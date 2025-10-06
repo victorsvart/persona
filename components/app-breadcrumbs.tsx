@@ -34,7 +34,9 @@ export const AppBreadcrumbs = (): ReactElement => {
           return (
             <BreadcrumbItem key={idx} className="flex items-center gap-1">
               <BreadcrumbSeparator hidden={idx === 0} />
-              <BreadcrumbLink href={href}>{formatName(segment)}</BreadcrumbLink>
+              <BreadcrumbLink href={idx === 0 ? '/dashboard/curriculum' : href}>
+                {formatName(segment)}
+              </BreadcrumbLink>
             </BreadcrumbItem>
           );
         })}

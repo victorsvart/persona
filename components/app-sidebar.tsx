@@ -44,7 +44,7 @@ const data = {
   projects: [
     {
       name: 'Your Curriculum',
-      url: 'dashboard/curriculum',
+      url: '/dashboard/curriculum',
       icon: Frame,
     },
     {

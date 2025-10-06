@@ -19,6 +19,9 @@ import { Button } from './ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
 import { Separator } from './ui/separator';
 import { ChangeProfilePic } from './change-profile-pic';
+import { saveUser } from '@/app/dashboard/account/actions';
+import { Toaster } from './ui/sonner';
+import { toast } from 'sonner';
 
 type Props = {
   user: User;
@@ -28,19 +31,20 @@ export const AccountForm = ({ user }: Props): ReactElement => {
   const form = useForm<AccountSchemaValues>({
     resolver: zodResolver(accountSchema),
     defaultValues: {
-      image: user.image,
       name: user.name,
       username: user.username as string,
       email: user.email,
     },
   });
 
-  const test = (form: AccountSchemaValues) => {
-    console.log(form);
+  const handleSave = async (form: AccountSchemaValues) => {
+    await saveUser(form);
+    toast.success('Saved succesfully');
   };
 
   return (
     <div className="flex flex-col gap-3">
+      <Toaster position="bottom-center" />
       <div className="flex flex-row items-center gap-3">
         <Avatar className="h-8 w-8 rounded-lg">
           <AvatarImage src={user.image ?? undefined} alt={user.name} />
@@ -55,7 +59,7 @@ export const AccountForm = ({ user }: Props): ReactElement => {
       </div>
       <Separator />
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(test)} className="space-y-4">
+        <form onSubmit={form.handleSubmit(handleSave)} className="space-y-4">
           <FormField
             control={form.control}
             name="name"
