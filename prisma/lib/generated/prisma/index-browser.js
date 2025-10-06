@@ -128,6 +128,12 @@ exports.Prisma.ApplicationScalarFieldEnum = {
   userId: 'userId'
 };
 
+exports.Prisma.OnboardScalarFieldEnum = {
+  id: 'id',
+  onboarded: 'onboarded',
+  userId: 'userId'
+};
+
 exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -194,6 +200,7 @@ exports.Prisma.NullsOrder = {
 
 exports.Prisma.ModelName = {
   Application: 'Application',
+  Onboard: 'Onboard',
   User: 'User',
   Session: 'Session',
   Account: 'Account',

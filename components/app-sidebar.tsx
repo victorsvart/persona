@@ -1,14 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import {
-  AudioWaveform,
-  Command,
-  Frame,
-  GalleryVerticalEnd,
-  Map,
-  PieChart,
-} from 'lucide-react';
+import { Frame, Map, PieChart } from 'lucide-react';
 
 import { NavOptions } from '@/components/nav-options';
 import { NavUser } from '@/components/nav-user';
@@ -20,31 +13,13 @@ import {
   SidebarHeader,
   SidebarRail,
 } from '@/components/ui/sidebar';
-import { User } from '@/lib/generated/prisma';
+import { User } from '@/prisma/lib/generated/prisma';
 
-// This is sample data.
 const data = {
-  applications: [
-    {
-      name: 'Acme Inc',
-      logo: GalleryVerticalEnd,
-      role: 'Software Engineer',
-    },
-    {
-      name: 'Acme Corp.',
-      logo: AudioWaveform,
-      role: 'Software Engineer II',
-    },
-    {
-      name: 'Evil Corp.',
-      logo: Command,
-      role: 'Software Engineer III',
-    },
-  ],
   projects: [
     {
       name: 'Your Curriculum',
-      url: '/dashboard/curriculum',
+      url: '/dashboard/**/curriculum',
       icon: Frame,
     },
     {
@@ -60,15 +35,22 @@ const data = {
   ],
 };
 
+type Application = {
+  id: string;
+  company_name: string;
+  role: string;
+};
+
 type Props = {
   user: User;
+  applications: Application[];
 } & React.ComponentProps<typeof Sidebar>;
 
-export function AppSidebar({ user, ...props }: Props) {
+export function AppSidebar({ user, applications, ...props }: Props) {
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
-        <ApplicationSwitcher teams={data.applications} />
+        <ApplicationSwitcher applications={applications} />
       </SidebarHeader>
       <SidebarContent>
         <NavOptions projects={data.projects} />

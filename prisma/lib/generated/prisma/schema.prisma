@@ -1,12 +1,22 @@
 model Application {
-  id           String @id @default(uuid())
+  id           String  @id @default(uuid())
   company_name String
   role         String
-  details      String
+  details      String?
   userId       String
-  user         User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user         User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("applications")
+  @@schema("public")
+}
+
+model Onboard {
+  id        String  @id @default(uuid())
+  onboarded Boolean @default(false)
+  userId    String  @unique
+  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("onboards")
   @@schema("public")
 }
 
@@ -40,6 +50,7 @@ model User {
   sessions        Session[]
   accounts        Account[]
   applications    Application[]
+  onboarded       Onboard?
 
   @@unique([email])
   @@unique([username])

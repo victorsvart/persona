@@ -1,6 +1,5 @@
 'use client';
 
-import { User } from '@/lib/generated/prisma';
 import { accountSchema, AccountSchemaValues } from '@/lib/zod/account.schema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ReactElement } from 'react';
@@ -22,6 +21,7 @@ import { ChangeProfilePic } from './change-profile-pic';
 import { saveUser } from '@/app/dashboard/account/actions';
 import { Toaster } from './ui/sonner';
 import { toast } from 'sonner';
+import { User } from '@/prisma/lib/generated/prisma';
 
 type Props = {
   user: User;
@@ -39,83 +39,117 @@ export const AccountForm = ({ user }: Props): ReactElement => {
 
   const handleSave = async (form: AccountSchemaValues) => {
     await saveUser(form);
-    toast.success('Saved succesfully');
+    toast.success('Profile updated successfully!');
   };
 
   return (
-    <div className="flex flex-col gap-3">
+    <div className="space-y-6">
       <Toaster position="bottom-center" />
-      <div className="flex flex-row items-center gap-3">
-        <Avatar className="h-8 w-8 rounded-lg">
+      
+      <div className="flex items-center gap-4 p-4 rounded-lg border bg-muted/30">
+        <Avatar className="h-16 w-16 rounded-xl ring-2 ring-background">
           <AvatarImage src={user.image ?? undefined} alt={user.name} />
-          <AvatarFallback className="rounded-lg">
-            {user.name.split(' ').map((s) => s[0])}
+          <AvatarFallback className="rounded-xl text-lg font-semibold">
+            {user.name.split(' ').map((s) => s[0]).join('').toUpperCase()}
           </AvatarFallback>
         </Avatar>
-        <div className="flex flex-col">
-          <span>{user.username}</span>
-          <ChangeProfilePic currentUserImage={user.image} />{' '}
+        <div className="flex-1">
+          <h3 className="font-semibold text-lg">{user.name}</h3>
+          <p className="text-sm text-muted-foreground">@{user.username}</p>
+          <ChangeProfilePic currentUserImage={user.image} />
         </div>
       </div>
-      <Separator />
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(handleSave)} className="space-y-4">
-          <FormField
-            control={form.control}
-            name="name"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Full Name</FormLabel>
-                <FormControl>
-                  <Input placeholder="John Doe" {...field} />
-                </FormControl>
-                <FormDescription>
-                  So we can refer to you correctly.
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
 
-          <FormField
-            control={form.control}
-            name="username"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Username</FormLabel>
-                <FormControl>
-                  <Input placeholder="John Doe" {...field} />
-                </FormControl>
-                <FormDescription>
-                  You'll use this to sign in. Your main identifier inside our
-                  application.
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(handleSave)} className="space-y-6">
+          <div className="grid gap-6 md:grid-cols-2">
+            <FormField
+              control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-sm font-medium">Full Name</FormLabel>
+                  <FormControl>
+                    <Input 
+                      placeholder="John Doe" 
+                      className="h-11"
+                      {...field} 
+                    />
+                  </FormControl>
+                  <FormDescription className="text-xs">
+                    This is your display name across the platform
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="username"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-sm font-medium">Username</FormLabel>
+                  <FormControl>
+                    <Input 
+                      placeholder="johndoe" 
+                      className="h-11"
+                      {...field} 
+                    />
+                  </FormControl>
+                  <FormDescription className="text-xs">
+                    Your unique identifier for login and mentions
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
 
           <FormField
             control={form.control}
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Email</FormLabel>
+                <FormLabel className="text-sm font-medium">Email Address</FormLabel>
                 <FormControl>
-                  <Input type="email" placeholder="m@example.com" {...field} />
+                  <Input 
+                    type="email" 
+                    placeholder="john@example.com" 
+                    className="h-11"
+                    {...field} 
+                  />
                 </FormControl>
-                <FormDescription>So we can contact you.</FormDescription>
+                <FormDescription className="text-xs">
+                  We'll use this to send you important updates and notifications
+                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
           />
 
-          <div className="flex flex-col gap-2 mt-4">
+          <Separator />
+
+          <div className="flex items-center justify-between">
+            <div>
+              <h4 className="font-medium">Save Changes</h4>
+              <p className="text-sm text-muted-foreground">
+                Update your profile information
+              </p>
+            </div>
             <Button
               disabled={form.formState.isSubmitting || !form.formState.isValid}
               type="submit"
+              className="min-w-[120px]"
             >
-              {form.formState.isSubmitting ? 'Saving...' : 'Save'}
+              {form.formState.isSubmitting ? (
+                <>
+                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />
+                  Saving...
+                </>
+              ) : (
+                'Save Changes'
+              )}
             </Button>
           </div>
         </form>

@@ -27,6 +27,7 @@ import {
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import { usePathname } from 'next/navigation';
+import { useCompany } from '@/providers/company-provider';
 
 export function NavOptions({
   projects,
@@ -39,6 +40,32 @@ export function NavOptions({
 }) {
   const { isMobile } = useSidebar();
   const pathName = usePathname();
+  const { application_id } = useCompany();
+
+  const isActive = (url: string) => {
+    if (url === '/dashboard/**/curriculum') {
+      return pathName.includes('/curriculum');
+    }
+    return pathName.includes(url);
+  };
+
+  const getHref = (url: string) => {
+    if (url === '/dashboard/**/curriculum') {
+      if (application_id) {
+        return `/dashboard/${application_id}/curriculum`;
+      }
+      
+      // If the above didn't work, dig through the URL AGAIN
+      const curriculumMatch = pathName.match(/\/dashboard\/([^\/]+)\/curriculum/);
+      if (curriculumMatch) {
+        return `/dashboard/${curriculumMatch[1]}/curriculum`;
+      }
+      
+      // if clueless, the dashboard will handle it
+      return '/dashboard';
+    }
+    return url;
+  };
 
   return (
     <SidebarGroup className="group-data-[collapsible=icon]:hidden">
@@ -48,8 +75,8 @@ export function NavOptions({
           <SidebarMenuItem key={item.name}>
             <SidebarMenuButton className="transition-all" asChild>
               <Link
-                className={cn(pathName.includes(item.url) ? 'bg-zinc-800' : '')}
-                href={item.url}
+                className={cn(isActive(item.url) ? 'bg-zinc-800' : '')}
+                href={getHref(item.url)}
               >
                 <item.icon />
                 <span>{item.name}</span>

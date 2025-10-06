@@ -1,0 +1,9 @@
+model Onboard {
+    id        String  @id @default(uuid())
+    onboarded Boolean @default(false)
+    userId    String  @unique
+    user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    @@map("onboards")
+    @@schema("public")
+}

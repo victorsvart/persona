@@ -28,6 +28,7 @@ model User {
   sessions        Session[]
   accounts        Account[]
   applications    Application[]
+  onboarded       Onboard?
 
   @@unique([email])
   @@unique([username])
