@@ -21,8 +21,6 @@ export async function signIn(form: LoginSchemaValues): Promise<AppResponse> {
   try {
     await auth.api.signInUsername({ body: form });
   } catch (error) {
-    // throw error;
-    console.error(error);
     return makeError({ code: 401, message: "Wrong credentials" });
   }
 
