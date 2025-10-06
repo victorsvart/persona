@@ -1,6 +1,6 @@
-import { AppError, AppResponse } from "@/types/AppResponse";
-import { clsx, type ClassValue } from "clsx";
-import { twMerge } from "tailwind-merge";
+import { AppError, AppResponse } from '@/types/AppResponse';
+import { clsx, type ClassValue } from 'clsx';
+import { twMerge } from 'tailwind-merge';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -25,4 +25,22 @@ export function makeError({ code, message }: AppError): AppResponse {
       message,
     },
   };
+}
+
+export function isValidURL(url: string): AppResponse {
+  try {
+    new URL(url);
+    return {
+      success: true,
+      error: undefined,
+    };
+  } catch (error) {
+    return {
+      success: false,
+      error: {
+        code: 500,
+        message: 'Invalid URL',
+      },
+    };
+  }
 }

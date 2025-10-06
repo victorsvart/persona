@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import { OrigamiIcon } from "lucide-react";
-import { LoginForm } from "@/components/login-form";
-import { Separator } from "@/components/ui/separator";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
+import { OrigamiIcon } from 'lucide-react';
+import { LoginForm } from '@/components/login-form';
+import { Separator } from '@/components/ui/separator';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 
 export default function LoginPage() {
   return (
@@ -52,7 +52,7 @@ export default function LoginPage() {
               </Button>
 
               <span className="text-center text-sm text-muted-foreground">
-                Don&apos;t have an account?{" "}
+                Don&apos;t have an account?{' '}
                 <Link
                   href="/auth/signup"
                   className="underline underline-offset-4"

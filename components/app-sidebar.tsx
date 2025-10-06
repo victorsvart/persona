@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import * as React from "react";
+import * as React from 'react';
 import {
   AudioWaveform,
   Command,
@@ -8,63 +8,63 @@ import {
   GalleryVerticalEnd,
   Map,
   PieChart,
-} from "lucide-react";
+} from 'lucide-react';
 
-import { NavOptions } from "@/components/nav-options";
-import { NavUser } from "@/components/nav-user";
-import { ApplicationSwitcher } from "@/components/team-switcher";
+import { NavOptions } from '@/components/nav-options';
+import { NavUser } from '@/components/nav-user';
+import { ApplicationSwitcher } from '@/components/team-switcher';
 import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
   SidebarHeader,
   SidebarRail,
-} from "@/components/ui/sidebar";
+} from '@/components/ui/sidebar';
+import { User } from '@/lib/generated/prisma';
 
 // This is sample data.
 const data = {
-  user: {
-    name: "shadcn",
-    email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
-  },
   applications: [
     {
-      name: "Acme Inc",
+      name: 'Acme Inc',
       logo: GalleryVerticalEnd,
-      role: "Software Engineer",
+      role: 'Software Engineer',
     },
     {
-      name: "Acme Corp.",
+      name: 'Acme Corp.',
       logo: AudioWaveform,
-      role: "Software Engineer II",
+      role: 'Software Engineer II',
     },
     {
-      name: "Evil Corp.",
+      name: 'Evil Corp.',
       logo: Command,
-      role: "Software Engineer III",
+      role: 'Software Engineer III',
     },
   ],
   projects: [
     {
-      name: "Design Engineering",
-      url: "#",
+      name: 'Your Curriculum',
+      url: 'dashboard/curriculum',
       icon: Frame,
     },
     {
-      name: "Sales & Marketing",
-      url: "#",
+      name: 'Application Info',
+      url: '#',
       icon: PieChart,
     },
     {
-      name: "Travel",
-      url: "#",
+      name: 'Training',
+      url: '#',
       icon: Map,
     },
   ],
 };
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+type Props = {
+  user: User;
+} & React.ComponentProps<typeof Sidebar>;
+
+export function AppSidebar({ user, ...props }: Props) {
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
@@ -74,7 +74,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <NavOptions projects={data.projects} />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={data.user} />
+        <NavUser user={user} />
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>

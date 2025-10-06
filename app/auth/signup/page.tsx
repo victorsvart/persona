@@ -1,7 +1,7 @@
-"use server";
+'use server';
 
-import { SignupForm } from "@/components/signup-form";
-import { OrigamiIcon } from "lucide-react";
+import { SignupForm } from '@/components/signup-form';
+import { OrigamiIcon } from 'lucide-react';
 
 export default async function SignUpPage() {
   return (
