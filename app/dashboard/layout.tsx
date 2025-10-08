@@ -19,7 +19,7 @@ export default async function DashboardLayout({
 }) {
   const user = await getUser();
   const applications = await getUserApplications();
-  
+
   return (
     <SidebarProvider>
       <CompanyProvider>

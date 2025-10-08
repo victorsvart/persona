@@ -36,7 +36,11 @@ export function ApplicationSwitcher({
 }) {
   const pathname = usePathname();
   const router = useRouter();
-  const { setCompanyName, setApplicationId } = useCompany();
+  const {
+    setCompanyName,
+    setApplicationId,
+    setLoading: setCompanyLoading,
+  } = useCompany();
   const { isMobile } = useSidebar();
   const [activeApplication, setActiveApplication] =
     React.useState<Application | null>(null);
@@ -54,6 +58,7 @@ export function ApplicationSwitcher({
           setActiveApplication(app);
           setCompanyName(app.company_name);
           setApplicationId(app.id);
+          setCompanyLoading(false);
         }
       } else {
         setActiveApplication(applications[0]);

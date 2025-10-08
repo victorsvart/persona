@@ -74,10 +74,10 @@ export async function getApplicationById(applicationId: string) {
 
 export async function handleDashboardRedirect() {
   const applications = await getUserApplications();
-  
+
   if (applications.length === 0) {
     redirect('/dashboard/onboard');
   }
-  
+
   redirect(`/dashboard/${applications[0].id}/curriculum`);
 }
