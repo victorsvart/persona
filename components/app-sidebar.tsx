@@ -5,7 +5,7 @@ import { Frame, Map, PieChart } from 'lucide-react';
 
 import { NavOptions } from '@/components/nav-options';
 import { NavUser } from '@/components/nav-user';
-import { ApplicationSwitcher } from '@/components/team-switcher';
+import { ApplicationSwitcher } from '@/components/applicaton-switcher';
 import {
   Sidebar,
   SidebarContent,

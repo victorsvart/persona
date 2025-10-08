@@ -22,6 +22,7 @@ import {
 import { usePathname } from 'next/navigation';
 import { useCompany } from '@/providers/company-provider';
 import { ApplicationForm } from '@/components/application-form';
+import { useEffect } from 'react';
 
 type Application = {
   id: string;
@@ -31,14 +32,17 @@ type Application = {
 
 export function ApplicationSwitcher({
   applications,
+  loading,
 }: {
   applications: Application[];
+  loading?: boolean; // optional prop to indicate loading
 }) {
   const pathname = usePathname();
   const router = useRouter();
   const {
     setCompanyName,
     setApplicationId,
+    loading: companyLoading,
     setLoading: setCompanyLoading,
   } = useCompany();
   const { isMobile } = useSidebar();
@@ -49,22 +53,16 @@ export function ApplicationSwitcher({
     return <></>;
   }
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (applications.length > 0) {
-      const currentAppId = pathname.split('/')[2]; // rip the app ID out of the URL
-      if (currentAppId) {
-        const app = applications.find((app) => app.id === currentAppId);
-        if (app) {
-          setActiveApplication(app);
-          setCompanyName(app.company_name);
-          setApplicationId(app.id);
-          setCompanyLoading(false);
-        }
-      } else {
-        setActiveApplication(applications[0]);
-        setCompanyName(applications[0].company_name);
-        setApplicationId(applications[0].id);
-      }
+      const currentAppId = pathname.split('/')[2]; // extract app ID from URL
+      const app =
+        applications.find((app) => app.id === currentAppId) || applications[0];
+
+      setActiveApplication(app);
+      setCompanyName(app.company_name);
+      setApplicationId(app.id);
+      setCompanyLoading(false);
     }
   }, [applications, pathname, setCompanyName, setApplicationId]);
 
@@ -74,6 +72,28 @@ export function ApplicationSwitcher({
     setApplicationId(application.id);
     router.push(`/dashboard/${application.id}/curriculum`);
   };
+
+  // Skeleton for loading state
+  if (loading || companyLoading) {
+    return (
+      <SidebarMenu>
+        <SidebarMenuItem key="loading">
+          <SidebarMenuButton
+            size="lg"
+            className="flex items-center gap-2 p-2 cursor-not-allowed"
+          >
+            <div className="bg-gray-200 animate-pulse flex aspect-square size-8 items-center justify-center rounded-lg">
+              <Building2 className="size-4 text-transparent" />
+            </div>
+            <div className="flex flex-1 flex-col gap-1">
+              <div className="h-4 w-24 bg-gray-200 rounded animate-pulse" />
+              <div className="h-3 w-16 bg-gray-200 rounded animate-pulse" />
+            </div>
+          </SidebarMenuButton>
+        </SidebarMenuItem>
+      </SidebarMenu>
+    );
+  }
 
   if (applications.length === 0) {
     return (
@@ -88,9 +108,7 @@ export function ApplicationSwitcher({
     );
   }
 
-  if (!activeApplication) {
-    return null;
-  }
+  if (!activeApplication) return null;
 
   return (
     <SidebarMenu>
