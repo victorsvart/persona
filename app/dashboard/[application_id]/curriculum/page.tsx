@@ -55,12 +55,11 @@ export default async function CurriculumPage({
 
           <CardFooter className="flex justify-end">
             <button className="text-sm font-medium text-primary hover:underline">
-              View more →
+              Edit →
             </button>
           </CardFooter>
         </Card>
 
-        {/* Placeholder cards */}
         <div className="bg-muted/50 aspect-video rounded-xl" />
         <div className="bg-muted/50 aspect-video rounded-xl" />
       </div>
