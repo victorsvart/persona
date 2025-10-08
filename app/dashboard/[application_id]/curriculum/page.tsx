@@ -1,6 +1,5 @@
 'use server';
 
-import { CurriculumHeader } from '@/components/curriculum-header';
 import { getApplicationById } from '../../actions';
 import {
   Card,
@@ -28,8 +27,6 @@ export default async function CurriculumPage({
 
   return (
     <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
-      <CurriculumHeader />
-
       <div className="grid auto-rows-min gap-4 md:grid-cols-3">
         <Card className="flex flex-col justify-between rounded-xl shadow-md hover:shadow-lg transition-shadow">
           <CardHeader>
