@@ -45,12 +45,16 @@ export const AccountForm = ({ user }: Props): ReactElement => {
   return (
     <div className="space-y-6">
       <Toaster position="bottom-center" />
-      
+
       <div className="flex items-center gap-4 p-4 rounded-lg border bg-muted/30">
         <Avatar className="h-16 w-16 rounded-xl ring-2 ring-background">
           <AvatarImage src={user.image ?? undefined} alt={user.name} />
           <AvatarFallback className="rounded-xl text-lg font-semibold">
-            {user.name.split(' ').map((s) => s[0]).join('').toUpperCase()}
+            {user.name
+              .split(' ')
+              .map((s) => s[0])
+              .join('')
+              .toUpperCase()}
           </AvatarFallback>
         </Avatar>
         <div className="flex-1">
@@ -68,13 +72,11 @@ export const AccountForm = ({ user }: Props): ReactElement => {
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-sm font-medium">Full Name</FormLabel>
+                  <FormLabel className="text-sm font-medium">
+                    Full Name
+                  </FormLabel>
                   <FormControl>
-                    <Input 
-                      placeholder="John Doe" 
-                      className="h-11"
-                      {...field} 
-                    />
+                    <Input placeholder="John Doe" className="h-11" {...field} />
                   </FormControl>
                   <FormDescription className="text-xs">
                     This is your display name across the platform
@@ -89,13 +91,11 @@ export const AccountForm = ({ user }: Props): ReactElement => {
               name="username"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-sm font-medium">Username</FormLabel>
+                  <FormLabel className="text-sm font-medium">
+                    Username
+                  </FormLabel>
                   <FormControl>
-                    <Input 
-                      placeholder="johndoe" 
-                      className="h-11"
-                      {...field} 
-                    />
+                    <Input placeholder="johndoe" className="h-11" {...field} />
                   </FormControl>
                   <FormDescription className="text-xs">
                     Your unique identifier for login and mentions
@@ -111,13 +111,16 @@ export const AccountForm = ({ user }: Props): ReactElement => {
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-sm font-medium">Email Address</FormLabel>
+                <FormLabel className="text-sm font-medium">
+                  Email Address
+                </FormLabel>
                 <FormControl>
-                  <Input 
-                    type="email" 
-                    placeholder="john@example.com" 
+                  <Input
+                    disabled={true}
+                    type="email"
+                    placeholder="john@example.com"
                     className="h-11"
-                    {...field} 
+                    {...field}
                   />
                 </FormControl>
                 <FormDescription className="text-xs">
