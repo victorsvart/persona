@@ -23,12 +23,16 @@ export default async function ApplicationInfo({
   }
 
   return (
-    <Card>
-      <CardHeader>Application Info</CardHeader>
-      <CardDescription>Edit this application</CardDescription>
-      <CardContent>
-        <ApplicationForm application={application} />
-      </CardContent>
-    </Card>
+    <div className="flex w-full min-h-screen justify-center items-center overflow-hidden">
+      <Card className="w-96">
+        <CardHeader>
+          Application Info
+          <CardDescription>Edit this application</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <ApplicationForm application={application} />
+        </CardContent>
+      </Card>
+    </div>
   );
 }

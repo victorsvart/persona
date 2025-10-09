@@ -30,6 +30,8 @@ import { Button } from './ui/button';
 import { useRouter } from 'next/navigation';
 import { createApplication, updateApplication } from '@/app/dashboard/actions';
 import { Application } from '@/prisma/lib/generated/prisma';
+import { toast } from 'sonner';
+import { Toaster } from './ui/sonner';
 
 type Props = {
   isOnboard?: boolean;
@@ -57,88 +59,100 @@ export const ApplicationForm = ({
       : await createApplication(values);
     if (!isOnboard) {
       setOpen(false);
+      toast.success('Profile updated successfully!');
       return;
     }
 
     router.push(`/dashboard/${applicationId}/curriculum`);
   };
 
-  const FormContent = (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-        <FormField
-          control={form.control}
-          name="company_name"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Company name</FormLabel>
-              <FormControl>
-                <Input placeholder="Google" {...field} />
-              </FormControl>
-              <FormDescription>
-                The name of the company you applied for.
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+  const FormContent = () => {
+    const submitText = application ? 'Save' : 'Submit';
+    return (
+      <Form {...form}>
+        <Toaster />
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+          <FormField
+            control={form.control}
+            name="company_name"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Company name</FormLabel>
+                <FormControl>
+                  <Input placeholder="Google" {...field} />
+                </FormControl>
+                <FormDescription>
+                  The name of the company you applied for.
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-        <FormField
-          control={form.control}
-          name="role"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Role being applied for</FormLabel>
-              <FormControl>
-                <Input placeholder="Software Engineer" {...field} />
-              </FormControl>
-              <FormDescription>The role you applied for.</FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+          <FormField
+            control={form.control}
+            name="role"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Role being applied for</FormLabel>
+                <FormControl>
+                  <Input placeholder="Software Engineer" {...field} />
+                </FormControl>
+                <FormDescription>The role you applied for.</FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-        <FormField
-          control={form.control}
-          name="details"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Details</FormLabel>
-              <FormControl>
-                <Textarea
-                  className="w-full h-32"
-                  placeholder="We are looking for a Node.js engineer..."
-                  {...field}
-                />
-              </FormControl>
-              <FormDescription>Additional job details.</FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+          <FormField
+            control={form.control}
+            name="details"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Details</FormLabel>
+                <FormControl>
+                  <Textarea
+                    className="w-full h-32"
+                    placeholder="We are looking for a Node.js engineer..."
+                    {...field}
+                  />
+                </FormControl>
+                <FormDescription>Additional job details.</FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-        <Button type="submit" className="w-full">
-          Submit
-        </Button>
-      </form>
-    </Form>
-  );
+          <Button
+            disabled={form.formState.isSubmitting}
+            type="submit"
+            className="w-full"
+          >
+            {form.formState.isSubmitting ? 'Saving...' : submitText}
+          </Button>
+        </form>
+      </Form>
+    );
+  };
 
-  if (isOnboard) {
-    return FormContent;
+  if (isOnboard || application) {
+    return FormContent();
   }
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <Button>Register Application</Button>
-      </DialogTrigger>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle>Create Application</DialogTitle>
-        </DialogHeader>
-        {FormContent}
-      </DialogContent>
-    </Dialog>
+    <>
+      <Toaster />
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogTrigger asChild>
+          <Button>Register Application</Button>
+        </DialogTrigger>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Create Application</DialogTitle>
+          </DialogHeader>
+          {FormContent()}
+        </DialogContent>
+      </Dialog>
+    </>
   );
 };

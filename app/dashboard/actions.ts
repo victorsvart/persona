@@ -5,6 +5,7 @@ import { prisma } from '@/lib/prisma';
 import { ApplicationSchemaValues } from '@/lib/zod/application.schema';
 import { User } from '@/prisma/lib/generated/prisma';
 import { Session } from '@/types/Session';
+import { revalidatePath } from 'next/cache';
 import { headers } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { cache } from 'react';
@@ -62,6 +63,8 @@ export async function updateApplication(
     },
   });
 
+  revalidatePath('/dashboard');
+
   return result.id;
 }
 export const getUserApplications = cache(async (userId: string) => {
@@ -81,7 +84,6 @@ export const getUserApplications = cache(async (userId: string) => {
     return [];
   }
 });
-
 
 export const getApplicationById = cache(async (applicationId: string) => {
   const user = await getUser();
