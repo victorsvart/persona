@@ -104,7 +104,8 @@ export default async function CurriculumPage({
           </Card>
         </div>
 
-        <div className="flex items-center justify-center bg-muted/30 rounded-xl min-h-[100vh] p-4">
+        <div className="flex flex-col items-center justify-center bg-muted/30 rounded-xl min-h-[100vh] p-4">
+          <div className="flex w-full justify-start">Version 1</div>
           <div className="bg-white text-black shadow-xl rounded-md w-full max-w-[794px] aspect-[1/1.4142] overflow-y-auto p-10 print:shadow-none">
             <h1 className="text-2xl font-bold">John Doe</h1>
             <p className="text-gray-700 mb-4">Software Engineer</p>

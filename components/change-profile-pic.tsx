@@ -93,7 +93,7 @@ export const ChangeProfilePic = ({ currentUserImage }: Props): ReactElement => {
             <div className="space-y-2">
               <label className="text-sm font-medium">Preview</label>
               <div className="w-20 h-20 rounded-xl overflow-hidden border-2 border-muted">
-                <Image
+                <img
                   src={imageUrl}
                   alt="Profile preview"
                   className="w-full h-full object-cover"
@@ -101,6 +101,18 @@ export const ChangeProfilePic = ({ currentUserImage }: Props): ReactElement => {
                     e.currentTarget.style.display = 'none';
                   }}
                 />
+
+                {/* We need this in the future */}
+                {/* <Image
+                  width="100"
+                  height="100"
+                  src={imageUrl}
+                  alt="Profile preview"
+                  className="w-full h-full object-cover"
+                  onError={(e) => {
+                    e.currentTarget.style.display = 'none';
+                  }}
+                /> */}
               </div>
             </div>
           )}
