@@ -15,6 +15,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from './ui/dialog';
+
 import {
   Form,
   FormControl,
@@ -59,7 +60,7 @@ export const ApplicationForm = ({
       : await createApplication(values);
     if (!isOnboard) {
       setOpen(false);
-      toast.success('Profile updated successfully!');
+      toast.success('Application updated successfully!');
       return;
     }
 
