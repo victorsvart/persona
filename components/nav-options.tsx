@@ -46,6 +46,9 @@ export function NavOptions({
     if (url === '/dashboard/**/curriculum') {
       return pathName.includes('/curriculum');
     }
+    if (url === '/dashboard/**/info') {
+      return pathName.includes('/info');
+    }
     return pathName.includes(url);
   };
 
@@ -54,13 +57,13 @@ export function NavOptions({
       return '/dashboard';
     }
 
-    const base = `/dashboard/${application_id}/`;
+    const base = `/dashboard/${application_id}`;
     const split = url.split('/');
     const current = split[split.length - 1];
     switch (current) {
-      case '/curriculum':
+      case 'curriculum':
         return `${base}/curriculum`;
-      case '/info':
+      case 'info':
         return `${base}/info`;
       default:
         return '/dashboard';

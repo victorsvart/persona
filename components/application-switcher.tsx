@@ -60,7 +60,7 @@ export function ApplicationSwitcher({
       setApplicationId(app.id);
       setCompanyLoading(false);
     }
-  }, [applications, pathname, setCompanyName, setApplicationId]);
+  }, [applications, pathname, setCompanyName, setApplicationId, setCompanyLoading]);
 
   const handleApplicationSelect = (application: Application) => {
     setActiveApplication(application);
