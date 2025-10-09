@@ -18,7 +18,7 @@ export default async function DashboardLayout({
   children: ReactNode;
 }) {
   const user = await getUser();
-  const applications = await getUserApplications();
+  const applications = await getUserApplications(user.id);
 
   return (
     <SidebarProvider>

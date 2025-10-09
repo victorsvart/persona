@@ -49,10 +49,6 @@ export function ApplicationSwitcher({
   const [activeApplication, setActiveApplication] =
     React.useState<Application | null>(null);
 
-  if (pathname === '/dashboard/onboard' || pathname === '/dashboard') {
-    return <></>;
-  }
-
   useEffect(() => {
     if (applications.length > 0) {
       const currentAppId = pathname.split('/')[2]; // extract app ID from URL
@@ -64,7 +60,7 @@ export function ApplicationSwitcher({
       setApplicationId(app.id);
       setCompanyLoading(false);
     }
-  }, [applications, pathname, setCompanyName, setApplicationId]);
+  }, [applications, pathname, setCompanyName, setApplicationId, setCompanyLoading]);
 
   const handleApplicationSelect = (application: Application) => {
     setActiveApplication(application);
@@ -93,6 +89,10 @@ export function ApplicationSwitcher({
         </SidebarMenuItem>
       </SidebarMenu>
     );
+  }
+
+  if (pathname === '/dashboard/onboard' || pathname === '/dashboard') {
+    return <></>;
   }
 
   if (applications.length === 0) {

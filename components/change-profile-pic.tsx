@@ -13,6 +13,7 @@ import { Input } from './ui/input';
 import { Button } from './ui/button';
 import { isValidURL } from '@/lib/utils';
 import { saveImageUrl } from '@/app/dashboard/account/actions';
+import Image from 'next/image';
 
 type Props = {
   currentUserImage: string | null;
@@ -36,7 +37,7 @@ export const ChangeProfilePic = ({ currentUserImage }: Props): ReactElement => {
     }
 
     setValidUrl(true);
-  });
+  }, [imageUrl]);
 
   const handleSave = async () => {
     setSaving(true);
@@ -61,7 +62,8 @@ export const ChangeProfilePic = ({ currentUserImage }: Props): ReactElement => {
             Update Profile Picture
           </DialogTitle>
           <DialogDescription>
-            Enter a URL to your desired profile picture. Make sure the image is publicly accessible.
+            Enter a URL to your desired profile picture. Make sure the image is
+            publicly accessible.
           </DialogDescription>
         </DialogHeader>
 
@@ -79,7 +81,9 @@ export const ChangeProfilePic = ({ currentUserImage }: Props): ReactElement => {
                 {validUrl ? (
                   <span className="text-green-600">✓ Valid URL format</span>
                 ) : (
-                  <span className="text-red-600">✗ Please enter a valid URL</span>
+                  <span className="text-red-600">
+                    ✗ Please enter a valid URL
+                  </span>
                 )}
               </div>
             )}
@@ -89,14 +93,26 @@ export const ChangeProfilePic = ({ currentUserImage }: Props): ReactElement => {
             <div className="space-y-2">
               <label className="text-sm font-medium">Preview</label>
               <div className="w-20 h-20 rounded-xl overflow-hidden border-2 border-muted">
-                <img 
-                  src={imageUrl} 
-                  alt="Profile preview" 
+                <img
+                  src={imageUrl}
+                  alt="Profile preview"
                   className="w-full h-full object-cover"
                   onError={(e) => {
                     e.currentTarget.style.display = 'none';
                   }}
                 />
+
+                {/* We need this in the future */}
+                {/* <Image
+                  width="100"
+                  height="100"
+                  src={imageUrl}
+                  alt="Profile preview"
+                  className="w-full h-full object-cover"
+                  onError={(e) => {
+                    e.currentTarget.style.display = 'none';
+                  }}
+                /> */}
               </div>
             </div>
           )}

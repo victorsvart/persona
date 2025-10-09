@@ -27,7 +27,6 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import {
@@ -63,7 +62,7 @@ export function NavUser({ user }: Props) {
   const getUserInitials = (name: string) => {
     return name
       .split(' ')
-      .map(word => word.charAt(0))
+      .map((word) => word.charAt(0))
       .join('')
       .toUpperCase()
       .slice(0, 2);
@@ -81,7 +80,9 @@ export function NavUser({ user }: Props) {
               >
                 <Avatar className="h-8 w-8 rounded-lg">
                   <AvatarImage src={user.image ?? undefined} alt={user.name} />
-                  <AvatarFallback className="rounded-lg">{getUserInitials(user.name)}</AvatarFallback>
+                  <AvatarFallback className="rounded-lg">
+                    {getUserInitials(user.name)}
+                  </AvatarFallback>
                 </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-medium">{user.name}</span>
@@ -99,8 +100,13 @@ export function NavUser({ user }: Props) {
               <DropdownMenuLabel className="p-0 font-normal">
                 <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
                   <Avatar className="h-8 w-8 rounded-lg">
-                    <AvatarImage src={user.image ?? undefined} alt={user.name} />
-                    <AvatarFallback className="rounded-lg">{getUserInitials(user.name)}</AvatarFallback>
+                    <AvatarImage
+                      src={user.image ?? undefined}
+                      alt={user.name}
+                    />
+                    <AvatarFallback className="rounded-lg">
+                      {getUserInitials(user.name)}
+                    </AvatarFallback>
                   </Avatar>
                   <div className="grid flex-1 text-left text-sm leading-tight">
                     <span className="truncate font-medium">{user.name}</span>
@@ -133,10 +139,14 @@ export function NavUser({ user }: Props) {
                 </DropdownMenuItem>
               </DropdownMenuGroup>
               <DropdownMenuSeparator />
-              <DropdownMenuItem 
+              <DropdownMenuItem
                 onClick={() => setShowLogoutDialog(true)}
                 disabled={isLoggingOut}
-                className={isLoggingOut ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}
+                className={
+                  isLoggingOut
+                    ? 'opacity-50 cursor-not-allowed'
+                    : 'cursor-pointer'
+                }
               >
                 <LogOut />
                 {isLoggingOut ? 'Signing out...' : 'Log out'}
@@ -145,25 +155,26 @@ export function NavUser({ user }: Props) {
           </DropdownMenu>
         </SidebarMenuItem>
       </SidebarMenu>
-      
+
       {/* reminder: fuck off dialog */}
       <Dialog open={showLogoutDialog} onOpenChange={setShowLogoutDialog}>
         <DialogContent>
           <DialogHeader>
             <DialogTitle>Are you sure you want to sign out?</DialogTitle>
             <DialogDescription>
-              You will be redirected to the login page and will need to sign in again to access your account.
+              You will be redirected to the login page and will need to sign in
+              again to access your account.
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
-            <Button 
-              variant="outline" 
+            <Button
+              variant="outline"
               onClick={() => setShowLogoutDialog(false)}
               disabled={isLoggingOut}
             >
               Cancel
             </Button>
-            <Button 
+            <Button
               onClick={handleLogout}
               disabled={isLoggingOut}
               className="bg-red-600 hover:bg-red-700"

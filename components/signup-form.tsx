@@ -1,20 +1,20 @@
-"use client";
+'use client';
 
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
+} from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
 import {
   registerSchema,
   RegisterSchemaValues,
-} from "@/lib/zod/register.schema";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+} from '@/lib/zod/register.schema';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 import {
   Form,
   FormControl,
@@ -23,23 +23,22 @@ import {
   FormLabel,
   FormMessage,
   FormDescription,
-} from "./ui/form";
-import { signUp } from "@/app/auth/actions";
-import { useRouter } from "next/navigation";
-import Link from "next/link";
+} from './ui/form';
+import { signUp } from '@/app/auth/actions';
+import { useRouter } from 'next/navigation';
 
 export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
   const router = useRouter();
 
   const form = useForm<RegisterSchemaValues>({
     resolver: zodResolver(registerSchema),
-    mode: "onChange",
+    mode: 'onChange',
     defaultValues: {
-      name: "",
-      username: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
+      name: '',
+      username: '',
+      email: '',
+      password: '',
+      confirmPassword: '',
     },
   });
 
@@ -152,8 +151,8 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
                 type="submit"
               >
                 {form.formState.isSubmitting
-                  ? "Signing up..."
-                  : "Create Account"}
+                  ? 'Signing up...'
+                  : 'Create Account'}
               </Button>
               <Button
                 disabled={form.formState.isSubmitting}
@@ -163,10 +162,10 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
                 Sign up with Google
               </Button>
               <p className="text-center text-sm mt-2">
-                Already have an account?{" "}
+                Already have an account?{' '}
                 <span
                   className="cursor-pointer underline"
-                  onClick={() => router.push("/auth/login")}
+                  onClick={() => router.push('/auth/login')}
                 >
                   Sign in
                 </span>

@@ -17,10 +17,6 @@ export const AppBreadcrumbs = (): ReactElement => {
   const [paths, setPaths] = useState<string[]>([]);
   const [visible, setVisible] = useState(!companyLoading);
 
-  if (pathname === '/dashboard/onboard' || pathname === '/dashboard') {
-    return <></>;
-  }
-
   useEffect(() => {
     if (!pathname) return;
     const segments = pathname.split('/').filter(Boolean);
@@ -36,6 +32,10 @@ export const AppBreadcrumbs = (): ReactElement => {
       setVisible(false);
     }
   }, [companyLoading]);
+
+  if (pathname === '/dashboard/onboard' || pathname === '/dashboard') {
+    return <></>;
+  }
 
   const loadingFallback = (): ReactElement => {
     const skeletonWidths = [48, 64, 80];

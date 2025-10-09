@@ -20,12 +20,12 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 6.16.3
- * Query Engine version: bb420e667c1820a8c05a38023385f6cc7ef8e83a
+ * Prisma Client JS version: 6.17.0
+ * Query Engine version: c0aafc03b8ef6cdced8654b9a817999e02457d6a
  */
 Prisma.prismaVersion = {
-  client: "6.16.3",
-  engine: "bb420e667c1820a8c05a38023385f6cc7ef8e83a"
+  client: "6.17.0",
+  engine: "c0aafc03b8ef6cdced8654b9a817999e02457d6a"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -124,7 +124,7 @@ exports.Prisma.ApplicationScalarFieldEnum = {
   id: 'id',
   company_name: 'company_name',
   role: 'role',
-  details: 'details',
+  job_description: 'job_description',
   userId: 'userId'
 };
 
@@ -143,7 +143,11 @@ exports.Prisma.UserScalarFieldEnum = {
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   username: 'username',
-  displayUsername: 'displayUsername'
+  displayUsername: 'displayUsername',
+  phone: 'phone',
+  location: 'location',
+  professional_summary: 'professional_summary',
+  locationTypeId: 'locationTypeId'
 };
 
 exports.Prisma.SessionScalarFieldEnum = {
@@ -182,6 +186,61 @@ exports.Prisma.VerificationScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.UserCertificationScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  emittedAt: 'emittedAt',
+  description: 'description',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.UserEducationScalarFieldEnum = {
+  id: 'id',
+  university_name: 'university_name',
+  enrollment: 'enrollment',
+  completion: 'completion',
+  finished: 'finished',
+  description: 'description',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.UserLocationTypeScalarFieldEnum = {
+  id: 'id',
+  name: 'name'
+};
+
+exports.Prisma.UserProfessionalSummaryScalarFieldEnum = {
+  id: 'id',
+  summary: 'summary',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.UserSkillScalarFieldEnum = {
+  id: 'id',
+  skills: 'skills',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.UserWorkExperienceScalarFieldEnum = {
+  id: 'id',
+  company_name: 'company_name',
+  enrollment: 'enrollment',
+  completion: 'completion',
+  description: 'description',
+  currentWorkPlace: 'currentWorkPlace',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -204,7 +263,13 @@ exports.Prisma.ModelName = {
   User: 'User',
   Session: 'Session',
   Account: 'Account',
-  Verification: 'Verification'
+  Verification: 'Verification',
+  UserCertification: 'UserCertification',
+  UserEducation: 'UserEducation',
+  UserLocationType: 'UserLocationType',
+  UserProfessionalSummary: 'UserProfessionalSummary',
+  UserSkill: 'UserSkill',
+  UserWorkExperience: 'UserWorkExperience'
 };
 
 /**

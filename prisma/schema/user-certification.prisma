@@ -1,0 +1,13 @@
+model UserCertification {
+    id          String   @id
+    name        String
+    emittedAt   DateTime @default(now())
+    description String?
+    userId      String
+    User        User     @relation(fields: [userId], references: [id])
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @default(now()) @updatedAt
+
+    @@map("user_certifications")
+    @@schema("public")
+}
