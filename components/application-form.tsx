@@ -28,26 +28,33 @@ import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
 import { Button } from './ui/button';
 import { useRouter } from 'next/navigation';
-import { createApplication } from '@/app/dashboard/actions';
+import { createApplication, updateApplication } from '@/app/dashboard/actions';
+import { Application } from '@/prisma/lib/generated/prisma';
 
 type Props = {
   isOnboard?: boolean;
+  application?: Application;
 };
 
-export const ApplicationForm = ({ isOnboard = false }: Props): ReactElement => {
+export const ApplicationForm = ({
+  isOnboard = false,
+  application,
+}: Props): ReactElement => {
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const form = useForm<ApplicationSchemaValues>({
     resolver: zodResolver(applicationSchema),
     defaultValues: {
-      company_name: '',
-      role: '',
-      details: '',
+      company_name: application?.company_name ?? '',
+      role: application?.role ?? '',
+      details: application?.details ?? '',
     },
   });
 
   const onSubmit = async (values: ApplicationSchemaValues) => {
-    const applicationId = await createApplication(values);
+    const applicationId = application
+      ? await updateApplication(values, application.id)
+      : await createApplication(values);
     if (!isOnboard) {
       setOpen(false);
       return;

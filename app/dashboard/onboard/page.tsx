@@ -8,7 +8,7 @@ import { redirect } from 'next/navigation';
 export default async function OnboardPage() {
   // Check if user already has applications
   const applications = await getUserApplications();
-  
+
   // If user has applications, redirect to the first one
   if (applications.length > 0) {
     redirect(`/dashboard/${applications[0].id}/curriculum`);
@@ -20,7 +20,7 @@ export default async function OnboardPage() {
         <CardHeader>
           <CardTitle>Welcome 👋</CardTitle>
           <p className="text-muted-foreground mt-2">
-            Let's get started by registering your first job application.
+            Let&apos;s get started by registering your first job application.
           </p>
         </CardHeader>
         <CardContent>

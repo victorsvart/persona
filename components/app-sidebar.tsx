@@ -24,7 +24,7 @@ const data = {
     },
     {
       name: 'Application Info',
-      url: '#',
+      url: '/dashboard/**/info',
       icon: PieChart,
     },
     {

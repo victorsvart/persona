@@ -41,6 +41,24 @@ export async function createApplication(
   return result.id;
 }
 
+export async function updateApplication(
+  form: ApplicationSchemaValues,
+  id: string,
+): Promise<string> {
+  const user = await getUser();
+  const result = await prisma.application.update({
+    where: { id: id, userId: user.id },
+    data: {
+      company_name: form.company_name,
+      role: form.role,
+      details: form.details,
+      userId: user.id,
+    },
+  });
+
+  return result.id;
+}
+
 export async function getUserApplications() {
   try {
     const user = await getUser();

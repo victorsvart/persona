@@ -32,11 +32,11 @@ import { useCompany } from '@/providers/company-provider';
 export function NavOptions({
   projects,
 }: {
-  projects: {
+  projects: Array<{
     name: string;
     url: string;
     icon: LucideIcon;
-  }[];
+  }>;
 }) {
   const { isMobile } = useSidebar();
   const pathName = usePathname();
@@ -50,21 +50,21 @@ export function NavOptions({
   };
 
   const getHref = (url: string) => {
-    if (url === '/dashboard/**/curriculum') {
-      if (application_id) {
-        return `/dashboard/${application_id}/curriculum`;
-      }
-      
-      // If the above didn't work, dig through the URL AGAIN
-      const curriculumMatch = pathName.match(/\/dashboard\/([^\/]+)\/curriculum/);
-      if (curriculumMatch) {
-        return `/dashboard/${curriculumMatch[1]}/curriculum`;
-      }
-      
-      // if clueless, the dashboard will handle it
+    if (!application_id) {
       return '/dashboard';
     }
-    return url;
+
+    const base = `/dashboard/${application_id}/`;
+    const split = url.split('/');
+    const current = split[split.length - 1];
+    switch (current) {
+      case '/curriculum':
+        return `${base}/curriculum`;
+      case '/info':
+        return `${base}/info`;
+      default:
+        return '/dashboard';
+    }
   };
 
   return (

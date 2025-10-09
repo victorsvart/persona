@@ -124,7 +124,8 @@ export const AccountForm = ({ user }: Props): ReactElement => {
                   />
                 </FormControl>
                 <FormDescription className="text-xs">
-                  We'll use this to send you important updates and notifications
+                  We&apos;ll use this to send you important updates and
+                  notifications
                 </FormDescription>
                 <FormMessage />
               </FormItem>
