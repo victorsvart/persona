@@ -1,7 +1,7 @@
 'use server';
 
 import { ReactElement } from 'react';
-import { getApplicationById } from '../../actions';
+import { getApplicationByIdFromCache } from '../../actions';
 import {
   Card,
   CardContent,
@@ -16,7 +16,7 @@ export default async function ApplicationInfo({
   params: { application_id: string };
 }): Promise<ReactElement> {
   const { application_id } = await params;
-  const application = await getApplicationById(application_id);
+  const application = await getApplicationByIdFromCache(application_id);
 
   if (!application) {
     return <>Application not found</>;

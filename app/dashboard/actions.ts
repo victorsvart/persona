@@ -7,8 +7,13 @@ import { User } from '@/prisma/lib/generated/prisma';
 import { Session } from '@/types/Session';
 import { headers } from 'next/headers';
 import { redirect } from 'next/navigation';
+import { cache } from 'react';
 
-export async function getSession(): Promise<Session> {
+const LOGIN_URL = '/auth/login';
+
+// Cache the session fetch for the duration of the request
+// This prevents multiple database calls for the same user data
+export const getSession = cache(async (): Promise<Session> => {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
@@ -18,12 +23,13 @@ export async function getSession(): Promise<Session> {
   }
 
   return session;
-}
+});
 
-export async function getUser(): Promise<User> {
+// Cache the user fetch - this will reuse the cached session
+export const getUser = cache(async (): Promise<User> => {
   const session = await getSession();
   return session.user as User;
-}
+});
 
 export async function createApplication(
   form: ApplicationSchemaValues,
@@ -58,13 +64,11 @@ export async function updateApplication(
 
   return result.id;
 }
-
-export async function getUserApplications() {
+export const getUserApplications = cache(async (userId: string) => {
   try {
-    const user = await getUser();
     const applications = await prisma.application.findMany({
       where: {
-        userId: user.id,
+        userId: userId,
       },
       orderBy: {
         company_name: 'asc',
@@ -76,9 +80,10 @@ export async function getUserApplications() {
     console.error('Error fetching user applications:', error);
     return [];
   }
-}
+});
 
-export async function getApplicationById(applicationId: string) {
+
+export const getApplicationById = cache(async (applicationId: string) => {
   const user = await getUser();
   const application = await prisma.application.findFirst({
     where: {
@@ -88,10 +93,27 @@ export async function getApplicationById(applicationId: string) {
   });
 
   return application;
-}
+});
+
+export const getApplicationByIdFromCache = cache(
+  async (applicationId: string) => {
+    const user = await getUser();
+    const applications = await getUserApplications(user.id);
+
+    const application = applications.find((app) => app.id === applicationId);
+
+    // Verify ownership (security check)
+    if (!application) {
+      return null;
+    }
+
+    return application;
+  },
+);
 
 export async function handleDashboardRedirect() {
-  const applications = await getUserApplications();
+  const user = await getUser();
+  const applications = await getUserApplications(user.id);
 
   if (applications.length === 0) {
     redirect('/dashboard/onboard');

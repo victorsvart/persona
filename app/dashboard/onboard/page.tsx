@@ -2,12 +2,13 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ApplicationForm } from '@/components/application-form';
-import { getUserApplications } from '../actions';
+import { getUser, getUserApplications } from '../actions';
 import { redirect } from 'next/navigation';
 
 export default async function OnboardPage() {
   // Check if user already has applications
-  const applications = await getUserApplications();
+  const user = await getUser();
+  const applications = await getUserApplications(user.id);
 
   // If user has applications, redirect to the first one
   if (applications.length > 0) {

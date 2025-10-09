@@ -1,6 +1,6 @@
 'use server';
 
-import { getApplicationById } from '../../actions';
+import { getApplicationByIdFromCache } from '../../actions';
 import {
   Card,
   CardHeader,
@@ -20,7 +20,7 @@ export default async function CurriculumPage({
   params: { application_id: string };
 }) {
   const { application_id } = await params;
-  const application = await getApplicationById(application_id);
+  const application = await getApplicationByIdFromCache(application_id);
 
   if (!application) {
     return (
