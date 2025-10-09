@@ -32,11 +32,8 @@ export default async function CurriculumPage({
 
   return (
     <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
-      {/* Two-column layout */}
       <div className="grid gap-4 md:grid-cols-[1fr_2fr]">
-        {/* LEFT SIDE (Application + Chat) */}
         <div className="flex flex-col gap-4">
-          {/* Application Info */}
           <Card className="flex flex-col justify-between rounded-xl shadow-md hover:shadow-lg transition-shadow">
             <CardHeader>
               <CardTitle className="text-lg">
@@ -72,7 +69,6 @@ export default async function CurriculumPage({
             </CardFooter>
           </Card>
 
-          {/* Chat */}
           <Card className="flex flex-col rounded-xl shadow-md flex-1">
             <CardHeader>
               <CardTitle className="text-lg">Chat</CardTitle>
@@ -108,7 +104,6 @@ export default async function CurriculumPage({
           </Card>
         </div>
 
-        {/* RIGHT SIDE (A4 Resume Preview) */}
         <div className="flex items-center justify-center bg-muted/30 rounded-xl min-h-[100vh] p-4">
           <div className="bg-white text-black shadow-xl rounded-md w-full max-w-[794px] aspect-[1/1.4142] overflow-y-auto p-10 print:shadow-none">
             <h1 className="text-2xl font-bold">John Doe</h1>
