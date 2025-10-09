@@ -13,6 +13,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import Link from 'next/link';
+import { ApplicationResume } from '@/components/application-resume';
 
 export default async function CurriculumPage({
   params,
@@ -30,6 +31,9 @@ export default async function CurriculumPage({
     );
   }
 
+  const htmlTest =
+    '<!DOCTYPE html> <html> <head> <meta charset="UTF-8" /> <title>Victor Moraes - Frontend Developer Resume</title> </head> <body> <section> <h2>Contact Information</h2> <p> Victor Moraes<br> São Paulo, Brazil<br> Phone: +55 11 91234-5678<br> Email: victor.moraes@email.com </p> </section> <section> <h2>Professional Summary</h2> <p>Experienced Frontend Developer specialized in creating responsive and user-centric web interfaces. Adept at utilizing modern frameworks and technologies to improve user experience and streamline frontend development processes. Passionate about clean code, performance optimization, and collaborative team environments.</p> </section> <section> <h2>Work Experience</h2> <h3>Frontend Developer, Innovatech Solutions</h3> <p>June 2019 – Present</p> <ul> <li>Developed and maintained dynamic, mobile-friendly websites using React.js, HTML5, and CSS3, improving site performance and user engagement.</li> <li>Collaborated with backend engineers and designers to create seamless UI/UX designs.</li> <li>Implemented component-based architecture, reducing code redundancy and easing maintenance.</li> </ul> <h3>Junior Frontend Developer, Web Creators</h3> <p>January 2017 – May 2019</p> <ul> <li>Participated in the development of client websites with a focus on responsive design and accessibility.</li> <li>Optimized site loading times and improved browser compatibility across devices.</li> </ul> </section> <section> <h2>Education</h2> <p>B.Sc. in Computer Science<br>University of São Paulo, 2016</p> </section> <section> <h2>Skills</h2> <ul> <li>HTML5, CSS3, JavaScript</li> <li>React.js, Vue.js</li> <li>Responsive Design & Mobile First</li> <li>Git & Version Control</li> <li>CSS Preprocessors (SASS, LESS)</li> </ul> </section> <section> <h2>Certifications</h2> <ul> <li>Certified Front-End Developer – freeCodeCamp</li> <li>JavaScript Algorithms and Data Structures – Coursera</li> </ul> </section> </body> </html>';
+
   return (
     <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
       <div className="grid gap-4 md:grid-cols-[1fr_2fr]">
@@ -43,9 +47,9 @@ export default async function CurriculumPage({
             </CardHeader>
 
             <CardContent className="space-y-2 text-sm">
-              {application.details && (
+              {application.job_description && (
                 <p className="text-muted-foreground leading-relaxed">
-                  {application.details}
+                  {application.job_description}
                 </p>
               )}
 
@@ -103,70 +107,7 @@ export default async function CurriculumPage({
             </CardFooter>
           </Card>
         </div>
-
-        <div className="flex flex-col items-center justify-center bg-muted/30 rounded-xl min-h-[100vh] p-4">
-          <div className="flex w-full justify-start">Version 1</div>
-          <div className="bg-white text-black shadow-xl rounded-md w-full max-w-[794px] aspect-[1/1.4142] overflow-y-auto p-10 print:shadow-none">
-            <h1 className="text-2xl font-bold">John Doe</h1>
-            <p className="text-gray-700 mb-4">Software Engineer</p>
-
-            <section>
-              <h2 className="text-lg font-semibold border-b pb-1 mb-2">
-                Experience
-              </h2>
-              <ul className="list-disc pl-6 space-y-1 text-sm leading-relaxed">
-                <li>
-                  <strong>Frontend Developer</strong> — TechCorp (2021–2024)
-                  <p>
-                    Built modern UIs with React and optimized performance across
-                    multi-tenant systems.
-                  </p>
-                </li>
-                <li>
-                  <strong>Intern</strong> — OpenAI (2020–2021)
-                  <p>
-                    Assisted in the development of internal tooling for model
-                    evaluation workflows.
-                  </p>
-                </li>
-              </ul>
-            </section>
-
-            <section className="mt-6">
-              <h2 className="text-lg font-semibold border-b pb-1 mb-2">
-                Education
-              </h2>
-              <p className="text-sm leading-relaxed">
-                <strong>MIT</strong> — B.Sc. in Computer Science (2016–2020)
-              </p>
-            </section>
-
-            <section className="mt-6">
-              <h2 className="text-lg font-semibold border-b pb-1 mb-2">
-                Skills
-              </h2>
-              <p className="text-sm leading-relaxed">
-                React, Node.js, TypeScript, Go, PostgreSQL, Docker, AWS
-              </p>
-            </section>
-
-            <section className="mt-6">
-              <h2 className="text-lg font-semibold border-b pb-1 mb-2">
-                Projects
-              </h2>
-              <ul className="list-disc pl-6 text-sm leading-relaxed">
-                <li>
-                  <strong>Realtime Chat App:</strong> Encrypted multi-threaded
-                  chat system built with Python.
-                </li>
-                <li>
-                  <strong>GHG Report Generator:</strong> Dynamic PDF reporting
-                  tool for emissions data (Brazil’s GHG Protocol).
-                </li>
-              </ul>
-            </section>
-          </div>
-        </div>
+        <ApplicationResume resumeHTML={htmlTest} />
       </div>
     </div>
   );

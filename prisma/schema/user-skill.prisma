@@ -1,0 +1,11 @@
+model UserSkill {
+    id        String   @id
+    skills    String
+    userId    String   @unique
+    user      User     @relation(fields: [userId], references: [id])
+    createdAt DateTime @default(now())
+    updatedAt DateTime @default(now()) @updatedAt
+
+    @@map("user_skill")
+    @@schema("public")
+}

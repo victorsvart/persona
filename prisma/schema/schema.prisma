@@ -16,22 +16,30 @@ datasource db {
 }
 
 model User {
-  id              String        @id
-  name            String
-  email           String
-  emailVerified   Boolean       @default(false)
-  image           String?
-  createdAt       DateTime      @default(now())
-  updatedAt       DateTime      @default(now()) @updatedAt
-  username        String?
-  displayUsername String?
-  sessions        Session[]
-  accounts        Account[]
-  applications    Application[]
-  onboarded       Onboard?
+  id                      String                   @id
+  name                    String
+  email                   String                   @unique
+  emailVerified           Boolean                  @default(false)
+  image                   String?
+  createdAt               DateTime                 @default(now())
+  updatedAt               DateTime                 @default(now()) @updatedAt
+  username                String?                  @unique
+  displayUsername         String?
+  phone                   String?
+  location                String?
+  professional_summary    String?
+  locationTypeId          Int?
+  locationType            UserLocationType?        @relation(fields: [locationTypeId], references: [id])
+  sessions                Session[]
+  accounts                Account[]
+  applications            Application[]
+  onboarded               Onboard?
+  user_educations         UserEducation[]
+  user_skills             UserSkill?
+  UserCertification       UserCertification[]
+  UserProfessionalSummary UserProfessionalSummary?
+  UserWorkExperience      UserWorkExperience[]
 
-  @@unique([email])
-  @@unique([username])
   @@map("user")
   @@schema("auth")
 }

@@ -50,7 +50,7 @@ export const ApplicationForm = ({
     defaultValues: {
       company_name: application?.company_name ?? '',
       role: application?.role ?? '',
-      details: application?.details ?? '',
+      details: application?.job_description ?? '',
     },
   });
 

@@ -1,0 +1,11 @@
+model UserProfessionalSummary {
+    id        String   @id
+    summary   String
+    userId    String   @unique
+    user      User     @relation(fields: [userId], references: [id])
+    createdAt DateTime @default(now())
+    updatedAt DateTime @default(now()) @updatedAt
+
+    @@map("user_professional_summary")
+    @@schema("public")
+}

@@ -1,0 +1,15 @@
+model UserWorkExperience {
+    id               String    @id
+    company_name     String
+    enrollment       DateTime  @default(now())
+    completion       DateTime?
+    description      String
+    currentWorkPlace Boolean
+    userId           String
+    user             User      @relation(fields: [userId], references: [id])
+    createdAt        DateTime  @default(now())
+    updatedAt        DateTime  @default(now()) @updatedAt
+
+    @@map("user_work_experience")
+    @@schema("public")
+}
