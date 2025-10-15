@@ -3,7 +3,7 @@
 import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { ApplicationSchemaValues } from '@/lib/zod/application.schema';
-import { User } from '@/prisma/lib/generated/prisma';
+import { User, UserProfessionalSummary } from '@/prisma/lib/generated/prisma';
 import { Session } from '@/types/Session';
 import { revalidatePath } from 'next/cache';
 import { headers } from 'next/headers';
@@ -40,7 +40,7 @@ export async function createApplication(
     data: {
       company_name: form.company_name,
       role: form.role,
-      details: form.details,
+      job_description: form.details,
       userId: user.id,
     },
   });
@@ -58,7 +58,7 @@ export async function updateApplication(
     data: {
       company_name: form.company_name,
       role: form.role,
-      details: form.details,
+      job_description: form.details,
       userId: user.id,
     },
   });
@@ -104,7 +104,6 @@ export const getApplicationByIdFromCache = cache(
 
     const application = applications.find((app) => app.id === applicationId);
 
-    // Verify ownership (security check)
     if (!application) {
       return null;
     }
@@ -116,10 +115,31 @@ export const getApplicationByIdFromCache = cache(
 export async function handleDashboardRedirect() {
   const user = await getUser();
   const applications = await getUserApplications(user.id);
+  
+  // Check if user has completed onboarding
+  const onboarded = await prisma.onboard.findUnique({
+    where: { userId: user.id },
+  });
 
-  if (applications.length === 0) {
+  if (!onboarded) {
     redirect('/dashboard/onboard');
   }
 
+  if (applications.length === 0) {
+    redirect('/dashboard/create-application');
+  }
+
   redirect(`/dashboard/${applications[0].id}/curriculum`);
+}
+
+export async function getSummary(userId: string) {
+  const summary = await prisma.userProfessionalSummary.findUnique({
+    where: { userId: userId },
+  });
+
+  if (!summary) {
+    return null;
+  }
+
+  return summary;
 }

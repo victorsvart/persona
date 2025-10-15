@@ -369,8 +369,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 6.17.0
-   * Query Engine version: c0aafc03b8ef6cdced8654b9a817999e02457d6a
+   * Prisma Client JS version: 6.17.1
+   * Query Engine version: 272a37d34178c2894197e17273bf937f25acdeac
    */
   export type PrismaVersion = {
     client: string
@@ -1861,20 +1861,20 @@ export namespace Prisma {
    */
 
   export type UserCountOutputType = {
-    sessions: number
     accounts: number
+    sessions: number
     applications: number
-    user_educations: number
     UserCertification: number
+    user_educations: number
     UserWorkExperience: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    sessions?: boolean | UserCountOutputTypeCountSessionsArgs
     accounts?: boolean | UserCountOutputTypeCountAccountsArgs
+    sessions?: boolean | UserCountOutputTypeCountSessionsArgs
     applications?: boolean | UserCountOutputTypeCountApplicationsArgs
-    user_educations?: boolean | UserCountOutputTypeCountUser_educationsArgs
     UserCertification?: boolean | UserCountOutputTypeCountUserCertificationArgs
+    user_educations?: boolean | UserCountOutputTypeCountUser_educationsArgs
     UserWorkExperience?: boolean | UserCountOutputTypeCountUserWorkExperienceArgs
   }
 
@@ -1892,15 +1892,15 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountSessionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: SessionWhereInput
+  export type UserCountOutputTypeCountAccountsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AccountWhereInput
   }
 
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountAccountsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: AccountWhereInput
+  export type UserCountOutputTypeCountSessionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SessionWhereInput
   }
 
   /**
@@ -1913,15 +1913,15 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountUser_educationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: UserEducationWhereInput
+  export type UserCountOutputTypeCountUserCertificationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserCertificationWhereInput
   }
 
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountUserCertificationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: UserCertificationWhereInput
+  export type UserCountOutputTypeCountUser_educationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserEducationWhereInput
   }
 
   /**
@@ -1981,24 +1981,24 @@ export namespace Prisma {
     id: string | null
     company_name: string | null
     role: string | null
-    job_description: string | null
     userId: string | null
+    job_description: string | null
   }
 
   export type ApplicationMaxAggregateOutputType = {
     id: string | null
     company_name: string | null
     role: string | null
-    job_description: string | null
     userId: string | null
+    job_description: string | null
   }
 
   export type ApplicationCountAggregateOutputType = {
     id: number
     company_name: number
     role: number
-    job_description: number
     userId: number
+    job_description: number
     _all: number
   }
 
@@ -2007,24 +2007,24 @@ export namespace Prisma {
     id?: true
     company_name?: true
     role?: true
-    job_description?: true
     userId?: true
+    job_description?: true
   }
 
   export type ApplicationMaxAggregateInputType = {
     id?: true
     company_name?: true
     role?: true
-    job_description?: true
     userId?: true
+    job_description?: true
   }
 
   export type ApplicationCountAggregateInputType = {
     id?: true
     company_name?: true
     role?: true
-    job_description?: true
     userId?: true
+    job_description?: true
     _all?: true
   }
 
@@ -2104,8 +2104,8 @@ export namespace Prisma {
     id: string
     company_name: string
     role: string
-    job_description: string | null
     userId: string
+    job_description: string | null
     _count: ApplicationCountAggregateOutputType | null
     _min: ApplicationMinAggregateOutputType | null
     _max: ApplicationMaxAggregateOutputType | null
@@ -2129,8 +2129,8 @@ export namespace Prisma {
     id?: boolean
     company_name?: boolean
     role?: boolean
-    job_description?: boolean
     userId?: boolean
+    job_description?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["application"]>
 
@@ -2138,8 +2138,8 @@ export namespace Prisma {
     id?: boolean
     company_name?: boolean
     role?: boolean
-    job_description?: boolean
     userId?: boolean
+    job_description?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["application"]>
 
@@ -2147,8 +2147,8 @@ export namespace Prisma {
     id?: boolean
     company_name?: boolean
     role?: boolean
-    job_description?: boolean
     userId?: boolean
+    job_description?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["application"]>
 
@@ -2156,11 +2156,11 @@ export namespace Prisma {
     id?: boolean
     company_name?: boolean
     role?: boolean
-    job_description?: boolean
     userId?: boolean
+    job_description?: boolean
   }
 
-  export type ApplicationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "company_name" | "role" | "job_description" | "userId", ExtArgs["result"]["application"]>
+  export type ApplicationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "company_name" | "role" | "userId" | "job_description", ExtArgs["result"]["application"]>
   export type ApplicationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -2180,8 +2180,8 @@ export namespace Prisma {
       id: string
       company_name: string
       role: string
-      job_description: string | null
       userId: string
+      job_description: string | null
     }, ExtArgs["result"]["application"]>
     composites: {}
   }
@@ -2609,8 +2609,8 @@ export namespace Prisma {
     readonly id: FieldRef<"Application", 'String'>
     readonly company_name: FieldRef<"Application", 'String'>
     readonly role: FieldRef<"Application", 'String'>
-    readonly job_description: FieldRef<"Application", 'String'>
     readonly userId: FieldRef<"Application", 'String'>
+    readonly job_description: FieldRef<"Application", 'String'>
   }
     
 
@@ -4087,10 +4087,10 @@ export namespace Prisma {
     updatedAt: Date | null
     username: string | null
     displayUsername: string | null
-    phone: string | null
     location: string | null
     professional_summary: string | null
     locationTypeId: number | null
+    phone: string | null
   }
 
   export type UserMaxAggregateOutputType = {
@@ -4103,10 +4103,10 @@ export namespace Prisma {
     updatedAt: Date | null
     username: string | null
     displayUsername: string | null
-    phone: string | null
     location: string | null
     professional_summary: string | null
     locationTypeId: number | null
+    phone: string | null
   }
 
   export type UserCountAggregateOutputType = {
@@ -4119,10 +4119,10 @@ export namespace Prisma {
     updatedAt: number
     username: number
     displayUsername: number
-    phone: number
     location: number
     professional_summary: number
     locationTypeId: number
+    phone: number
     _all: number
   }
 
@@ -4145,10 +4145,10 @@ export namespace Prisma {
     updatedAt?: true
     username?: true
     displayUsername?: true
-    phone?: true
     location?: true
     professional_summary?: true
     locationTypeId?: true
+    phone?: true
   }
 
   export type UserMaxAggregateInputType = {
@@ -4161,10 +4161,10 @@ export namespace Prisma {
     updatedAt?: true
     username?: true
     displayUsername?: true
-    phone?: true
     location?: true
     professional_summary?: true
     locationTypeId?: true
+    phone?: true
   }
 
   export type UserCountAggregateInputType = {
@@ -4177,10 +4177,10 @@ export namespace Prisma {
     updatedAt?: true
     username?: true
     displayUsername?: true
-    phone?: true
     location?: true
     professional_summary?: true
     locationTypeId?: true
+    phone?: true
     _all?: true
   }
 
@@ -4280,10 +4280,10 @@ export namespace Prisma {
     updatedAt: Date
     username: string | null
     displayUsername: string | null
-    phone: string | null
     location: string | null
     professional_summary: string | null
     locationTypeId: number | null
+    phone: string | null
     _count: UserCountAggregateOutputType | null
     _avg: UserAvgAggregateOutputType | null
     _sum: UserSumAggregateOutputType | null
@@ -4315,19 +4315,19 @@ export namespace Prisma {
     updatedAt?: boolean
     username?: boolean
     displayUsername?: boolean
-    phone?: boolean
     location?: boolean
     professional_summary?: boolean
     locationTypeId?: boolean
-    locationType?: boolean | User$locationTypeArgs<ExtArgs>
-    sessions?: boolean | User$sessionsArgs<ExtArgs>
+    phone?: boolean
     accounts?: boolean | User$accountsArgs<ExtArgs>
+    sessions?: boolean | User$sessionsArgs<ExtArgs>
+    locationType?: boolean | User$locationTypeArgs<ExtArgs>
     applications?: boolean | User$applicationsArgs<ExtArgs>
     onboarded?: boolean | User$onboardedArgs<ExtArgs>
-    user_educations?: boolean | User$user_educationsArgs<ExtArgs>
-    user_skills?: boolean | User$user_skillsArgs<ExtArgs>
     UserCertification?: boolean | User$UserCertificationArgs<ExtArgs>
+    user_educations?: boolean | User$user_educationsArgs<ExtArgs>
     UserProfessionalSummary?: boolean | User$UserProfessionalSummaryArgs<ExtArgs>
+    user_skills?: boolean | User$user_skillsArgs<ExtArgs>
     UserWorkExperience?: boolean | User$UserWorkExperienceArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
@@ -4342,10 +4342,10 @@ export namespace Prisma {
     updatedAt?: boolean
     username?: boolean
     displayUsername?: boolean
-    phone?: boolean
     location?: boolean
     professional_summary?: boolean
     locationTypeId?: boolean
+    phone?: boolean
     locationType?: boolean | User$locationTypeArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -4359,10 +4359,10 @@ export namespace Prisma {
     updatedAt?: boolean
     username?: boolean
     displayUsername?: boolean
-    phone?: boolean
     location?: boolean
     professional_summary?: boolean
     locationTypeId?: boolean
+    phone?: boolean
     locationType?: boolean | User$locationTypeArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -4376,23 +4376,23 @@ export namespace Prisma {
     updatedAt?: boolean
     username?: boolean
     displayUsername?: boolean
-    phone?: boolean
     location?: boolean
     professional_summary?: boolean
     locationTypeId?: boolean
+    phone?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "image" | "createdAt" | "updatedAt" | "username" | "displayUsername" | "phone" | "location" | "professional_summary" | "locationTypeId", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "image" | "createdAt" | "updatedAt" | "username" | "displayUsername" | "location" | "professional_summary" | "locationTypeId" | "phone", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    locationType?: boolean | User$locationTypeArgs<ExtArgs>
-    sessions?: boolean | User$sessionsArgs<ExtArgs>
     accounts?: boolean | User$accountsArgs<ExtArgs>
+    sessions?: boolean | User$sessionsArgs<ExtArgs>
+    locationType?: boolean | User$locationTypeArgs<ExtArgs>
     applications?: boolean | User$applicationsArgs<ExtArgs>
     onboarded?: boolean | User$onboardedArgs<ExtArgs>
-    user_educations?: boolean | User$user_educationsArgs<ExtArgs>
-    user_skills?: boolean | User$user_skillsArgs<ExtArgs>
     UserCertification?: boolean | User$UserCertificationArgs<ExtArgs>
+    user_educations?: boolean | User$user_educationsArgs<ExtArgs>
     UserProfessionalSummary?: boolean | User$UserProfessionalSummaryArgs<ExtArgs>
+    user_skills?: boolean | User$user_skillsArgs<ExtArgs>
     UserWorkExperience?: boolean | User$UserWorkExperienceArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -4406,15 +4406,15 @@ export namespace Prisma {
   export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "User"
     objects: {
-      locationType: Prisma.$UserLocationTypePayload<ExtArgs> | null
-      sessions: Prisma.$SessionPayload<ExtArgs>[]
       accounts: Prisma.$AccountPayload<ExtArgs>[]
+      sessions: Prisma.$SessionPayload<ExtArgs>[]
+      locationType: Prisma.$UserLocationTypePayload<ExtArgs> | null
       applications: Prisma.$ApplicationPayload<ExtArgs>[]
       onboarded: Prisma.$OnboardPayload<ExtArgs> | null
-      user_educations: Prisma.$UserEducationPayload<ExtArgs>[]
-      user_skills: Prisma.$UserSkillPayload<ExtArgs> | null
       UserCertification: Prisma.$UserCertificationPayload<ExtArgs>[]
+      user_educations: Prisma.$UserEducationPayload<ExtArgs>[]
       UserProfessionalSummary: Prisma.$UserProfessionalSummaryPayload<ExtArgs> | null
+      user_skills: Prisma.$UserSkillPayload<ExtArgs> | null
       UserWorkExperience: Prisma.$UserWorkExperiencePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -4427,10 +4427,10 @@ export namespace Prisma {
       updatedAt: Date
       username: string | null
       displayUsername: string | null
-      phone: string | null
       location: string | null
       professional_summary: string | null
       locationTypeId: number | null
+      phone: string | null
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -4825,15 +4825,15 @@ export namespace Prisma {
    */
   export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    locationType<T extends User$locationTypeArgs<ExtArgs> = {}>(args?: Subset<T, User$locationTypeArgs<ExtArgs>>): Prisma__UserLocationTypeClient<$Result.GetResult<Prisma.$UserLocationTypePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    sessions<T extends User$sessionsArgs<ExtArgs> = {}>(args?: Subset<T, User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     accounts<T extends User$accountsArgs<ExtArgs> = {}>(args?: Subset<T, User$accountsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    sessions<T extends User$sessionsArgs<ExtArgs> = {}>(args?: Subset<T, User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    locationType<T extends User$locationTypeArgs<ExtArgs> = {}>(args?: Subset<T, User$locationTypeArgs<ExtArgs>>): Prisma__UserLocationTypeClient<$Result.GetResult<Prisma.$UserLocationTypePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     applications<T extends User$applicationsArgs<ExtArgs> = {}>(args?: Subset<T, User$applicationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ApplicationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     onboarded<T extends User$onboardedArgs<ExtArgs> = {}>(args?: Subset<T, User$onboardedArgs<ExtArgs>>): Prisma__OnboardClient<$Result.GetResult<Prisma.$OnboardPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    user_educations<T extends User$user_educationsArgs<ExtArgs> = {}>(args?: Subset<T, User$user_educationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserEducationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    user_skills<T extends User$user_skillsArgs<ExtArgs> = {}>(args?: Subset<T, User$user_skillsArgs<ExtArgs>>): Prisma__UserSkillClient<$Result.GetResult<Prisma.$UserSkillPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     UserCertification<T extends User$UserCertificationArgs<ExtArgs> = {}>(args?: Subset<T, User$UserCertificationArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserCertificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    user_educations<T extends User$user_educationsArgs<ExtArgs> = {}>(args?: Subset<T, User$user_educationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserEducationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     UserProfessionalSummary<T extends User$UserProfessionalSummaryArgs<ExtArgs> = {}>(args?: Subset<T, User$UserProfessionalSummaryArgs<ExtArgs>>): Prisma__UserProfessionalSummaryClient<$Result.GetResult<Prisma.$UserProfessionalSummaryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    user_skills<T extends User$user_skillsArgs<ExtArgs> = {}>(args?: Subset<T, User$user_skillsArgs<ExtArgs>>): Prisma__UserSkillClient<$Result.GetResult<Prisma.$UserSkillPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     UserWorkExperience<T extends User$UserWorkExperienceArgs<ExtArgs> = {}>(args?: Subset<T, User$UserWorkExperienceArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserWorkExperiencePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -4873,10 +4873,10 @@ export namespace Prisma {
     readonly updatedAt: FieldRef<"User", 'DateTime'>
     readonly username: FieldRef<"User", 'String'>
     readonly displayUsername: FieldRef<"User", 'String'>
-    readonly phone: FieldRef<"User", 'String'>
     readonly location: FieldRef<"User", 'String'>
     readonly professional_summary: FieldRef<"User", 'String'>
     readonly locationTypeId: FieldRef<"User", 'Int'>
+    readonly phone: FieldRef<"User", 'String'>
   }
     
 
@@ -5273,22 +5273,27 @@ export namespace Prisma {
   }
 
   /**
-   * User.locationType
+   * User.accounts
    */
-  export type User$locationTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type User$accountsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the UserLocationType
+     * Select specific fields to fetch from the Account
      */
-    select?: UserLocationTypeSelect<ExtArgs> | null
+    select?: AccountSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the UserLocationType
+     * Omit specific fields from the Account
      */
-    omit?: UserLocationTypeOmit<ExtArgs> | null
+    omit?: AccountOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: UserLocationTypeInclude<ExtArgs> | null
-    where?: UserLocationTypeWhereInput
+    include?: AccountInclude<ExtArgs> | null
+    where?: AccountWhereInput
+    orderBy?: AccountOrderByWithRelationInput | AccountOrderByWithRelationInput[]
+    cursor?: AccountWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AccountScalarFieldEnum | AccountScalarFieldEnum[]
   }
 
   /**
@@ -5316,27 +5321,22 @@ export namespace Prisma {
   }
 
   /**
-   * User.accounts
+   * User.locationType
    */
-  export type User$accountsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type User$locationTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Account
+     * Select specific fields to fetch from the UserLocationType
      */
-    select?: AccountSelect<ExtArgs> | null
+    select?: UserLocationTypeSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Account
+     * Omit specific fields from the UserLocationType
      */
-    omit?: AccountOmit<ExtArgs> | null
+    omit?: UserLocationTypeOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: AccountInclude<ExtArgs> | null
-    where?: AccountWhereInput
-    orderBy?: AccountOrderByWithRelationInput | AccountOrderByWithRelationInput[]
-    cursor?: AccountWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: AccountScalarFieldEnum | AccountScalarFieldEnum[]
+    include?: UserLocationTypeInclude<ExtArgs> | null
+    where?: UserLocationTypeWhereInput
   }
 
   /**
@@ -5383,49 +5383,6 @@ export namespace Prisma {
   }
 
   /**
-   * User.user_educations
-   */
-  export type User$user_educationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the UserEducation
-     */
-    select?: UserEducationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the UserEducation
-     */
-    omit?: UserEducationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserEducationInclude<ExtArgs> | null
-    where?: UserEducationWhereInput
-    orderBy?: UserEducationOrderByWithRelationInput | UserEducationOrderByWithRelationInput[]
-    cursor?: UserEducationWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: UserEducationScalarFieldEnum | UserEducationScalarFieldEnum[]
-  }
-
-  /**
-   * User.user_skills
-   */
-  export type User$user_skillsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the UserSkill
-     */
-    select?: UserSkillSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the UserSkill
-     */
-    omit?: UserSkillOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserSkillInclude<ExtArgs> | null
-    where?: UserSkillWhereInput
-  }
-
-  /**
    * User.UserCertification
    */
   export type User$UserCertificationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5450,6 +5407,30 @@ export namespace Prisma {
   }
 
   /**
+   * User.user_educations
+   */
+  export type User$user_educationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserEducation
+     */
+    select?: UserEducationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserEducation
+     */
+    omit?: UserEducationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserEducationInclude<ExtArgs> | null
+    where?: UserEducationWhereInput
+    orderBy?: UserEducationOrderByWithRelationInput | UserEducationOrderByWithRelationInput[]
+    cursor?: UserEducationWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UserEducationScalarFieldEnum | UserEducationScalarFieldEnum[]
+  }
+
+  /**
    * User.UserProfessionalSummary
    */
   export type User$UserProfessionalSummaryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5466,6 +5447,25 @@ export namespace Prisma {
      */
     include?: UserProfessionalSummaryInclude<ExtArgs> | null
     where?: UserProfessionalSummaryWhereInput
+  }
+
+  /**
+   * User.user_skills
+   */
+  export type User$user_skillsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserSkill
+     */
+    select?: UserSkillSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserSkill
+     */
+    omit?: UserSkillOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserSkillInclude<ExtArgs> | null
+    where?: UserSkillWhereInput
   }
 
   /**
@@ -15281,8 +15281,8 @@ export namespace Prisma {
     id: 'id',
     company_name: 'company_name',
     role: 'role',
-    job_description: 'job_description',
-    userId: 'userId'
+    userId: 'userId',
+    job_description: 'job_description'
   };
 
   export type ApplicationScalarFieldEnum = (typeof ApplicationScalarFieldEnum)[keyof typeof ApplicationScalarFieldEnum]
@@ -15307,10 +15307,10 @@ export namespace Prisma {
     updatedAt: 'updatedAt',
     username: 'username',
     displayUsername: 'displayUsername',
-    phone: 'phone',
     location: 'location',
     professional_summary: 'professional_summary',
-    locationTypeId: 'locationTypeId'
+    locationTypeId: 'locationTypeId',
+    phone: 'phone'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -15536,8 +15536,8 @@ export namespace Prisma {
     id?: StringFilter<"Application"> | string
     company_name?: StringFilter<"Application"> | string
     role?: StringFilter<"Application"> | string
-    job_description?: StringNullableFilter<"Application"> | string | null
     userId?: StringFilter<"Application"> | string
+    job_description?: StringNullableFilter<"Application"> | string | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
@@ -15545,8 +15545,8 @@ export namespace Prisma {
     id?: SortOrder
     company_name?: SortOrder
     role?: SortOrder
-    job_description?: SortOrderInput | SortOrder
     userId?: SortOrder
+    job_description?: SortOrderInput | SortOrder
     user?: UserOrderByWithRelationInput
   }
 
@@ -15557,8 +15557,8 @@ export namespace Prisma {
     NOT?: ApplicationWhereInput | ApplicationWhereInput[]
     company_name?: StringFilter<"Application"> | string
     role?: StringFilter<"Application"> | string
-    job_description?: StringNullableFilter<"Application"> | string | null
     userId?: StringFilter<"Application"> | string
+    job_description?: StringNullableFilter<"Application"> | string | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id">
 
@@ -15566,8 +15566,8 @@ export namespace Prisma {
     id?: SortOrder
     company_name?: SortOrder
     role?: SortOrder
-    job_description?: SortOrderInput | SortOrder
     userId?: SortOrder
+    job_description?: SortOrderInput | SortOrder
     _count?: ApplicationCountOrderByAggregateInput
     _max?: ApplicationMaxOrderByAggregateInput
     _min?: ApplicationMinOrderByAggregateInput
@@ -15580,8 +15580,8 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Application"> | string
     company_name?: StringWithAggregatesFilter<"Application"> | string
     role?: StringWithAggregatesFilter<"Application"> | string
-    job_description?: StringNullableWithAggregatesFilter<"Application"> | string | null
     userId?: StringWithAggregatesFilter<"Application"> | string
+    job_description?: StringNullableWithAggregatesFilter<"Application"> | string | null
   }
 
   export type OnboardWhereInput = {
@@ -15642,19 +15642,19 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"User"> | Date | string
     username?: StringNullableFilter<"User"> | string | null
     displayUsername?: StringNullableFilter<"User"> | string | null
-    phone?: StringNullableFilter<"User"> | string | null
     location?: StringNullableFilter<"User"> | string | null
     professional_summary?: StringNullableFilter<"User"> | string | null
     locationTypeId?: IntNullableFilter<"User"> | number | null
-    locationType?: XOR<UserLocationTypeNullableScalarRelationFilter, UserLocationTypeWhereInput> | null
-    sessions?: SessionListRelationFilter
+    phone?: StringNullableFilter<"User"> | string | null
     accounts?: AccountListRelationFilter
+    sessions?: SessionListRelationFilter
+    locationType?: XOR<UserLocationTypeNullableScalarRelationFilter, UserLocationTypeWhereInput> | null
     applications?: ApplicationListRelationFilter
     onboarded?: XOR<OnboardNullableScalarRelationFilter, OnboardWhereInput> | null
-    user_educations?: UserEducationListRelationFilter
-    user_skills?: XOR<UserSkillNullableScalarRelationFilter, UserSkillWhereInput> | null
     UserCertification?: UserCertificationListRelationFilter
+    user_educations?: UserEducationListRelationFilter
     UserProfessionalSummary?: XOR<UserProfessionalSummaryNullableScalarRelationFilter, UserProfessionalSummaryWhereInput> | null
+    user_skills?: XOR<UserSkillNullableScalarRelationFilter, UserSkillWhereInput> | null
     UserWorkExperience?: UserWorkExperienceListRelationFilter
   }
 
@@ -15668,19 +15668,19 @@ export namespace Prisma {
     updatedAt?: SortOrder
     username?: SortOrderInput | SortOrder
     displayUsername?: SortOrderInput | SortOrder
-    phone?: SortOrderInput | SortOrder
     location?: SortOrderInput | SortOrder
     professional_summary?: SortOrderInput | SortOrder
     locationTypeId?: SortOrderInput | SortOrder
-    locationType?: UserLocationTypeOrderByWithRelationInput
-    sessions?: SessionOrderByRelationAggregateInput
+    phone?: SortOrderInput | SortOrder
     accounts?: AccountOrderByRelationAggregateInput
+    sessions?: SessionOrderByRelationAggregateInput
+    locationType?: UserLocationTypeOrderByWithRelationInput
     applications?: ApplicationOrderByRelationAggregateInput
     onboarded?: OnboardOrderByWithRelationInput
-    user_educations?: UserEducationOrderByRelationAggregateInput
-    user_skills?: UserSkillOrderByWithRelationInput
     UserCertification?: UserCertificationOrderByRelationAggregateInput
+    user_educations?: UserEducationOrderByRelationAggregateInput
     UserProfessionalSummary?: UserProfessionalSummaryOrderByWithRelationInput
+    user_skills?: UserSkillOrderByWithRelationInput
     UserWorkExperience?: UserWorkExperienceOrderByRelationAggregateInput
   }
 
@@ -15697,19 +15697,19 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     displayUsername?: StringNullableFilter<"User"> | string | null
-    phone?: StringNullableFilter<"User"> | string | null
     location?: StringNullableFilter<"User"> | string | null
     professional_summary?: StringNullableFilter<"User"> | string | null
     locationTypeId?: IntNullableFilter<"User"> | number | null
-    locationType?: XOR<UserLocationTypeNullableScalarRelationFilter, UserLocationTypeWhereInput> | null
-    sessions?: SessionListRelationFilter
+    phone?: StringNullableFilter<"User"> | string | null
     accounts?: AccountListRelationFilter
+    sessions?: SessionListRelationFilter
+    locationType?: XOR<UserLocationTypeNullableScalarRelationFilter, UserLocationTypeWhereInput> | null
     applications?: ApplicationListRelationFilter
     onboarded?: XOR<OnboardNullableScalarRelationFilter, OnboardWhereInput> | null
-    user_educations?: UserEducationListRelationFilter
-    user_skills?: XOR<UserSkillNullableScalarRelationFilter, UserSkillWhereInput> | null
     UserCertification?: UserCertificationListRelationFilter
+    user_educations?: UserEducationListRelationFilter
     UserProfessionalSummary?: XOR<UserProfessionalSummaryNullableScalarRelationFilter, UserProfessionalSummaryWhereInput> | null
+    user_skills?: XOR<UserSkillNullableScalarRelationFilter, UserSkillWhereInput> | null
     UserWorkExperience?: UserWorkExperienceListRelationFilter
   }, "id" | "email" | "username">
 
@@ -15723,10 +15723,10 @@ export namespace Prisma {
     updatedAt?: SortOrder
     username?: SortOrderInput | SortOrder
     displayUsername?: SortOrderInput | SortOrder
-    phone?: SortOrderInput | SortOrder
     location?: SortOrderInput | SortOrder
     professional_summary?: SortOrderInput | SortOrder
     locationTypeId?: SortOrderInput | SortOrder
+    phone?: SortOrderInput | SortOrder
     _count?: UserCountOrderByAggregateInput
     _avg?: UserAvgOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
@@ -15747,10 +15747,10 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     username?: StringNullableWithAggregatesFilter<"User"> | string | null
     displayUsername?: StringNullableWithAggregatesFilter<"User"> | string | null
-    phone?: StringNullableWithAggregatesFilter<"User"> | string | null
     location?: StringNullableWithAggregatesFilter<"User"> | string | null
     professional_summary?: StringNullableWithAggregatesFilter<"User"> | string | null
     locationTypeId?: IntNullableWithAggregatesFilter<"User"> | number | null
+    phone?: StringNullableWithAggregatesFilter<"User"> | string | null
   }
 
   export type SessionWhereInput = {
@@ -16354,8 +16354,8 @@ export namespace Prisma {
     id?: string
     company_name: string
     role: string
-    job_description?: string | null
     userId: string
+    job_description?: string | null
   }
 
   export type ApplicationUpdateInput = {
@@ -16370,16 +16370,16 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     company_name?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
-    job_description?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
+    job_description?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ApplicationCreateManyInput = {
     id?: string
     company_name: string
     role: string
-    job_description?: string | null
     userId: string
+    job_description?: string | null
   }
 
   export type ApplicationUpdateManyMutationInput = {
@@ -16393,8 +16393,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     company_name?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
-    job_description?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
+    job_description?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type OnboardCreateInput = {
@@ -16448,18 +16448,18 @@ export namespace Prisma {
     updatedAt?: Date | string
     username?: string | null
     displayUsername?: string | null
-    phone?: string | null
     location?: string | null
     professional_summary?: string | null
-    locationType?: UserLocationTypeCreateNestedOneWithoutUsersInput
-    sessions?: SessionCreateNestedManyWithoutUserInput
+    phone?: string | null
     accounts?: AccountCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    locationType?: UserLocationTypeCreateNestedOneWithoutUsersInput
     applications?: ApplicationCreateNestedManyWithoutUserInput
     onboarded?: OnboardCreateNestedOneWithoutUserInput
-    user_educations?: UserEducationCreateNestedManyWithoutUserInput
-    user_skills?: UserSkillCreateNestedOneWithoutUserInput
     UserCertification?: UserCertificationCreateNestedManyWithoutUserInput
+    user_educations?: UserEducationCreateNestedManyWithoutUserInput
     UserProfessionalSummary?: UserProfessionalSummaryCreateNestedOneWithoutUserInput
+    user_skills?: UserSkillCreateNestedOneWithoutUserInput
     UserWorkExperience?: UserWorkExperienceCreateNestedManyWithoutUserInput
   }
 
@@ -16473,18 +16473,18 @@ export namespace Prisma {
     updatedAt?: Date | string
     username?: string | null
     displayUsername?: string | null
-    phone?: string | null
     location?: string | null
     professional_summary?: string | null
     locationTypeId?: number | null
-    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    phone?: string | null
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     applications?: ApplicationUncheckedCreateNestedManyWithoutUserInput
     onboarded?: OnboardUncheckedCreateNestedOneWithoutUserInput
-    user_educations?: UserEducationUncheckedCreateNestedManyWithoutUserInput
-    user_skills?: UserSkillUncheckedCreateNestedOneWithoutUserInput
     UserCertification?: UserCertificationUncheckedCreateNestedManyWithoutUserInput
+    user_educations?: UserEducationUncheckedCreateNestedManyWithoutUserInput
     UserProfessionalSummary?: UserProfessionalSummaryUncheckedCreateNestedOneWithoutUserInput
+    user_skills?: UserSkillUncheckedCreateNestedOneWithoutUserInput
     UserWorkExperience?: UserWorkExperienceUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -16498,18 +16498,18 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
     displayUsername?: NullableStringFieldUpdateOperationsInput | string | null
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
     location?: NullableStringFieldUpdateOperationsInput | string | null
     professional_summary?: NullableStringFieldUpdateOperationsInput | string | null
-    locationType?: UserLocationTypeUpdateOneWithoutUsersNestedInput
-    sessions?: SessionUpdateManyWithoutUserNestedInput
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     accounts?: AccountUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    locationType?: UserLocationTypeUpdateOneWithoutUsersNestedInput
     applications?: ApplicationUpdateManyWithoutUserNestedInput
     onboarded?: OnboardUpdateOneWithoutUserNestedInput
-    user_educations?: UserEducationUpdateManyWithoutUserNestedInput
-    user_skills?: UserSkillUpdateOneWithoutUserNestedInput
     UserCertification?: UserCertificationUpdateManyWithoutUserNestedInput
+    user_educations?: UserEducationUpdateManyWithoutUserNestedInput
     UserProfessionalSummary?: UserProfessionalSummaryUpdateOneWithoutUserNestedInput
+    user_skills?: UserSkillUpdateOneWithoutUserNestedInput
     UserWorkExperience?: UserWorkExperienceUpdateManyWithoutUserNestedInput
   }
 
@@ -16523,18 +16523,18 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
     displayUsername?: NullableStringFieldUpdateOperationsInput | string | null
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
     location?: NullableStringFieldUpdateOperationsInput | string | null
     professional_summary?: NullableStringFieldUpdateOperationsInput | string | null
     locationTypeId?: NullableIntFieldUpdateOperationsInput | number | null
-    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     applications?: ApplicationUncheckedUpdateManyWithoutUserNestedInput
     onboarded?: OnboardUncheckedUpdateOneWithoutUserNestedInput
-    user_educations?: UserEducationUncheckedUpdateManyWithoutUserNestedInput
-    user_skills?: UserSkillUncheckedUpdateOneWithoutUserNestedInput
     UserCertification?: UserCertificationUncheckedUpdateManyWithoutUserNestedInput
+    user_educations?: UserEducationUncheckedUpdateManyWithoutUserNestedInput
     UserProfessionalSummary?: UserProfessionalSummaryUncheckedUpdateOneWithoutUserNestedInput
+    user_skills?: UserSkillUncheckedUpdateOneWithoutUserNestedInput
     UserWorkExperience?: UserWorkExperienceUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -16548,10 +16548,10 @@ export namespace Prisma {
     updatedAt?: Date | string
     username?: string | null
     displayUsername?: string | null
-    phone?: string | null
     location?: string | null
     professional_summary?: string | null
     locationTypeId?: number | null
+    phone?: string | null
   }
 
   export type UserUpdateManyMutationInput = {
@@ -16564,9 +16564,9 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
     displayUsername?: NullableStringFieldUpdateOperationsInput | string | null
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
     location?: NullableStringFieldUpdateOperationsInput | string | null
     professional_summary?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type UserUncheckedUpdateManyInput = {
@@ -16579,10 +16579,10 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
     displayUsername?: NullableStringFieldUpdateOperationsInput | string | null
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
     location?: NullableStringFieldUpdateOperationsInput | string | null
     professional_summary?: NullableStringFieldUpdateOperationsInput | string | null
     locationTypeId?: NullableIntFieldUpdateOperationsInput | number | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type SessionCreateInput = {
@@ -16836,7 +16836,7 @@ export namespace Prisma {
   }
 
   export type UserCertificationCreateInput = {
-    id: string
+    id?: string
     name: string
     emittedAt?: Date | string
     description?: string | null
@@ -16846,7 +16846,7 @@ export namespace Prisma {
   }
 
   export type UserCertificationUncheckedCreateInput = {
-    id: string
+    id?: string
     name: string
     emittedAt?: Date | string
     description?: string | null
@@ -16876,7 +16876,7 @@ export namespace Prisma {
   }
 
   export type UserCertificationCreateManyInput = {
-    id: string
+    id?: string
     name: string
     emittedAt?: Date | string
     description?: string | null
@@ -16905,7 +16905,7 @@ export namespace Prisma {
   }
 
   export type UserEducationCreateInput = {
-    id: string
+    id?: string
     university_name: string
     enrollment?: Date | string
     completion?: Date | string | null
@@ -16917,7 +16917,7 @@ export namespace Prisma {
   }
 
   export type UserEducationUncheckedCreateInput = {
-    id: string
+    id?: string
     university_name: string
     enrollment?: Date | string
     completion?: Date | string | null
@@ -16953,7 +16953,7 @@ export namespace Prisma {
   }
 
   export type UserEducationCreateManyInput = {
-    id: string
+    id?: string
     university_name: string
     enrollment?: Date | string
     completion?: Date | string | null
@@ -17024,7 +17024,7 @@ export namespace Prisma {
   }
 
   export type UserProfessionalSummaryCreateInput = {
-    id: string
+    id?: string
     summary: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -17032,7 +17032,7 @@ export namespace Prisma {
   }
 
   export type UserProfessionalSummaryUncheckedCreateInput = {
-    id: string
+    id?: string
     summary: string
     userId: string
     createdAt?: Date | string
@@ -17056,7 +17056,7 @@ export namespace Prisma {
   }
 
   export type UserProfessionalSummaryCreateManyInput = {
-    id: string
+    id?: string
     summary: string
     userId: string
     createdAt?: Date | string
@@ -17079,7 +17079,7 @@ export namespace Prisma {
   }
 
   export type UserSkillCreateInput = {
-    id: string
+    id?: string
     skills: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -17087,7 +17087,7 @@ export namespace Prisma {
   }
 
   export type UserSkillUncheckedCreateInput = {
-    id: string
+    id?: string
     skills: string
     userId: string
     createdAt?: Date | string
@@ -17111,7 +17111,7 @@ export namespace Prisma {
   }
 
   export type UserSkillCreateManyInput = {
-    id: string
+    id?: string
     skills: string
     userId: string
     createdAt?: Date | string
@@ -17134,7 +17134,7 @@ export namespace Prisma {
   }
 
   export type UserWorkExperienceCreateInput = {
-    id: string
+    id?: string
     company_name: string
     enrollment?: Date | string
     completion?: Date | string | null
@@ -17146,7 +17146,7 @@ export namespace Prisma {
   }
 
   export type UserWorkExperienceUncheckedCreateInput = {
-    id: string
+    id?: string
     company_name: string
     enrollment?: Date | string
     completion?: Date | string | null
@@ -17182,7 +17182,7 @@ export namespace Prisma {
   }
 
   export type UserWorkExperienceCreateManyInput = {
-    id: string
+    id?: string
     company_name: string
     enrollment?: Date | string
     completion?: Date | string | null
@@ -17260,24 +17260,24 @@ export namespace Prisma {
     id?: SortOrder
     company_name?: SortOrder
     role?: SortOrder
-    job_description?: SortOrder
     userId?: SortOrder
+    job_description?: SortOrder
   }
 
   export type ApplicationMaxOrderByAggregateInput = {
     id?: SortOrder
     company_name?: SortOrder
     role?: SortOrder
-    job_description?: SortOrder
     userId?: SortOrder
+    job_description?: SortOrder
   }
 
   export type ApplicationMinOrderByAggregateInput = {
     id?: SortOrder
     company_name?: SortOrder
     role?: SortOrder
-    job_description?: SortOrder
     userId?: SortOrder
+    job_description?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -17369,9 +17369,10 @@ export namespace Prisma {
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
-  export type UserLocationTypeNullableScalarRelationFilter = {
-    is?: UserLocationTypeWhereInput | null
-    isNot?: UserLocationTypeWhereInput | null
+  export type AccountListRelationFilter = {
+    every?: AccountWhereInput
+    some?: AccountWhereInput
+    none?: AccountWhereInput
   }
 
   export type SessionListRelationFilter = {
@@ -17380,10 +17381,9 @@ export namespace Prisma {
     none?: SessionWhereInput
   }
 
-  export type AccountListRelationFilter = {
-    every?: AccountWhereInput
-    some?: AccountWhereInput
-    none?: AccountWhereInput
+  export type UserLocationTypeNullableScalarRelationFilter = {
+    is?: UserLocationTypeWhereInput | null
+    isNot?: UserLocationTypeWhereInput | null
   }
 
   export type ApplicationListRelationFilter = {
@@ -17397,26 +17397,26 @@ export namespace Prisma {
     isNot?: OnboardWhereInput | null
   }
 
-  export type UserEducationListRelationFilter = {
-    every?: UserEducationWhereInput
-    some?: UserEducationWhereInput
-    none?: UserEducationWhereInput
-  }
-
-  export type UserSkillNullableScalarRelationFilter = {
-    is?: UserSkillWhereInput | null
-    isNot?: UserSkillWhereInput | null
-  }
-
   export type UserCertificationListRelationFilter = {
     every?: UserCertificationWhereInput
     some?: UserCertificationWhereInput
     none?: UserCertificationWhereInput
   }
 
+  export type UserEducationListRelationFilter = {
+    every?: UserEducationWhereInput
+    some?: UserEducationWhereInput
+    none?: UserEducationWhereInput
+  }
+
   export type UserProfessionalSummaryNullableScalarRelationFilter = {
     is?: UserProfessionalSummaryWhereInput | null
     isNot?: UserProfessionalSummaryWhereInput | null
+  }
+
+  export type UserSkillNullableScalarRelationFilter = {
+    is?: UserSkillWhereInput | null
+    isNot?: UserSkillWhereInput | null
   }
 
   export type UserWorkExperienceListRelationFilter = {
@@ -17425,11 +17425,11 @@ export namespace Prisma {
     none?: UserWorkExperienceWhereInput
   }
 
-  export type SessionOrderByRelationAggregateInput = {
+  export type AccountOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
-  export type AccountOrderByRelationAggregateInput = {
+  export type SessionOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -17437,11 +17437,11 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
-  export type UserEducationOrderByRelationAggregateInput = {
+  export type UserCertificationOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
-  export type UserCertificationOrderByRelationAggregateInput = {
+  export type UserEducationOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -17459,10 +17459,10 @@ export namespace Prisma {
     updatedAt?: SortOrder
     username?: SortOrder
     displayUsername?: SortOrder
-    phone?: SortOrder
     location?: SortOrder
     professional_summary?: SortOrder
     locationTypeId?: SortOrder
+    phone?: SortOrder
   }
 
   export type UserAvgOrderByAggregateInput = {
@@ -17479,10 +17479,10 @@ export namespace Prisma {
     updatedAt?: SortOrder
     username?: SortOrder
     displayUsername?: SortOrder
-    phone?: SortOrder
     location?: SortOrder
     professional_summary?: SortOrder
     locationTypeId?: SortOrder
+    phone?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
@@ -17495,10 +17495,10 @@ export namespace Prisma {
     updatedAt?: SortOrder
     username?: SortOrder
     displayUsername?: SortOrder
-    phone?: SortOrder
     location?: SortOrder
     professional_summary?: SortOrder
     locationTypeId?: SortOrder
+    phone?: SortOrder
   }
 
   export type UserSumOrderByAggregateInput = {
@@ -17918,10 +17918,11 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutOnboardedInput, UserUpdateWithoutOnboardedInput>, UserUncheckedUpdateWithoutOnboardedInput>
   }
 
-  export type UserLocationTypeCreateNestedOneWithoutUsersInput = {
-    create?: XOR<UserLocationTypeCreateWithoutUsersInput, UserLocationTypeUncheckedCreateWithoutUsersInput>
-    connectOrCreate?: UserLocationTypeCreateOrConnectWithoutUsersInput
-    connect?: UserLocationTypeWhereUniqueInput
+  export type AccountCreateNestedManyWithoutUserInput = {
+    create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
+    createMany?: AccountCreateManyUserInputEnvelope
+    connect?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
   }
 
   export type SessionCreateNestedManyWithoutUserInput = {
@@ -17931,11 +17932,10 @@ export namespace Prisma {
     connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
   }
 
-  export type AccountCreateNestedManyWithoutUserInput = {
-    create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
-    createMany?: AccountCreateManyUserInputEnvelope
-    connect?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
+  export type UserLocationTypeCreateNestedOneWithoutUsersInput = {
+    create?: XOR<UserLocationTypeCreateWithoutUsersInput, UserLocationTypeUncheckedCreateWithoutUsersInput>
+    connectOrCreate?: UserLocationTypeCreateOrConnectWithoutUsersInput
+    connect?: UserLocationTypeWhereUniqueInput
   }
 
   export type ApplicationCreateNestedManyWithoutUserInput = {
@@ -17951,19 +17951,6 @@ export namespace Prisma {
     connect?: OnboardWhereUniqueInput
   }
 
-  export type UserEducationCreateNestedManyWithoutUserInput = {
-    create?: XOR<UserEducationCreateWithoutUserInput, UserEducationUncheckedCreateWithoutUserInput> | UserEducationCreateWithoutUserInput[] | UserEducationUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: UserEducationCreateOrConnectWithoutUserInput | UserEducationCreateOrConnectWithoutUserInput[]
-    createMany?: UserEducationCreateManyUserInputEnvelope
-    connect?: UserEducationWhereUniqueInput | UserEducationWhereUniqueInput[]
-  }
-
-  export type UserSkillCreateNestedOneWithoutUserInput = {
-    create?: XOR<UserSkillCreateWithoutUserInput, UserSkillUncheckedCreateWithoutUserInput>
-    connectOrCreate?: UserSkillCreateOrConnectWithoutUserInput
-    connect?: UserSkillWhereUniqueInput
-  }
-
   export type UserCertificationCreateNestedManyWithoutUserInput = {
     create?: XOR<UserCertificationCreateWithoutUserInput, UserCertificationUncheckedCreateWithoutUserInput> | UserCertificationCreateWithoutUserInput[] | UserCertificationUncheckedCreateWithoutUserInput[]
     connectOrCreate?: UserCertificationCreateOrConnectWithoutUserInput | UserCertificationCreateOrConnectWithoutUserInput[]
@@ -17971,10 +17958,23 @@ export namespace Prisma {
     connect?: UserCertificationWhereUniqueInput | UserCertificationWhereUniqueInput[]
   }
 
+  export type UserEducationCreateNestedManyWithoutUserInput = {
+    create?: XOR<UserEducationCreateWithoutUserInput, UserEducationUncheckedCreateWithoutUserInput> | UserEducationCreateWithoutUserInput[] | UserEducationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserEducationCreateOrConnectWithoutUserInput | UserEducationCreateOrConnectWithoutUserInput[]
+    createMany?: UserEducationCreateManyUserInputEnvelope
+    connect?: UserEducationWhereUniqueInput | UserEducationWhereUniqueInput[]
+  }
+
   export type UserProfessionalSummaryCreateNestedOneWithoutUserInput = {
     create?: XOR<UserProfessionalSummaryCreateWithoutUserInput, UserProfessionalSummaryUncheckedCreateWithoutUserInput>
     connectOrCreate?: UserProfessionalSummaryCreateOrConnectWithoutUserInput
     connect?: UserProfessionalSummaryWhereUniqueInput
+  }
+
+  export type UserSkillCreateNestedOneWithoutUserInput = {
+    create?: XOR<UserSkillCreateWithoutUserInput, UserSkillUncheckedCreateWithoutUserInput>
+    connectOrCreate?: UserSkillCreateOrConnectWithoutUserInput
+    connect?: UserSkillWhereUniqueInput
   }
 
   export type UserWorkExperienceCreateNestedManyWithoutUserInput = {
@@ -17984,18 +17984,18 @@ export namespace Prisma {
     connect?: UserWorkExperienceWhereUniqueInput | UserWorkExperienceWhereUniqueInput[]
   }
 
-  export type SessionUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
-    createMany?: SessionCreateManyUserInputEnvelope
-    connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
-  }
-
   export type AccountUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
     connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
     createMany?: AccountCreateManyUserInputEnvelope
     connect?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
+  }
+
+  export type SessionUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
+    createMany?: SessionCreateManyUserInputEnvelope
+    connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
   }
 
   export type ApplicationUncheckedCreateNestedManyWithoutUserInput = {
@@ -18011,19 +18011,6 @@ export namespace Prisma {
     connect?: OnboardWhereUniqueInput
   }
 
-  export type UserEducationUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<UserEducationCreateWithoutUserInput, UserEducationUncheckedCreateWithoutUserInput> | UserEducationCreateWithoutUserInput[] | UserEducationUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: UserEducationCreateOrConnectWithoutUserInput | UserEducationCreateOrConnectWithoutUserInput[]
-    createMany?: UserEducationCreateManyUserInputEnvelope
-    connect?: UserEducationWhereUniqueInput | UserEducationWhereUniqueInput[]
-  }
-
-  export type UserSkillUncheckedCreateNestedOneWithoutUserInput = {
-    create?: XOR<UserSkillCreateWithoutUserInput, UserSkillUncheckedCreateWithoutUserInput>
-    connectOrCreate?: UserSkillCreateOrConnectWithoutUserInput
-    connect?: UserSkillWhereUniqueInput
-  }
-
   export type UserCertificationUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<UserCertificationCreateWithoutUserInput, UserCertificationUncheckedCreateWithoutUserInput> | UserCertificationCreateWithoutUserInput[] | UserCertificationUncheckedCreateWithoutUserInput[]
     connectOrCreate?: UserCertificationCreateOrConnectWithoutUserInput | UserCertificationCreateOrConnectWithoutUserInput[]
@@ -18031,10 +18018,23 @@ export namespace Prisma {
     connect?: UserCertificationWhereUniqueInput | UserCertificationWhereUniqueInput[]
   }
 
+  export type UserEducationUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<UserEducationCreateWithoutUserInput, UserEducationUncheckedCreateWithoutUserInput> | UserEducationCreateWithoutUserInput[] | UserEducationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserEducationCreateOrConnectWithoutUserInput | UserEducationCreateOrConnectWithoutUserInput[]
+    createMany?: UserEducationCreateManyUserInputEnvelope
+    connect?: UserEducationWhereUniqueInput | UserEducationWhereUniqueInput[]
+  }
+
   export type UserProfessionalSummaryUncheckedCreateNestedOneWithoutUserInput = {
     create?: XOR<UserProfessionalSummaryCreateWithoutUserInput, UserProfessionalSummaryUncheckedCreateWithoutUserInput>
     connectOrCreate?: UserProfessionalSummaryCreateOrConnectWithoutUserInput
     connect?: UserProfessionalSummaryWhereUniqueInput
+  }
+
+  export type UserSkillUncheckedCreateNestedOneWithoutUserInput = {
+    create?: XOR<UserSkillCreateWithoutUserInput, UserSkillUncheckedCreateWithoutUserInput>
+    connectOrCreate?: UserSkillCreateOrConnectWithoutUserInput
+    connect?: UserSkillWhereUniqueInput
   }
 
   export type UserWorkExperienceUncheckedCreateNestedManyWithoutUserInput = {
@@ -18048,14 +18048,18 @@ export namespace Prisma {
     set?: Date | string
   }
 
-  export type UserLocationTypeUpdateOneWithoutUsersNestedInput = {
-    create?: XOR<UserLocationTypeCreateWithoutUsersInput, UserLocationTypeUncheckedCreateWithoutUsersInput>
-    connectOrCreate?: UserLocationTypeCreateOrConnectWithoutUsersInput
-    upsert?: UserLocationTypeUpsertWithoutUsersInput
-    disconnect?: UserLocationTypeWhereInput | boolean
-    delete?: UserLocationTypeWhereInput | boolean
-    connect?: UserLocationTypeWhereUniqueInput
-    update?: XOR<XOR<UserLocationTypeUpdateToOneWithWhereWithoutUsersInput, UserLocationTypeUpdateWithoutUsersInput>, UserLocationTypeUncheckedUpdateWithoutUsersInput>
+  export type AccountUpdateManyWithoutUserNestedInput = {
+    create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
+    upsert?: AccountUpsertWithWhereUniqueWithoutUserInput | AccountUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: AccountCreateManyUserInputEnvelope
+    set?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
+    disconnect?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
+    delete?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
+    connect?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
+    update?: AccountUpdateWithWhereUniqueWithoutUserInput | AccountUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: AccountUpdateManyWithWhereWithoutUserInput | AccountUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: AccountScalarWhereInput | AccountScalarWhereInput[]
   }
 
   export type SessionUpdateManyWithoutUserNestedInput = {
@@ -18072,18 +18076,14 @@ export namespace Prisma {
     deleteMany?: SessionScalarWhereInput | SessionScalarWhereInput[]
   }
 
-  export type AccountUpdateManyWithoutUserNestedInput = {
-    create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
-    upsert?: AccountUpsertWithWhereUniqueWithoutUserInput | AccountUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: AccountCreateManyUserInputEnvelope
-    set?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
-    disconnect?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
-    delete?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
-    connect?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
-    update?: AccountUpdateWithWhereUniqueWithoutUserInput | AccountUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: AccountUpdateManyWithWhereWithoutUserInput | AccountUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: AccountScalarWhereInput | AccountScalarWhereInput[]
+  export type UserLocationTypeUpdateOneWithoutUsersNestedInput = {
+    create?: XOR<UserLocationTypeCreateWithoutUsersInput, UserLocationTypeUncheckedCreateWithoutUsersInput>
+    connectOrCreate?: UserLocationTypeCreateOrConnectWithoutUsersInput
+    upsert?: UserLocationTypeUpsertWithoutUsersInput
+    disconnect?: UserLocationTypeWhereInput | boolean
+    delete?: UserLocationTypeWhereInput | boolean
+    connect?: UserLocationTypeWhereUniqueInput
+    update?: XOR<XOR<UserLocationTypeUpdateToOneWithWhereWithoutUsersInput, UserLocationTypeUpdateWithoutUsersInput>, UserLocationTypeUncheckedUpdateWithoutUsersInput>
   }
 
   export type ApplicationUpdateManyWithoutUserNestedInput = {
@@ -18110,30 +18110,6 @@ export namespace Prisma {
     update?: XOR<XOR<OnboardUpdateToOneWithWhereWithoutUserInput, OnboardUpdateWithoutUserInput>, OnboardUncheckedUpdateWithoutUserInput>
   }
 
-  export type UserEducationUpdateManyWithoutUserNestedInput = {
-    create?: XOR<UserEducationCreateWithoutUserInput, UserEducationUncheckedCreateWithoutUserInput> | UserEducationCreateWithoutUserInput[] | UserEducationUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: UserEducationCreateOrConnectWithoutUserInput | UserEducationCreateOrConnectWithoutUserInput[]
-    upsert?: UserEducationUpsertWithWhereUniqueWithoutUserInput | UserEducationUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: UserEducationCreateManyUserInputEnvelope
-    set?: UserEducationWhereUniqueInput | UserEducationWhereUniqueInput[]
-    disconnect?: UserEducationWhereUniqueInput | UserEducationWhereUniqueInput[]
-    delete?: UserEducationWhereUniqueInput | UserEducationWhereUniqueInput[]
-    connect?: UserEducationWhereUniqueInput | UserEducationWhereUniqueInput[]
-    update?: UserEducationUpdateWithWhereUniqueWithoutUserInput | UserEducationUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: UserEducationUpdateManyWithWhereWithoutUserInput | UserEducationUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: UserEducationScalarWhereInput | UserEducationScalarWhereInput[]
-  }
-
-  export type UserSkillUpdateOneWithoutUserNestedInput = {
-    create?: XOR<UserSkillCreateWithoutUserInput, UserSkillUncheckedCreateWithoutUserInput>
-    connectOrCreate?: UserSkillCreateOrConnectWithoutUserInput
-    upsert?: UserSkillUpsertWithoutUserInput
-    disconnect?: UserSkillWhereInput | boolean
-    delete?: UserSkillWhereInput | boolean
-    connect?: UserSkillWhereUniqueInput
-    update?: XOR<XOR<UserSkillUpdateToOneWithWhereWithoutUserInput, UserSkillUpdateWithoutUserInput>, UserSkillUncheckedUpdateWithoutUserInput>
-  }
-
   export type UserCertificationUpdateManyWithoutUserNestedInput = {
     create?: XOR<UserCertificationCreateWithoutUserInput, UserCertificationUncheckedCreateWithoutUserInput> | UserCertificationCreateWithoutUserInput[] | UserCertificationUncheckedCreateWithoutUserInput[]
     connectOrCreate?: UserCertificationCreateOrConnectWithoutUserInput | UserCertificationCreateOrConnectWithoutUserInput[]
@@ -18148,6 +18124,20 @@ export namespace Prisma {
     deleteMany?: UserCertificationScalarWhereInput | UserCertificationScalarWhereInput[]
   }
 
+  export type UserEducationUpdateManyWithoutUserNestedInput = {
+    create?: XOR<UserEducationCreateWithoutUserInput, UserEducationUncheckedCreateWithoutUserInput> | UserEducationCreateWithoutUserInput[] | UserEducationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserEducationCreateOrConnectWithoutUserInput | UserEducationCreateOrConnectWithoutUserInput[]
+    upsert?: UserEducationUpsertWithWhereUniqueWithoutUserInput | UserEducationUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: UserEducationCreateManyUserInputEnvelope
+    set?: UserEducationWhereUniqueInput | UserEducationWhereUniqueInput[]
+    disconnect?: UserEducationWhereUniqueInput | UserEducationWhereUniqueInput[]
+    delete?: UserEducationWhereUniqueInput | UserEducationWhereUniqueInput[]
+    connect?: UserEducationWhereUniqueInput | UserEducationWhereUniqueInput[]
+    update?: UserEducationUpdateWithWhereUniqueWithoutUserInput | UserEducationUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: UserEducationUpdateManyWithWhereWithoutUserInput | UserEducationUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: UserEducationScalarWhereInput | UserEducationScalarWhereInput[]
+  }
+
   export type UserProfessionalSummaryUpdateOneWithoutUserNestedInput = {
     create?: XOR<UserProfessionalSummaryCreateWithoutUserInput, UserProfessionalSummaryUncheckedCreateWithoutUserInput>
     connectOrCreate?: UserProfessionalSummaryCreateOrConnectWithoutUserInput
@@ -18156,6 +18146,16 @@ export namespace Prisma {
     delete?: UserProfessionalSummaryWhereInput | boolean
     connect?: UserProfessionalSummaryWhereUniqueInput
     update?: XOR<XOR<UserProfessionalSummaryUpdateToOneWithWhereWithoutUserInput, UserProfessionalSummaryUpdateWithoutUserInput>, UserProfessionalSummaryUncheckedUpdateWithoutUserInput>
+  }
+
+  export type UserSkillUpdateOneWithoutUserNestedInput = {
+    create?: XOR<UserSkillCreateWithoutUserInput, UserSkillUncheckedCreateWithoutUserInput>
+    connectOrCreate?: UserSkillCreateOrConnectWithoutUserInput
+    upsert?: UserSkillUpsertWithoutUserInput
+    disconnect?: UserSkillWhereInput | boolean
+    delete?: UserSkillWhereInput | boolean
+    connect?: UserSkillWhereUniqueInput
+    update?: XOR<XOR<UserSkillUpdateToOneWithWhereWithoutUserInput, UserSkillUpdateWithoutUserInput>, UserSkillUncheckedUpdateWithoutUserInput>
   }
 
   export type UserWorkExperienceUpdateManyWithoutUserNestedInput = {
@@ -18180,20 +18180,6 @@ export namespace Prisma {
     divide?: number
   }
 
-  export type SessionUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
-    upsert?: SessionUpsertWithWhereUniqueWithoutUserInput | SessionUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: SessionCreateManyUserInputEnvelope
-    set?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
-    disconnect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
-    delete?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
-    connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
-    update?: SessionUpdateWithWhereUniqueWithoutUserInput | SessionUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: SessionUpdateManyWithWhereWithoutUserInput | SessionUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: SessionScalarWhereInput | SessionScalarWhereInput[]
-  }
-
   export type AccountUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
     connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
@@ -18206,6 +18192,20 @@ export namespace Prisma {
     update?: AccountUpdateWithWhereUniqueWithoutUserInput | AccountUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: AccountUpdateManyWithWhereWithoutUserInput | AccountUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: AccountScalarWhereInput | AccountScalarWhereInput[]
+  }
+
+  export type SessionUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
+    upsert?: SessionUpsertWithWhereUniqueWithoutUserInput | SessionUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: SessionCreateManyUserInputEnvelope
+    set?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    disconnect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    delete?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    update?: SessionUpdateWithWhereUniqueWithoutUserInput | SessionUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: SessionUpdateManyWithWhereWithoutUserInput | SessionUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: SessionScalarWhereInput | SessionScalarWhereInput[]
   }
 
   export type ApplicationUncheckedUpdateManyWithoutUserNestedInput = {
@@ -18232,30 +18232,6 @@ export namespace Prisma {
     update?: XOR<XOR<OnboardUpdateToOneWithWhereWithoutUserInput, OnboardUpdateWithoutUserInput>, OnboardUncheckedUpdateWithoutUserInput>
   }
 
-  export type UserEducationUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<UserEducationCreateWithoutUserInput, UserEducationUncheckedCreateWithoutUserInput> | UserEducationCreateWithoutUserInput[] | UserEducationUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: UserEducationCreateOrConnectWithoutUserInput | UserEducationCreateOrConnectWithoutUserInput[]
-    upsert?: UserEducationUpsertWithWhereUniqueWithoutUserInput | UserEducationUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: UserEducationCreateManyUserInputEnvelope
-    set?: UserEducationWhereUniqueInput | UserEducationWhereUniqueInput[]
-    disconnect?: UserEducationWhereUniqueInput | UserEducationWhereUniqueInput[]
-    delete?: UserEducationWhereUniqueInput | UserEducationWhereUniqueInput[]
-    connect?: UserEducationWhereUniqueInput | UserEducationWhereUniqueInput[]
-    update?: UserEducationUpdateWithWhereUniqueWithoutUserInput | UserEducationUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: UserEducationUpdateManyWithWhereWithoutUserInput | UserEducationUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: UserEducationScalarWhereInput | UserEducationScalarWhereInput[]
-  }
-
-  export type UserSkillUncheckedUpdateOneWithoutUserNestedInput = {
-    create?: XOR<UserSkillCreateWithoutUserInput, UserSkillUncheckedCreateWithoutUserInput>
-    connectOrCreate?: UserSkillCreateOrConnectWithoutUserInput
-    upsert?: UserSkillUpsertWithoutUserInput
-    disconnect?: UserSkillWhereInput | boolean
-    delete?: UserSkillWhereInput | boolean
-    connect?: UserSkillWhereUniqueInput
-    update?: XOR<XOR<UserSkillUpdateToOneWithWhereWithoutUserInput, UserSkillUpdateWithoutUserInput>, UserSkillUncheckedUpdateWithoutUserInput>
-  }
-
   export type UserCertificationUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<UserCertificationCreateWithoutUserInput, UserCertificationUncheckedCreateWithoutUserInput> | UserCertificationCreateWithoutUserInput[] | UserCertificationUncheckedCreateWithoutUserInput[]
     connectOrCreate?: UserCertificationCreateOrConnectWithoutUserInput | UserCertificationCreateOrConnectWithoutUserInput[]
@@ -18270,6 +18246,20 @@ export namespace Prisma {
     deleteMany?: UserCertificationScalarWhereInput | UserCertificationScalarWhereInput[]
   }
 
+  export type UserEducationUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<UserEducationCreateWithoutUserInput, UserEducationUncheckedCreateWithoutUserInput> | UserEducationCreateWithoutUserInput[] | UserEducationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserEducationCreateOrConnectWithoutUserInput | UserEducationCreateOrConnectWithoutUserInput[]
+    upsert?: UserEducationUpsertWithWhereUniqueWithoutUserInput | UserEducationUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: UserEducationCreateManyUserInputEnvelope
+    set?: UserEducationWhereUniqueInput | UserEducationWhereUniqueInput[]
+    disconnect?: UserEducationWhereUniqueInput | UserEducationWhereUniqueInput[]
+    delete?: UserEducationWhereUniqueInput | UserEducationWhereUniqueInput[]
+    connect?: UserEducationWhereUniqueInput | UserEducationWhereUniqueInput[]
+    update?: UserEducationUpdateWithWhereUniqueWithoutUserInput | UserEducationUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: UserEducationUpdateManyWithWhereWithoutUserInput | UserEducationUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: UserEducationScalarWhereInput | UserEducationScalarWhereInput[]
+  }
+
   export type UserProfessionalSummaryUncheckedUpdateOneWithoutUserNestedInput = {
     create?: XOR<UserProfessionalSummaryCreateWithoutUserInput, UserProfessionalSummaryUncheckedCreateWithoutUserInput>
     connectOrCreate?: UserProfessionalSummaryCreateOrConnectWithoutUserInput
@@ -18278,6 +18268,16 @@ export namespace Prisma {
     delete?: UserProfessionalSummaryWhereInput | boolean
     connect?: UserProfessionalSummaryWhereUniqueInput
     update?: XOR<XOR<UserProfessionalSummaryUpdateToOneWithWhereWithoutUserInput, UserProfessionalSummaryUpdateWithoutUserInput>, UserProfessionalSummaryUncheckedUpdateWithoutUserInput>
+  }
+
+  export type UserSkillUncheckedUpdateOneWithoutUserNestedInput = {
+    create?: XOR<UserSkillCreateWithoutUserInput, UserSkillUncheckedCreateWithoutUserInput>
+    connectOrCreate?: UserSkillCreateOrConnectWithoutUserInput
+    upsert?: UserSkillUpsertWithoutUserInput
+    disconnect?: UserSkillWhereInput | boolean
+    delete?: UserSkillWhereInput | boolean
+    connect?: UserSkillWhereUniqueInput
+    update?: XOR<XOR<UserSkillUpdateToOneWithWhereWithoutUserInput, UserSkillUpdateWithoutUserInput>, UserSkillUncheckedUpdateWithoutUserInput>
   }
 
   export type UserWorkExperienceUncheckedUpdateManyWithoutUserNestedInput = {
@@ -18657,17 +18657,17 @@ export namespace Prisma {
     updatedAt?: Date | string
     username?: string | null
     displayUsername?: string | null
-    phone?: string | null
     location?: string | null
     professional_summary?: string | null
-    locationType?: UserLocationTypeCreateNestedOneWithoutUsersInput
-    sessions?: SessionCreateNestedManyWithoutUserInput
+    phone?: string | null
     accounts?: AccountCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    locationType?: UserLocationTypeCreateNestedOneWithoutUsersInput
     onboarded?: OnboardCreateNestedOneWithoutUserInput
-    user_educations?: UserEducationCreateNestedManyWithoutUserInput
-    user_skills?: UserSkillCreateNestedOneWithoutUserInput
     UserCertification?: UserCertificationCreateNestedManyWithoutUserInput
+    user_educations?: UserEducationCreateNestedManyWithoutUserInput
     UserProfessionalSummary?: UserProfessionalSummaryCreateNestedOneWithoutUserInput
+    user_skills?: UserSkillCreateNestedOneWithoutUserInput
     UserWorkExperience?: UserWorkExperienceCreateNestedManyWithoutUserInput
   }
 
@@ -18681,17 +18681,17 @@ export namespace Prisma {
     updatedAt?: Date | string
     username?: string | null
     displayUsername?: string | null
-    phone?: string | null
     location?: string | null
     professional_summary?: string | null
     locationTypeId?: number | null
-    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    phone?: string | null
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     onboarded?: OnboardUncheckedCreateNestedOneWithoutUserInput
-    user_educations?: UserEducationUncheckedCreateNestedManyWithoutUserInput
-    user_skills?: UserSkillUncheckedCreateNestedOneWithoutUserInput
     UserCertification?: UserCertificationUncheckedCreateNestedManyWithoutUserInput
+    user_educations?: UserEducationUncheckedCreateNestedManyWithoutUserInput
     UserProfessionalSummary?: UserProfessionalSummaryUncheckedCreateNestedOneWithoutUserInput
+    user_skills?: UserSkillUncheckedCreateNestedOneWithoutUserInput
     UserWorkExperience?: UserWorkExperienceUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -18721,17 +18721,17 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
     displayUsername?: NullableStringFieldUpdateOperationsInput | string | null
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
     location?: NullableStringFieldUpdateOperationsInput | string | null
     professional_summary?: NullableStringFieldUpdateOperationsInput | string | null
-    locationType?: UserLocationTypeUpdateOneWithoutUsersNestedInput
-    sessions?: SessionUpdateManyWithoutUserNestedInput
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     accounts?: AccountUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    locationType?: UserLocationTypeUpdateOneWithoutUsersNestedInput
     onboarded?: OnboardUpdateOneWithoutUserNestedInput
-    user_educations?: UserEducationUpdateManyWithoutUserNestedInput
-    user_skills?: UserSkillUpdateOneWithoutUserNestedInput
     UserCertification?: UserCertificationUpdateManyWithoutUserNestedInput
+    user_educations?: UserEducationUpdateManyWithoutUserNestedInput
     UserProfessionalSummary?: UserProfessionalSummaryUpdateOneWithoutUserNestedInput
+    user_skills?: UserSkillUpdateOneWithoutUserNestedInput
     UserWorkExperience?: UserWorkExperienceUpdateManyWithoutUserNestedInput
   }
 
@@ -18745,17 +18745,17 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
     displayUsername?: NullableStringFieldUpdateOperationsInput | string | null
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
     location?: NullableStringFieldUpdateOperationsInput | string | null
     professional_summary?: NullableStringFieldUpdateOperationsInput | string | null
     locationTypeId?: NullableIntFieldUpdateOperationsInput | number | null
-    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     onboarded?: OnboardUncheckedUpdateOneWithoutUserNestedInput
-    user_educations?: UserEducationUncheckedUpdateManyWithoutUserNestedInput
-    user_skills?: UserSkillUncheckedUpdateOneWithoutUserNestedInput
     UserCertification?: UserCertificationUncheckedUpdateManyWithoutUserNestedInput
+    user_educations?: UserEducationUncheckedUpdateManyWithoutUserNestedInput
     UserProfessionalSummary?: UserProfessionalSummaryUncheckedUpdateOneWithoutUserNestedInput
+    user_skills?: UserSkillUncheckedUpdateOneWithoutUserNestedInput
     UserWorkExperience?: UserWorkExperienceUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -18769,17 +18769,17 @@ export namespace Prisma {
     updatedAt?: Date | string
     username?: string | null
     displayUsername?: string | null
-    phone?: string | null
     location?: string | null
     professional_summary?: string | null
-    locationType?: UserLocationTypeCreateNestedOneWithoutUsersInput
-    sessions?: SessionCreateNestedManyWithoutUserInput
+    phone?: string | null
     accounts?: AccountCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    locationType?: UserLocationTypeCreateNestedOneWithoutUsersInput
     applications?: ApplicationCreateNestedManyWithoutUserInput
-    user_educations?: UserEducationCreateNestedManyWithoutUserInput
-    user_skills?: UserSkillCreateNestedOneWithoutUserInput
     UserCertification?: UserCertificationCreateNestedManyWithoutUserInput
+    user_educations?: UserEducationCreateNestedManyWithoutUserInput
     UserProfessionalSummary?: UserProfessionalSummaryCreateNestedOneWithoutUserInput
+    user_skills?: UserSkillCreateNestedOneWithoutUserInput
     UserWorkExperience?: UserWorkExperienceCreateNestedManyWithoutUserInput
   }
 
@@ -18793,17 +18793,17 @@ export namespace Prisma {
     updatedAt?: Date | string
     username?: string | null
     displayUsername?: string | null
-    phone?: string | null
     location?: string | null
     professional_summary?: string | null
     locationTypeId?: number | null
-    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    phone?: string | null
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     applications?: ApplicationUncheckedCreateNestedManyWithoutUserInput
-    user_educations?: UserEducationUncheckedCreateNestedManyWithoutUserInput
-    user_skills?: UserSkillUncheckedCreateNestedOneWithoutUserInput
     UserCertification?: UserCertificationUncheckedCreateNestedManyWithoutUserInput
+    user_educations?: UserEducationUncheckedCreateNestedManyWithoutUserInput
     UserProfessionalSummary?: UserProfessionalSummaryUncheckedCreateNestedOneWithoutUserInput
+    user_skills?: UserSkillUncheckedCreateNestedOneWithoutUserInput
     UserWorkExperience?: UserWorkExperienceUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -18833,17 +18833,17 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
     displayUsername?: NullableStringFieldUpdateOperationsInput | string | null
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
     location?: NullableStringFieldUpdateOperationsInput | string | null
     professional_summary?: NullableStringFieldUpdateOperationsInput | string | null
-    locationType?: UserLocationTypeUpdateOneWithoutUsersNestedInput
-    sessions?: SessionUpdateManyWithoutUserNestedInput
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     accounts?: AccountUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    locationType?: UserLocationTypeUpdateOneWithoutUsersNestedInput
     applications?: ApplicationUpdateManyWithoutUserNestedInput
-    user_educations?: UserEducationUpdateManyWithoutUserNestedInput
-    user_skills?: UserSkillUpdateOneWithoutUserNestedInput
     UserCertification?: UserCertificationUpdateManyWithoutUserNestedInput
+    user_educations?: UserEducationUpdateManyWithoutUserNestedInput
     UserProfessionalSummary?: UserProfessionalSummaryUpdateOneWithoutUserNestedInput
+    user_skills?: UserSkillUpdateOneWithoutUserNestedInput
     UserWorkExperience?: UserWorkExperienceUpdateManyWithoutUserNestedInput
   }
 
@@ -18857,62 +18857,18 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
     displayUsername?: NullableStringFieldUpdateOperationsInput | string | null
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
     location?: NullableStringFieldUpdateOperationsInput | string | null
     professional_summary?: NullableStringFieldUpdateOperationsInput | string | null
     locationTypeId?: NullableIntFieldUpdateOperationsInput | number | null
-    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     applications?: ApplicationUncheckedUpdateManyWithoutUserNestedInput
-    user_educations?: UserEducationUncheckedUpdateManyWithoutUserNestedInput
-    user_skills?: UserSkillUncheckedUpdateOneWithoutUserNestedInput
     UserCertification?: UserCertificationUncheckedUpdateManyWithoutUserNestedInput
+    user_educations?: UserEducationUncheckedUpdateManyWithoutUserNestedInput
     UserProfessionalSummary?: UserProfessionalSummaryUncheckedUpdateOneWithoutUserNestedInput
+    user_skills?: UserSkillUncheckedUpdateOneWithoutUserNestedInput
     UserWorkExperience?: UserWorkExperienceUncheckedUpdateManyWithoutUserNestedInput
-  }
-
-  export type UserLocationTypeCreateWithoutUsersInput = {
-    name: string
-  }
-
-  export type UserLocationTypeUncheckedCreateWithoutUsersInput = {
-    id?: number
-    name: string
-  }
-
-  export type UserLocationTypeCreateOrConnectWithoutUsersInput = {
-    where: UserLocationTypeWhereUniqueInput
-    create: XOR<UserLocationTypeCreateWithoutUsersInput, UserLocationTypeUncheckedCreateWithoutUsersInput>
-  }
-
-  export type SessionCreateWithoutUserInput = {
-    id: string
-    expiresAt: Date | string
-    token: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    ipAddress?: string | null
-    userAgent?: string | null
-  }
-
-  export type SessionUncheckedCreateWithoutUserInput = {
-    id: string
-    expiresAt: Date | string
-    token: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    ipAddress?: string | null
-    userAgent?: string | null
-  }
-
-  export type SessionCreateOrConnectWithoutUserInput = {
-    where: SessionWhereUniqueInput
-    create: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput>
-  }
-
-  export type SessionCreateManyUserInputEnvelope = {
-    data: SessionCreateManyUserInput | SessionCreateManyUserInput[]
-    skipDuplicates?: boolean
   }
 
   export type AccountCreateWithoutUserInput = {
@@ -18955,6 +18911,50 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type SessionCreateWithoutUserInput = {
+    id: string
+    expiresAt: Date | string
+    token: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    ipAddress?: string | null
+    userAgent?: string | null
+  }
+
+  export type SessionUncheckedCreateWithoutUserInput = {
+    id: string
+    expiresAt: Date | string
+    token: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    ipAddress?: string | null
+    userAgent?: string | null
+  }
+
+  export type SessionCreateOrConnectWithoutUserInput = {
+    where: SessionWhereUniqueInput
+    create: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput>
+  }
+
+  export type SessionCreateManyUserInputEnvelope = {
+    data: SessionCreateManyUserInput | SessionCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type UserLocationTypeCreateWithoutUsersInput = {
+    name: string
+  }
+
+  export type UserLocationTypeUncheckedCreateWithoutUsersInput = {
+    id?: number
+    name: string
+  }
+
+  export type UserLocationTypeCreateOrConnectWithoutUsersInput = {
+    where: UserLocationTypeWhereUniqueInput
+    create: XOR<UserLocationTypeCreateWithoutUsersInput, UserLocationTypeUncheckedCreateWithoutUsersInput>
+  }
+
   export type ApplicationCreateWithoutUserInput = {
     id?: string
     company_name: string
@@ -18994,8 +18994,36 @@ export namespace Prisma {
     create: XOR<OnboardCreateWithoutUserInput, OnboardUncheckedCreateWithoutUserInput>
   }
 
+  export type UserCertificationCreateWithoutUserInput = {
+    id?: string
+    name: string
+    emittedAt?: Date | string
+    description?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UserCertificationUncheckedCreateWithoutUserInput = {
+    id?: string
+    name: string
+    emittedAt?: Date | string
+    description?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UserCertificationCreateOrConnectWithoutUserInput = {
+    where: UserCertificationWhereUniqueInput
+    create: XOR<UserCertificationCreateWithoutUserInput, UserCertificationUncheckedCreateWithoutUserInput>
+  }
+
+  export type UserCertificationCreateManyUserInputEnvelope = {
+    data: UserCertificationCreateManyUserInput | UserCertificationCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
   export type UserEducationCreateWithoutUserInput = {
-    id: string
+    id?: string
     university_name: string
     enrollment?: Date | string
     completion?: Date | string | null
@@ -19006,7 +19034,7 @@ export namespace Prisma {
   }
 
   export type UserEducationUncheckedCreateWithoutUserInput = {
-    id: string
+    id?: string
     university_name: string
     enrollment?: Date | string
     completion?: Date | string | null
@@ -19026,62 +19054,15 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type UserSkillCreateWithoutUserInput = {
-    id: string
-    skills: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type UserSkillUncheckedCreateWithoutUserInput = {
-    id: string
-    skills: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type UserSkillCreateOrConnectWithoutUserInput = {
-    where: UserSkillWhereUniqueInput
-    create: XOR<UserSkillCreateWithoutUserInput, UserSkillUncheckedCreateWithoutUserInput>
-  }
-
-  export type UserCertificationCreateWithoutUserInput = {
-    id: string
-    name: string
-    emittedAt?: Date | string
-    description?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type UserCertificationUncheckedCreateWithoutUserInput = {
-    id: string
-    name: string
-    emittedAt?: Date | string
-    description?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type UserCertificationCreateOrConnectWithoutUserInput = {
-    where: UserCertificationWhereUniqueInput
-    create: XOR<UserCertificationCreateWithoutUserInput, UserCertificationUncheckedCreateWithoutUserInput>
-  }
-
-  export type UserCertificationCreateManyUserInputEnvelope = {
-    data: UserCertificationCreateManyUserInput | UserCertificationCreateManyUserInput[]
-    skipDuplicates?: boolean
-  }
-
   export type UserProfessionalSummaryCreateWithoutUserInput = {
-    id: string
+    id?: string
     summary: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type UserProfessionalSummaryUncheckedCreateWithoutUserInput = {
-    id: string
+    id?: string
     summary: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -19092,8 +19073,27 @@ export namespace Prisma {
     create: XOR<UserProfessionalSummaryCreateWithoutUserInput, UserProfessionalSummaryUncheckedCreateWithoutUserInput>
   }
 
+  export type UserSkillCreateWithoutUserInput = {
+    id?: string
+    skills: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UserSkillUncheckedCreateWithoutUserInput = {
+    id?: string
+    skills: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UserSkillCreateOrConnectWithoutUserInput = {
+    where: UserSkillWhereUniqueInput
+    create: XOR<UserSkillCreateWithoutUserInput, UserSkillUncheckedCreateWithoutUserInput>
+  }
+
   export type UserWorkExperienceCreateWithoutUserInput = {
-    id: string
+    id?: string
     company_name: string
     enrollment?: Date | string
     completion?: Date | string | null
@@ -19104,7 +19104,7 @@ export namespace Prisma {
   }
 
   export type UserWorkExperienceUncheckedCreateWithoutUserInput = {
-    id: string
+    id?: string
     company_name: string
     enrollment?: Date | string
     completion?: Date | string | null
@@ -19122,56 +19122,6 @@ export namespace Prisma {
   export type UserWorkExperienceCreateManyUserInputEnvelope = {
     data: UserWorkExperienceCreateManyUserInput | UserWorkExperienceCreateManyUserInput[]
     skipDuplicates?: boolean
-  }
-
-  export type UserLocationTypeUpsertWithoutUsersInput = {
-    update: XOR<UserLocationTypeUpdateWithoutUsersInput, UserLocationTypeUncheckedUpdateWithoutUsersInput>
-    create: XOR<UserLocationTypeCreateWithoutUsersInput, UserLocationTypeUncheckedCreateWithoutUsersInput>
-    where?: UserLocationTypeWhereInput
-  }
-
-  export type UserLocationTypeUpdateToOneWithWhereWithoutUsersInput = {
-    where?: UserLocationTypeWhereInput
-    data: XOR<UserLocationTypeUpdateWithoutUsersInput, UserLocationTypeUncheckedUpdateWithoutUsersInput>
-  }
-
-  export type UserLocationTypeUpdateWithoutUsersInput = {
-    name?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type UserLocationTypeUncheckedUpdateWithoutUsersInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type SessionUpsertWithWhereUniqueWithoutUserInput = {
-    where: SessionWhereUniqueInput
-    update: XOR<SessionUpdateWithoutUserInput, SessionUncheckedUpdateWithoutUserInput>
-    create: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput>
-  }
-
-  export type SessionUpdateWithWhereUniqueWithoutUserInput = {
-    where: SessionWhereUniqueInput
-    data: XOR<SessionUpdateWithoutUserInput, SessionUncheckedUpdateWithoutUserInput>
-  }
-
-  export type SessionUpdateManyWithWhereWithoutUserInput = {
-    where: SessionScalarWhereInput
-    data: XOR<SessionUpdateManyMutationInput, SessionUncheckedUpdateManyWithoutUserInput>
-  }
-
-  export type SessionScalarWhereInput = {
-    AND?: SessionScalarWhereInput | SessionScalarWhereInput[]
-    OR?: SessionScalarWhereInput[]
-    NOT?: SessionScalarWhereInput | SessionScalarWhereInput[]
-    id?: StringFilter<"Session"> | string
-    expiresAt?: DateTimeFilter<"Session"> | Date | string
-    token?: StringFilter<"Session"> | string
-    createdAt?: DateTimeFilter<"Session"> | Date | string
-    updatedAt?: DateTimeFilter<"Session"> | Date | string
-    ipAddress?: StringNullableFilter<"Session"> | string | null
-    userAgent?: StringNullableFilter<"Session"> | string | null
-    userId?: StringFilter<"Session"> | string
   }
 
   export type AccountUpsertWithWhereUniqueWithoutUserInput = {
@@ -19209,6 +19159,56 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Account"> | Date | string
   }
 
+  export type SessionUpsertWithWhereUniqueWithoutUserInput = {
+    where: SessionWhereUniqueInput
+    update: XOR<SessionUpdateWithoutUserInput, SessionUncheckedUpdateWithoutUserInput>
+    create: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput>
+  }
+
+  export type SessionUpdateWithWhereUniqueWithoutUserInput = {
+    where: SessionWhereUniqueInput
+    data: XOR<SessionUpdateWithoutUserInput, SessionUncheckedUpdateWithoutUserInput>
+  }
+
+  export type SessionUpdateManyWithWhereWithoutUserInput = {
+    where: SessionScalarWhereInput
+    data: XOR<SessionUpdateManyMutationInput, SessionUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type SessionScalarWhereInput = {
+    AND?: SessionScalarWhereInput | SessionScalarWhereInput[]
+    OR?: SessionScalarWhereInput[]
+    NOT?: SessionScalarWhereInput | SessionScalarWhereInput[]
+    id?: StringFilter<"Session"> | string
+    expiresAt?: DateTimeFilter<"Session"> | Date | string
+    token?: StringFilter<"Session"> | string
+    createdAt?: DateTimeFilter<"Session"> | Date | string
+    updatedAt?: DateTimeFilter<"Session"> | Date | string
+    ipAddress?: StringNullableFilter<"Session"> | string | null
+    userAgent?: StringNullableFilter<"Session"> | string | null
+    userId?: StringFilter<"Session"> | string
+  }
+
+  export type UserLocationTypeUpsertWithoutUsersInput = {
+    update: XOR<UserLocationTypeUpdateWithoutUsersInput, UserLocationTypeUncheckedUpdateWithoutUsersInput>
+    create: XOR<UserLocationTypeCreateWithoutUsersInput, UserLocationTypeUncheckedCreateWithoutUsersInput>
+    where?: UserLocationTypeWhereInput
+  }
+
+  export type UserLocationTypeUpdateToOneWithWhereWithoutUsersInput = {
+    where?: UserLocationTypeWhereInput
+    data: XOR<UserLocationTypeUpdateWithoutUsersInput, UserLocationTypeUncheckedUpdateWithoutUsersInput>
+  }
+
+  export type UserLocationTypeUpdateWithoutUsersInput = {
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type UserLocationTypeUncheckedUpdateWithoutUsersInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
   export type ApplicationUpsertWithWhereUniqueWithoutUserInput = {
     where: ApplicationWhereUniqueInput
     update: XOR<ApplicationUpdateWithoutUserInput, ApplicationUncheckedUpdateWithoutUserInput>
@@ -19232,8 +19232,8 @@ export namespace Prisma {
     id?: StringFilter<"Application"> | string
     company_name?: StringFilter<"Application"> | string
     role?: StringFilter<"Application"> | string
-    job_description?: StringNullableFilter<"Application"> | string | null
     userId?: StringFilter<"Application"> | string
+    job_description?: StringNullableFilter<"Application"> | string | null
   }
 
   export type OnboardUpsertWithoutUserInput = {
@@ -19255,6 +19255,35 @@ export namespace Prisma {
   export type OnboardUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     onboarded?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type UserCertificationUpsertWithWhereUniqueWithoutUserInput = {
+    where: UserCertificationWhereUniqueInput
+    update: XOR<UserCertificationUpdateWithoutUserInput, UserCertificationUncheckedUpdateWithoutUserInput>
+    create: XOR<UserCertificationCreateWithoutUserInput, UserCertificationUncheckedCreateWithoutUserInput>
+  }
+
+  export type UserCertificationUpdateWithWhereUniqueWithoutUserInput = {
+    where: UserCertificationWhereUniqueInput
+    data: XOR<UserCertificationUpdateWithoutUserInput, UserCertificationUncheckedUpdateWithoutUserInput>
+  }
+
+  export type UserCertificationUpdateManyWithWhereWithoutUserInput = {
+    where: UserCertificationScalarWhereInput
+    data: XOR<UserCertificationUpdateManyMutationInput, UserCertificationUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type UserCertificationScalarWhereInput = {
+    AND?: UserCertificationScalarWhereInput | UserCertificationScalarWhereInput[]
+    OR?: UserCertificationScalarWhereInput[]
+    NOT?: UserCertificationScalarWhereInput | UserCertificationScalarWhereInput[]
+    id?: StringFilter<"UserCertification"> | string
+    name?: StringFilter<"UserCertification"> | string
+    emittedAt?: DateTimeFilter<"UserCertification"> | Date | string
+    description?: StringNullableFilter<"UserCertification"> | string | null
+    userId?: StringFilter<"UserCertification"> | string
+    createdAt?: DateTimeFilter<"UserCertification"> | Date | string
+    updatedAt?: DateTimeFilter<"UserCertification"> | Date | string
   }
 
   export type UserEducationUpsertWithWhereUniqueWithoutUserInput = {
@@ -19288,60 +19317,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"UserEducation"> | Date | string
   }
 
-  export type UserSkillUpsertWithoutUserInput = {
-    update: XOR<UserSkillUpdateWithoutUserInput, UserSkillUncheckedUpdateWithoutUserInput>
-    create: XOR<UserSkillCreateWithoutUserInput, UserSkillUncheckedCreateWithoutUserInput>
-    where?: UserSkillWhereInput
-  }
-
-  export type UserSkillUpdateToOneWithWhereWithoutUserInput = {
-    where?: UserSkillWhereInput
-    data: XOR<UserSkillUpdateWithoutUserInput, UserSkillUncheckedUpdateWithoutUserInput>
-  }
-
-  export type UserSkillUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    skills?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type UserSkillUncheckedUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    skills?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type UserCertificationUpsertWithWhereUniqueWithoutUserInput = {
-    where: UserCertificationWhereUniqueInput
-    update: XOR<UserCertificationUpdateWithoutUserInput, UserCertificationUncheckedUpdateWithoutUserInput>
-    create: XOR<UserCertificationCreateWithoutUserInput, UserCertificationUncheckedCreateWithoutUserInput>
-  }
-
-  export type UserCertificationUpdateWithWhereUniqueWithoutUserInput = {
-    where: UserCertificationWhereUniqueInput
-    data: XOR<UserCertificationUpdateWithoutUserInput, UserCertificationUncheckedUpdateWithoutUserInput>
-  }
-
-  export type UserCertificationUpdateManyWithWhereWithoutUserInput = {
-    where: UserCertificationScalarWhereInput
-    data: XOR<UserCertificationUpdateManyMutationInput, UserCertificationUncheckedUpdateManyWithoutUserInput>
-  }
-
-  export type UserCertificationScalarWhereInput = {
-    AND?: UserCertificationScalarWhereInput | UserCertificationScalarWhereInput[]
-    OR?: UserCertificationScalarWhereInput[]
-    NOT?: UserCertificationScalarWhereInput | UserCertificationScalarWhereInput[]
-    id?: StringFilter<"UserCertification"> | string
-    name?: StringFilter<"UserCertification"> | string
-    emittedAt?: DateTimeFilter<"UserCertification"> | Date | string
-    description?: StringNullableFilter<"UserCertification"> | string | null
-    userId?: StringFilter<"UserCertification"> | string
-    createdAt?: DateTimeFilter<"UserCertification"> | Date | string
-    updatedAt?: DateTimeFilter<"UserCertification"> | Date | string
-  }
-
   export type UserProfessionalSummaryUpsertWithoutUserInput = {
     update: XOR<UserProfessionalSummaryUpdateWithoutUserInput, UserProfessionalSummaryUncheckedUpdateWithoutUserInput>
     create: XOR<UserProfessionalSummaryCreateWithoutUserInput, UserProfessionalSummaryUncheckedCreateWithoutUserInput>
@@ -19363,6 +19338,31 @@ export namespace Prisma {
   export type UserProfessionalSummaryUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     summary?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserSkillUpsertWithoutUserInput = {
+    update: XOR<UserSkillUpdateWithoutUserInput, UserSkillUncheckedUpdateWithoutUserInput>
+    create: XOR<UserSkillCreateWithoutUserInput, UserSkillUncheckedCreateWithoutUserInput>
+    where?: UserSkillWhereInput
+  }
+
+  export type UserSkillUpdateToOneWithWhereWithoutUserInput = {
+    where?: UserSkillWhereInput
+    data: XOR<UserSkillUpdateWithoutUserInput, UserSkillUncheckedUpdateWithoutUserInput>
+  }
+
+  export type UserSkillUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    skills?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserSkillUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    skills?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -19408,17 +19408,17 @@ export namespace Prisma {
     updatedAt?: Date | string
     username?: string | null
     displayUsername?: string | null
-    phone?: string | null
     location?: string | null
     professional_summary?: string | null
-    locationType?: UserLocationTypeCreateNestedOneWithoutUsersInput
+    phone?: string | null
     accounts?: AccountCreateNestedManyWithoutUserInput
+    locationType?: UserLocationTypeCreateNestedOneWithoutUsersInput
     applications?: ApplicationCreateNestedManyWithoutUserInput
     onboarded?: OnboardCreateNestedOneWithoutUserInput
-    user_educations?: UserEducationCreateNestedManyWithoutUserInput
-    user_skills?: UserSkillCreateNestedOneWithoutUserInput
     UserCertification?: UserCertificationCreateNestedManyWithoutUserInput
+    user_educations?: UserEducationCreateNestedManyWithoutUserInput
     UserProfessionalSummary?: UserProfessionalSummaryCreateNestedOneWithoutUserInput
+    user_skills?: UserSkillCreateNestedOneWithoutUserInput
     UserWorkExperience?: UserWorkExperienceCreateNestedManyWithoutUserInput
   }
 
@@ -19432,17 +19432,17 @@ export namespace Prisma {
     updatedAt?: Date | string
     username?: string | null
     displayUsername?: string | null
-    phone?: string | null
     location?: string | null
     professional_summary?: string | null
     locationTypeId?: number | null
+    phone?: string | null
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     applications?: ApplicationUncheckedCreateNestedManyWithoutUserInput
     onboarded?: OnboardUncheckedCreateNestedOneWithoutUserInput
-    user_educations?: UserEducationUncheckedCreateNestedManyWithoutUserInput
-    user_skills?: UserSkillUncheckedCreateNestedOneWithoutUserInput
     UserCertification?: UserCertificationUncheckedCreateNestedManyWithoutUserInput
+    user_educations?: UserEducationUncheckedCreateNestedManyWithoutUserInput
     UserProfessionalSummary?: UserProfessionalSummaryUncheckedCreateNestedOneWithoutUserInput
+    user_skills?: UserSkillUncheckedCreateNestedOneWithoutUserInput
     UserWorkExperience?: UserWorkExperienceUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -19472,17 +19472,17 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
     displayUsername?: NullableStringFieldUpdateOperationsInput | string | null
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
     location?: NullableStringFieldUpdateOperationsInput | string | null
     professional_summary?: NullableStringFieldUpdateOperationsInput | string | null
-    locationType?: UserLocationTypeUpdateOneWithoutUsersNestedInput
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     accounts?: AccountUpdateManyWithoutUserNestedInput
+    locationType?: UserLocationTypeUpdateOneWithoutUsersNestedInput
     applications?: ApplicationUpdateManyWithoutUserNestedInput
     onboarded?: OnboardUpdateOneWithoutUserNestedInput
-    user_educations?: UserEducationUpdateManyWithoutUserNestedInput
-    user_skills?: UserSkillUpdateOneWithoutUserNestedInput
     UserCertification?: UserCertificationUpdateManyWithoutUserNestedInput
+    user_educations?: UserEducationUpdateManyWithoutUserNestedInput
     UserProfessionalSummary?: UserProfessionalSummaryUpdateOneWithoutUserNestedInput
+    user_skills?: UserSkillUpdateOneWithoutUserNestedInput
     UserWorkExperience?: UserWorkExperienceUpdateManyWithoutUserNestedInput
   }
 
@@ -19496,17 +19496,17 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
     displayUsername?: NullableStringFieldUpdateOperationsInput | string | null
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
     location?: NullableStringFieldUpdateOperationsInput | string | null
     professional_summary?: NullableStringFieldUpdateOperationsInput | string | null
     locationTypeId?: NullableIntFieldUpdateOperationsInput | number | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     applications?: ApplicationUncheckedUpdateManyWithoutUserNestedInput
     onboarded?: OnboardUncheckedUpdateOneWithoutUserNestedInput
-    user_educations?: UserEducationUncheckedUpdateManyWithoutUserNestedInput
-    user_skills?: UserSkillUncheckedUpdateOneWithoutUserNestedInput
     UserCertification?: UserCertificationUncheckedUpdateManyWithoutUserNestedInput
+    user_educations?: UserEducationUncheckedUpdateManyWithoutUserNestedInput
     UserProfessionalSummary?: UserProfessionalSummaryUncheckedUpdateOneWithoutUserNestedInput
+    user_skills?: UserSkillUncheckedUpdateOneWithoutUserNestedInput
     UserWorkExperience?: UserWorkExperienceUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -19520,17 +19520,17 @@ export namespace Prisma {
     updatedAt?: Date | string
     username?: string | null
     displayUsername?: string | null
-    phone?: string | null
     location?: string | null
     professional_summary?: string | null
-    locationType?: UserLocationTypeCreateNestedOneWithoutUsersInput
+    phone?: string | null
     sessions?: SessionCreateNestedManyWithoutUserInput
+    locationType?: UserLocationTypeCreateNestedOneWithoutUsersInput
     applications?: ApplicationCreateNestedManyWithoutUserInput
     onboarded?: OnboardCreateNestedOneWithoutUserInput
-    user_educations?: UserEducationCreateNestedManyWithoutUserInput
-    user_skills?: UserSkillCreateNestedOneWithoutUserInput
     UserCertification?: UserCertificationCreateNestedManyWithoutUserInput
+    user_educations?: UserEducationCreateNestedManyWithoutUserInput
     UserProfessionalSummary?: UserProfessionalSummaryCreateNestedOneWithoutUserInput
+    user_skills?: UserSkillCreateNestedOneWithoutUserInput
     UserWorkExperience?: UserWorkExperienceCreateNestedManyWithoutUserInput
   }
 
@@ -19544,17 +19544,17 @@ export namespace Prisma {
     updatedAt?: Date | string
     username?: string | null
     displayUsername?: string | null
-    phone?: string | null
     location?: string | null
     professional_summary?: string | null
     locationTypeId?: number | null
+    phone?: string | null
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     applications?: ApplicationUncheckedCreateNestedManyWithoutUserInput
     onboarded?: OnboardUncheckedCreateNestedOneWithoutUserInput
-    user_educations?: UserEducationUncheckedCreateNestedManyWithoutUserInput
-    user_skills?: UserSkillUncheckedCreateNestedOneWithoutUserInput
     UserCertification?: UserCertificationUncheckedCreateNestedManyWithoutUserInput
+    user_educations?: UserEducationUncheckedCreateNestedManyWithoutUserInput
     UserProfessionalSummary?: UserProfessionalSummaryUncheckedCreateNestedOneWithoutUserInput
+    user_skills?: UserSkillUncheckedCreateNestedOneWithoutUserInput
     UserWorkExperience?: UserWorkExperienceUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -19584,17 +19584,17 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
     displayUsername?: NullableStringFieldUpdateOperationsInput | string | null
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
     location?: NullableStringFieldUpdateOperationsInput | string | null
     professional_summary?: NullableStringFieldUpdateOperationsInput | string | null
-    locationType?: UserLocationTypeUpdateOneWithoutUsersNestedInput
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     sessions?: SessionUpdateManyWithoutUserNestedInput
+    locationType?: UserLocationTypeUpdateOneWithoutUsersNestedInput
     applications?: ApplicationUpdateManyWithoutUserNestedInput
     onboarded?: OnboardUpdateOneWithoutUserNestedInput
-    user_educations?: UserEducationUpdateManyWithoutUserNestedInput
-    user_skills?: UserSkillUpdateOneWithoutUserNestedInput
     UserCertification?: UserCertificationUpdateManyWithoutUserNestedInput
+    user_educations?: UserEducationUpdateManyWithoutUserNestedInput
     UserProfessionalSummary?: UserProfessionalSummaryUpdateOneWithoutUserNestedInput
+    user_skills?: UserSkillUpdateOneWithoutUserNestedInput
     UserWorkExperience?: UserWorkExperienceUpdateManyWithoutUserNestedInput
   }
 
@@ -19608,17 +19608,17 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
     displayUsername?: NullableStringFieldUpdateOperationsInput | string | null
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
     location?: NullableStringFieldUpdateOperationsInput | string | null
     professional_summary?: NullableStringFieldUpdateOperationsInput | string | null
     locationTypeId?: NullableIntFieldUpdateOperationsInput | number | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     applications?: ApplicationUncheckedUpdateManyWithoutUserNestedInput
     onboarded?: OnboardUncheckedUpdateOneWithoutUserNestedInput
-    user_educations?: UserEducationUncheckedUpdateManyWithoutUserNestedInput
-    user_skills?: UserSkillUncheckedUpdateOneWithoutUserNestedInput
     UserCertification?: UserCertificationUncheckedUpdateManyWithoutUserNestedInput
+    user_educations?: UserEducationUncheckedUpdateManyWithoutUserNestedInput
     UserProfessionalSummary?: UserProfessionalSummaryUncheckedUpdateOneWithoutUserNestedInput
+    user_skills?: UserSkillUncheckedUpdateOneWithoutUserNestedInput
     UserWorkExperience?: UserWorkExperienceUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -19632,17 +19632,17 @@ export namespace Prisma {
     updatedAt?: Date | string
     username?: string | null
     displayUsername?: string | null
-    phone?: string | null
     location?: string | null
     professional_summary?: string | null
-    locationType?: UserLocationTypeCreateNestedOneWithoutUsersInput
-    sessions?: SessionCreateNestedManyWithoutUserInput
+    phone?: string | null
     accounts?: AccountCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    locationType?: UserLocationTypeCreateNestedOneWithoutUsersInput
     applications?: ApplicationCreateNestedManyWithoutUserInput
     onboarded?: OnboardCreateNestedOneWithoutUserInput
     user_educations?: UserEducationCreateNestedManyWithoutUserInput
-    user_skills?: UserSkillCreateNestedOneWithoutUserInput
     UserProfessionalSummary?: UserProfessionalSummaryCreateNestedOneWithoutUserInput
+    user_skills?: UserSkillCreateNestedOneWithoutUserInput
     UserWorkExperience?: UserWorkExperienceCreateNestedManyWithoutUserInput
   }
 
@@ -19656,17 +19656,17 @@ export namespace Prisma {
     updatedAt?: Date | string
     username?: string | null
     displayUsername?: string | null
-    phone?: string | null
     location?: string | null
     professional_summary?: string | null
     locationTypeId?: number | null
-    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    phone?: string | null
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     applications?: ApplicationUncheckedCreateNestedManyWithoutUserInput
     onboarded?: OnboardUncheckedCreateNestedOneWithoutUserInput
     user_educations?: UserEducationUncheckedCreateNestedManyWithoutUserInput
-    user_skills?: UserSkillUncheckedCreateNestedOneWithoutUserInput
     UserProfessionalSummary?: UserProfessionalSummaryUncheckedCreateNestedOneWithoutUserInput
+    user_skills?: UserSkillUncheckedCreateNestedOneWithoutUserInput
     UserWorkExperience?: UserWorkExperienceUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -19696,17 +19696,17 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
     displayUsername?: NullableStringFieldUpdateOperationsInput | string | null
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
     location?: NullableStringFieldUpdateOperationsInput | string | null
     professional_summary?: NullableStringFieldUpdateOperationsInput | string | null
-    locationType?: UserLocationTypeUpdateOneWithoutUsersNestedInput
-    sessions?: SessionUpdateManyWithoutUserNestedInput
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     accounts?: AccountUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    locationType?: UserLocationTypeUpdateOneWithoutUsersNestedInput
     applications?: ApplicationUpdateManyWithoutUserNestedInput
     onboarded?: OnboardUpdateOneWithoutUserNestedInput
     user_educations?: UserEducationUpdateManyWithoutUserNestedInput
-    user_skills?: UserSkillUpdateOneWithoutUserNestedInput
     UserProfessionalSummary?: UserProfessionalSummaryUpdateOneWithoutUserNestedInput
+    user_skills?: UserSkillUpdateOneWithoutUserNestedInput
     UserWorkExperience?: UserWorkExperienceUpdateManyWithoutUserNestedInput
   }
 
@@ -19720,17 +19720,17 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
     displayUsername?: NullableStringFieldUpdateOperationsInput | string | null
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
     location?: NullableStringFieldUpdateOperationsInput | string | null
     professional_summary?: NullableStringFieldUpdateOperationsInput | string | null
     locationTypeId?: NullableIntFieldUpdateOperationsInput | number | null
-    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     applications?: ApplicationUncheckedUpdateManyWithoutUserNestedInput
     onboarded?: OnboardUncheckedUpdateOneWithoutUserNestedInput
     user_educations?: UserEducationUncheckedUpdateManyWithoutUserNestedInput
-    user_skills?: UserSkillUncheckedUpdateOneWithoutUserNestedInput
     UserProfessionalSummary?: UserProfessionalSummaryUncheckedUpdateOneWithoutUserNestedInput
+    user_skills?: UserSkillUncheckedUpdateOneWithoutUserNestedInput
     UserWorkExperience?: UserWorkExperienceUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -19744,17 +19744,17 @@ export namespace Prisma {
     updatedAt?: Date | string
     username?: string | null
     displayUsername?: string | null
-    phone?: string | null
     location?: string | null
     professional_summary?: string | null
-    locationType?: UserLocationTypeCreateNestedOneWithoutUsersInput
-    sessions?: SessionCreateNestedManyWithoutUserInput
+    phone?: string | null
     accounts?: AccountCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    locationType?: UserLocationTypeCreateNestedOneWithoutUsersInput
     applications?: ApplicationCreateNestedManyWithoutUserInput
     onboarded?: OnboardCreateNestedOneWithoutUserInput
-    user_skills?: UserSkillCreateNestedOneWithoutUserInput
     UserCertification?: UserCertificationCreateNestedManyWithoutUserInput
     UserProfessionalSummary?: UserProfessionalSummaryCreateNestedOneWithoutUserInput
+    user_skills?: UserSkillCreateNestedOneWithoutUserInput
     UserWorkExperience?: UserWorkExperienceCreateNestedManyWithoutUserInput
   }
 
@@ -19768,17 +19768,17 @@ export namespace Prisma {
     updatedAt?: Date | string
     username?: string | null
     displayUsername?: string | null
-    phone?: string | null
     location?: string | null
     professional_summary?: string | null
     locationTypeId?: number | null
-    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    phone?: string | null
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     applications?: ApplicationUncheckedCreateNestedManyWithoutUserInput
     onboarded?: OnboardUncheckedCreateNestedOneWithoutUserInput
-    user_skills?: UserSkillUncheckedCreateNestedOneWithoutUserInput
     UserCertification?: UserCertificationUncheckedCreateNestedManyWithoutUserInput
     UserProfessionalSummary?: UserProfessionalSummaryUncheckedCreateNestedOneWithoutUserInput
+    user_skills?: UserSkillUncheckedCreateNestedOneWithoutUserInput
     UserWorkExperience?: UserWorkExperienceUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -19808,17 +19808,17 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
     displayUsername?: NullableStringFieldUpdateOperationsInput | string | null
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
     location?: NullableStringFieldUpdateOperationsInput | string | null
     professional_summary?: NullableStringFieldUpdateOperationsInput | string | null
-    locationType?: UserLocationTypeUpdateOneWithoutUsersNestedInput
-    sessions?: SessionUpdateManyWithoutUserNestedInput
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     accounts?: AccountUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    locationType?: UserLocationTypeUpdateOneWithoutUsersNestedInput
     applications?: ApplicationUpdateManyWithoutUserNestedInput
     onboarded?: OnboardUpdateOneWithoutUserNestedInput
-    user_skills?: UserSkillUpdateOneWithoutUserNestedInput
     UserCertification?: UserCertificationUpdateManyWithoutUserNestedInput
     UserProfessionalSummary?: UserProfessionalSummaryUpdateOneWithoutUserNestedInput
+    user_skills?: UserSkillUpdateOneWithoutUserNestedInput
     UserWorkExperience?: UserWorkExperienceUpdateManyWithoutUserNestedInput
   }
 
@@ -19832,17 +19832,17 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
     displayUsername?: NullableStringFieldUpdateOperationsInput | string | null
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
     location?: NullableStringFieldUpdateOperationsInput | string | null
     professional_summary?: NullableStringFieldUpdateOperationsInput | string | null
     locationTypeId?: NullableIntFieldUpdateOperationsInput | number | null
-    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     applications?: ApplicationUncheckedUpdateManyWithoutUserNestedInput
     onboarded?: OnboardUncheckedUpdateOneWithoutUserNestedInput
-    user_skills?: UserSkillUncheckedUpdateOneWithoutUserNestedInput
     UserCertification?: UserCertificationUncheckedUpdateManyWithoutUserNestedInput
     UserProfessionalSummary?: UserProfessionalSummaryUncheckedUpdateOneWithoutUserNestedInput
+    user_skills?: UserSkillUncheckedUpdateOneWithoutUserNestedInput
     UserWorkExperience?: UserWorkExperienceUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -19856,17 +19856,17 @@ export namespace Prisma {
     updatedAt?: Date | string
     username?: string | null
     displayUsername?: string | null
-    phone?: string | null
     location?: string | null
     professional_summary?: string | null
-    sessions?: SessionCreateNestedManyWithoutUserInput
+    phone?: string | null
     accounts?: AccountCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
     applications?: ApplicationCreateNestedManyWithoutUserInput
     onboarded?: OnboardCreateNestedOneWithoutUserInput
-    user_educations?: UserEducationCreateNestedManyWithoutUserInput
-    user_skills?: UserSkillCreateNestedOneWithoutUserInput
     UserCertification?: UserCertificationCreateNestedManyWithoutUserInput
+    user_educations?: UserEducationCreateNestedManyWithoutUserInput
     UserProfessionalSummary?: UserProfessionalSummaryCreateNestedOneWithoutUserInput
+    user_skills?: UserSkillCreateNestedOneWithoutUserInput
     UserWorkExperience?: UserWorkExperienceCreateNestedManyWithoutUserInput
   }
 
@@ -19880,17 +19880,17 @@ export namespace Prisma {
     updatedAt?: Date | string
     username?: string | null
     displayUsername?: string | null
-    phone?: string | null
     location?: string | null
     professional_summary?: string | null
-    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    phone?: string | null
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     applications?: ApplicationUncheckedCreateNestedManyWithoutUserInput
     onboarded?: OnboardUncheckedCreateNestedOneWithoutUserInput
-    user_educations?: UserEducationUncheckedCreateNestedManyWithoutUserInput
-    user_skills?: UserSkillUncheckedCreateNestedOneWithoutUserInput
     UserCertification?: UserCertificationUncheckedCreateNestedManyWithoutUserInput
+    user_educations?: UserEducationUncheckedCreateNestedManyWithoutUserInput
     UserProfessionalSummary?: UserProfessionalSummaryUncheckedCreateNestedOneWithoutUserInput
+    user_skills?: UserSkillUncheckedCreateNestedOneWithoutUserInput
     UserWorkExperience?: UserWorkExperienceUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -19933,10 +19933,10 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"User"> | Date | string
     username?: StringNullableFilter<"User"> | string | null
     displayUsername?: StringNullableFilter<"User"> | string | null
-    phone?: StringNullableFilter<"User"> | string | null
     location?: StringNullableFilter<"User"> | string | null
     professional_summary?: StringNullableFilter<"User"> | string | null
     locationTypeId?: IntNullableFilter<"User"> | number | null
+    phone?: StringNullableFilter<"User"> | string | null
   }
 
   export type UserCreateWithoutUserProfessionalSummaryInput = {
@@ -19949,17 +19949,17 @@ export namespace Prisma {
     updatedAt?: Date | string
     username?: string | null
     displayUsername?: string | null
-    phone?: string | null
     location?: string | null
     professional_summary?: string | null
-    locationType?: UserLocationTypeCreateNestedOneWithoutUsersInput
-    sessions?: SessionCreateNestedManyWithoutUserInput
+    phone?: string | null
     accounts?: AccountCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    locationType?: UserLocationTypeCreateNestedOneWithoutUsersInput
     applications?: ApplicationCreateNestedManyWithoutUserInput
     onboarded?: OnboardCreateNestedOneWithoutUserInput
+    UserCertification?: UserCertificationCreateNestedManyWithoutUserInput
     user_educations?: UserEducationCreateNestedManyWithoutUserInput
     user_skills?: UserSkillCreateNestedOneWithoutUserInput
-    UserCertification?: UserCertificationCreateNestedManyWithoutUserInput
     UserWorkExperience?: UserWorkExperienceCreateNestedManyWithoutUserInput
   }
 
@@ -19973,17 +19973,17 @@ export namespace Prisma {
     updatedAt?: Date | string
     username?: string | null
     displayUsername?: string | null
-    phone?: string | null
     location?: string | null
     professional_summary?: string | null
     locationTypeId?: number | null
-    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    phone?: string | null
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     applications?: ApplicationUncheckedCreateNestedManyWithoutUserInput
     onboarded?: OnboardUncheckedCreateNestedOneWithoutUserInput
+    UserCertification?: UserCertificationUncheckedCreateNestedManyWithoutUserInput
     user_educations?: UserEducationUncheckedCreateNestedManyWithoutUserInput
     user_skills?: UserSkillUncheckedCreateNestedOneWithoutUserInput
-    UserCertification?: UserCertificationUncheckedCreateNestedManyWithoutUserInput
     UserWorkExperience?: UserWorkExperienceUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -20013,17 +20013,17 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
     displayUsername?: NullableStringFieldUpdateOperationsInput | string | null
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
     location?: NullableStringFieldUpdateOperationsInput | string | null
     professional_summary?: NullableStringFieldUpdateOperationsInput | string | null
-    locationType?: UserLocationTypeUpdateOneWithoutUsersNestedInput
-    sessions?: SessionUpdateManyWithoutUserNestedInput
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     accounts?: AccountUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    locationType?: UserLocationTypeUpdateOneWithoutUsersNestedInput
     applications?: ApplicationUpdateManyWithoutUserNestedInput
     onboarded?: OnboardUpdateOneWithoutUserNestedInput
+    UserCertification?: UserCertificationUpdateManyWithoutUserNestedInput
     user_educations?: UserEducationUpdateManyWithoutUserNestedInput
     user_skills?: UserSkillUpdateOneWithoutUserNestedInput
-    UserCertification?: UserCertificationUpdateManyWithoutUserNestedInput
     UserWorkExperience?: UserWorkExperienceUpdateManyWithoutUserNestedInput
   }
 
@@ -20037,17 +20037,17 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
     displayUsername?: NullableStringFieldUpdateOperationsInput | string | null
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
     location?: NullableStringFieldUpdateOperationsInput | string | null
     professional_summary?: NullableStringFieldUpdateOperationsInput | string | null
     locationTypeId?: NullableIntFieldUpdateOperationsInput | number | null
-    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     applications?: ApplicationUncheckedUpdateManyWithoutUserNestedInput
     onboarded?: OnboardUncheckedUpdateOneWithoutUserNestedInput
+    UserCertification?: UserCertificationUncheckedUpdateManyWithoutUserNestedInput
     user_educations?: UserEducationUncheckedUpdateManyWithoutUserNestedInput
     user_skills?: UserSkillUncheckedUpdateOneWithoutUserNestedInput
-    UserCertification?: UserCertificationUncheckedUpdateManyWithoutUserNestedInput
     UserWorkExperience?: UserWorkExperienceUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -20061,16 +20061,16 @@ export namespace Prisma {
     updatedAt?: Date | string
     username?: string | null
     displayUsername?: string | null
-    phone?: string | null
     location?: string | null
     professional_summary?: string | null
-    locationType?: UserLocationTypeCreateNestedOneWithoutUsersInput
-    sessions?: SessionCreateNestedManyWithoutUserInput
+    phone?: string | null
     accounts?: AccountCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    locationType?: UserLocationTypeCreateNestedOneWithoutUsersInput
     applications?: ApplicationCreateNestedManyWithoutUserInput
     onboarded?: OnboardCreateNestedOneWithoutUserInput
-    user_educations?: UserEducationCreateNestedManyWithoutUserInput
     UserCertification?: UserCertificationCreateNestedManyWithoutUserInput
+    user_educations?: UserEducationCreateNestedManyWithoutUserInput
     UserProfessionalSummary?: UserProfessionalSummaryCreateNestedOneWithoutUserInput
     UserWorkExperience?: UserWorkExperienceCreateNestedManyWithoutUserInput
   }
@@ -20085,16 +20085,16 @@ export namespace Prisma {
     updatedAt?: Date | string
     username?: string | null
     displayUsername?: string | null
-    phone?: string | null
     location?: string | null
     professional_summary?: string | null
     locationTypeId?: number | null
-    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    phone?: string | null
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     applications?: ApplicationUncheckedCreateNestedManyWithoutUserInput
     onboarded?: OnboardUncheckedCreateNestedOneWithoutUserInput
-    user_educations?: UserEducationUncheckedCreateNestedManyWithoutUserInput
     UserCertification?: UserCertificationUncheckedCreateNestedManyWithoutUserInput
+    user_educations?: UserEducationUncheckedCreateNestedManyWithoutUserInput
     UserProfessionalSummary?: UserProfessionalSummaryUncheckedCreateNestedOneWithoutUserInput
     UserWorkExperience?: UserWorkExperienceUncheckedCreateNestedManyWithoutUserInput
   }
@@ -20125,16 +20125,16 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
     displayUsername?: NullableStringFieldUpdateOperationsInput | string | null
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
     location?: NullableStringFieldUpdateOperationsInput | string | null
     professional_summary?: NullableStringFieldUpdateOperationsInput | string | null
-    locationType?: UserLocationTypeUpdateOneWithoutUsersNestedInput
-    sessions?: SessionUpdateManyWithoutUserNestedInput
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     accounts?: AccountUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    locationType?: UserLocationTypeUpdateOneWithoutUsersNestedInput
     applications?: ApplicationUpdateManyWithoutUserNestedInput
     onboarded?: OnboardUpdateOneWithoutUserNestedInput
-    user_educations?: UserEducationUpdateManyWithoutUserNestedInput
     UserCertification?: UserCertificationUpdateManyWithoutUserNestedInput
+    user_educations?: UserEducationUpdateManyWithoutUserNestedInput
     UserProfessionalSummary?: UserProfessionalSummaryUpdateOneWithoutUserNestedInput
     UserWorkExperience?: UserWorkExperienceUpdateManyWithoutUserNestedInput
   }
@@ -20149,16 +20149,16 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
     displayUsername?: NullableStringFieldUpdateOperationsInput | string | null
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
     location?: NullableStringFieldUpdateOperationsInput | string | null
     professional_summary?: NullableStringFieldUpdateOperationsInput | string | null
     locationTypeId?: NullableIntFieldUpdateOperationsInput | number | null
-    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     applications?: ApplicationUncheckedUpdateManyWithoutUserNestedInput
     onboarded?: OnboardUncheckedUpdateOneWithoutUserNestedInput
-    user_educations?: UserEducationUncheckedUpdateManyWithoutUserNestedInput
     UserCertification?: UserCertificationUncheckedUpdateManyWithoutUserNestedInput
+    user_educations?: UserEducationUncheckedUpdateManyWithoutUserNestedInput
     UserProfessionalSummary?: UserProfessionalSummaryUncheckedUpdateOneWithoutUserNestedInput
     UserWorkExperience?: UserWorkExperienceUncheckedUpdateManyWithoutUserNestedInput
   }
@@ -20173,18 +20173,18 @@ export namespace Prisma {
     updatedAt?: Date | string
     username?: string | null
     displayUsername?: string | null
-    phone?: string | null
     location?: string | null
     professional_summary?: string | null
-    locationType?: UserLocationTypeCreateNestedOneWithoutUsersInput
-    sessions?: SessionCreateNestedManyWithoutUserInput
+    phone?: string | null
     accounts?: AccountCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    locationType?: UserLocationTypeCreateNestedOneWithoutUsersInput
     applications?: ApplicationCreateNestedManyWithoutUserInput
     onboarded?: OnboardCreateNestedOneWithoutUserInput
-    user_educations?: UserEducationCreateNestedManyWithoutUserInput
-    user_skills?: UserSkillCreateNestedOneWithoutUserInput
     UserCertification?: UserCertificationCreateNestedManyWithoutUserInput
+    user_educations?: UserEducationCreateNestedManyWithoutUserInput
     UserProfessionalSummary?: UserProfessionalSummaryCreateNestedOneWithoutUserInput
+    user_skills?: UserSkillCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutUserWorkExperienceInput = {
@@ -20197,18 +20197,18 @@ export namespace Prisma {
     updatedAt?: Date | string
     username?: string | null
     displayUsername?: string | null
-    phone?: string | null
     location?: string | null
     professional_summary?: string | null
     locationTypeId?: number | null
-    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    phone?: string | null
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     applications?: ApplicationUncheckedCreateNestedManyWithoutUserInput
     onboarded?: OnboardUncheckedCreateNestedOneWithoutUserInput
-    user_educations?: UserEducationUncheckedCreateNestedManyWithoutUserInput
-    user_skills?: UserSkillUncheckedCreateNestedOneWithoutUserInput
     UserCertification?: UserCertificationUncheckedCreateNestedManyWithoutUserInput
+    user_educations?: UserEducationUncheckedCreateNestedManyWithoutUserInput
     UserProfessionalSummary?: UserProfessionalSummaryUncheckedCreateNestedOneWithoutUserInput
+    user_skills?: UserSkillUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutUserWorkExperienceInput = {
@@ -20237,18 +20237,18 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
     displayUsername?: NullableStringFieldUpdateOperationsInput | string | null
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
     location?: NullableStringFieldUpdateOperationsInput | string | null
     professional_summary?: NullableStringFieldUpdateOperationsInput | string | null
-    locationType?: UserLocationTypeUpdateOneWithoutUsersNestedInput
-    sessions?: SessionUpdateManyWithoutUserNestedInput
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     accounts?: AccountUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    locationType?: UserLocationTypeUpdateOneWithoutUsersNestedInput
     applications?: ApplicationUpdateManyWithoutUserNestedInput
     onboarded?: OnboardUpdateOneWithoutUserNestedInput
-    user_educations?: UserEducationUpdateManyWithoutUserNestedInput
-    user_skills?: UserSkillUpdateOneWithoutUserNestedInput
     UserCertification?: UserCertificationUpdateManyWithoutUserNestedInput
+    user_educations?: UserEducationUpdateManyWithoutUserNestedInput
     UserProfessionalSummary?: UserProfessionalSummaryUpdateOneWithoutUserNestedInput
+    user_skills?: UserSkillUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutUserWorkExperienceInput = {
@@ -20261,28 +20261,18 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
     displayUsername?: NullableStringFieldUpdateOperationsInput | string | null
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
     location?: NullableStringFieldUpdateOperationsInput | string | null
     professional_summary?: NullableStringFieldUpdateOperationsInput | string | null
     locationTypeId?: NullableIntFieldUpdateOperationsInput | number | null
-    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     applications?: ApplicationUncheckedUpdateManyWithoutUserNestedInput
     onboarded?: OnboardUncheckedUpdateOneWithoutUserNestedInput
-    user_educations?: UserEducationUncheckedUpdateManyWithoutUserNestedInput
-    user_skills?: UserSkillUncheckedUpdateOneWithoutUserNestedInput
     UserCertification?: UserCertificationUncheckedUpdateManyWithoutUserNestedInput
+    user_educations?: UserEducationUncheckedUpdateManyWithoutUserNestedInput
     UserProfessionalSummary?: UserProfessionalSummaryUncheckedUpdateOneWithoutUserNestedInput
-  }
-
-  export type SessionCreateManyUserInput = {
-    id: string
-    expiresAt: Date | string
-    token: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    ipAddress?: string | null
-    userAgent?: string | null
+    user_skills?: UserSkillUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type AccountCreateManyUserInput = {
@@ -20300,6 +20290,16 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type SessionCreateManyUserInput = {
+    id: string
+    expiresAt: Date | string
+    token: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    ipAddress?: string | null
+    userAgent?: string | null
+  }
+
   export type ApplicationCreateManyUserInput = {
     id?: string
     company_name: string
@@ -20307,8 +20307,17 @@ export namespace Prisma {
     job_description?: string | null
   }
 
+  export type UserCertificationCreateManyUserInput = {
+    id?: string
+    name: string
+    emittedAt?: Date | string
+    description?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type UserEducationCreateManyUserInput = {
-    id: string
+    id?: string
     university_name: string
     enrollment?: Date | string
     completion?: Date | string | null
@@ -20318,17 +20327,8 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type UserCertificationCreateManyUserInput = {
-    id: string
-    name: string
-    emittedAt?: Date | string
-    description?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
   export type UserWorkExperienceCreateManyUserInput = {
-    id: string
+    id?: string
     company_name: string
     enrollment?: Date | string
     completion?: Date | string | null
@@ -20336,36 +20336,6 @@ export namespace Prisma {
     currentWorkPlace: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
-  }
-
-  export type SessionUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    token?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
-    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type SessionUncheckedUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    token?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
-    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type SessionUncheckedUpdateManyWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    token?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
-    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type AccountUpdateWithoutUserInput = {
@@ -20413,6 +20383,36 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type SessionUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    token?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type SessionUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    token?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type SessionUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    token?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
   export type ApplicationUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     company_name?: StringFieldUpdateOperationsInput | string
@@ -20432,6 +20432,33 @@ export namespace Prisma {
     company_name?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     job_description?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type UserCertificationUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    emittedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserCertificationUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    emittedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserCertificationUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    emittedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type UserEducationUpdateWithoutUserInput = {
@@ -20462,33 +20489,6 @@ export namespace Prisma {
     enrollment?: DateTimeFieldUpdateOperationsInput | Date | string
     completion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     finished?: BoolFieldUpdateOperationsInput | boolean
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type UserCertificationUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    emittedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type UserCertificationUncheckedUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    emittedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type UserCertificationUncheckedUpdateManyWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    emittedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -20537,9 +20537,9 @@ export namespace Prisma {
     updatedAt?: Date | string
     username?: string | null
     displayUsername?: string | null
-    phone?: string | null
     location?: string | null
     professional_summary?: string | null
+    phone?: string | null
   }
 
   export type UserUpdateWithoutLocationTypeInput = {
@@ -20552,17 +20552,17 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
     displayUsername?: NullableStringFieldUpdateOperationsInput | string | null
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
     location?: NullableStringFieldUpdateOperationsInput | string | null
     professional_summary?: NullableStringFieldUpdateOperationsInput | string | null
-    sessions?: SessionUpdateManyWithoutUserNestedInput
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     accounts?: AccountUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
     applications?: ApplicationUpdateManyWithoutUserNestedInput
     onboarded?: OnboardUpdateOneWithoutUserNestedInput
-    user_educations?: UserEducationUpdateManyWithoutUserNestedInput
-    user_skills?: UserSkillUpdateOneWithoutUserNestedInput
     UserCertification?: UserCertificationUpdateManyWithoutUserNestedInput
+    user_educations?: UserEducationUpdateManyWithoutUserNestedInput
     UserProfessionalSummary?: UserProfessionalSummaryUpdateOneWithoutUserNestedInput
+    user_skills?: UserSkillUpdateOneWithoutUserNestedInput
     UserWorkExperience?: UserWorkExperienceUpdateManyWithoutUserNestedInput
   }
 
@@ -20576,17 +20576,17 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
     displayUsername?: NullableStringFieldUpdateOperationsInput | string | null
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
     location?: NullableStringFieldUpdateOperationsInput | string | null
     professional_summary?: NullableStringFieldUpdateOperationsInput | string | null
-    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     applications?: ApplicationUncheckedUpdateManyWithoutUserNestedInput
     onboarded?: OnboardUncheckedUpdateOneWithoutUserNestedInput
-    user_educations?: UserEducationUncheckedUpdateManyWithoutUserNestedInput
-    user_skills?: UserSkillUncheckedUpdateOneWithoutUserNestedInput
     UserCertification?: UserCertificationUncheckedUpdateManyWithoutUserNestedInput
+    user_educations?: UserEducationUncheckedUpdateManyWithoutUserNestedInput
     UserProfessionalSummary?: UserProfessionalSummaryUncheckedUpdateOneWithoutUserNestedInput
+    user_skills?: UserSkillUncheckedUpdateOneWithoutUserNestedInput
     UserWorkExperience?: UserWorkExperienceUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -20600,9 +20600,9 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
     displayUsername?: NullableStringFieldUpdateOperationsInput | string | null
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
     location?: NullableStringFieldUpdateOperationsInput | string | null
     professional_summary?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
 

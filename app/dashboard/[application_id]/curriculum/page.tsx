@@ -34,6 +34,12 @@ export default async function CurriculumPage({
   const htmlTest =
     '<!DOCTYPE html> <html> <head> <meta charset="UTF-8" /> <title>Victor Moraes - Frontend Developer Resume</title> </head> <body> <section> <h2>Contact Information</h2> <p> Victor Moraes<br> São Paulo, Brazil<br> Phone: +55 11 91234-5678<br> Email: victor.moraes@email.com </p> </section> <section> <h2>Professional Summary</h2> <p>Experienced Frontend Developer specialized in creating responsive and user-centric web interfaces. Adept at utilizing modern frameworks and technologies to improve user experience and streamline frontend development processes. Passionate about clean code, performance optimization, and collaborative team environments.</p> </section> <section> <h2>Work Experience</h2> <h3>Frontend Developer, Innovatech Solutions</h3> <p>June 2019 – Present</p> <ul> <li>Developed and maintained dynamic, mobile-friendly websites using React.js, HTML5, and CSS3, improving site performance and user engagement.</li> <li>Collaborated with backend engineers and designers to create seamless UI/UX designs.</li> <li>Implemented component-based architecture, reducing code redundancy and easing maintenance.</li> </ul> <h3>Junior Frontend Developer, Web Creators</h3> <p>January 2017 – May 2019</p> <ul> <li>Participated in the development of client websites with a focus on responsive design and accessibility.</li> <li>Optimized site loading times and improved browser compatibility across devices.</li> </ul> </section> <section> <h2>Education</h2> <p>B.Sc. in Computer Science<br>University of São Paulo, 2016</p> </section> <section> <h2>Skills</h2> <ul> <li>HTML5, CSS3, JavaScript</li> <li>React.js, Vue.js</li> <li>Responsive Design & Mobile First</li> <li>Git & Version Control</li> <li>CSS Preprocessors (SASS, LESS)</li> </ul> </section> <section> <h2>Certifications</h2> <ul> <li>Certified Front-End Developer – freeCodeCamp</li> <li>JavaScript Algorithms and Data Structures – Coursera</li> </ul> </section> </body> </html>';
 
+  const applicationDetails = application.job_description
+    ? application.job_description.length > 255
+      ? application.job_description.slice(0, 255) + '...'
+      : application.job_description
+    : '';
+
   return (
     <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
       <div className="grid gap-4 md:grid-cols-[1fr_2fr]">
@@ -49,7 +55,7 @@ export default async function CurriculumPage({
             <CardContent className="space-y-2 text-sm">
               {application.job_description && (
                 <p className="text-muted-foreground leading-relaxed">
-                  {application.job_description}
+                  {applicationDetails}
                 </p>
               )}
 

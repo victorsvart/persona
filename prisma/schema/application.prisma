@@ -1,11 +1,11 @@
 model Application {
-    id              String  @id @default(uuid())
-    company_name    String
-    role            String
-    job_description String?
-    userId          String
-    user            User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id              String  @id @default(uuid())
+  company_name    String
+  role            String
+  userId          String
+  job_description String?
+  user            User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-    @@map("applications")
-    @@schema("public")
+  @@map("applications")
+  @@schema("public")
 }

@@ -1,15 +1,15 @@
 model UserEducation {
-    id              String    @id
-    university_name String
-    enrollment      DateTime  @default(now())
-    completion      DateTime?
-    finished        Boolean
-    description     String?
-    userId          String
-    User            User      @relation(fields: [userId], references: [id])
-    createdAt       DateTime  @default(now())
-    updatedAt       DateTime  @default(now()) @updatedAt
+  id              String    @id @default(uuid())
+  university_name String
+  enrollment      DateTime  @default(now())
+  completion      DateTime?
+  finished        Boolean
+  description     String?
+  userId          String
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @default(now()) @updatedAt
+  User            User      @relation(fields: [userId], references: [id])
 
-    @@map("user_education")
-    @@schema("public")
+  @@map("user_education")
+  @@schema("public")
 }

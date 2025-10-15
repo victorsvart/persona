@@ -20,12 +20,12 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 6.17.0
- * Query Engine version: c0aafc03b8ef6cdced8654b9a817999e02457d6a
+ * Prisma Client JS version: 6.17.1
+ * Query Engine version: 272a37d34178c2894197e17273bf937f25acdeac
  */
 Prisma.prismaVersion = {
-  client: "6.17.0",
-  engine: "c0aafc03b8ef6cdced8654b9a817999e02457d6a"
+  client: "6.17.1",
+  engine: "272a37d34178c2894197e17273bf937f25acdeac"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -124,8 +124,8 @@ exports.Prisma.ApplicationScalarFieldEnum = {
   id: 'id',
   company_name: 'company_name',
   role: 'role',
-  job_description: 'job_description',
-  userId: 'userId'
+  userId: 'userId',
+  job_description: 'job_description'
 };
 
 exports.Prisma.OnboardScalarFieldEnum = {
@@ -144,10 +144,10 @@ exports.Prisma.UserScalarFieldEnum = {
   updatedAt: 'updatedAt',
   username: 'username',
   displayUsername: 'displayUsername',
-  phone: 'phone',
   location: 'location',
   professional_summary: 'professional_summary',
-  locationTypeId: 'locationTypeId'
+  locationTypeId: 'locationTypeId',
+  phone: 'phone'
 };
 
 exports.Prisma.SessionScalarFieldEnum = {

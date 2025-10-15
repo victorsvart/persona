@@ -12,9 +12,10 @@ import { redirect } from 'next/navigation';
 export async function signUp(form: RegisterSchemaValues): Promise<void> {
   try {
     await auth.api.signUpEmail({ body: form });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Sign up error:', error);
-    throw new Error(error?.message || 'Failed to create user');
+    const errorMessage = error instanceof Error ? error.message : 'Failed to create user';
+    throw new Error(errorMessage);
   }
 
   redirect('/dashboard/onboard');

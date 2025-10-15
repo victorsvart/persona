@@ -1,1 +1,1 @@
-declare var LOGIN_URL: string = '/auth/login';
+declare const LOGIN_URL: string;
