@@ -1,0 +1,23 @@
+# Use the docker:up script. Check package.json scripts.
+services:
+  db:
+    image: postgres
+    restart: always
+    shm_size: 128mb
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: persona
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - '8080:8080'
+
+volumes:
+  pgdata: {}
