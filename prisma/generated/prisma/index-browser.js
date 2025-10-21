@@ -168,6 +168,50 @@ exports.Prisma.VerificationScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.UserProfessionalExperienceScalarFieldEnum = {
+  id: 'id',
+  institution: 'institution',
+  role: 'role',
+  start_date: 'start_date',
+  end_date: 'end_date',
+  summary: 'summary',
+  version: 'version',
+  userId: 'userId',
+  at_university: 'at_university',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.UserProfessionalSummaryScalarFieldEnum = {
+  id: 'id',
+  experience_years: 'experience_years',
+  summary: 'summary',
+  version: 'version',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.UserAcademicInformationScalarFieldEnum = {
+  id: 'id',
+  institution: 'institution',
+  major: 'major',
+  start_date: 'start_date',
+  end_date: 'end_date',
+  summary: 'summary',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.UserSkillScalarFieldEnum = {
+  id: 'id',
+  skills: 'skills',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -188,7 +232,11 @@ exports.Prisma.ModelName = {
   User: 'User',
   Session: 'Session',
   Account: 'Account',
-  Verification: 'Verification'
+  Verification: 'Verification',
+  UserProfessionalExperience: 'UserProfessionalExperience',
+  UserProfessionalSummary: 'UserProfessionalSummary',
+  UserAcademicInformation: 'UserAcademicInformation',
+  UserSkill: 'UserSkill'
 };
 
 /**
