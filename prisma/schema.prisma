@@ -16,18 +16,22 @@ datasource db {
 }
 
 model User {
-  id            String    @id
-  name          String
-  email         String
-  emailVerified Boolean   @default(false)
-  image         String?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @default(now()) @updatedAt
-  sessions      Session[]
-  accounts      Account[]
-
-  username        String?
-  displayUsername String?
+  id                            String                       @id
+  name                          String
+  email                         String
+  emailVerified                 Boolean                      @default(false)
+  image                         String?
+  createdAt                     DateTime                     @default(now())
+  updatedAt                     DateTime                     @default(now()) @updatedAt
+  sessions                      Session[]
+  accounts                      Account[]
+  user_professional_summary     UserProfessionalSummary?
+  user_professional_experiences UserProfessionalExperience[]
+  user_academic_information     UserAcademicInformation[]
+  user_skill                    UserSkill?
+  username                      String?
+  displayUsername               String?
+  onboarded                     Boolean                      @default(false)
 
   @@unique([email])
   @@unique([username])
@@ -81,4 +85,64 @@ model Verification {
 
   @@map("verification")
   @@schema("auth")
+}
+
+model UserProfessionalExperience {
+  id            String    @id @default(uuid())
+  institution   String
+  role          String
+  start_date    DateTime?
+  end_date      DateTime?
+  summary       String?
+  version       Int       @default(1)
+  userId        String
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  at_university Boolean   @default(false)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@map("user_professional_experience")
+  @@schema("public")
+}
+
+model UserProfessionalSummary {
+  id               String   @id @default(uuid())
+  experience_years Int
+  summary          String?
+  version          Int      @default(1)
+  userId           String   @unique
+  user             User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  @@map("user_professional_summary")
+  @@schema("public")
+}
+
+model UserAcademicInformation {
+  id          String    @id @default(uuid())
+  institution String
+  major       String
+  start_date  DateTime
+  end_date    DateTime?
+  summary     String?
+  userId      String
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@map("user_academic_information")
+  @@schema("public")
+}
+
+model UserSkill {
+  id        Int      @id @default(autoincrement())
+  skills    String
+  userId    String   @unique
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("user_skill")
+  @@schema("public")
 }

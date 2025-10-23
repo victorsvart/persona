@@ -33,6 +33,26 @@ export type Account = $Result.DefaultSelection<Prisma.$AccountPayload>
  * 
  */
 export type Verification = $Result.DefaultSelection<Prisma.$VerificationPayload>
+/**
+ * Model UserProfessionalExperience
+ * 
+ */
+export type UserProfessionalExperience = $Result.DefaultSelection<Prisma.$UserProfessionalExperiencePayload>
+/**
+ * Model UserProfessionalSummary
+ * 
+ */
+export type UserProfessionalSummary = $Result.DefaultSelection<Prisma.$UserProfessionalSummaryPayload>
+/**
+ * Model UserAcademicInformation
+ * 
+ */
+export type UserAcademicInformation = $Result.DefaultSelection<Prisma.$UserAcademicInformationPayload>
+/**
+ * Model UserSkill
+ * 
+ */
+export type UserSkill = $Result.DefaultSelection<Prisma.$UserSkillPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -191,6 +211,46 @@ export class PrismaClient<
     * ```
     */
   get verification(): Prisma.VerificationDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.userProfessionalExperience`: Exposes CRUD operations for the **UserProfessionalExperience** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more UserProfessionalExperiences
+    * const userProfessionalExperiences = await prisma.userProfessionalExperience.findMany()
+    * ```
+    */
+  get userProfessionalExperience(): Prisma.UserProfessionalExperienceDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.userProfessionalSummary`: Exposes CRUD operations for the **UserProfessionalSummary** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more UserProfessionalSummaries
+    * const userProfessionalSummaries = await prisma.userProfessionalSummary.findMany()
+    * ```
+    */
+  get userProfessionalSummary(): Prisma.UserProfessionalSummaryDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.userAcademicInformation`: Exposes CRUD operations for the **UserAcademicInformation** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more UserAcademicInformations
+    * const userAcademicInformations = await prisma.userAcademicInformation.findMany()
+    * ```
+    */
+  get userAcademicInformation(): Prisma.UserAcademicInformationDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.userSkill`: Exposes CRUD operations for the **UserSkill** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more UserSkills
+    * const userSkills = await prisma.userSkill.findMany()
+    * ```
+    */
+  get userSkill(): Prisma.UserSkillDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -249,8 +309,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 6.17.1
-   * Query Engine version: 272a37d34178c2894197e17273bf937f25acdeac
+   * Prisma Client JS version: 6.18.0
+   * Query Engine version: 34b5a692b7bd79939a9a2c3ef97d816e749cda2f
    */
   export type PrismaVersion = {
     client: string
@@ -263,6 +323,7 @@ export namespace Prisma {
    */
 
 
+  export import Bytes = runtime.Bytes
   export import JsonObject = runtime.JsonObject
   export import JsonArray = runtime.JsonArray
   export import JsonValue = runtime.JsonValue
@@ -634,7 +695,11 @@ export namespace Prisma {
     User: 'User',
     Session: 'Session',
     Account: 'Account',
-    Verification: 'Verification'
+    Verification: 'Verification',
+    UserProfessionalExperience: 'UserProfessionalExperience',
+    UserProfessionalSummary: 'UserProfessionalSummary',
+    UserAcademicInformation: 'UserAcademicInformation',
+    UserSkill: 'UserSkill'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -653,7 +718,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "session" | "account" | "verification"
+      modelProps: "user" | "session" | "account" | "verification" | "userProfessionalExperience" | "userProfessionalSummary" | "userAcademicInformation" | "userSkill"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -953,6 +1018,302 @@ export namespace Prisma {
           }
         }
       }
+      UserProfessionalExperience: {
+        payload: Prisma.$UserProfessionalExperiencePayload<ExtArgs>
+        fields: Prisma.UserProfessionalExperienceFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.UserProfessionalExperienceFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserProfessionalExperiencePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.UserProfessionalExperienceFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserProfessionalExperiencePayload>
+          }
+          findFirst: {
+            args: Prisma.UserProfessionalExperienceFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserProfessionalExperiencePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.UserProfessionalExperienceFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserProfessionalExperiencePayload>
+          }
+          findMany: {
+            args: Prisma.UserProfessionalExperienceFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserProfessionalExperiencePayload>[]
+          }
+          create: {
+            args: Prisma.UserProfessionalExperienceCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserProfessionalExperiencePayload>
+          }
+          createMany: {
+            args: Prisma.UserProfessionalExperienceCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.UserProfessionalExperienceCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserProfessionalExperiencePayload>[]
+          }
+          delete: {
+            args: Prisma.UserProfessionalExperienceDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserProfessionalExperiencePayload>
+          }
+          update: {
+            args: Prisma.UserProfessionalExperienceUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserProfessionalExperiencePayload>
+          }
+          deleteMany: {
+            args: Prisma.UserProfessionalExperienceDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.UserProfessionalExperienceUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.UserProfessionalExperienceUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserProfessionalExperiencePayload>[]
+          }
+          upsert: {
+            args: Prisma.UserProfessionalExperienceUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserProfessionalExperiencePayload>
+          }
+          aggregate: {
+            args: Prisma.UserProfessionalExperienceAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateUserProfessionalExperience>
+          }
+          groupBy: {
+            args: Prisma.UserProfessionalExperienceGroupByArgs<ExtArgs>
+            result: $Utils.Optional<UserProfessionalExperienceGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.UserProfessionalExperienceCountArgs<ExtArgs>
+            result: $Utils.Optional<UserProfessionalExperienceCountAggregateOutputType> | number
+          }
+        }
+      }
+      UserProfessionalSummary: {
+        payload: Prisma.$UserProfessionalSummaryPayload<ExtArgs>
+        fields: Prisma.UserProfessionalSummaryFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.UserProfessionalSummaryFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserProfessionalSummaryPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.UserProfessionalSummaryFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserProfessionalSummaryPayload>
+          }
+          findFirst: {
+            args: Prisma.UserProfessionalSummaryFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserProfessionalSummaryPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.UserProfessionalSummaryFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserProfessionalSummaryPayload>
+          }
+          findMany: {
+            args: Prisma.UserProfessionalSummaryFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserProfessionalSummaryPayload>[]
+          }
+          create: {
+            args: Prisma.UserProfessionalSummaryCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserProfessionalSummaryPayload>
+          }
+          createMany: {
+            args: Prisma.UserProfessionalSummaryCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.UserProfessionalSummaryCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserProfessionalSummaryPayload>[]
+          }
+          delete: {
+            args: Prisma.UserProfessionalSummaryDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserProfessionalSummaryPayload>
+          }
+          update: {
+            args: Prisma.UserProfessionalSummaryUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserProfessionalSummaryPayload>
+          }
+          deleteMany: {
+            args: Prisma.UserProfessionalSummaryDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.UserProfessionalSummaryUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.UserProfessionalSummaryUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserProfessionalSummaryPayload>[]
+          }
+          upsert: {
+            args: Prisma.UserProfessionalSummaryUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserProfessionalSummaryPayload>
+          }
+          aggregate: {
+            args: Prisma.UserProfessionalSummaryAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateUserProfessionalSummary>
+          }
+          groupBy: {
+            args: Prisma.UserProfessionalSummaryGroupByArgs<ExtArgs>
+            result: $Utils.Optional<UserProfessionalSummaryGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.UserProfessionalSummaryCountArgs<ExtArgs>
+            result: $Utils.Optional<UserProfessionalSummaryCountAggregateOutputType> | number
+          }
+        }
+      }
+      UserAcademicInformation: {
+        payload: Prisma.$UserAcademicInformationPayload<ExtArgs>
+        fields: Prisma.UserAcademicInformationFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.UserAcademicInformationFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserAcademicInformationPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.UserAcademicInformationFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserAcademicInformationPayload>
+          }
+          findFirst: {
+            args: Prisma.UserAcademicInformationFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserAcademicInformationPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.UserAcademicInformationFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserAcademicInformationPayload>
+          }
+          findMany: {
+            args: Prisma.UserAcademicInformationFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserAcademicInformationPayload>[]
+          }
+          create: {
+            args: Prisma.UserAcademicInformationCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserAcademicInformationPayload>
+          }
+          createMany: {
+            args: Prisma.UserAcademicInformationCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.UserAcademicInformationCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserAcademicInformationPayload>[]
+          }
+          delete: {
+            args: Prisma.UserAcademicInformationDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserAcademicInformationPayload>
+          }
+          update: {
+            args: Prisma.UserAcademicInformationUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserAcademicInformationPayload>
+          }
+          deleteMany: {
+            args: Prisma.UserAcademicInformationDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.UserAcademicInformationUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.UserAcademicInformationUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserAcademicInformationPayload>[]
+          }
+          upsert: {
+            args: Prisma.UserAcademicInformationUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserAcademicInformationPayload>
+          }
+          aggregate: {
+            args: Prisma.UserAcademicInformationAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateUserAcademicInformation>
+          }
+          groupBy: {
+            args: Prisma.UserAcademicInformationGroupByArgs<ExtArgs>
+            result: $Utils.Optional<UserAcademicInformationGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.UserAcademicInformationCountArgs<ExtArgs>
+            result: $Utils.Optional<UserAcademicInformationCountAggregateOutputType> | number
+          }
+        }
+      }
+      UserSkill: {
+        payload: Prisma.$UserSkillPayload<ExtArgs>
+        fields: Prisma.UserSkillFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.UserSkillFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserSkillPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.UserSkillFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserSkillPayload>
+          }
+          findFirst: {
+            args: Prisma.UserSkillFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserSkillPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.UserSkillFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserSkillPayload>
+          }
+          findMany: {
+            args: Prisma.UserSkillFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserSkillPayload>[]
+          }
+          create: {
+            args: Prisma.UserSkillCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserSkillPayload>
+          }
+          createMany: {
+            args: Prisma.UserSkillCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.UserSkillCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserSkillPayload>[]
+          }
+          delete: {
+            args: Prisma.UserSkillDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserSkillPayload>
+          }
+          update: {
+            args: Prisma.UserSkillUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserSkillPayload>
+          }
+          deleteMany: {
+            args: Prisma.UserSkillDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.UserSkillUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.UserSkillUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserSkillPayload>[]
+          }
+          upsert: {
+            args: Prisma.UserSkillUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserSkillPayload>
+          }
+          aggregate: {
+            args: Prisma.UserSkillAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateUserSkill>
+          }
+          groupBy: {
+            args: Prisma.UserSkillGroupByArgs<ExtArgs>
+            result: $Utils.Optional<UserSkillGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.UserSkillCountArgs<ExtArgs>
+            result: $Utils.Optional<UserSkillCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1053,6 +1414,10 @@ export namespace Prisma {
     session?: SessionOmit
     account?: AccountOmit
     verification?: VerificationOmit
+    userProfessionalExperience?: UserProfessionalExperienceOmit
+    userProfessionalSummary?: UserProfessionalSummaryOmit
+    userAcademicInformation?: UserAcademicInformationOmit
+    userSkill?: UserSkillOmit
   }
 
   /* Types for Logging */
@@ -1135,11 +1500,15 @@ export namespace Prisma {
   export type UserCountOutputType = {
     sessions: number
     accounts: number
+    user_professional_experiences: number
+    user_academic_information: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     sessions?: boolean | UserCountOutputTypeCountSessionsArgs
     accounts?: boolean | UserCountOutputTypeCountAccountsArgs
+    user_professional_experiences?: boolean | UserCountOutputTypeCountUser_professional_experiencesArgs
+    user_academic_information?: boolean | UserCountOutputTypeCountUser_academic_informationArgs
   }
 
   // Custom InputTypes
@@ -1167,6 +1536,20 @@ export namespace Prisma {
     where?: AccountWhereInput
   }
 
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountUser_professional_experiencesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserProfessionalExperienceWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountUser_academic_informationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserAcademicInformationWhereInput
+  }
+
 
   /**
    * Models
@@ -1192,6 +1575,7 @@ export namespace Prisma {
     updatedAt: Date | null
     username: string | null
     displayUsername: string | null
+    onboarded: boolean | null
   }
 
   export type UserMaxAggregateOutputType = {
@@ -1204,6 +1588,7 @@ export namespace Prisma {
     updatedAt: Date | null
     username: string | null
     displayUsername: string | null
+    onboarded: boolean | null
   }
 
   export type UserCountAggregateOutputType = {
@@ -1216,6 +1601,7 @@ export namespace Prisma {
     updatedAt: number
     username: number
     displayUsername: number
+    onboarded: number
     _all: number
   }
 
@@ -1230,6 +1616,7 @@ export namespace Prisma {
     updatedAt?: true
     username?: true
     displayUsername?: true
+    onboarded?: true
   }
 
   export type UserMaxAggregateInputType = {
@@ -1242,6 +1629,7 @@ export namespace Prisma {
     updatedAt?: true
     username?: true
     displayUsername?: true
+    onboarded?: true
   }
 
   export type UserCountAggregateInputType = {
@@ -1254,6 +1642,7 @@ export namespace Prisma {
     updatedAt?: true
     username?: true
     displayUsername?: true
+    onboarded?: true
     _all?: true
   }
 
@@ -1339,6 +1728,7 @@ export namespace Prisma {
     updatedAt: Date
     username: string | null
     displayUsername: string | null
+    onboarded: boolean
     _count: UserCountAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
@@ -1368,8 +1758,13 @@ export namespace Prisma {
     updatedAt?: boolean
     username?: boolean
     displayUsername?: boolean
+    onboarded?: boolean
     sessions?: boolean | User$sessionsArgs<ExtArgs>
     accounts?: boolean | User$accountsArgs<ExtArgs>
+    user_professional_summary?: boolean | User$user_professional_summaryArgs<ExtArgs>
+    user_professional_experiences?: boolean | User$user_professional_experiencesArgs<ExtArgs>
+    user_academic_information?: boolean | User$user_academic_informationArgs<ExtArgs>
+    user_skill?: boolean | User$user_skillArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -1383,6 +1778,7 @@ export namespace Prisma {
     updatedAt?: boolean
     username?: boolean
     displayUsername?: boolean
+    onboarded?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -1395,6 +1791,7 @@ export namespace Prisma {
     updatedAt?: boolean
     username?: boolean
     displayUsername?: boolean
+    onboarded?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectScalar = {
@@ -1407,12 +1804,17 @@ export namespace Prisma {
     updatedAt?: boolean
     username?: boolean
     displayUsername?: boolean
+    onboarded?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "image" | "createdAt" | "updatedAt" | "username" | "displayUsername", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "image" | "createdAt" | "updatedAt" | "username" | "displayUsername" | "onboarded", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     sessions?: boolean | User$sessionsArgs<ExtArgs>
     accounts?: boolean | User$accountsArgs<ExtArgs>
+    user_professional_summary?: boolean | User$user_professional_summaryArgs<ExtArgs>
+    user_professional_experiences?: boolean | User$user_professional_experiencesArgs<ExtArgs>
+    user_academic_information?: boolean | User$user_academic_informationArgs<ExtArgs>
+    user_skill?: boolean | User$user_skillArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1423,6 +1825,10 @@ export namespace Prisma {
     objects: {
       sessions: Prisma.$SessionPayload<ExtArgs>[]
       accounts: Prisma.$AccountPayload<ExtArgs>[]
+      user_professional_summary: Prisma.$UserProfessionalSummaryPayload<ExtArgs> | null
+      user_professional_experiences: Prisma.$UserProfessionalExperiencePayload<ExtArgs>[]
+      user_academic_information: Prisma.$UserAcademicInformationPayload<ExtArgs>[]
+      user_skill: Prisma.$UserSkillPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -1434,6 +1840,7 @@ export namespace Prisma {
       updatedAt: Date
       username: string | null
       displayUsername: string | null
+      onboarded: boolean
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -1830,6 +2237,10 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     sessions<T extends User$sessionsArgs<ExtArgs> = {}>(args?: Subset<T, User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     accounts<T extends User$accountsArgs<ExtArgs> = {}>(args?: Subset<T, User$accountsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    user_professional_summary<T extends User$user_professional_summaryArgs<ExtArgs> = {}>(args?: Subset<T, User$user_professional_summaryArgs<ExtArgs>>): Prisma__UserProfessionalSummaryClient<$Result.GetResult<Prisma.$UserProfessionalSummaryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    user_professional_experiences<T extends User$user_professional_experiencesArgs<ExtArgs> = {}>(args?: Subset<T, User$user_professional_experiencesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserProfessionalExperiencePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    user_academic_information<T extends User$user_academic_informationArgs<ExtArgs> = {}>(args?: Subset<T, User$user_academic_informationArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserAcademicInformationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    user_skill<T extends User$user_skillArgs<ExtArgs> = {}>(args?: Subset<T, User$user_skillArgs<ExtArgs>>): Prisma__UserSkillClient<$Result.GetResult<Prisma.$UserSkillPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1868,6 +2279,7 @@ export namespace Prisma {
     readonly updatedAt: FieldRef<"User", 'DateTime'>
     readonly username: FieldRef<"User", 'String'>
     readonly displayUsername: FieldRef<"User", 'String'>
+    readonly onboarded: FieldRef<"User", 'Boolean'>
   }
     
 
@@ -2301,6 +2713,92 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: AccountScalarFieldEnum | AccountScalarFieldEnum[]
+  }
+
+  /**
+   * User.user_professional_summary
+   */
+  export type User$user_professional_summaryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserProfessionalSummary
+     */
+    select?: UserProfessionalSummarySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserProfessionalSummary
+     */
+    omit?: UserProfessionalSummaryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserProfessionalSummaryInclude<ExtArgs> | null
+    where?: UserProfessionalSummaryWhereInput
+  }
+
+  /**
+   * User.user_professional_experiences
+   */
+  export type User$user_professional_experiencesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserProfessionalExperience
+     */
+    select?: UserProfessionalExperienceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserProfessionalExperience
+     */
+    omit?: UserProfessionalExperienceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserProfessionalExperienceInclude<ExtArgs> | null
+    where?: UserProfessionalExperienceWhereInput
+    orderBy?: UserProfessionalExperienceOrderByWithRelationInput | UserProfessionalExperienceOrderByWithRelationInput[]
+    cursor?: UserProfessionalExperienceWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UserProfessionalExperienceScalarFieldEnum | UserProfessionalExperienceScalarFieldEnum[]
+  }
+
+  /**
+   * User.user_academic_information
+   */
+  export type User$user_academic_informationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserAcademicInformation
+     */
+    select?: UserAcademicInformationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserAcademicInformation
+     */
+    omit?: UserAcademicInformationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserAcademicInformationInclude<ExtArgs> | null
+    where?: UserAcademicInformationWhereInput
+    orderBy?: UserAcademicInformationOrderByWithRelationInput | UserAcademicInformationOrderByWithRelationInput[]
+    cursor?: UserAcademicInformationWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UserAcademicInformationScalarFieldEnum | UserAcademicInformationScalarFieldEnum[]
+  }
+
+  /**
+   * User.user_skill
+   */
+  export type User$user_skillArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserSkill
+     */
+    select?: UserSkillSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserSkill
+     */
+    omit?: UserSkillOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserSkillInclude<ExtArgs> | null
+    where?: UserSkillWhereInput
   }
 
   /**
@@ -5590,6 +6088,4500 @@ export namespace Prisma {
 
 
   /**
+   * Model UserProfessionalExperience
+   */
+
+  export type AggregateUserProfessionalExperience = {
+    _count: UserProfessionalExperienceCountAggregateOutputType | null
+    _avg: UserProfessionalExperienceAvgAggregateOutputType | null
+    _sum: UserProfessionalExperienceSumAggregateOutputType | null
+    _min: UserProfessionalExperienceMinAggregateOutputType | null
+    _max: UserProfessionalExperienceMaxAggregateOutputType | null
+  }
+
+  export type UserProfessionalExperienceAvgAggregateOutputType = {
+    version: number | null
+  }
+
+  export type UserProfessionalExperienceSumAggregateOutputType = {
+    version: number | null
+  }
+
+  export type UserProfessionalExperienceMinAggregateOutputType = {
+    id: string | null
+    institution: string | null
+    role: string | null
+    start_date: Date | null
+    end_date: Date | null
+    summary: string | null
+    version: number | null
+    userId: string | null
+    at_university: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type UserProfessionalExperienceMaxAggregateOutputType = {
+    id: string | null
+    institution: string | null
+    role: string | null
+    start_date: Date | null
+    end_date: Date | null
+    summary: string | null
+    version: number | null
+    userId: string | null
+    at_university: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type UserProfessionalExperienceCountAggregateOutputType = {
+    id: number
+    institution: number
+    role: number
+    start_date: number
+    end_date: number
+    summary: number
+    version: number
+    userId: number
+    at_university: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type UserProfessionalExperienceAvgAggregateInputType = {
+    version?: true
+  }
+
+  export type UserProfessionalExperienceSumAggregateInputType = {
+    version?: true
+  }
+
+  export type UserProfessionalExperienceMinAggregateInputType = {
+    id?: true
+    institution?: true
+    role?: true
+    start_date?: true
+    end_date?: true
+    summary?: true
+    version?: true
+    userId?: true
+    at_university?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type UserProfessionalExperienceMaxAggregateInputType = {
+    id?: true
+    institution?: true
+    role?: true
+    start_date?: true
+    end_date?: true
+    summary?: true
+    version?: true
+    userId?: true
+    at_university?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type UserProfessionalExperienceCountAggregateInputType = {
+    id?: true
+    institution?: true
+    role?: true
+    start_date?: true
+    end_date?: true
+    summary?: true
+    version?: true
+    userId?: true
+    at_university?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type UserProfessionalExperienceAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UserProfessionalExperience to aggregate.
+     */
+    where?: UserProfessionalExperienceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserProfessionalExperiences to fetch.
+     */
+    orderBy?: UserProfessionalExperienceOrderByWithRelationInput | UserProfessionalExperienceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: UserProfessionalExperienceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserProfessionalExperiences from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserProfessionalExperiences.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned UserProfessionalExperiences
+    **/
+    _count?: true | UserProfessionalExperienceCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: UserProfessionalExperienceAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: UserProfessionalExperienceSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: UserProfessionalExperienceMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: UserProfessionalExperienceMaxAggregateInputType
+  }
+
+  export type GetUserProfessionalExperienceAggregateType<T extends UserProfessionalExperienceAggregateArgs> = {
+        [P in keyof T & keyof AggregateUserProfessionalExperience]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateUserProfessionalExperience[P]>
+      : GetScalarType<T[P], AggregateUserProfessionalExperience[P]>
+  }
+
+
+
+
+  export type UserProfessionalExperienceGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserProfessionalExperienceWhereInput
+    orderBy?: UserProfessionalExperienceOrderByWithAggregationInput | UserProfessionalExperienceOrderByWithAggregationInput[]
+    by: UserProfessionalExperienceScalarFieldEnum[] | UserProfessionalExperienceScalarFieldEnum
+    having?: UserProfessionalExperienceScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: UserProfessionalExperienceCountAggregateInputType | true
+    _avg?: UserProfessionalExperienceAvgAggregateInputType
+    _sum?: UserProfessionalExperienceSumAggregateInputType
+    _min?: UserProfessionalExperienceMinAggregateInputType
+    _max?: UserProfessionalExperienceMaxAggregateInputType
+  }
+
+  export type UserProfessionalExperienceGroupByOutputType = {
+    id: string
+    institution: string
+    role: string
+    start_date: Date | null
+    end_date: Date | null
+    summary: string | null
+    version: number
+    userId: string
+    at_university: boolean
+    createdAt: Date
+    updatedAt: Date
+    _count: UserProfessionalExperienceCountAggregateOutputType | null
+    _avg: UserProfessionalExperienceAvgAggregateOutputType | null
+    _sum: UserProfessionalExperienceSumAggregateOutputType | null
+    _min: UserProfessionalExperienceMinAggregateOutputType | null
+    _max: UserProfessionalExperienceMaxAggregateOutputType | null
+  }
+
+  type GetUserProfessionalExperienceGroupByPayload<T extends UserProfessionalExperienceGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<UserProfessionalExperienceGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof UserProfessionalExperienceGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], UserProfessionalExperienceGroupByOutputType[P]>
+            : GetScalarType<T[P], UserProfessionalExperienceGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type UserProfessionalExperienceSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    institution?: boolean
+    role?: boolean
+    start_date?: boolean
+    end_date?: boolean
+    summary?: boolean
+    version?: boolean
+    userId?: boolean
+    at_university?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userProfessionalExperience"]>
+
+  export type UserProfessionalExperienceSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    institution?: boolean
+    role?: boolean
+    start_date?: boolean
+    end_date?: boolean
+    summary?: boolean
+    version?: boolean
+    userId?: boolean
+    at_university?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userProfessionalExperience"]>
+
+  export type UserProfessionalExperienceSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    institution?: boolean
+    role?: boolean
+    start_date?: boolean
+    end_date?: boolean
+    summary?: boolean
+    version?: boolean
+    userId?: boolean
+    at_university?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userProfessionalExperience"]>
+
+  export type UserProfessionalExperienceSelectScalar = {
+    id?: boolean
+    institution?: boolean
+    role?: boolean
+    start_date?: boolean
+    end_date?: boolean
+    summary?: boolean
+    version?: boolean
+    userId?: boolean
+    at_university?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type UserProfessionalExperienceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "institution" | "role" | "start_date" | "end_date" | "summary" | "version" | "userId" | "at_university" | "createdAt" | "updatedAt", ExtArgs["result"]["userProfessionalExperience"]>
+  export type UserProfessionalExperienceInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type UserProfessionalExperienceIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type UserProfessionalExperienceIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $UserProfessionalExperiencePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "UserProfessionalExperience"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      institution: string
+      role: string
+      start_date: Date | null
+      end_date: Date | null
+      summary: string | null
+      version: number
+      userId: string
+      at_university: boolean
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["userProfessionalExperience"]>
+    composites: {}
+  }
+
+  type UserProfessionalExperienceGetPayload<S extends boolean | null | undefined | UserProfessionalExperienceDefaultArgs> = $Result.GetResult<Prisma.$UserProfessionalExperiencePayload, S>
+
+  type UserProfessionalExperienceCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<UserProfessionalExperienceFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: UserProfessionalExperienceCountAggregateInputType | true
+    }
+
+  export interface UserProfessionalExperienceDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['UserProfessionalExperience'], meta: { name: 'UserProfessionalExperience' } }
+    /**
+     * Find zero or one UserProfessionalExperience that matches the filter.
+     * @param {UserProfessionalExperienceFindUniqueArgs} args - Arguments to find a UserProfessionalExperience
+     * @example
+     * // Get one UserProfessionalExperience
+     * const userProfessionalExperience = await prisma.userProfessionalExperience.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends UserProfessionalExperienceFindUniqueArgs>(args: SelectSubset<T, UserProfessionalExperienceFindUniqueArgs<ExtArgs>>): Prisma__UserProfessionalExperienceClient<$Result.GetResult<Prisma.$UserProfessionalExperiencePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one UserProfessionalExperience that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {UserProfessionalExperienceFindUniqueOrThrowArgs} args - Arguments to find a UserProfessionalExperience
+     * @example
+     * // Get one UserProfessionalExperience
+     * const userProfessionalExperience = await prisma.userProfessionalExperience.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends UserProfessionalExperienceFindUniqueOrThrowArgs>(args: SelectSubset<T, UserProfessionalExperienceFindUniqueOrThrowArgs<ExtArgs>>): Prisma__UserProfessionalExperienceClient<$Result.GetResult<Prisma.$UserProfessionalExperiencePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first UserProfessionalExperience that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserProfessionalExperienceFindFirstArgs} args - Arguments to find a UserProfessionalExperience
+     * @example
+     * // Get one UserProfessionalExperience
+     * const userProfessionalExperience = await prisma.userProfessionalExperience.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends UserProfessionalExperienceFindFirstArgs>(args?: SelectSubset<T, UserProfessionalExperienceFindFirstArgs<ExtArgs>>): Prisma__UserProfessionalExperienceClient<$Result.GetResult<Prisma.$UserProfessionalExperiencePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first UserProfessionalExperience that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserProfessionalExperienceFindFirstOrThrowArgs} args - Arguments to find a UserProfessionalExperience
+     * @example
+     * // Get one UserProfessionalExperience
+     * const userProfessionalExperience = await prisma.userProfessionalExperience.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends UserProfessionalExperienceFindFirstOrThrowArgs>(args?: SelectSubset<T, UserProfessionalExperienceFindFirstOrThrowArgs<ExtArgs>>): Prisma__UserProfessionalExperienceClient<$Result.GetResult<Prisma.$UserProfessionalExperiencePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more UserProfessionalExperiences that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserProfessionalExperienceFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all UserProfessionalExperiences
+     * const userProfessionalExperiences = await prisma.userProfessionalExperience.findMany()
+     * 
+     * // Get first 10 UserProfessionalExperiences
+     * const userProfessionalExperiences = await prisma.userProfessionalExperience.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const userProfessionalExperienceWithIdOnly = await prisma.userProfessionalExperience.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends UserProfessionalExperienceFindManyArgs>(args?: SelectSubset<T, UserProfessionalExperienceFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserProfessionalExperiencePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a UserProfessionalExperience.
+     * @param {UserProfessionalExperienceCreateArgs} args - Arguments to create a UserProfessionalExperience.
+     * @example
+     * // Create one UserProfessionalExperience
+     * const UserProfessionalExperience = await prisma.userProfessionalExperience.create({
+     *   data: {
+     *     // ... data to create a UserProfessionalExperience
+     *   }
+     * })
+     * 
+     */
+    create<T extends UserProfessionalExperienceCreateArgs>(args: SelectSubset<T, UserProfessionalExperienceCreateArgs<ExtArgs>>): Prisma__UserProfessionalExperienceClient<$Result.GetResult<Prisma.$UserProfessionalExperiencePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many UserProfessionalExperiences.
+     * @param {UserProfessionalExperienceCreateManyArgs} args - Arguments to create many UserProfessionalExperiences.
+     * @example
+     * // Create many UserProfessionalExperiences
+     * const userProfessionalExperience = await prisma.userProfessionalExperience.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends UserProfessionalExperienceCreateManyArgs>(args?: SelectSubset<T, UserProfessionalExperienceCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many UserProfessionalExperiences and returns the data saved in the database.
+     * @param {UserProfessionalExperienceCreateManyAndReturnArgs} args - Arguments to create many UserProfessionalExperiences.
+     * @example
+     * // Create many UserProfessionalExperiences
+     * const userProfessionalExperience = await prisma.userProfessionalExperience.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many UserProfessionalExperiences and only return the `id`
+     * const userProfessionalExperienceWithIdOnly = await prisma.userProfessionalExperience.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends UserProfessionalExperienceCreateManyAndReturnArgs>(args?: SelectSubset<T, UserProfessionalExperienceCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserProfessionalExperiencePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a UserProfessionalExperience.
+     * @param {UserProfessionalExperienceDeleteArgs} args - Arguments to delete one UserProfessionalExperience.
+     * @example
+     * // Delete one UserProfessionalExperience
+     * const UserProfessionalExperience = await prisma.userProfessionalExperience.delete({
+     *   where: {
+     *     // ... filter to delete one UserProfessionalExperience
+     *   }
+     * })
+     * 
+     */
+    delete<T extends UserProfessionalExperienceDeleteArgs>(args: SelectSubset<T, UserProfessionalExperienceDeleteArgs<ExtArgs>>): Prisma__UserProfessionalExperienceClient<$Result.GetResult<Prisma.$UserProfessionalExperiencePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one UserProfessionalExperience.
+     * @param {UserProfessionalExperienceUpdateArgs} args - Arguments to update one UserProfessionalExperience.
+     * @example
+     * // Update one UserProfessionalExperience
+     * const userProfessionalExperience = await prisma.userProfessionalExperience.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends UserProfessionalExperienceUpdateArgs>(args: SelectSubset<T, UserProfessionalExperienceUpdateArgs<ExtArgs>>): Prisma__UserProfessionalExperienceClient<$Result.GetResult<Prisma.$UserProfessionalExperiencePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more UserProfessionalExperiences.
+     * @param {UserProfessionalExperienceDeleteManyArgs} args - Arguments to filter UserProfessionalExperiences to delete.
+     * @example
+     * // Delete a few UserProfessionalExperiences
+     * const { count } = await prisma.userProfessionalExperience.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends UserProfessionalExperienceDeleteManyArgs>(args?: SelectSubset<T, UserProfessionalExperienceDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more UserProfessionalExperiences.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserProfessionalExperienceUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many UserProfessionalExperiences
+     * const userProfessionalExperience = await prisma.userProfessionalExperience.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends UserProfessionalExperienceUpdateManyArgs>(args: SelectSubset<T, UserProfessionalExperienceUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more UserProfessionalExperiences and returns the data updated in the database.
+     * @param {UserProfessionalExperienceUpdateManyAndReturnArgs} args - Arguments to update many UserProfessionalExperiences.
+     * @example
+     * // Update many UserProfessionalExperiences
+     * const userProfessionalExperience = await prisma.userProfessionalExperience.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more UserProfessionalExperiences and only return the `id`
+     * const userProfessionalExperienceWithIdOnly = await prisma.userProfessionalExperience.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends UserProfessionalExperienceUpdateManyAndReturnArgs>(args: SelectSubset<T, UserProfessionalExperienceUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserProfessionalExperiencePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one UserProfessionalExperience.
+     * @param {UserProfessionalExperienceUpsertArgs} args - Arguments to update or create a UserProfessionalExperience.
+     * @example
+     * // Update or create a UserProfessionalExperience
+     * const userProfessionalExperience = await prisma.userProfessionalExperience.upsert({
+     *   create: {
+     *     // ... data to create a UserProfessionalExperience
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the UserProfessionalExperience we want to update
+     *   }
+     * })
+     */
+    upsert<T extends UserProfessionalExperienceUpsertArgs>(args: SelectSubset<T, UserProfessionalExperienceUpsertArgs<ExtArgs>>): Prisma__UserProfessionalExperienceClient<$Result.GetResult<Prisma.$UserProfessionalExperiencePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of UserProfessionalExperiences.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserProfessionalExperienceCountArgs} args - Arguments to filter UserProfessionalExperiences to count.
+     * @example
+     * // Count the number of UserProfessionalExperiences
+     * const count = await prisma.userProfessionalExperience.count({
+     *   where: {
+     *     // ... the filter for the UserProfessionalExperiences we want to count
+     *   }
+     * })
+    **/
+    count<T extends UserProfessionalExperienceCountArgs>(
+      args?: Subset<T, UserProfessionalExperienceCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], UserProfessionalExperienceCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a UserProfessionalExperience.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserProfessionalExperienceAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends UserProfessionalExperienceAggregateArgs>(args: Subset<T, UserProfessionalExperienceAggregateArgs>): Prisma.PrismaPromise<GetUserProfessionalExperienceAggregateType<T>>
+
+    /**
+     * Group by UserProfessionalExperience.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserProfessionalExperienceGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends UserProfessionalExperienceGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: UserProfessionalExperienceGroupByArgs['orderBy'] }
+        : { orderBy?: UserProfessionalExperienceGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, UserProfessionalExperienceGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUserProfessionalExperienceGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the UserProfessionalExperience model
+   */
+  readonly fields: UserProfessionalExperienceFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for UserProfessionalExperience.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__UserProfessionalExperienceClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the UserProfessionalExperience model
+   */
+  interface UserProfessionalExperienceFieldRefs {
+    readonly id: FieldRef<"UserProfessionalExperience", 'String'>
+    readonly institution: FieldRef<"UserProfessionalExperience", 'String'>
+    readonly role: FieldRef<"UserProfessionalExperience", 'String'>
+    readonly start_date: FieldRef<"UserProfessionalExperience", 'DateTime'>
+    readonly end_date: FieldRef<"UserProfessionalExperience", 'DateTime'>
+    readonly summary: FieldRef<"UserProfessionalExperience", 'String'>
+    readonly version: FieldRef<"UserProfessionalExperience", 'Int'>
+    readonly userId: FieldRef<"UserProfessionalExperience", 'String'>
+    readonly at_university: FieldRef<"UserProfessionalExperience", 'Boolean'>
+    readonly createdAt: FieldRef<"UserProfessionalExperience", 'DateTime'>
+    readonly updatedAt: FieldRef<"UserProfessionalExperience", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * UserProfessionalExperience findUnique
+   */
+  export type UserProfessionalExperienceFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserProfessionalExperience
+     */
+    select?: UserProfessionalExperienceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserProfessionalExperience
+     */
+    omit?: UserProfessionalExperienceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserProfessionalExperienceInclude<ExtArgs> | null
+    /**
+     * Filter, which UserProfessionalExperience to fetch.
+     */
+    where: UserProfessionalExperienceWhereUniqueInput
+  }
+
+  /**
+   * UserProfessionalExperience findUniqueOrThrow
+   */
+  export type UserProfessionalExperienceFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserProfessionalExperience
+     */
+    select?: UserProfessionalExperienceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserProfessionalExperience
+     */
+    omit?: UserProfessionalExperienceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserProfessionalExperienceInclude<ExtArgs> | null
+    /**
+     * Filter, which UserProfessionalExperience to fetch.
+     */
+    where: UserProfessionalExperienceWhereUniqueInput
+  }
+
+  /**
+   * UserProfessionalExperience findFirst
+   */
+  export type UserProfessionalExperienceFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserProfessionalExperience
+     */
+    select?: UserProfessionalExperienceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserProfessionalExperience
+     */
+    omit?: UserProfessionalExperienceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserProfessionalExperienceInclude<ExtArgs> | null
+    /**
+     * Filter, which UserProfessionalExperience to fetch.
+     */
+    where?: UserProfessionalExperienceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserProfessionalExperiences to fetch.
+     */
+    orderBy?: UserProfessionalExperienceOrderByWithRelationInput | UserProfessionalExperienceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UserProfessionalExperiences.
+     */
+    cursor?: UserProfessionalExperienceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserProfessionalExperiences from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserProfessionalExperiences.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UserProfessionalExperiences.
+     */
+    distinct?: UserProfessionalExperienceScalarFieldEnum | UserProfessionalExperienceScalarFieldEnum[]
+  }
+
+  /**
+   * UserProfessionalExperience findFirstOrThrow
+   */
+  export type UserProfessionalExperienceFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserProfessionalExperience
+     */
+    select?: UserProfessionalExperienceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserProfessionalExperience
+     */
+    omit?: UserProfessionalExperienceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserProfessionalExperienceInclude<ExtArgs> | null
+    /**
+     * Filter, which UserProfessionalExperience to fetch.
+     */
+    where?: UserProfessionalExperienceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserProfessionalExperiences to fetch.
+     */
+    orderBy?: UserProfessionalExperienceOrderByWithRelationInput | UserProfessionalExperienceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UserProfessionalExperiences.
+     */
+    cursor?: UserProfessionalExperienceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserProfessionalExperiences from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserProfessionalExperiences.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UserProfessionalExperiences.
+     */
+    distinct?: UserProfessionalExperienceScalarFieldEnum | UserProfessionalExperienceScalarFieldEnum[]
+  }
+
+  /**
+   * UserProfessionalExperience findMany
+   */
+  export type UserProfessionalExperienceFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserProfessionalExperience
+     */
+    select?: UserProfessionalExperienceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserProfessionalExperience
+     */
+    omit?: UserProfessionalExperienceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserProfessionalExperienceInclude<ExtArgs> | null
+    /**
+     * Filter, which UserProfessionalExperiences to fetch.
+     */
+    where?: UserProfessionalExperienceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserProfessionalExperiences to fetch.
+     */
+    orderBy?: UserProfessionalExperienceOrderByWithRelationInput | UserProfessionalExperienceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing UserProfessionalExperiences.
+     */
+    cursor?: UserProfessionalExperienceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserProfessionalExperiences from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserProfessionalExperiences.
+     */
+    skip?: number
+    distinct?: UserProfessionalExperienceScalarFieldEnum | UserProfessionalExperienceScalarFieldEnum[]
+  }
+
+  /**
+   * UserProfessionalExperience create
+   */
+  export type UserProfessionalExperienceCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserProfessionalExperience
+     */
+    select?: UserProfessionalExperienceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserProfessionalExperience
+     */
+    omit?: UserProfessionalExperienceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserProfessionalExperienceInclude<ExtArgs> | null
+    /**
+     * The data needed to create a UserProfessionalExperience.
+     */
+    data: XOR<UserProfessionalExperienceCreateInput, UserProfessionalExperienceUncheckedCreateInput>
+  }
+
+  /**
+   * UserProfessionalExperience createMany
+   */
+  export type UserProfessionalExperienceCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many UserProfessionalExperiences.
+     */
+    data: UserProfessionalExperienceCreateManyInput | UserProfessionalExperienceCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * UserProfessionalExperience createManyAndReturn
+   */
+  export type UserProfessionalExperienceCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserProfessionalExperience
+     */
+    select?: UserProfessionalExperienceSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserProfessionalExperience
+     */
+    omit?: UserProfessionalExperienceOmit<ExtArgs> | null
+    /**
+     * The data used to create many UserProfessionalExperiences.
+     */
+    data: UserProfessionalExperienceCreateManyInput | UserProfessionalExperienceCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserProfessionalExperienceIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * UserProfessionalExperience update
+   */
+  export type UserProfessionalExperienceUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserProfessionalExperience
+     */
+    select?: UserProfessionalExperienceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserProfessionalExperience
+     */
+    omit?: UserProfessionalExperienceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserProfessionalExperienceInclude<ExtArgs> | null
+    /**
+     * The data needed to update a UserProfessionalExperience.
+     */
+    data: XOR<UserProfessionalExperienceUpdateInput, UserProfessionalExperienceUncheckedUpdateInput>
+    /**
+     * Choose, which UserProfessionalExperience to update.
+     */
+    where: UserProfessionalExperienceWhereUniqueInput
+  }
+
+  /**
+   * UserProfessionalExperience updateMany
+   */
+  export type UserProfessionalExperienceUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update UserProfessionalExperiences.
+     */
+    data: XOR<UserProfessionalExperienceUpdateManyMutationInput, UserProfessionalExperienceUncheckedUpdateManyInput>
+    /**
+     * Filter which UserProfessionalExperiences to update
+     */
+    where?: UserProfessionalExperienceWhereInput
+    /**
+     * Limit how many UserProfessionalExperiences to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * UserProfessionalExperience updateManyAndReturn
+   */
+  export type UserProfessionalExperienceUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserProfessionalExperience
+     */
+    select?: UserProfessionalExperienceSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserProfessionalExperience
+     */
+    omit?: UserProfessionalExperienceOmit<ExtArgs> | null
+    /**
+     * The data used to update UserProfessionalExperiences.
+     */
+    data: XOR<UserProfessionalExperienceUpdateManyMutationInput, UserProfessionalExperienceUncheckedUpdateManyInput>
+    /**
+     * Filter which UserProfessionalExperiences to update
+     */
+    where?: UserProfessionalExperienceWhereInput
+    /**
+     * Limit how many UserProfessionalExperiences to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserProfessionalExperienceIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * UserProfessionalExperience upsert
+   */
+  export type UserProfessionalExperienceUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserProfessionalExperience
+     */
+    select?: UserProfessionalExperienceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserProfessionalExperience
+     */
+    omit?: UserProfessionalExperienceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserProfessionalExperienceInclude<ExtArgs> | null
+    /**
+     * The filter to search for the UserProfessionalExperience to update in case it exists.
+     */
+    where: UserProfessionalExperienceWhereUniqueInput
+    /**
+     * In case the UserProfessionalExperience found by the `where` argument doesn't exist, create a new UserProfessionalExperience with this data.
+     */
+    create: XOR<UserProfessionalExperienceCreateInput, UserProfessionalExperienceUncheckedCreateInput>
+    /**
+     * In case the UserProfessionalExperience was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<UserProfessionalExperienceUpdateInput, UserProfessionalExperienceUncheckedUpdateInput>
+  }
+
+  /**
+   * UserProfessionalExperience delete
+   */
+  export type UserProfessionalExperienceDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserProfessionalExperience
+     */
+    select?: UserProfessionalExperienceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserProfessionalExperience
+     */
+    omit?: UserProfessionalExperienceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserProfessionalExperienceInclude<ExtArgs> | null
+    /**
+     * Filter which UserProfessionalExperience to delete.
+     */
+    where: UserProfessionalExperienceWhereUniqueInput
+  }
+
+  /**
+   * UserProfessionalExperience deleteMany
+   */
+  export type UserProfessionalExperienceDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UserProfessionalExperiences to delete
+     */
+    where?: UserProfessionalExperienceWhereInput
+    /**
+     * Limit how many UserProfessionalExperiences to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * UserProfessionalExperience without action
+   */
+  export type UserProfessionalExperienceDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserProfessionalExperience
+     */
+    select?: UserProfessionalExperienceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserProfessionalExperience
+     */
+    omit?: UserProfessionalExperienceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserProfessionalExperienceInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model UserProfessionalSummary
+   */
+
+  export type AggregateUserProfessionalSummary = {
+    _count: UserProfessionalSummaryCountAggregateOutputType | null
+    _avg: UserProfessionalSummaryAvgAggregateOutputType | null
+    _sum: UserProfessionalSummarySumAggregateOutputType | null
+    _min: UserProfessionalSummaryMinAggregateOutputType | null
+    _max: UserProfessionalSummaryMaxAggregateOutputType | null
+  }
+
+  export type UserProfessionalSummaryAvgAggregateOutputType = {
+    experience_years: number | null
+    version: number | null
+  }
+
+  export type UserProfessionalSummarySumAggregateOutputType = {
+    experience_years: number | null
+    version: number | null
+  }
+
+  export type UserProfessionalSummaryMinAggregateOutputType = {
+    id: string | null
+    experience_years: number | null
+    summary: string | null
+    version: number | null
+    userId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type UserProfessionalSummaryMaxAggregateOutputType = {
+    id: string | null
+    experience_years: number | null
+    summary: string | null
+    version: number | null
+    userId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type UserProfessionalSummaryCountAggregateOutputType = {
+    id: number
+    experience_years: number
+    summary: number
+    version: number
+    userId: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type UserProfessionalSummaryAvgAggregateInputType = {
+    experience_years?: true
+    version?: true
+  }
+
+  export type UserProfessionalSummarySumAggregateInputType = {
+    experience_years?: true
+    version?: true
+  }
+
+  export type UserProfessionalSummaryMinAggregateInputType = {
+    id?: true
+    experience_years?: true
+    summary?: true
+    version?: true
+    userId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type UserProfessionalSummaryMaxAggregateInputType = {
+    id?: true
+    experience_years?: true
+    summary?: true
+    version?: true
+    userId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type UserProfessionalSummaryCountAggregateInputType = {
+    id?: true
+    experience_years?: true
+    summary?: true
+    version?: true
+    userId?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type UserProfessionalSummaryAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UserProfessionalSummary to aggregate.
+     */
+    where?: UserProfessionalSummaryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserProfessionalSummaries to fetch.
+     */
+    orderBy?: UserProfessionalSummaryOrderByWithRelationInput | UserProfessionalSummaryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: UserProfessionalSummaryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserProfessionalSummaries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserProfessionalSummaries.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned UserProfessionalSummaries
+    **/
+    _count?: true | UserProfessionalSummaryCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: UserProfessionalSummaryAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: UserProfessionalSummarySumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: UserProfessionalSummaryMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: UserProfessionalSummaryMaxAggregateInputType
+  }
+
+  export type GetUserProfessionalSummaryAggregateType<T extends UserProfessionalSummaryAggregateArgs> = {
+        [P in keyof T & keyof AggregateUserProfessionalSummary]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateUserProfessionalSummary[P]>
+      : GetScalarType<T[P], AggregateUserProfessionalSummary[P]>
+  }
+
+
+
+
+  export type UserProfessionalSummaryGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserProfessionalSummaryWhereInput
+    orderBy?: UserProfessionalSummaryOrderByWithAggregationInput | UserProfessionalSummaryOrderByWithAggregationInput[]
+    by: UserProfessionalSummaryScalarFieldEnum[] | UserProfessionalSummaryScalarFieldEnum
+    having?: UserProfessionalSummaryScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: UserProfessionalSummaryCountAggregateInputType | true
+    _avg?: UserProfessionalSummaryAvgAggregateInputType
+    _sum?: UserProfessionalSummarySumAggregateInputType
+    _min?: UserProfessionalSummaryMinAggregateInputType
+    _max?: UserProfessionalSummaryMaxAggregateInputType
+  }
+
+  export type UserProfessionalSummaryGroupByOutputType = {
+    id: string
+    experience_years: number
+    summary: string | null
+    version: number
+    userId: string
+    createdAt: Date
+    updatedAt: Date
+    _count: UserProfessionalSummaryCountAggregateOutputType | null
+    _avg: UserProfessionalSummaryAvgAggregateOutputType | null
+    _sum: UserProfessionalSummarySumAggregateOutputType | null
+    _min: UserProfessionalSummaryMinAggregateOutputType | null
+    _max: UserProfessionalSummaryMaxAggregateOutputType | null
+  }
+
+  type GetUserProfessionalSummaryGroupByPayload<T extends UserProfessionalSummaryGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<UserProfessionalSummaryGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof UserProfessionalSummaryGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], UserProfessionalSummaryGroupByOutputType[P]>
+            : GetScalarType<T[P], UserProfessionalSummaryGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type UserProfessionalSummarySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    experience_years?: boolean
+    summary?: boolean
+    version?: boolean
+    userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userProfessionalSummary"]>
+
+  export type UserProfessionalSummarySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    experience_years?: boolean
+    summary?: boolean
+    version?: boolean
+    userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userProfessionalSummary"]>
+
+  export type UserProfessionalSummarySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    experience_years?: boolean
+    summary?: boolean
+    version?: boolean
+    userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userProfessionalSummary"]>
+
+  export type UserProfessionalSummarySelectScalar = {
+    id?: boolean
+    experience_years?: boolean
+    summary?: boolean
+    version?: boolean
+    userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type UserProfessionalSummaryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "experience_years" | "summary" | "version" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["userProfessionalSummary"]>
+  export type UserProfessionalSummaryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type UserProfessionalSummaryIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type UserProfessionalSummaryIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $UserProfessionalSummaryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "UserProfessionalSummary"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      experience_years: number
+      summary: string | null
+      version: number
+      userId: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["userProfessionalSummary"]>
+    composites: {}
+  }
+
+  type UserProfessionalSummaryGetPayload<S extends boolean | null | undefined | UserProfessionalSummaryDefaultArgs> = $Result.GetResult<Prisma.$UserProfessionalSummaryPayload, S>
+
+  type UserProfessionalSummaryCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<UserProfessionalSummaryFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: UserProfessionalSummaryCountAggregateInputType | true
+    }
+
+  export interface UserProfessionalSummaryDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['UserProfessionalSummary'], meta: { name: 'UserProfessionalSummary' } }
+    /**
+     * Find zero or one UserProfessionalSummary that matches the filter.
+     * @param {UserProfessionalSummaryFindUniqueArgs} args - Arguments to find a UserProfessionalSummary
+     * @example
+     * // Get one UserProfessionalSummary
+     * const userProfessionalSummary = await prisma.userProfessionalSummary.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends UserProfessionalSummaryFindUniqueArgs>(args: SelectSubset<T, UserProfessionalSummaryFindUniqueArgs<ExtArgs>>): Prisma__UserProfessionalSummaryClient<$Result.GetResult<Prisma.$UserProfessionalSummaryPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one UserProfessionalSummary that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {UserProfessionalSummaryFindUniqueOrThrowArgs} args - Arguments to find a UserProfessionalSummary
+     * @example
+     * // Get one UserProfessionalSummary
+     * const userProfessionalSummary = await prisma.userProfessionalSummary.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends UserProfessionalSummaryFindUniqueOrThrowArgs>(args: SelectSubset<T, UserProfessionalSummaryFindUniqueOrThrowArgs<ExtArgs>>): Prisma__UserProfessionalSummaryClient<$Result.GetResult<Prisma.$UserProfessionalSummaryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first UserProfessionalSummary that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserProfessionalSummaryFindFirstArgs} args - Arguments to find a UserProfessionalSummary
+     * @example
+     * // Get one UserProfessionalSummary
+     * const userProfessionalSummary = await prisma.userProfessionalSummary.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends UserProfessionalSummaryFindFirstArgs>(args?: SelectSubset<T, UserProfessionalSummaryFindFirstArgs<ExtArgs>>): Prisma__UserProfessionalSummaryClient<$Result.GetResult<Prisma.$UserProfessionalSummaryPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first UserProfessionalSummary that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserProfessionalSummaryFindFirstOrThrowArgs} args - Arguments to find a UserProfessionalSummary
+     * @example
+     * // Get one UserProfessionalSummary
+     * const userProfessionalSummary = await prisma.userProfessionalSummary.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends UserProfessionalSummaryFindFirstOrThrowArgs>(args?: SelectSubset<T, UserProfessionalSummaryFindFirstOrThrowArgs<ExtArgs>>): Prisma__UserProfessionalSummaryClient<$Result.GetResult<Prisma.$UserProfessionalSummaryPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more UserProfessionalSummaries that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserProfessionalSummaryFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all UserProfessionalSummaries
+     * const userProfessionalSummaries = await prisma.userProfessionalSummary.findMany()
+     * 
+     * // Get first 10 UserProfessionalSummaries
+     * const userProfessionalSummaries = await prisma.userProfessionalSummary.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const userProfessionalSummaryWithIdOnly = await prisma.userProfessionalSummary.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends UserProfessionalSummaryFindManyArgs>(args?: SelectSubset<T, UserProfessionalSummaryFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserProfessionalSummaryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a UserProfessionalSummary.
+     * @param {UserProfessionalSummaryCreateArgs} args - Arguments to create a UserProfessionalSummary.
+     * @example
+     * // Create one UserProfessionalSummary
+     * const UserProfessionalSummary = await prisma.userProfessionalSummary.create({
+     *   data: {
+     *     // ... data to create a UserProfessionalSummary
+     *   }
+     * })
+     * 
+     */
+    create<T extends UserProfessionalSummaryCreateArgs>(args: SelectSubset<T, UserProfessionalSummaryCreateArgs<ExtArgs>>): Prisma__UserProfessionalSummaryClient<$Result.GetResult<Prisma.$UserProfessionalSummaryPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many UserProfessionalSummaries.
+     * @param {UserProfessionalSummaryCreateManyArgs} args - Arguments to create many UserProfessionalSummaries.
+     * @example
+     * // Create many UserProfessionalSummaries
+     * const userProfessionalSummary = await prisma.userProfessionalSummary.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends UserProfessionalSummaryCreateManyArgs>(args?: SelectSubset<T, UserProfessionalSummaryCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many UserProfessionalSummaries and returns the data saved in the database.
+     * @param {UserProfessionalSummaryCreateManyAndReturnArgs} args - Arguments to create many UserProfessionalSummaries.
+     * @example
+     * // Create many UserProfessionalSummaries
+     * const userProfessionalSummary = await prisma.userProfessionalSummary.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many UserProfessionalSummaries and only return the `id`
+     * const userProfessionalSummaryWithIdOnly = await prisma.userProfessionalSummary.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends UserProfessionalSummaryCreateManyAndReturnArgs>(args?: SelectSubset<T, UserProfessionalSummaryCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserProfessionalSummaryPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a UserProfessionalSummary.
+     * @param {UserProfessionalSummaryDeleteArgs} args - Arguments to delete one UserProfessionalSummary.
+     * @example
+     * // Delete one UserProfessionalSummary
+     * const UserProfessionalSummary = await prisma.userProfessionalSummary.delete({
+     *   where: {
+     *     // ... filter to delete one UserProfessionalSummary
+     *   }
+     * })
+     * 
+     */
+    delete<T extends UserProfessionalSummaryDeleteArgs>(args: SelectSubset<T, UserProfessionalSummaryDeleteArgs<ExtArgs>>): Prisma__UserProfessionalSummaryClient<$Result.GetResult<Prisma.$UserProfessionalSummaryPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one UserProfessionalSummary.
+     * @param {UserProfessionalSummaryUpdateArgs} args - Arguments to update one UserProfessionalSummary.
+     * @example
+     * // Update one UserProfessionalSummary
+     * const userProfessionalSummary = await prisma.userProfessionalSummary.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends UserProfessionalSummaryUpdateArgs>(args: SelectSubset<T, UserProfessionalSummaryUpdateArgs<ExtArgs>>): Prisma__UserProfessionalSummaryClient<$Result.GetResult<Prisma.$UserProfessionalSummaryPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more UserProfessionalSummaries.
+     * @param {UserProfessionalSummaryDeleteManyArgs} args - Arguments to filter UserProfessionalSummaries to delete.
+     * @example
+     * // Delete a few UserProfessionalSummaries
+     * const { count } = await prisma.userProfessionalSummary.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends UserProfessionalSummaryDeleteManyArgs>(args?: SelectSubset<T, UserProfessionalSummaryDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more UserProfessionalSummaries.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserProfessionalSummaryUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many UserProfessionalSummaries
+     * const userProfessionalSummary = await prisma.userProfessionalSummary.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends UserProfessionalSummaryUpdateManyArgs>(args: SelectSubset<T, UserProfessionalSummaryUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more UserProfessionalSummaries and returns the data updated in the database.
+     * @param {UserProfessionalSummaryUpdateManyAndReturnArgs} args - Arguments to update many UserProfessionalSummaries.
+     * @example
+     * // Update many UserProfessionalSummaries
+     * const userProfessionalSummary = await prisma.userProfessionalSummary.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more UserProfessionalSummaries and only return the `id`
+     * const userProfessionalSummaryWithIdOnly = await prisma.userProfessionalSummary.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends UserProfessionalSummaryUpdateManyAndReturnArgs>(args: SelectSubset<T, UserProfessionalSummaryUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserProfessionalSummaryPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one UserProfessionalSummary.
+     * @param {UserProfessionalSummaryUpsertArgs} args - Arguments to update or create a UserProfessionalSummary.
+     * @example
+     * // Update or create a UserProfessionalSummary
+     * const userProfessionalSummary = await prisma.userProfessionalSummary.upsert({
+     *   create: {
+     *     // ... data to create a UserProfessionalSummary
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the UserProfessionalSummary we want to update
+     *   }
+     * })
+     */
+    upsert<T extends UserProfessionalSummaryUpsertArgs>(args: SelectSubset<T, UserProfessionalSummaryUpsertArgs<ExtArgs>>): Prisma__UserProfessionalSummaryClient<$Result.GetResult<Prisma.$UserProfessionalSummaryPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of UserProfessionalSummaries.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserProfessionalSummaryCountArgs} args - Arguments to filter UserProfessionalSummaries to count.
+     * @example
+     * // Count the number of UserProfessionalSummaries
+     * const count = await prisma.userProfessionalSummary.count({
+     *   where: {
+     *     // ... the filter for the UserProfessionalSummaries we want to count
+     *   }
+     * })
+    **/
+    count<T extends UserProfessionalSummaryCountArgs>(
+      args?: Subset<T, UserProfessionalSummaryCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], UserProfessionalSummaryCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a UserProfessionalSummary.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserProfessionalSummaryAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends UserProfessionalSummaryAggregateArgs>(args: Subset<T, UserProfessionalSummaryAggregateArgs>): Prisma.PrismaPromise<GetUserProfessionalSummaryAggregateType<T>>
+
+    /**
+     * Group by UserProfessionalSummary.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserProfessionalSummaryGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends UserProfessionalSummaryGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: UserProfessionalSummaryGroupByArgs['orderBy'] }
+        : { orderBy?: UserProfessionalSummaryGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, UserProfessionalSummaryGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUserProfessionalSummaryGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the UserProfessionalSummary model
+   */
+  readonly fields: UserProfessionalSummaryFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for UserProfessionalSummary.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__UserProfessionalSummaryClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the UserProfessionalSummary model
+   */
+  interface UserProfessionalSummaryFieldRefs {
+    readonly id: FieldRef<"UserProfessionalSummary", 'String'>
+    readonly experience_years: FieldRef<"UserProfessionalSummary", 'Int'>
+    readonly summary: FieldRef<"UserProfessionalSummary", 'String'>
+    readonly version: FieldRef<"UserProfessionalSummary", 'Int'>
+    readonly userId: FieldRef<"UserProfessionalSummary", 'String'>
+    readonly createdAt: FieldRef<"UserProfessionalSummary", 'DateTime'>
+    readonly updatedAt: FieldRef<"UserProfessionalSummary", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * UserProfessionalSummary findUnique
+   */
+  export type UserProfessionalSummaryFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserProfessionalSummary
+     */
+    select?: UserProfessionalSummarySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserProfessionalSummary
+     */
+    omit?: UserProfessionalSummaryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserProfessionalSummaryInclude<ExtArgs> | null
+    /**
+     * Filter, which UserProfessionalSummary to fetch.
+     */
+    where: UserProfessionalSummaryWhereUniqueInput
+  }
+
+  /**
+   * UserProfessionalSummary findUniqueOrThrow
+   */
+  export type UserProfessionalSummaryFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserProfessionalSummary
+     */
+    select?: UserProfessionalSummarySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserProfessionalSummary
+     */
+    omit?: UserProfessionalSummaryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserProfessionalSummaryInclude<ExtArgs> | null
+    /**
+     * Filter, which UserProfessionalSummary to fetch.
+     */
+    where: UserProfessionalSummaryWhereUniqueInput
+  }
+
+  /**
+   * UserProfessionalSummary findFirst
+   */
+  export type UserProfessionalSummaryFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserProfessionalSummary
+     */
+    select?: UserProfessionalSummarySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserProfessionalSummary
+     */
+    omit?: UserProfessionalSummaryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserProfessionalSummaryInclude<ExtArgs> | null
+    /**
+     * Filter, which UserProfessionalSummary to fetch.
+     */
+    where?: UserProfessionalSummaryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserProfessionalSummaries to fetch.
+     */
+    orderBy?: UserProfessionalSummaryOrderByWithRelationInput | UserProfessionalSummaryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UserProfessionalSummaries.
+     */
+    cursor?: UserProfessionalSummaryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserProfessionalSummaries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserProfessionalSummaries.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UserProfessionalSummaries.
+     */
+    distinct?: UserProfessionalSummaryScalarFieldEnum | UserProfessionalSummaryScalarFieldEnum[]
+  }
+
+  /**
+   * UserProfessionalSummary findFirstOrThrow
+   */
+  export type UserProfessionalSummaryFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserProfessionalSummary
+     */
+    select?: UserProfessionalSummarySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserProfessionalSummary
+     */
+    omit?: UserProfessionalSummaryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserProfessionalSummaryInclude<ExtArgs> | null
+    /**
+     * Filter, which UserProfessionalSummary to fetch.
+     */
+    where?: UserProfessionalSummaryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserProfessionalSummaries to fetch.
+     */
+    orderBy?: UserProfessionalSummaryOrderByWithRelationInput | UserProfessionalSummaryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UserProfessionalSummaries.
+     */
+    cursor?: UserProfessionalSummaryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserProfessionalSummaries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserProfessionalSummaries.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UserProfessionalSummaries.
+     */
+    distinct?: UserProfessionalSummaryScalarFieldEnum | UserProfessionalSummaryScalarFieldEnum[]
+  }
+
+  /**
+   * UserProfessionalSummary findMany
+   */
+  export type UserProfessionalSummaryFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserProfessionalSummary
+     */
+    select?: UserProfessionalSummarySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserProfessionalSummary
+     */
+    omit?: UserProfessionalSummaryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserProfessionalSummaryInclude<ExtArgs> | null
+    /**
+     * Filter, which UserProfessionalSummaries to fetch.
+     */
+    where?: UserProfessionalSummaryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserProfessionalSummaries to fetch.
+     */
+    orderBy?: UserProfessionalSummaryOrderByWithRelationInput | UserProfessionalSummaryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing UserProfessionalSummaries.
+     */
+    cursor?: UserProfessionalSummaryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserProfessionalSummaries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserProfessionalSummaries.
+     */
+    skip?: number
+    distinct?: UserProfessionalSummaryScalarFieldEnum | UserProfessionalSummaryScalarFieldEnum[]
+  }
+
+  /**
+   * UserProfessionalSummary create
+   */
+  export type UserProfessionalSummaryCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserProfessionalSummary
+     */
+    select?: UserProfessionalSummarySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserProfessionalSummary
+     */
+    omit?: UserProfessionalSummaryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserProfessionalSummaryInclude<ExtArgs> | null
+    /**
+     * The data needed to create a UserProfessionalSummary.
+     */
+    data: XOR<UserProfessionalSummaryCreateInput, UserProfessionalSummaryUncheckedCreateInput>
+  }
+
+  /**
+   * UserProfessionalSummary createMany
+   */
+  export type UserProfessionalSummaryCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many UserProfessionalSummaries.
+     */
+    data: UserProfessionalSummaryCreateManyInput | UserProfessionalSummaryCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * UserProfessionalSummary createManyAndReturn
+   */
+  export type UserProfessionalSummaryCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserProfessionalSummary
+     */
+    select?: UserProfessionalSummarySelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserProfessionalSummary
+     */
+    omit?: UserProfessionalSummaryOmit<ExtArgs> | null
+    /**
+     * The data used to create many UserProfessionalSummaries.
+     */
+    data: UserProfessionalSummaryCreateManyInput | UserProfessionalSummaryCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserProfessionalSummaryIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * UserProfessionalSummary update
+   */
+  export type UserProfessionalSummaryUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserProfessionalSummary
+     */
+    select?: UserProfessionalSummarySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserProfessionalSummary
+     */
+    omit?: UserProfessionalSummaryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserProfessionalSummaryInclude<ExtArgs> | null
+    /**
+     * The data needed to update a UserProfessionalSummary.
+     */
+    data: XOR<UserProfessionalSummaryUpdateInput, UserProfessionalSummaryUncheckedUpdateInput>
+    /**
+     * Choose, which UserProfessionalSummary to update.
+     */
+    where: UserProfessionalSummaryWhereUniqueInput
+  }
+
+  /**
+   * UserProfessionalSummary updateMany
+   */
+  export type UserProfessionalSummaryUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update UserProfessionalSummaries.
+     */
+    data: XOR<UserProfessionalSummaryUpdateManyMutationInput, UserProfessionalSummaryUncheckedUpdateManyInput>
+    /**
+     * Filter which UserProfessionalSummaries to update
+     */
+    where?: UserProfessionalSummaryWhereInput
+    /**
+     * Limit how many UserProfessionalSummaries to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * UserProfessionalSummary updateManyAndReturn
+   */
+  export type UserProfessionalSummaryUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserProfessionalSummary
+     */
+    select?: UserProfessionalSummarySelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserProfessionalSummary
+     */
+    omit?: UserProfessionalSummaryOmit<ExtArgs> | null
+    /**
+     * The data used to update UserProfessionalSummaries.
+     */
+    data: XOR<UserProfessionalSummaryUpdateManyMutationInput, UserProfessionalSummaryUncheckedUpdateManyInput>
+    /**
+     * Filter which UserProfessionalSummaries to update
+     */
+    where?: UserProfessionalSummaryWhereInput
+    /**
+     * Limit how many UserProfessionalSummaries to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserProfessionalSummaryIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * UserProfessionalSummary upsert
+   */
+  export type UserProfessionalSummaryUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserProfessionalSummary
+     */
+    select?: UserProfessionalSummarySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserProfessionalSummary
+     */
+    omit?: UserProfessionalSummaryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserProfessionalSummaryInclude<ExtArgs> | null
+    /**
+     * The filter to search for the UserProfessionalSummary to update in case it exists.
+     */
+    where: UserProfessionalSummaryWhereUniqueInput
+    /**
+     * In case the UserProfessionalSummary found by the `where` argument doesn't exist, create a new UserProfessionalSummary with this data.
+     */
+    create: XOR<UserProfessionalSummaryCreateInput, UserProfessionalSummaryUncheckedCreateInput>
+    /**
+     * In case the UserProfessionalSummary was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<UserProfessionalSummaryUpdateInput, UserProfessionalSummaryUncheckedUpdateInput>
+  }
+
+  /**
+   * UserProfessionalSummary delete
+   */
+  export type UserProfessionalSummaryDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserProfessionalSummary
+     */
+    select?: UserProfessionalSummarySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserProfessionalSummary
+     */
+    omit?: UserProfessionalSummaryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserProfessionalSummaryInclude<ExtArgs> | null
+    /**
+     * Filter which UserProfessionalSummary to delete.
+     */
+    where: UserProfessionalSummaryWhereUniqueInput
+  }
+
+  /**
+   * UserProfessionalSummary deleteMany
+   */
+  export type UserProfessionalSummaryDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UserProfessionalSummaries to delete
+     */
+    where?: UserProfessionalSummaryWhereInput
+    /**
+     * Limit how many UserProfessionalSummaries to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * UserProfessionalSummary without action
+   */
+  export type UserProfessionalSummaryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserProfessionalSummary
+     */
+    select?: UserProfessionalSummarySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserProfessionalSummary
+     */
+    omit?: UserProfessionalSummaryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserProfessionalSummaryInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model UserAcademicInformation
+   */
+
+  export type AggregateUserAcademicInformation = {
+    _count: UserAcademicInformationCountAggregateOutputType | null
+    _min: UserAcademicInformationMinAggregateOutputType | null
+    _max: UserAcademicInformationMaxAggregateOutputType | null
+  }
+
+  export type UserAcademicInformationMinAggregateOutputType = {
+    id: string | null
+    institution: string | null
+    major: string | null
+    start_date: Date | null
+    end_date: Date | null
+    summary: string | null
+    userId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type UserAcademicInformationMaxAggregateOutputType = {
+    id: string | null
+    institution: string | null
+    major: string | null
+    start_date: Date | null
+    end_date: Date | null
+    summary: string | null
+    userId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type UserAcademicInformationCountAggregateOutputType = {
+    id: number
+    institution: number
+    major: number
+    start_date: number
+    end_date: number
+    summary: number
+    userId: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type UserAcademicInformationMinAggregateInputType = {
+    id?: true
+    institution?: true
+    major?: true
+    start_date?: true
+    end_date?: true
+    summary?: true
+    userId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type UserAcademicInformationMaxAggregateInputType = {
+    id?: true
+    institution?: true
+    major?: true
+    start_date?: true
+    end_date?: true
+    summary?: true
+    userId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type UserAcademicInformationCountAggregateInputType = {
+    id?: true
+    institution?: true
+    major?: true
+    start_date?: true
+    end_date?: true
+    summary?: true
+    userId?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type UserAcademicInformationAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UserAcademicInformation to aggregate.
+     */
+    where?: UserAcademicInformationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserAcademicInformations to fetch.
+     */
+    orderBy?: UserAcademicInformationOrderByWithRelationInput | UserAcademicInformationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: UserAcademicInformationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserAcademicInformations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserAcademicInformations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned UserAcademicInformations
+    **/
+    _count?: true | UserAcademicInformationCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: UserAcademicInformationMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: UserAcademicInformationMaxAggregateInputType
+  }
+
+  export type GetUserAcademicInformationAggregateType<T extends UserAcademicInformationAggregateArgs> = {
+        [P in keyof T & keyof AggregateUserAcademicInformation]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateUserAcademicInformation[P]>
+      : GetScalarType<T[P], AggregateUserAcademicInformation[P]>
+  }
+
+
+
+
+  export type UserAcademicInformationGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserAcademicInformationWhereInput
+    orderBy?: UserAcademicInformationOrderByWithAggregationInput | UserAcademicInformationOrderByWithAggregationInput[]
+    by: UserAcademicInformationScalarFieldEnum[] | UserAcademicInformationScalarFieldEnum
+    having?: UserAcademicInformationScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: UserAcademicInformationCountAggregateInputType | true
+    _min?: UserAcademicInformationMinAggregateInputType
+    _max?: UserAcademicInformationMaxAggregateInputType
+  }
+
+  export type UserAcademicInformationGroupByOutputType = {
+    id: string
+    institution: string
+    major: string
+    start_date: Date
+    end_date: Date | null
+    summary: string | null
+    userId: string
+    createdAt: Date
+    updatedAt: Date
+    _count: UserAcademicInformationCountAggregateOutputType | null
+    _min: UserAcademicInformationMinAggregateOutputType | null
+    _max: UserAcademicInformationMaxAggregateOutputType | null
+  }
+
+  type GetUserAcademicInformationGroupByPayload<T extends UserAcademicInformationGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<UserAcademicInformationGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof UserAcademicInformationGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], UserAcademicInformationGroupByOutputType[P]>
+            : GetScalarType<T[P], UserAcademicInformationGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type UserAcademicInformationSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    institution?: boolean
+    major?: boolean
+    start_date?: boolean
+    end_date?: boolean
+    summary?: boolean
+    userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userAcademicInformation"]>
+
+  export type UserAcademicInformationSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    institution?: boolean
+    major?: boolean
+    start_date?: boolean
+    end_date?: boolean
+    summary?: boolean
+    userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userAcademicInformation"]>
+
+  export type UserAcademicInformationSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    institution?: boolean
+    major?: boolean
+    start_date?: boolean
+    end_date?: boolean
+    summary?: boolean
+    userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userAcademicInformation"]>
+
+  export type UserAcademicInformationSelectScalar = {
+    id?: boolean
+    institution?: boolean
+    major?: boolean
+    start_date?: boolean
+    end_date?: boolean
+    summary?: boolean
+    userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type UserAcademicInformationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "institution" | "major" | "start_date" | "end_date" | "summary" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["userAcademicInformation"]>
+  export type UserAcademicInformationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type UserAcademicInformationIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type UserAcademicInformationIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $UserAcademicInformationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "UserAcademicInformation"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      institution: string
+      major: string
+      start_date: Date
+      end_date: Date | null
+      summary: string | null
+      userId: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["userAcademicInformation"]>
+    composites: {}
+  }
+
+  type UserAcademicInformationGetPayload<S extends boolean | null | undefined | UserAcademicInformationDefaultArgs> = $Result.GetResult<Prisma.$UserAcademicInformationPayload, S>
+
+  type UserAcademicInformationCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<UserAcademicInformationFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: UserAcademicInformationCountAggregateInputType | true
+    }
+
+  export interface UserAcademicInformationDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['UserAcademicInformation'], meta: { name: 'UserAcademicInformation' } }
+    /**
+     * Find zero or one UserAcademicInformation that matches the filter.
+     * @param {UserAcademicInformationFindUniqueArgs} args - Arguments to find a UserAcademicInformation
+     * @example
+     * // Get one UserAcademicInformation
+     * const userAcademicInformation = await prisma.userAcademicInformation.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends UserAcademicInformationFindUniqueArgs>(args: SelectSubset<T, UserAcademicInformationFindUniqueArgs<ExtArgs>>): Prisma__UserAcademicInformationClient<$Result.GetResult<Prisma.$UserAcademicInformationPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one UserAcademicInformation that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {UserAcademicInformationFindUniqueOrThrowArgs} args - Arguments to find a UserAcademicInformation
+     * @example
+     * // Get one UserAcademicInformation
+     * const userAcademicInformation = await prisma.userAcademicInformation.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends UserAcademicInformationFindUniqueOrThrowArgs>(args: SelectSubset<T, UserAcademicInformationFindUniqueOrThrowArgs<ExtArgs>>): Prisma__UserAcademicInformationClient<$Result.GetResult<Prisma.$UserAcademicInformationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first UserAcademicInformation that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserAcademicInformationFindFirstArgs} args - Arguments to find a UserAcademicInformation
+     * @example
+     * // Get one UserAcademicInformation
+     * const userAcademicInformation = await prisma.userAcademicInformation.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends UserAcademicInformationFindFirstArgs>(args?: SelectSubset<T, UserAcademicInformationFindFirstArgs<ExtArgs>>): Prisma__UserAcademicInformationClient<$Result.GetResult<Prisma.$UserAcademicInformationPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first UserAcademicInformation that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserAcademicInformationFindFirstOrThrowArgs} args - Arguments to find a UserAcademicInformation
+     * @example
+     * // Get one UserAcademicInformation
+     * const userAcademicInformation = await prisma.userAcademicInformation.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends UserAcademicInformationFindFirstOrThrowArgs>(args?: SelectSubset<T, UserAcademicInformationFindFirstOrThrowArgs<ExtArgs>>): Prisma__UserAcademicInformationClient<$Result.GetResult<Prisma.$UserAcademicInformationPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more UserAcademicInformations that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserAcademicInformationFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all UserAcademicInformations
+     * const userAcademicInformations = await prisma.userAcademicInformation.findMany()
+     * 
+     * // Get first 10 UserAcademicInformations
+     * const userAcademicInformations = await prisma.userAcademicInformation.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const userAcademicInformationWithIdOnly = await prisma.userAcademicInformation.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends UserAcademicInformationFindManyArgs>(args?: SelectSubset<T, UserAcademicInformationFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserAcademicInformationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a UserAcademicInformation.
+     * @param {UserAcademicInformationCreateArgs} args - Arguments to create a UserAcademicInformation.
+     * @example
+     * // Create one UserAcademicInformation
+     * const UserAcademicInformation = await prisma.userAcademicInformation.create({
+     *   data: {
+     *     // ... data to create a UserAcademicInformation
+     *   }
+     * })
+     * 
+     */
+    create<T extends UserAcademicInformationCreateArgs>(args: SelectSubset<T, UserAcademicInformationCreateArgs<ExtArgs>>): Prisma__UserAcademicInformationClient<$Result.GetResult<Prisma.$UserAcademicInformationPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many UserAcademicInformations.
+     * @param {UserAcademicInformationCreateManyArgs} args - Arguments to create many UserAcademicInformations.
+     * @example
+     * // Create many UserAcademicInformations
+     * const userAcademicInformation = await prisma.userAcademicInformation.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends UserAcademicInformationCreateManyArgs>(args?: SelectSubset<T, UserAcademicInformationCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many UserAcademicInformations and returns the data saved in the database.
+     * @param {UserAcademicInformationCreateManyAndReturnArgs} args - Arguments to create many UserAcademicInformations.
+     * @example
+     * // Create many UserAcademicInformations
+     * const userAcademicInformation = await prisma.userAcademicInformation.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many UserAcademicInformations and only return the `id`
+     * const userAcademicInformationWithIdOnly = await prisma.userAcademicInformation.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends UserAcademicInformationCreateManyAndReturnArgs>(args?: SelectSubset<T, UserAcademicInformationCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserAcademicInformationPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a UserAcademicInformation.
+     * @param {UserAcademicInformationDeleteArgs} args - Arguments to delete one UserAcademicInformation.
+     * @example
+     * // Delete one UserAcademicInformation
+     * const UserAcademicInformation = await prisma.userAcademicInformation.delete({
+     *   where: {
+     *     // ... filter to delete one UserAcademicInformation
+     *   }
+     * })
+     * 
+     */
+    delete<T extends UserAcademicInformationDeleteArgs>(args: SelectSubset<T, UserAcademicInformationDeleteArgs<ExtArgs>>): Prisma__UserAcademicInformationClient<$Result.GetResult<Prisma.$UserAcademicInformationPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one UserAcademicInformation.
+     * @param {UserAcademicInformationUpdateArgs} args - Arguments to update one UserAcademicInformation.
+     * @example
+     * // Update one UserAcademicInformation
+     * const userAcademicInformation = await prisma.userAcademicInformation.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends UserAcademicInformationUpdateArgs>(args: SelectSubset<T, UserAcademicInformationUpdateArgs<ExtArgs>>): Prisma__UserAcademicInformationClient<$Result.GetResult<Prisma.$UserAcademicInformationPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more UserAcademicInformations.
+     * @param {UserAcademicInformationDeleteManyArgs} args - Arguments to filter UserAcademicInformations to delete.
+     * @example
+     * // Delete a few UserAcademicInformations
+     * const { count } = await prisma.userAcademicInformation.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends UserAcademicInformationDeleteManyArgs>(args?: SelectSubset<T, UserAcademicInformationDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more UserAcademicInformations.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserAcademicInformationUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many UserAcademicInformations
+     * const userAcademicInformation = await prisma.userAcademicInformation.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends UserAcademicInformationUpdateManyArgs>(args: SelectSubset<T, UserAcademicInformationUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more UserAcademicInformations and returns the data updated in the database.
+     * @param {UserAcademicInformationUpdateManyAndReturnArgs} args - Arguments to update many UserAcademicInformations.
+     * @example
+     * // Update many UserAcademicInformations
+     * const userAcademicInformation = await prisma.userAcademicInformation.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more UserAcademicInformations and only return the `id`
+     * const userAcademicInformationWithIdOnly = await prisma.userAcademicInformation.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends UserAcademicInformationUpdateManyAndReturnArgs>(args: SelectSubset<T, UserAcademicInformationUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserAcademicInformationPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one UserAcademicInformation.
+     * @param {UserAcademicInformationUpsertArgs} args - Arguments to update or create a UserAcademicInformation.
+     * @example
+     * // Update or create a UserAcademicInformation
+     * const userAcademicInformation = await prisma.userAcademicInformation.upsert({
+     *   create: {
+     *     // ... data to create a UserAcademicInformation
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the UserAcademicInformation we want to update
+     *   }
+     * })
+     */
+    upsert<T extends UserAcademicInformationUpsertArgs>(args: SelectSubset<T, UserAcademicInformationUpsertArgs<ExtArgs>>): Prisma__UserAcademicInformationClient<$Result.GetResult<Prisma.$UserAcademicInformationPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of UserAcademicInformations.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserAcademicInformationCountArgs} args - Arguments to filter UserAcademicInformations to count.
+     * @example
+     * // Count the number of UserAcademicInformations
+     * const count = await prisma.userAcademicInformation.count({
+     *   where: {
+     *     // ... the filter for the UserAcademicInformations we want to count
+     *   }
+     * })
+    **/
+    count<T extends UserAcademicInformationCountArgs>(
+      args?: Subset<T, UserAcademicInformationCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], UserAcademicInformationCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a UserAcademicInformation.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserAcademicInformationAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends UserAcademicInformationAggregateArgs>(args: Subset<T, UserAcademicInformationAggregateArgs>): Prisma.PrismaPromise<GetUserAcademicInformationAggregateType<T>>
+
+    /**
+     * Group by UserAcademicInformation.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserAcademicInformationGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends UserAcademicInformationGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: UserAcademicInformationGroupByArgs['orderBy'] }
+        : { orderBy?: UserAcademicInformationGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, UserAcademicInformationGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUserAcademicInformationGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the UserAcademicInformation model
+   */
+  readonly fields: UserAcademicInformationFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for UserAcademicInformation.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__UserAcademicInformationClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the UserAcademicInformation model
+   */
+  interface UserAcademicInformationFieldRefs {
+    readonly id: FieldRef<"UserAcademicInformation", 'String'>
+    readonly institution: FieldRef<"UserAcademicInformation", 'String'>
+    readonly major: FieldRef<"UserAcademicInformation", 'String'>
+    readonly start_date: FieldRef<"UserAcademicInformation", 'DateTime'>
+    readonly end_date: FieldRef<"UserAcademicInformation", 'DateTime'>
+    readonly summary: FieldRef<"UserAcademicInformation", 'String'>
+    readonly userId: FieldRef<"UserAcademicInformation", 'String'>
+    readonly createdAt: FieldRef<"UserAcademicInformation", 'DateTime'>
+    readonly updatedAt: FieldRef<"UserAcademicInformation", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * UserAcademicInformation findUnique
+   */
+  export type UserAcademicInformationFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserAcademicInformation
+     */
+    select?: UserAcademicInformationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserAcademicInformation
+     */
+    omit?: UserAcademicInformationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserAcademicInformationInclude<ExtArgs> | null
+    /**
+     * Filter, which UserAcademicInformation to fetch.
+     */
+    where: UserAcademicInformationWhereUniqueInput
+  }
+
+  /**
+   * UserAcademicInformation findUniqueOrThrow
+   */
+  export type UserAcademicInformationFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserAcademicInformation
+     */
+    select?: UserAcademicInformationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserAcademicInformation
+     */
+    omit?: UserAcademicInformationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserAcademicInformationInclude<ExtArgs> | null
+    /**
+     * Filter, which UserAcademicInformation to fetch.
+     */
+    where: UserAcademicInformationWhereUniqueInput
+  }
+
+  /**
+   * UserAcademicInformation findFirst
+   */
+  export type UserAcademicInformationFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserAcademicInformation
+     */
+    select?: UserAcademicInformationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserAcademicInformation
+     */
+    omit?: UserAcademicInformationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserAcademicInformationInclude<ExtArgs> | null
+    /**
+     * Filter, which UserAcademicInformation to fetch.
+     */
+    where?: UserAcademicInformationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserAcademicInformations to fetch.
+     */
+    orderBy?: UserAcademicInformationOrderByWithRelationInput | UserAcademicInformationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UserAcademicInformations.
+     */
+    cursor?: UserAcademicInformationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserAcademicInformations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserAcademicInformations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UserAcademicInformations.
+     */
+    distinct?: UserAcademicInformationScalarFieldEnum | UserAcademicInformationScalarFieldEnum[]
+  }
+
+  /**
+   * UserAcademicInformation findFirstOrThrow
+   */
+  export type UserAcademicInformationFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserAcademicInformation
+     */
+    select?: UserAcademicInformationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserAcademicInformation
+     */
+    omit?: UserAcademicInformationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserAcademicInformationInclude<ExtArgs> | null
+    /**
+     * Filter, which UserAcademicInformation to fetch.
+     */
+    where?: UserAcademicInformationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserAcademicInformations to fetch.
+     */
+    orderBy?: UserAcademicInformationOrderByWithRelationInput | UserAcademicInformationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UserAcademicInformations.
+     */
+    cursor?: UserAcademicInformationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserAcademicInformations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserAcademicInformations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UserAcademicInformations.
+     */
+    distinct?: UserAcademicInformationScalarFieldEnum | UserAcademicInformationScalarFieldEnum[]
+  }
+
+  /**
+   * UserAcademicInformation findMany
+   */
+  export type UserAcademicInformationFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserAcademicInformation
+     */
+    select?: UserAcademicInformationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserAcademicInformation
+     */
+    omit?: UserAcademicInformationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserAcademicInformationInclude<ExtArgs> | null
+    /**
+     * Filter, which UserAcademicInformations to fetch.
+     */
+    where?: UserAcademicInformationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserAcademicInformations to fetch.
+     */
+    orderBy?: UserAcademicInformationOrderByWithRelationInput | UserAcademicInformationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing UserAcademicInformations.
+     */
+    cursor?: UserAcademicInformationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserAcademicInformations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserAcademicInformations.
+     */
+    skip?: number
+    distinct?: UserAcademicInformationScalarFieldEnum | UserAcademicInformationScalarFieldEnum[]
+  }
+
+  /**
+   * UserAcademicInformation create
+   */
+  export type UserAcademicInformationCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserAcademicInformation
+     */
+    select?: UserAcademicInformationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserAcademicInformation
+     */
+    omit?: UserAcademicInformationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserAcademicInformationInclude<ExtArgs> | null
+    /**
+     * The data needed to create a UserAcademicInformation.
+     */
+    data: XOR<UserAcademicInformationCreateInput, UserAcademicInformationUncheckedCreateInput>
+  }
+
+  /**
+   * UserAcademicInformation createMany
+   */
+  export type UserAcademicInformationCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many UserAcademicInformations.
+     */
+    data: UserAcademicInformationCreateManyInput | UserAcademicInformationCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * UserAcademicInformation createManyAndReturn
+   */
+  export type UserAcademicInformationCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserAcademicInformation
+     */
+    select?: UserAcademicInformationSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserAcademicInformation
+     */
+    omit?: UserAcademicInformationOmit<ExtArgs> | null
+    /**
+     * The data used to create many UserAcademicInformations.
+     */
+    data: UserAcademicInformationCreateManyInput | UserAcademicInformationCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserAcademicInformationIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * UserAcademicInformation update
+   */
+  export type UserAcademicInformationUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserAcademicInformation
+     */
+    select?: UserAcademicInformationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserAcademicInformation
+     */
+    omit?: UserAcademicInformationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserAcademicInformationInclude<ExtArgs> | null
+    /**
+     * The data needed to update a UserAcademicInformation.
+     */
+    data: XOR<UserAcademicInformationUpdateInput, UserAcademicInformationUncheckedUpdateInput>
+    /**
+     * Choose, which UserAcademicInformation to update.
+     */
+    where: UserAcademicInformationWhereUniqueInput
+  }
+
+  /**
+   * UserAcademicInformation updateMany
+   */
+  export type UserAcademicInformationUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update UserAcademicInformations.
+     */
+    data: XOR<UserAcademicInformationUpdateManyMutationInput, UserAcademicInformationUncheckedUpdateManyInput>
+    /**
+     * Filter which UserAcademicInformations to update
+     */
+    where?: UserAcademicInformationWhereInput
+    /**
+     * Limit how many UserAcademicInformations to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * UserAcademicInformation updateManyAndReturn
+   */
+  export type UserAcademicInformationUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserAcademicInformation
+     */
+    select?: UserAcademicInformationSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserAcademicInformation
+     */
+    omit?: UserAcademicInformationOmit<ExtArgs> | null
+    /**
+     * The data used to update UserAcademicInformations.
+     */
+    data: XOR<UserAcademicInformationUpdateManyMutationInput, UserAcademicInformationUncheckedUpdateManyInput>
+    /**
+     * Filter which UserAcademicInformations to update
+     */
+    where?: UserAcademicInformationWhereInput
+    /**
+     * Limit how many UserAcademicInformations to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserAcademicInformationIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * UserAcademicInformation upsert
+   */
+  export type UserAcademicInformationUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserAcademicInformation
+     */
+    select?: UserAcademicInformationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserAcademicInformation
+     */
+    omit?: UserAcademicInformationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserAcademicInformationInclude<ExtArgs> | null
+    /**
+     * The filter to search for the UserAcademicInformation to update in case it exists.
+     */
+    where: UserAcademicInformationWhereUniqueInput
+    /**
+     * In case the UserAcademicInformation found by the `where` argument doesn't exist, create a new UserAcademicInformation with this data.
+     */
+    create: XOR<UserAcademicInformationCreateInput, UserAcademicInformationUncheckedCreateInput>
+    /**
+     * In case the UserAcademicInformation was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<UserAcademicInformationUpdateInput, UserAcademicInformationUncheckedUpdateInput>
+  }
+
+  /**
+   * UserAcademicInformation delete
+   */
+  export type UserAcademicInformationDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserAcademicInformation
+     */
+    select?: UserAcademicInformationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserAcademicInformation
+     */
+    omit?: UserAcademicInformationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserAcademicInformationInclude<ExtArgs> | null
+    /**
+     * Filter which UserAcademicInformation to delete.
+     */
+    where: UserAcademicInformationWhereUniqueInput
+  }
+
+  /**
+   * UserAcademicInformation deleteMany
+   */
+  export type UserAcademicInformationDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UserAcademicInformations to delete
+     */
+    where?: UserAcademicInformationWhereInput
+    /**
+     * Limit how many UserAcademicInformations to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * UserAcademicInformation without action
+   */
+  export type UserAcademicInformationDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserAcademicInformation
+     */
+    select?: UserAcademicInformationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserAcademicInformation
+     */
+    omit?: UserAcademicInformationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserAcademicInformationInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model UserSkill
+   */
+
+  export type AggregateUserSkill = {
+    _count: UserSkillCountAggregateOutputType | null
+    _avg: UserSkillAvgAggregateOutputType | null
+    _sum: UserSkillSumAggregateOutputType | null
+    _min: UserSkillMinAggregateOutputType | null
+    _max: UserSkillMaxAggregateOutputType | null
+  }
+
+  export type UserSkillAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type UserSkillSumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type UserSkillMinAggregateOutputType = {
+    id: number | null
+    skills: string | null
+    userId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type UserSkillMaxAggregateOutputType = {
+    id: number | null
+    skills: string | null
+    userId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type UserSkillCountAggregateOutputType = {
+    id: number
+    skills: number
+    userId: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type UserSkillAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type UserSkillSumAggregateInputType = {
+    id?: true
+  }
+
+  export type UserSkillMinAggregateInputType = {
+    id?: true
+    skills?: true
+    userId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type UserSkillMaxAggregateInputType = {
+    id?: true
+    skills?: true
+    userId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type UserSkillCountAggregateInputType = {
+    id?: true
+    skills?: true
+    userId?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type UserSkillAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UserSkill to aggregate.
+     */
+    where?: UserSkillWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserSkills to fetch.
+     */
+    orderBy?: UserSkillOrderByWithRelationInput | UserSkillOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: UserSkillWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserSkills from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserSkills.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned UserSkills
+    **/
+    _count?: true | UserSkillCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: UserSkillAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: UserSkillSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: UserSkillMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: UserSkillMaxAggregateInputType
+  }
+
+  export type GetUserSkillAggregateType<T extends UserSkillAggregateArgs> = {
+        [P in keyof T & keyof AggregateUserSkill]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateUserSkill[P]>
+      : GetScalarType<T[P], AggregateUserSkill[P]>
+  }
+
+
+
+
+  export type UserSkillGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserSkillWhereInput
+    orderBy?: UserSkillOrderByWithAggregationInput | UserSkillOrderByWithAggregationInput[]
+    by: UserSkillScalarFieldEnum[] | UserSkillScalarFieldEnum
+    having?: UserSkillScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: UserSkillCountAggregateInputType | true
+    _avg?: UserSkillAvgAggregateInputType
+    _sum?: UserSkillSumAggregateInputType
+    _min?: UserSkillMinAggregateInputType
+    _max?: UserSkillMaxAggregateInputType
+  }
+
+  export type UserSkillGroupByOutputType = {
+    id: number
+    skills: string
+    userId: string
+    createdAt: Date
+    updatedAt: Date
+    _count: UserSkillCountAggregateOutputType | null
+    _avg: UserSkillAvgAggregateOutputType | null
+    _sum: UserSkillSumAggregateOutputType | null
+    _min: UserSkillMinAggregateOutputType | null
+    _max: UserSkillMaxAggregateOutputType | null
+  }
+
+  type GetUserSkillGroupByPayload<T extends UserSkillGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<UserSkillGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof UserSkillGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], UserSkillGroupByOutputType[P]>
+            : GetScalarType<T[P], UserSkillGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type UserSkillSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    skills?: boolean
+    userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userSkill"]>
+
+  export type UserSkillSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    skills?: boolean
+    userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userSkill"]>
+
+  export type UserSkillSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    skills?: boolean
+    userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userSkill"]>
+
+  export type UserSkillSelectScalar = {
+    id?: boolean
+    skills?: boolean
+    userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type UserSkillOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "skills" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["userSkill"]>
+  export type UserSkillInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type UserSkillIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type UserSkillIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $UserSkillPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "UserSkill"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      skills: string
+      userId: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["userSkill"]>
+    composites: {}
+  }
+
+  type UserSkillGetPayload<S extends boolean | null | undefined | UserSkillDefaultArgs> = $Result.GetResult<Prisma.$UserSkillPayload, S>
+
+  type UserSkillCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<UserSkillFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: UserSkillCountAggregateInputType | true
+    }
+
+  export interface UserSkillDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['UserSkill'], meta: { name: 'UserSkill' } }
+    /**
+     * Find zero or one UserSkill that matches the filter.
+     * @param {UserSkillFindUniqueArgs} args - Arguments to find a UserSkill
+     * @example
+     * // Get one UserSkill
+     * const userSkill = await prisma.userSkill.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends UserSkillFindUniqueArgs>(args: SelectSubset<T, UserSkillFindUniqueArgs<ExtArgs>>): Prisma__UserSkillClient<$Result.GetResult<Prisma.$UserSkillPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one UserSkill that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {UserSkillFindUniqueOrThrowArgs} args - Arguments to find a UserSkill
+     * @example
+     * // Get one UserSkill
+     * const userSkill = await prisma.userSkill.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends UserSkillFindUniqueOrThrowArgs>(args: SelectSubset<T, UserSkillFindUniqueOrThrowArgs<ExtArgs>>): Prisma__UserSkillClient<$Result.GetResult<Prisma.$UserSkillPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first UserSkill that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserSkillFindFirstArgs} args - Arguments to find a UserSkill
+     * @example
+     * // Get one UserSkill
+     * const userSkill = await prisma.userSkill.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends UserSkillFindFirstArgs>(args?: SelectSubset<T, UserSkillFindFirstArgs<ExtArgs>>): Prisma__UserSkillClient<$Result.GetResult<Prisma.$UserSkillPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first UserSkill that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserSkillFindFirstOrThrowArgs} args - Arguments to find a UserSkill
+     * @example
+     * // Get one UserSkill
+     * const userSkill = await prisma.userSkill.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends UserSkillFindFirstOrThrowArgs>(args?: SelectSubset<T, UserSkillFindFirstOrThrowArgs<ExtArgs>>): Prisma__UserSkillClient<$Result.GetResult<Prisma.$UserSkillPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more UserSkills that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserSkillFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all UserSkills
+     * const userSkills = await prisma.userSkill.findMany()
+     * 
+     * // Get first 10 UserSkills
+     * const userSkills = await prisma.userSkill.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const userSkillWithIdOnly = await prisma.userSkill.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends UserSkillFindManyArgs>(args?: SelectSubset<T, UserSkillFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserSkillPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a UserSkill.
+     * @param {UserSkillCreateArgs} args - Arguments to create a UserSkill.
+     * @example
+     * // Create one UserSkill
+     * const UserSkill = await prisma.userSkill.create({
+     *   data: {
+     *     // ... data to create a UserSkill
+     *   }
+     * })
+     * 
+     */
+    create<T extends UserSkillCreateArgs>(args: SelectSubset<T, UserSkillCreateArgs<ExtArgs>>): Prisma__UserSkillClient<$Result.GetResult<Prisma.$UserSkillPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many UserSkills.
+     * @param {UserSkillCreateManyArgs} args - Arguments to create many UserSkills.
+     * @example
+     * // Create many UserSkills
+     * const userSkill = await prisma.userSkill.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends UserSkillCreateManyArgs>(args?: SelectSubset<T, UserSkillCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many UserSkills and returns the data saved in the database.
+     * @param {UserSkillCreateManyAndReturnArgs} args - Arguments to create many UserSkills.
+     * @example
+     * // Create many UserSkills
+     * const userSkill = await prisma.userSkill.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many UserSkills and only return the `id`
+     * const userSkillWithIdOnly = await prisma.userSkill.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends UserSkillCreateManyAndReturnArgs>(args?: SelectSubset<T, UserSkillCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserSkillPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a UserSkill.
+     * @param {UserSkillDeleteArgs} args - Arguments to delete one UserSkill.
+     * @example
+     * // Delete one UserSkill
+     * const UserSkill = await prisma.userSkill.delete({
+     *   where: {
+     *     // ... filter to delete one UserSkill
+     *   }
+     * })
+     * 
+     */
+    delete<T extends UserSkillDeleteArgs>(args: SelectSubset<T, UserSkillDeleteArgs<ExtArgs>>): Prisma__UserSkillClient<$Result.GetResult<Prisma.$UserSkillPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one UserSkill.
+     * @param {UserSkillUpdateArgs} args - Arguments to update one UserSkill.
+     * @example
+     * // Update one UserSkill
+     * const userSkill = await prisma.userSkill.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends UserSkillUpdateArgs>(args: SelectSubset<T, UserSkillUpdateArgs<ExtArgs>>): Prisma__UserSkillClient<$Result.GetResult<Prisma.$UserSkillPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more UserSkills.
+     * @param {UserSkillDeleteManyArgs} args - Arguments to filter UserSkills to delete.
+     * @example
+     * // Delete a few UserSkills
+     * const { count } = await prisma.userSkill.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends UserSkillDeleteManyArgs>(args?: SelectSubset<T, UserSkillDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more UserSkills.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserSkillUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many UserSkills
+     * const userSkill = await prisma.userSkill.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends UserSkillUpdateManyArgs>(args: SelectSubset<T, UserSkillUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more UserSkills and returns the data updated in the database.
+     * @param {UserSkillUpdateManyAndReturnArgs} args - Arguments to update many UserSkills.
+     * @example
+     * // Update many UserSkills
+     * const userSkill = await prisma.userSkill.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more UserSkills and only return the `id`
+     * const userSkillWithIdOnly = await prisma.userSkill.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends UserSkillUpdateManyAndReturnArgs>(args: SelectSubset<T, UserSkillUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserSkillPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one UserSkill.
+     * @param {UserSkillUpsertArgs} args - Arguments to update or create a UserSkill.
+     * @example
+     * // Update or create a UserSkill
+     * const userSkill = await prisma.userSkill.upsert({
+     *   create: {
+     *     // ... data to create a UserSkill
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the UserSkill we want to update
+     *   }
+     * })
+     */
+    upsert<T extends UserSkillUpsertArgs>(args: SelectSubset<T, UserSkillUpsertArgs<ExtArgs>>): Prisma__UserSkillClient<$Result.GetResult<Prisma.$UserSkillPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of UserSkills.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserSkillCountArgs} args - Arguments to filter UserSkills to count.
+     * @example
+     * // Count the number of UserSkills
+     * const count = await prisma.userSkill.count({
+     *   where: {
+     *     // ... the filter for the UserSkills we want to count
+     *   }
+     * })
+    **/
+    count<T extends UserSkillCountArgs>(
+      args?: Subset<T, UserSkillCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], UserSkillCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a UserSkill.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserSkillAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends UserSkillAggregateArgs>(args: Subset<T, UserSkillAggregateArgs>): Prisma.PrismaPromise<GetUserSkillAggregateType<T>>
+
+    /**
+     * Group by UserSkill.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserSkillGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends UserSkillGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: UserSkillGroupByArgs['orderBy'] }
+        : { orderBy?: UserSkillGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, UserSkillGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUserSkillGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the UserSkill model
+   */
+  readonly fields: UserSkillFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for UserSkill.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__UserSkillClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the UserSkill model
+   */
+  interface UserSkillFieldRefs {
+    readonly id: FieldRef<"UserSkill", 'Int'>
+    readonly skills: FieldRef<"UserSkill", 'String'>
+    readonly userId: FieldRef<"UserSkill", 'String'>
+    readonly createdAt: FieldRef<"UserSkill", 'DateTime'>
+    readonly updatedAt: FieldRef<"UserSkill", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * UserSkill findUnique
+   */
+  export type UserSkillFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserSkill
+     */
+    select?: UserSkillSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserSkill
+     */
+    omit?: UserSkillOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserSkillInclude<ExtArgs> | null
+    /**
+     * Filter, which UserSkill to fetch.
+     */
+    where: UserSkillWhereUniqueInput
+  }
+
+  /**
+   * UserSkill findUniqueOrThrow
+   */
+  export type UserSkillFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserSkill
+     */
+    select?: UserSkillSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserSkill
+     */
+    omit?: UserSkillOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserSkillInclude<ExtArgs> | null
+    /**
+     * Filter, which UserSkill to fetch.
+     */
+    where: UserSkillWhereUniqueInput
+  }
+
+  /**
+   * UserSkill findFirst
+   */
+  export type UserSkillFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserSkill
+     */
+    select?: UserSkillSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserSkill
+     */
+    omit?: UserSkillOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserSkillInclude<ExtArgs> | null
+    /**
+     * Filter, which UserSkill to fetch.
+     */
+    where?: UserSkillWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserSkills to fetch.
+     */
+    orderBy?: UserSkillOrderByWithRelationInput | UserSkillOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UserSkills.
+     */
+    cursor?: UserSkillWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserSkills from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserSkills.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UserSkills.
+     */
+    distinct?: UserSkillScalarFieldEnum | UserSkillScalarFieldEnum[]
+  }
+
+  /**
+   * UserSkill findFirstOrThrow
+   */
+  export type UserSkillFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserSkill
+     */
+    select?: UserSkillSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserSkill
+     */
+    omit?: UserSkillOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserSkillInclude<ExtArgs> | null
+    /**
+     * Filter, which UserSkill to fetch.
+     */
+    where?: UserSkillWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserSkills to fetch.
+     */
+    orderBy?: UserSkillOrderByWithRelationInput | UserSkillOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UserSkills.
+     */
+    cursor?: UserSkillWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserSkills from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserSkills.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UserSkills.
+     */
+    distinct?: UserSkillScalarFieldEnum | UserSkillScalarFieldEnum[]
+  }
+
+  /**
+   * UserSkill findMany
+   */
+  export type UserSkillFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserSkill
+     */
+    select?: UserSkillSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserSkill
+     */
+    omit?: UserSkillOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserSkillInclude<ExtArgs> | null
+    /**
+     * Filter, which UserSkills to fetch.
+     */
+    where?: UserSkillWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserSkills to fetch.
+     */
+    orderBy?: UserSkillOrderByWithRelationInput | UserSkillOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing UserSkills.
+     */
+    cursor?: UserSkillWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserSkills from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserSkills.
+     */
+    skip?: number
+    distinct?: UserSkillScalarFieldEnum | UserSkillScalarFieldEnum[]
+  }
+
+  /**
+   * UserSkill create
+   */
+  export type UserSkillCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserSkill
+     */
+    select?: UserSkillSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserSkill
+     */
+    omit?: UserSkillOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserSkillInclude<ExtArgs> | null
+    /**
+     * The data needed to create a UserSkill.
+     */
+    data: XOR<UserSkillCreateInput, UserSkillUncheckedCreateInput>
+  }
+
+  /**
+   * UserSkill createMany
+   */
+  export type UserSkillCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many UserSkills.
+     */
+    data: UserSkillCreateManyInput | UserSkillCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * UserSkill createManyAndReturn
+   */
+  export type UserSkillCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserSkill
+     */
+    select?: UserSkillSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserSkill
+     */
+    omit?: UserSkillOmit<ExtArgs> | null
+    /**
+     * The data used to create many UserSkills.
+     */
+    data: UserSkillCreateManyInput | UserSkillCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserSkillIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * UserSkill update
+   */
+  export type UserSkillUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserSkill
+     */
+    select?: UserSkillSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserSkill
+     */
+    omit?: UserSkillOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserSkillInclude<ExtArgs> | null
+    /**
+     * The data needed to update a UserSkill.
+     */
+    data: XOR<UserSkillUpdateInput, UserSkillUncheckedUpdateInput>
+    /**
+     * Choose, which UserSkill to update.
+     */
+    where: UserSkillWhereUniqueInput
+  }
+
+  /**
+   * UserSkill updateMany
+   */
+  export type UserSkillUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update UserSkills.
+     */
+    data: XOR<UserSkillUpdateManyMutationInput, UserSkillUncheckedUpdateManyInput>
+    /**
+     * Filter which UserSkills to update
+     */
+    where?: UserSkillWhereInput
+    /**
+     * Limit how many UserSkills to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * UserSkill updateManyAndReturn
+   */
+  export type UserSkillUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserSkill
+     */
+    select?: UserSkillSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserSkill
+     */
+    omit?: UserSkillOmit<ExtArgs> | null
+    /**
+     * The data used to update UserSkills.
+     */
+    data: XOR<UserSkillUpdateManyMutationInput, UserSkillUncheckedUpdateManyInput>
+    /**
+     * Filter which UserSkills to update
+     */
+    where?: UserSkillWhereInput
+    /**
+     * Limit how many UserSkills to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserSkillIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * UserSkill upsert
+   */
+  export type UserSkillUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserSkill
+     */
+    select?: UserSkillSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserSkill
+     */
+    omit?: UserSkillOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserSkillInclude<ExtArgs> | null
+    /**
+     * The filter to search for the UserSkill to update in case it exists.
+     */
+    where: UserSkillWhereUniqueInput
+    /**
+     * In case the UserSkill found by the `where` argument doesn't exist, create a new UserSkill with this data.
+     */
+    create: XOR<UserSkillCreateInput, UserSkillUncheckedCreateInput>
+    /**
+     * In case the UserSkill was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<UserSkillUpdateInput, UserSkillUncheckedUpdateInput>
+  }
+
+  /**
+   * UserSkill delete
+   */
+  export type UserSkillDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserSkill
+     */
+    select?: UserSkillSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserSkill
+     */
+    omit?: UserSkillOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserSkillInclude<ExtArgs> | null
+    /**
+     * Filter which UserSkill to delete.
+     */
+    where: UserSkillWhereUniqueInput
+  }
+
+  /**
+   * UserSkill deleteMany
+   */
+  export type UserSkillDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UserSkills to delete
+     */
+    where?: UserSkillWhereInput
+    /**
+     * Limit how many UserSkills to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * UserSkill without action
+   */
+  export type UserSkillDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserSkill
+     */
+    select?: UserSkillSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserSkill
+     */
+    omit?: UserSkillOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserSkillInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -5612,7 +10604,8 @@ export namespace Prisma {
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
     username: 'username',
-    displayUsername: 'displayUsername'
+    displayUsername: 'displayUsername',
+    onboarded: 'onboarded'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -5661,6 +10654,62 @@ export namespace Prisma {
   };
 
   export type VerificationScalarFieldEnum = (typeof VerificationScalarFieldEnum)[keyof typeof VerificationScalarFieldEnum]
+
+
+  export const UserProfessionalExperienceScalarFieldEnum: {
+    id: 'id',
+    institution: 'institution',
+    role: 'role',
+    start_date: 'start_date',
+    end_date: 'end_date',
+    summary: 'summary',
+    version: 'version',
+    userId: 'userId',
+    at_university: 'at_university',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type UserProfessionalExperienceScalarFieldEnum = (typeof UserProfessionalExperienceScalarFieldEnum)[keyof typeof UserProfessionalExperienceScalarFieldEnum]
+
+
+  export const UserProfessionalSummaryScalarFieldEnum: {
+    id: 'id',
+    experience_years: 'experience_years',
+    summary: 'summary',
+    version: 'version',
+    userId: 'userId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type UserProfessionalSummaryScalarFieldEnum = (typeof UserProfessionalSummaryScalarFieldEnum)[keyof typeof UserProfessionalSummaryScalarFieldEnum]
+
+
+  export const UserAcademicInformationScalarFieldEnum: {
+    id: 'id',
+    institution: 'institution',
+    major: 'major',
+    start_date: 'start_date',
+    end_date: 'end_date',
+    summary: 'summary',
+    userId: 'userId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type UserAcademicInformationScalarFieldEnum = (typeof UserAcademicInformationScalarFieldEnum)[keyof typeof UserAcademicInformationScalarFieldEnum]
+
+
+  export const UserSkillScalarFieldEnum: {
+    id: 'id',
+    skills: 'skills',
+    userId: 'userId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type UserSkillScalarFieldEnum = (typeof UserSkillScalarFieldEnum)[keyof typeof UserSkillScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -5739,6 +10788,20 @@ export namespace Prisma {
    */
   export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
     
+
+
+  /**
+   * Reference to a field of type 'Float'
+   */
+  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float[]'
+   */
+  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
+    
   /**
    * Deep Input Types
    */
@@ -5757,8 +10820,13 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"User"> | Date | string
     username?: StringNullableFilter<"User"> | string | null
     displayUsername?: StringNullableFilter<"User"> | string | null
+    onboarded?: BoolFilter<"User"> | boolean
     sessions?: SessionListRelationFilter
     accounts?: AccountListRelationFilter
+    user_professional_summary?: XOR<UserProfessionalSummaryNullableScalarRelationFilter, UserProfessionalSummaryWhereInput> | null
+    user_professional_experiences?: UserProfessionalExperienceListRelationFilter
+    user_academic_information?: UserAcademicInformationListRelationFilter
+    user_skill?: XOR<UserSkillNullableScalarRelationFilter, UserSkillWhereInput> | null
   }
 
   export type UserOrderByWithRelationInput = {
@@ -5771,8 +10839,13 @@ export namespace Prisma {
     updatedAt?: SortOrder
     username?: SortOrderInput | SortOrder
     displayUsername?: SortOrderInput | SortOrder
+    onboarded?: SortOrder
     sessions?: SessionOrderByRelationAggregateInput
     accounts?: AccountOrderByRelationAggregateInput
+    user_professional_summary?: UserProfessionalSummaryOrderByWithRelationInput
+    user_professional_experiences?: UserProfessionalExperienceOrderByRelationAggregateInput
+    user_academic_information?: UserAcademicInformationOrderByRelationAggregateInput
+    user_skill?: UserSkillOrderByWithRelationInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -5788,8 +10861,13 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     displayUsername?: StringNullableFilter<"User"> | string | null
+    onboarded?: BoolFilter<"User"> | boolean
     sessions?: SessionListRelationFilter
     accounts?: AccountListRelationFilter
+    user_professional_summary?: XOR<UserProfessionalSummaryNullableScalarRelationFilter, UserProfessionalSummaryWhereInput> | null
+    user_professional_experiences?: UserProfessionalExperienceListRelationFilter
+    user_academic_information?: UserAcademicInformationListRelationFilter
+    user_skill?: XOR<UserSkillNullableScalarRelationFilter, UserSkillWhereInput> | null
   }, "id" | "email" | "username">
 
   export type UserOrderByWithAggregationInput = {
@@ -5802,6 +10880,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     username?: SortOrderInput | SortOrder
     displayUsername?: SortOrderInput | SortOrder
+    onboarded?: SortOrder
     _count?: UserCountOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
     _min?: UserMinOrderByAggregateInput
@@ -5820,6 +10899,7 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     username?: StringNullableWithAggregatesFilter<"User"> | string | null
     displayUsername?: StringNullableWithAggregatesFilter<"User"> | string | null
+    onboarded?: BoolWithAggregatesFilter<"User"> | boolean
   }
 
   export type SessionWhereInput = {
@@ -6044,6 +11124,292 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"Verification"> | Date | string
   }
 
+  export type UserProfessionalExperienceWhereInput = {
+    AND?: UserProfessionalExperienceWhereInput | UserProfessionalExperienceWhereInput[]
+    OR?: UserProfessionalExperienceWhereInput[]
+    NOT?: UserProfessionalExperienceWhereInput | UserProfessionalExperienceWhereInput[]
+    id?: StringFilter<"UserProfessionalExperience"> | string
+    institution?: StringFilter<"UserProfessionalExperience"> | string
+    role?: StringFilter<"UserProfessionalExperience"> | string
+    start_date?: DateTimeNullableFilter<"UserProfessionalExperience"> | Date | string | null
+    end_date?: DateTimeNullableFilter<"UserProfessionalExperience"> | Date | string | null
+    summary?: StringNullableFilter<"UserProfessionalExperience"> | string | null
+    version?: IntFilter<"UserProfessionalExperience"> | number
+    userId?: StringFilter<"UserProfessionalExperience"> | string
+    at_university?: BoolFilter<"UserProfessionalExperience"> | boolean
+    createdAt?: DateTimeFilter<"UserProfessionalExperience"> | Date | string
+    updatedAt?: DateTimeFilter<"UserProfessionalExperience"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type UserProfessionalExperienceOrderByWithRelationInput = {
+    id?: SortOrder
+    institution?: SortOrder
+    role?: SortOrder
+    start_date?: SortOrderInput | SortOrder
+    end_date?: SortOrderInput | SortOrder
+    summary?: SortOrderInput | SortOrder
+    version?: SortOrder
+    userId?: SortOrder
+    at_university?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type UserProfessionalExperienceWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: UserProfessionalExperienceWhereInput | UserProfessionalExperienceWhereInput[]
+    OR?: UserProfessionalExperienceWhereInput[]
+    NOT?: UserProfessionalExperienceWhereInput | UserProfessionalExperienceWhereInput[]
+    institution?: StringFilter<"UserProfessionalExperience"> | string
+    role?: StringFilter<"UserProfessionalExperience"> | string
+    start_date?: DateTimeNullableFilter<"UserProfessionalExperience"> | Date | string | null
+    end_date?: DateTimeNullableFilter<"UserProfessionalExperience"> | Date | string | null
+    summary?: StringNullableFilter<"UserProfessionalExperience"> | string | null
+    version?: IntFilter<"UserProfessionalExperience"> | number
+    userId?: StringFilter<"UserProfessionalExperience"> | string
+    at_university?: BoolFilter<"UserProfessionalExperience"> | boolean
+    createdAt?: DateTimeFilter<"UserProfessionalExperience"> | Date | string
+    updatedAt?: DateTimeFilter<"UserProfessionalExperience"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id">
+
+  export type UserProfessionalExperienceOrderByWithAggregationInput = {
+    id?: SortOrder
+    institution?: SortOrder
+    role?: SortOrder
+    start_date?: SortOrderInput | SortOrder
+    end_date?: SortOrderInput | SortOrder
+    summary?: SortOrderInput | SortOrder
+    version?: SortOrder
+    userId?: SortOrder
+    at_university?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: UserProfessionalExperienceCountOrderByAggregateInput
+    _avg?: UserProfessionalExperienceAvgOrderByAggregateInput
+    _max?: UserProfessionalExperienceMaxOrderByAggregateInput
+    _min?: UserProfessionalExperienceMinOrderByAggregateInput
+    _sum?: UserProfessionalExperienceSumOrderByAggregateInput
+  }
+
+  export type UserProfessionalExperienceScalarWhereWithAggregatesInput = {
+    AND?: UserProfessionalExperienceScalarWhereWithAggregatesInput | UserProfessionalExperienceScalarWhereWithAggregatesInput[]
+    OR?: UserProfessionalExperienceScalarWhereWithAggregatesInput[]
+    NOT?: UserProfessionalExperienceScalarWhereWithAggregatesInput | UserProfessionalExperienceScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"UserProfessionalExperience"> | string
+    institution?: StringWithAggregatesFilter<"UserProfessionalExperience"> | string
+    role?: StringWithAggregatesFilter<"UserProfessionalExperience"> | string
+    start_date?: DateTimeNullableWithAggregatesFilter<"UserProfessionalExperience"> | Date | string | null
+    end_date?: DateTimeNullableWithAggregatesFilter<"UserProfessionalExperience"> | Date | string | null
+    summary?: StringNullableWithAggregatesFilter<"UserProfessionalExperience"> | string | null
+    version?: IntWithAggregatesFilter<"UserProfessionalExperience"> | number
+    userId?: StringWithAggregatesFilter<"UserProfessionalExperience"> | string
+    at_university?: BoolWithAggregatesFilter<"UserProfessionalExperience"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"UserProfessionalExperience"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"UserProfessionalExperience"> | Date | string
+  }
+
+  export type UserProfessionalSummaryWhereInput = {
+    AND?: UserProfessionalSummaryWhereInput | UserProfessionalSummaryWhereInput[]
+    OR?: UserProfessionalSummaryWhereInput[]
+    NOT?: UserProfessionalSummaryWhereInput | UserProfessionalSummaryWhereInput[]
+    id?: StringFilter<"UserProfessionalSummary"> | string
+    experience_years?: IntFilter<"UserProfessionalSummary"> | number
+    summary?: StringNullableFilter<"UserProfessionalSummary"> | string | null
+    version?: IntFilter<"UserProfessionalSummary"> | number
+    userId?: StringFilter<"UserProfessionalSummary"> | string
+    createdAt?: DateTimeFilter<"UserProfessionalSummary"> | Date | string
+    updatedAt?: DateTimeFilter<"UserProfessionalSummary"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type UserProfessionalSummaryOrderByWithRelationInput = {
+    id?: SortOrder
+    experience_years?: SortOrder
+    summary?: SortOrderInput | SortOrder
+    version?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type UserProfessionalSummaryWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    userId?: string
+    AND?: UserProfessionalSummaryWhereInput | UserProfessionalSummaryWhereInput[]
+    OR?: UserProfessionalSummaryWhereInput[]
+    NOT?: UserProfessionalSummaryWhereInput | UserProfessionalSummaryWhereInput[]
+    experience_years?: IntFilter<"UserProfessionalSummary"> | number
+    summary?: StringNullableFilter<"UserProfessionalSummary"> | string | null
+    version?: IntFilter<"UserProfessionalSummary"> | number
+    createdAt?: DateTimeFilter<"UserProfessionalSummary"> | Date | string
+    updatedAt?: DateTimeFilter<"UserProfessionalSummary"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id" | "userId">
+
+  export type UserProfessionalSummaryOrderByWithAggregationInput = {
+    id?: SortOrder
+    experience_years?: SortOrder
+    summary?: SortOrderInput | SortOrder
+    version?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: UserProfessionalSummaryCountOrderByAggregateInput
+    _avg?: UserProfessionalSummaryAvgOrderByAggregateInput
+    _max?: UserProfessionalSummaryMaxOrderByAggregateInput
+    _min?: UserProfessionalSummaryMinOrderByAggregateInput
+    _sum?: UserProfessionalSummarySumOrderByAggregateInput
+  }
+
+  export type UserProfessionalSummaryScalarWhereWithAggregatesInput = {
+    AND?: UserProfessionalSummaryScalarWhereWithAggregatesInput | UserProfessionalSummaryScalarWhereWithAggregatesInput[]
+    OR?: UserProfessionalSummaryScalarWhereWithAggregatesInput[]
+    NOT?: UserProfessionalSummaryScalarWhereWithAggregatesInput | UserProfessionalSummaryScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"UserProfessionalSummary"> | string
+    experience_years?: IntWithAggregatesFilter<"UserProfessionalSummary"> | number
+    summary?: StringNullableWithAggregatesFilter<"UserProfessionalSummary"> | string | null
+    version?: IntWithAggregatesFilter<"UserProfessionalSummary"> | number
+    userId?: StringWithAggregatesFilter<"UserProfessionalSummary"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"UserProfessionalSummary"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"UserProfessionalSummary"> | Date | string
+  }
+
+  export type UserAcademicInformationWhereInput = {
+    AND?: UserAcademicInformationWhereInput | UserAcademicInformationWhereInput[]
+    OR?: UserAcademicInformationWhereInput[]
+    NOT?: UserAcademicInformationWhereInput | UserAcademicInformationWhereInput[]
+    id?: StringFilter<"UserAcademicInformation"> | string
+    institution?: StringFilter<"UserAcademicInformation"> | string
+    major?: StringFilter<"UserAcademicInformation"> | string
+    start_date?: DateTimeFilter<"UserAcademicInformation"> | Date | string
+    end_date?: DateTimeNullableFilter<"UserAcademicInformation"> | Date | string | null
+    summary?: StringNullableFilter<"UserAcademicInformation"> | string | null
+    userId?: StringFilter<"UserAcademicInformation"> | string
+    createdAt?: DateTimeFilter<"UserAcademicInformation"> | Date | string
+    updatedAt?: DateTimeFilter<"UserAcademicInformation"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type UserAcademicInformationOrderByWithRelationInput = {
+    id?: SortOrder
+    institution?: SortOrder
+    major?: SortOrder
+    start_date?: SortOrder
+    end_date?: SortOrderInput | SortOrder
+    summary?: SortOrderInput | SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type UserAcademicInformationWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: UserAcademicInformationWhereInput | UserAcademicInformationWhereInput[]
+    OR?: UserAcademicInformationWhereInput[]
+    NOT?: UserAcademicInformationWhereInput | UserAcademicInformationWhereInput[]
+    institution?: StringFilter<"UserAcademicInformation"> | string
+    major?: StringFilter<"UserAcademicInformation"> | string
+    start_date?: DateTimeFilter<"UserAcademicInformation"> | Date | string
+    end_date?: DateTimeNullableFilter<"UserAcademicInformation"> | Date | string | null
+    summary?: StringNullableFilter<"UserAcademicInformation"> | string | null
+    userId?: StringFilter<"UserAcademicInformation"> | string
+    createdAt?: DateTimeFilter<"UserAcademicInformation"> | Date | string
+    updatedAt?: DateTimeFilter<"UserAcademicInformation"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id">
+
+  export type UserAcademicInformationOrderByWithAggregationInput = {
+    id?: SortOrder
+    institution?: SortOrder
+    major?: SortOrder
+    start_date?: SortOrder
+    end_date?: SortOrderInput | SortOrder
+    summary?: SortOrderInput | SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: UserAcademicInformationCountOrderByAggregateInput
+    _max?: UserAcademicInformationMaxOrderByAggregateInput
+    _min?: UserAcademicInformationMinOrderByAggregateInput
+  }
+
+  export type UserAcademicInformationScalarWhereWithAggregatesInput = {
+    AND?: UserAcademicInformationScalarWhereWithAggregatesInput | UserAcademicInformationScalarWhereWithAggregatesInput[]
+    OR?: UserAcademicInformationScalarWhereWithAggregatesInput[]
+    NOT?: UserAcademicInformationScalarWhereWithAggregatesInput | UserAcademicInformationScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"UserAcademicInformation"> | string
+    institution?: StringWithAggregatesFilter<"UserAcademicInformation"> | string
+    major?: StringWithAggregatesFilter<"UserAcademicInformation"> | string
+    start_date?: DateTimeWithAggregatesFilter<"UserAcademicInformation"> | Date | string
+    end_date?: DateTimeNullableWithAggregatesFilter<"UserAcademicInformation"> | Date | string | null
+    summary?: StringNullableWithAggregatesFilter<"UserAcademicInformation"> | string | null
+    userId?: StringWithAggregatesFilter<"UserAcademicInformation"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"UserAcademicInformation"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"UserAcademicInformation"> | Date | string
+  }
+
+  export type UserSkillWhereInput = {
+    AND?: UserSkillWhereInput | UserSkillWhereInput[]
+    OR?: UserSkillWhereInput[]
+    NOT?: UserSkillWhereInput | UserSkillWhereInput[]
+    id?: IntFilter<"UserSkill"> | number
+    skills?: StringFilter<"UserSkill"> | string
+    userId?: StringFilter<"UserSkill"> | string
+    createdAt?: DateTimeFilter<"UserSkill"> | Date | string
+    updatedAt?: DateTimeFilter<"UserSkill"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type UserSkillOrderByWithRelationInput = {
+    id?: SortOrder
+    skills?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type UserSkillWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    userId?: string
+    AND?: UserSkillWhereInput | UserSkillWhereInput[]
+    OR?: UserSkillWhereInput[]
+    NOT?: UserSkillWhereInput | UserSkillWhereInput[]
+    skills?: StringFilter<"UserSkill"> | string
+    createdAt?: DateTimeFilter<"UserSkill"> | Date | string
+    updatedAt?: DateTimeFilter<"UserSkill"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id" | "userId">
+
+  export type UserSkillOrderByWithAggregationInput = {
+    id?: SortOrder
+    skills?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: UserSkillCountOrderByAggregateInput
+    _avg?: UserSkillAvgOrderByAggregateInput
+    _max?: UserSkillMaxOrderByAggregateInput
+    _min?: UserSkillMinOrderByAggregateInput
+    _sum?: UserSkillSumOrderByAggregateInput
+  }
+
+  export type UserSkillScalarWhereWithAggregatesInput = {
+    AND?: UserSkillScalarWhereWithAggregatesInput | UserSkillScalarWhereWithAggregatesInput[]
+    OR?: UserSkillScalarWhereWithAggregatesInput[]
+    NOT?: UserSkillScalarWhereWithAggregatesInput | UserSkillScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"UserSkill"> | number
+    skills?: StringWithAggregatesFilter<"UserSkill"> | string
+    userId?: StringWithAggregatesFilter<"UserSkill"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"UserSkill"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"UserSkill"> | Date | string
+  }
+
   export type UserCreateInput = {
     id: string
     name: string
@@ -6054,8 +11420,13 @@ export namespace Prisma {
     updatedAt?: Date | string
     username?: string | null
     displayUsername?: string | null
+    onboarded?: boolean
     sessions?: SessionCreateNestedManyWithoutUserInput
     accounts?: AccountCreateNestedManyWithoutUserInput
+    user_professional_summary?: UserProfessionalSummaryCreateNestedOneWithoutUserInput
+    user_professional_experiences?: UserProfessionalExperienceCreateNestedManyWithoutUserInput
+    user_academic_information?: UserAcademicInformationCreateNestedManyWithoutUserInput
+    user_skill?: UserSkillCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -6068,8 +11439,13 @@ export namespace Prisma {
     updatedAt?: Date | string
     username?: string | null
     displayUsername?: string | null
+    onboarded?: boolean
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    user_professional_summary?: UserProfessionalSummaryUncheckedCreateNestedOneWithoutUserInput
+    user_professional_experiences?: UserProfessionalExperienceUncheckedCreateNestedManyWithoutUserInput
+    user_academic_information?: UserAcademicInformationUncheckedCreateNestedManyWithoutUserInput
+    user_skill?: UserSkillUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -6082,8 +11458,13 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
     displayUsername?: NullableStringFieldUpdateOperationsInput | string | null
+    onboarded?: BoolFieldUpdateOperationsInput | boolean
     sessions?: SessionUpdateManyWithoutUserNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
+    user_professional_summary?: UserProfessionalSummaryUpdateOneWithoutUserNestedInput
+    user_professional_experiences?: UserProfessionalExperienceUpdateManyWithoutUserNestedInput
+    user_academic_information?: UserAcademicInformationUpdateManyWithoutUserNestedInput
+    user_skill?: UserSkillUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -6096,8 +11477,13 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
     displayUsername?: NullableStringFieldUpdateOperationsInput | string | null
+    onboarded?: BoolFieldUpdateOperationsInput | boolean
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    user_professional_summary?: UserProfessionalSummaryUncheckedUpdateOneWithoutUserNestedInput
+    user_professional_experiences?: UserProfessionalExperienceUncheckedUpdateManyWithoutUserNestedInput
+    user_academic_information?: UserAcademicInformationUncheckedUpdateManyWithoutUserNestedInput
+    user_skill?: UserSkillUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -6110,6 +11496,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     username?: string | null
     displayUsername?: string | null
+    onboarded?: boolean
   }
 
   export type UserUpdateManyMutationInput = {
@@ -6122,6 +11509,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
     displayUsername?: NullableStringFieldUpdateOperationsInput | string | null
+    onboarded?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type UserUncheckedUpdateManyInput = {
@@ -6134,6 +11522,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
     displayUsername?: NullableStringFieldUpdateOperationsInput | string | null
+    onboarded?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type SessionCreateInput = {
@@ -6386,6 +11775,307 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type UserProfessionalExperienceCreateInput = {
+    id?: string
+    institution: string
+    role: string
+    start_date?: Date | string | null
+    end_date?: Date | string | null
+    summary?: string | null
+    version?: number
+    at_university?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutUser_professional_experiencesInput
+  }
+
+  export type UserProfessionalExperienceUncheckedCreateInput = {
+    id?: string
+    institution: string
+    role: string
+    start_date?: Date | string | null
+    end_date?: Date | string | null
+    summary?: string | null
+    version?: number
+    userId: string
+    at_university?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UserProfessionalExperienceUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    institution?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    start_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    end_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    version?: IntFieldUpdateOperationsInput | number
+    at_university?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutUser_professional_experiencesNestedInput
+  }
+
+  export type UserProfessionalExperienceUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    institution?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    start_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    end_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    version?: IntFieldUpdateOperationsInput | number
+    userId?: StringFieldUpdateOperationsInput | string
+    at_university?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserProfessionalExperienceCreateManyInput = {
+    id?: string
+    institution: string
+    role: string
+    start_date?: Date | string | null
+    end_date?: Date | string | null
+    summary?: string | null
+    version?: number
+    userId: string
+    at_university?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UserProfessionalExperienceUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    institution?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    start_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    end_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    version?: IntFieldUpdateOperationsInput | number
+    at_university?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserProfessionalExperienceUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    institution?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    start_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    end_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    version?: IntFieldUpdateOperationsInput | number
+    userId?: StringFieldUpdateOperationsInput | string
+    at_university?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserProfessionalSummaryCreateInput = {
+    id?: string
+    experience_years: number
+    summary?: string | null
+    version?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutUser_professional_summaryInput
+  }
+
+  export type UserProfessionalSummaryUncheckedCreateInput = {
+    id?: string
+    experience_years: number
+    summary?: string | null
+    version?: number
+    userId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UserProfessionalSummaryUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    experience_years?: IntFieldUpdateOperationsInput | number
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    version?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutUser_professional_summaryNestedInput
+  }
+
+  export type UserProfessionalSummaryUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    experience_years?: IntFieldUpdateOperationsInput | number
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    version?: IntFieldUpdateOperationsInput | number
+    userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserProfessionalSummaryCreateManyInput = {
+    id?: string
+    experience_years: number
+    summary?: string | null
+    version?: number
+    userId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UserProfessionalSummaryUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    experience_years?: IntFieldUpdateOperationsInput | number
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    version?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserProfessionalSummaryUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    experience_years?: IntFieldUpdateOperationsInput | number
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    version?: IntFieldUpdateOperationsInput | number
+    userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserAcademicInformationCreateInput = {
+    id?: string
+    institution: string
+    major: string
+    start_date: Date | string
+    end_date?: Date | string | null
+    summary?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutUser_academic_informationInput
+  }
+
+  export type UserAcademicInformationUncheckedCreateInput = {
+    id?: string
+    institution: string
+    major: string
+    start_date: Date | string
+    end_date?: Date | string | null
+    summary?: string | null
+    userId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UserAcademicInformationUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    institution?: StringFieldUpdateOperationsInput | string
+    major?: StringFieldUpdateOperationsInput | string
+    start_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    end_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutUser_academic_informationNestedInput
+  }
+
+  export type UserAcademicInformationUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    institution?: StringFieldUpdateOperationsInput | string
+    major?: StringFieldUpdateOperationsInput | string
+    start_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    end_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserAcademicInformationCreateManyInput = {
+    id?: string
+    institution: string
+    major: string
+    start_date: Date | string
+    end_date?: Date | string | null
+    summary?: string | null
+    userId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UserAcademicInformationUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    institution?: StringFieldUpdateOperationsInput | string
+    major?: StringFieldUpdateOperationsInput | string
+    start_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    end_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserAcademicInformationUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    institution?: StringFieldUpdateOperationsInput | string
+    major?: StringFieldUpdateOperationsInput | string
+    start_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    end_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserSkillCreateInput = {
+    skills: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutUser_skillInput
+  }
+
+  export type UserSkillUncheckedCreateInput = {
+    id?: number
+    skills: string
+    userId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UserSkillUpdateInput = {
+    skills?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutUser_skillNestedInput
+  }
+
+  export type UserSkillUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    skills?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserSkillCreateManyInput = {
+    id?: number
+    skills: string
+    userId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UserSkillUpdateManyMutationInput = {
+    skills?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserSkillUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    skills?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -6444,6 +12134,28 @@ export namespace Prisma {
     none?: AccountWhereInput
   }
 
+  export type UserProfessionalSummaryNullableScalarRelationFilter = {
+    is?: UserProfessionalSummaryWhereInput | null
+    isNot?: UserProfessionalSummaryWhereInput | null
+  }
+
+  export type UserProfessionalExperienceListRelationFilter = {
+    every?: UserProfessionalExperienceWhereInput
+    some?: UserProfessionalExperienceWhereInput
+    none?: UserProfessionalExperienceWhereInput
+  }
+
+  export type UserAcademicInformationListRelationFilter = {
+    every?: UserAcademicInformationWhereInput
+    some?: UserAcademicInformationWhereInput
+    none?: UserAcademicInformationWhereInput
+  }
+
+  export type UserSkillNullableScalarRelationFilter = {
+    is?: UserSkillWhereInput | null
+    isNot?: UserSkillWhereInput | null
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -6457,6 +12169,14 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
+  export type UserProfessionalExperienceOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type UserAcademicInformationOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type UserCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
@@ -6467,6 +12187,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     username?: SortOrder
     displayUsername?: SortOrder
+    onboarded?: SortOrder
   }
 
   export type UserMaxOrderByAggregateInput = {
@@ -6479,6 +12200,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     username?: SortOrder
     displayUsername?: SortOrder
+    onboarded?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
@@ -6491,6 +12213,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     username?: SortOrder
     displayUsername?: SortOrder
+    onboarded?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -6689,6 +12412,191 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type UserProfessionalExperienceCountOrderByAggregateInput = {
+    id?: SortOrder
+    institution?: SortOrder
+    role?: SortOrder
+    start_date?: SortOrder
+    end_date?: SortOrder
+    summary?: SortOrder
+    version?: SortOrder
+    userId?: SortOrder
+    at_university?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type UserProfessionalExperienceAvgOrderByAggregateInput = {
+    version?: SortOrder
+  }
+
+  export type UserProfessionalExperienceMaxOrderByAggregateInput = {
+    id?: SortOrder
+    institution?: SortOrder
+    role?: SortOrder
+    start_date?: SortOrder
+    end_date?: SortOrder
+    summary?: SortOrder
+    version?: SortOrder
+    userId?: SortOrder
+    at_university?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type UserProfessionalExperienceMinOrderByAggregateInput = {
+    id?: SortOrder
+    institution?: SortOrder
+    role?: SortOrder
+    start_date?: SortOrder
+    end_date?: SortOrder
+    summary?: SortOrder
+    version?: SortOrder
+    userId?: SortOrder
+    at_university?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type UserProfessionalExperienceSumOrderByAggregateInput = {
+    version?: SortOrder
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type UserProfessionalSummaryCountOrderByAggregateInput = {
+    id?: SortOrder
+    experience_years?: SortOrder
+    summary?: SortOrder
+    version?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type UserProfessionalSummaryAvgOrderByAggregateInput = {
+    experience_years?: SortOrder
+    version?: SortOrder
+  }
+
+  export type UserProfessionalSummaryMaxOrderByAggregateInput = {
+    id?: SortOrder
+    experience_years?: SortOrder
+    summary?: SortOrder
+    version?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type UserProfessionalSummaryMinOrderByAggregateInput = {
+    id?: SortOrder
+    experience_years?: SortOrder
+    summary?: SortOrder
+    version?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type UserProfessionalSummarySumOrderByAggregateInput = {
+    experience_years?: SortOrder
+    version?: SortOrder
+  }
+
+  export type UserAcademicInformationCountOrderByAggregateInput = {
+    id?: SortOrder
+    institution?: SortOrder
+    major?: SortOrder
+    start_date?: SortOrder
+    end_date?: SortOrder
+    summary?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type UserAcademicInformationMaxOrderByAggregateInput = {
+    id?: SortOrder
+    institution?: SortOrder
+    major?: SortOrder
+    start_date?: SortOrder
+    end_date?: SortOrder
+    summary?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type UserAcademicInformationMinOrderByAggregateInput = {
+    id?: SortOrder
+    institution?: SortOrder
+    major?: SortOrder
+    start_date?: SortOrder
+    end_date?: SortOrder
+    summary?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type UserSkillCountOrderByAggregateInput = {
+    id?: SortOrder
+    skills?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type UserSkillAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type UserSkillMaxOrderByAggregateInput = {
+    id?: SortOrder
+    skills?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type UserSkillMinOrderByAggregateInput = {
+    id?: SortOrder
+    skills?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type UserSkillSumOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
   export type SessionCreateNestedManyWithoutUserInput = {
     create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
     connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
@@ -6703,6 +12611,32 @@ export namespace Prisma {
     connect?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
   }
 
+  export type UserProfessionalSummaryCreateNestedOneWithoutUserInput = {
+    create?: XOR<UserProfessionalSummaryCreateWithoutUserInput, UserProfessionalSummaryUncheckedCreateWithoutUserInput>
+    connectOrCreate?: UserProfessionalSummaryCreateOrConnectWithoutUserInput
+    connect?: UserProfessionalSummaryWhereUniqueInput
+  }
+
+  export type UserProfessionalExperienceCreateNestedManyWithoutUserInput = {
+    create?: XOR<UserProfessionalExperienceCreateWithoutUserInput, UserProfessionalExperienceUncheckedCreateWithoutUserInput> | UserProfessionalExperienceCreateWithoutUserInput[] | UserProfessionalExperienceUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserProfessionalExperienceCreateOrConnectWithoutUserInput | UserProfessionalExperienceCreateOrConnectWithoutUserInput[]
+    createMany?: UserProfessionalExperienceCreateManyUserInputEnvelope
+    connect?: UserProfessionalExperienceWhereUniqueInput | UserProfessionalExperienceWhereUniqueInput[]
+  }
+
+  export type UserAcademicInformationCreateNestedManyWithoutUserInput = {
+    create?: XOR<UserAcademicInformationCreateWithoutUserInput, UserAcademicInformationUncheckedCreateWithoutUserInput> | UserAcademicInformationCreateWithoutUserInput[] | UserAcademicInformationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserAcademicInformationCreateOrConnectWithoutUserInput | UserAcademicInformationCreateOrConnectWithoutUserInput[]
+    createMany?: UserAcademicInformationCreateManyUserInputEnvelope
+    connect?: UserAcademicInformationWhereUniqueInput | UserAcademicInformationWhereUniqueInput[]
+  }
+
+  export type UserSkillCreateNestedOneWithoutUserInput = {
+    create?: XOR<UserSkillCreateWithoutUserInput, UserSkillUncheckedCreateWithoutUserInput>
+    connectOrCreate?: UserSkillCreateOrConnectWithoutUserInput
+    connect?: UserSkillWhereUniqueInput
+  }
+
   export type SessionUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
     connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
@@ -6715,6 +12649,32 @@ export namespace Prisma {
     connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
     createMany?: AccountCreateManyUserInputEnvelope
     connect?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
+  }
+
+  export type UserProfessionalSummaryUncheckedCreateNestedOneWithoutUserInput = {
+    create?: XOR<UserProfessionalSummaryCreateWithoutUserInput, UserProfessionalSummaryUncheckedCreateWithoutUserInput>
+    connectOrCreate?: UserProfessionalSummaryCreateOrConnectWithoutUserInput
+    connect?: UserProfessionalSummaryWhereUniqueInput
+  }
+
+  export type UserProfessionalExperienceUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<UserProfessionalExperienceCreateWithoutUserInput, UserProfessionalExperienceUncheckedCreateWithoutUserInput> | UserProfessionalExperienceCreateWithoutUserInput[] | UserProfessionalExperienceUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserProfessionalExperienceCreateOrConnectWithoutUserInput | UserProfessionalExperienceCreateOrConnectWithoutUserInput[]
+    createMany?: UserProfessionalExperienceCreateManyUserInputEnvelope
+    connect?: UserProfessionalExperienceWhereUniqueInput | UserProfessionalExperienceWhereUniqueInput[]
+  }
+
+  export type UserAcademicInformationUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<UserAcademicInformationCreateWithoutUserInput, UserAcademicInformationUncheckedCreateWithoutUserInput> | UserAcademicInformationCreateWithoutUserInput[] | UserAcademicInformationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserAcademicInformationCreateOrConnectWithoutUserInput | UserAcademicInformationCreateOrConnectWithoutUserInput[]
+    createMany?: UserAcademicInformationCreateManyUserInputEnvelope
+    connect?: UserAcademicInformationWhereUniqueInput | UserAcademicInformationWhereUniqueInput[]
+  }
+
+  export type UserSkillUncheckedCreateNestedOneWithoutUserInput = {
+    create?: XOR<UserSkillCreateWithoutUserInput, UserSkillUncheckedCreateWithoutUserInput>
+    connectOrCreate?: UserSkillCreateOrConnectWithoutUserInput
+    connect?: UserSkillWhereUniqueInput
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -6761,6 +12721,54 @@ export namespace Prisma {
     deleteMany?: AccountScalarWhereInput | AccountScalarWhereInput[]
   }
 
+  export type UserProfessionalSummaryUpdateOneWithoutUserNestedInput = {
+    create?: XOR<UserProfessionalSummaryCreateWithoutUserInput, UserProfessionalSummaryUncheckedCreateWithoutUserInput>
+    connectOrCreate?: UserProfessionalSummaryCreateOrConnectWithoutUserInput
+    upsert?: UserProfessionalSummaryUpsertWithoutUserInput
+    disconnect?: UserProfessionalSummaryWhereInput | boolean
+    delete?: UserProfessionalSummaryWhereInput | boolean
+    connect?: UserProfessionalSummaryWhereUniqueInput
+    update?: XOR<XOR<UserProfessionalSummaryUpdateToOneWithWhereWithoutUserInput, UserProfessionalSummaryUpdateWithoutUserInput>, UserProfessionalSummaryUncheckedUpdateWithoutUserInput>
+  }
+
+  export type UserProfessionalExperienceUpdateManyWithoutUserNestedInput = {
+    create?: XOR<UserProfessionalExperienceCreateWithoutUserInput, UserProfessionalExperienceUncheckedCreateWithoutUserInput> | UserProfessionalExperienceCreateWithoutUserInput[] | UserProfessionalExperienceUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserProfessionalExperienceCreateOrConnectWithoutUserInput | UserProfessionalExperienceCreateOrConnectWithoutUserInput[]
+    upsert?: UserProfessionalExperienceUpsertWithWhereUniqueWithoutUserInput | UserProfessionalExperienceUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: UserProfessionalExperienceCreateManyUserInputEnvelope
+    set?: UserProfessionalExperienceWhereUniqueInput | UserProfessionalExperienceWhereUniqueInput[]
+    disconnect?: UserProfessionalExperienceWhereUniqueInput | UserProfessionalExperienceWhereUniqueInput[]
+    delete?: UserProfessionalExperienceWhereUniqueInput | UserProfessionalExperienceWhereUniqueInput[]
+    connect?: UserProfessionalExperienceWhereUniqueInput | UserProfessionalExperienceWhereUniqueInput[]
+    update?: UserProfessionalExperienceUpdateWithWhereUniqueWithoutUserInput | UserProfessionalExperienceUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: UserProfessionalExperienceUpdateManyWithWhereWithoutUserInput | UserProfessionalExperienceUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: UserProfessionalExperienceScalarWhereInput | UserProfessionalExperienceScalarWhereInput[]
+  }
+
+  export type UserAcademicInformationUpdateManyWithoutUserNestedInput = {
+    create?: XOR<UserAcademicInformationCreateWithoutUserInput, UserAcademicInformationUncheckedCreateWithoutUserInput> | UserAcademicInformationCreateWithoutUserInput[] | UserAcademicInformationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserAcademicInformationCreateOrConnectWithoutUserInput | UserAcademicInformationCreateOrConnectWithoutUserInput[]
+    upsert?: UserAcademicInformationUpsertWithWhereUniqueWithoutUserInput | UserAcademicInformationUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: UserAcademicInformationCreateManyUserInputEnvelope
+    set?: UserAcademicInformationWhereUniqueInput | UserAcademicInformationWhereUniqueInput[]
+    disconnect?: UserAcademicInformationWhereUniqueInput | UserAcademicInformationWhereUniqueInput[]
+    delete?: UserAcademicInformationWhereUniqueInput | UserAcademicInformationWhereUniqueInput[]
+    connect?: UserAcademicInformationWhereUniqueInput | UserAcademicInformationWhereUniqueInput[]
+    update?: UserAcademicInformationUpdateWithWhereUniqueWithoutUserInput | UserAcademicInformationUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: UserAcademicInformationUpdateManyWithWhereWithoutUserInput | UserAcademicInformationUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: UserAcademicInformationScalarWhereInput | UserAcademicInformationScalarWhereInput[]
+  }
+
+  export type UserSkillUpdateOneWithoutUserNestedInput = {
+    create?: XOR<UserSkillCreateWithoutUserInput, UserSkillUncheckedCreateWithoutUserInput>
+    connectOrCreate?: UserSkillCreateOrConnectWithoutUserInput
+    upsert?: UserSkillUpsertWithoutUserInput
+    disconnect?: UserSkillWhereInput | boolean
+    delete?: UserSkillWhereInput | boolean
+    connect?: UserSkillWhereUniqueInput
+    update?: XOR<XOR<UserSkillUpdateToOneWithWhereWithoutUserInput, UserSkillUpdateWithoutUserInput>, UserSkillUncheckedUpdateWithoutUserInput>
+  }
+
   export type SessionUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
     connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
@@ -6787,6 +12795,54 @@ export namespace Prisma {
     update?: AccountUpdateWithWhereUniqueWithoutUserInput | AccountUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: AccountUpdateManyWithWhereWithoutUserInput | AccountUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: AccountScalarWhereInput | AccountScalarWhereInput[]
+  }
+
+  export type UserProfessionalSummaryUncheckedUpdateOneWithoutUserNestedInput = {
+    create?: XOR<UserProfessionalSummaryCreateWithoutUserInput, UserProfessionalSummaryUncheckedCreateWithoutUserInput>
+    connectOrCreate?: UserProfessionalSummaryCreateOrConnectWithoutUserInput
+    upsert?: UserProfessionalSummaryUpsertWithoutUserInput
+    disconnect?: UserProfessionalSummaryWhereInput | boolean
+    delete?: UserProfessionalSummaryWhereInput | boolean
+    connect?: UserProfessionalSummaryWhereUniqueInput
+    update?: XOR<XOR<UserProfessionalSummaryUpdateToOneWithWhereWithoutUserInput, UserProfessionalSummaryUpdateWithoutUserInput>, UserProfessionalSummaryUncheckedUpdateWithoutUserInput>
+  }
+
+  export type UserProfessionalExperienceUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<UserProfessionalExperienceCreateWithoutUserInput, UserProfessionalExperienceUncheckedCreateWithoutUserInput> | UserProfessionalExperienceCreateWithoutUserInput[] | UserProfessionalExperienceUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserProfessionalExperienceCreateOrConnectWithoutUserInput | UserProfessionalExperienceCreateOrConnectWithoutUserInput[]
+    upsert?: UserProfessionalExperienceUpsertWithWhereUniqueWithoutUserInput | UserProfessionalExperienceUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: UserProfessionalExperienceCreateManyUserInputEnvelope
+    set?: UserProfessionalExperienceWhereUniqueInput | UserProfessionalExperienceWhereUniqueInput[]
+    disconnect?: UserProfessionalExperienceWhereUniqueInput | UserProfessionalExperienceWhereUniqueInput[]
+    delete?: UserProfessionalExperienceWhereUniqueInput | UserProfessionalExperienceWhereUniqueInput[]
+    connect?: UserProfessionalExperienceWhereUniqueInput | UserProfessionalExperienceWhereUniqueInput[]
+    update?: UserProfessionalExperienceUpdateWithWhereUniqueWithoutUserInput | UserProfessionalExperienceUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: UserProfessionalExperienceUpdateManyWithWhereWithoutUserInput | UserProfessionalExperienceUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: UserProfessionalExperienceScalarWhereInput | UserProfessionalExperienceScalarWhereInput[]
+  }
+
+  export type UserAcademicInformationUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<UserAcademicInformationCreateWithoutUserInput, UserAcademicInformationUncheckedCreateWithoutUserInput> | UserAcademicInformationCreateWithoutUserInput[] | UserAcademicInformationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserAcademicInformationCreateOrConnectWithoutUserInput | UserAcademicInformationCreateOrConnectWithoutUserInput[]
+    upsert?: UserAcademicInformationUpsertWithWhereUniqueWithoutUserInput | UserAcademicInformationUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: UserAcademicInformationCreateManyUserInputEnvelope
+    set?: UserAcademicInformationWhereUniqueInput | UserAcademicInformationWhereUniqueInput[]
+    disconnect?: UserAcademicInformationWhereUniqueInput | UserAcademicInformationWhereUniqueInput[]
+    delete?: UserAcademicInformationWhereUniqueInput | UserAcademicInformationWhereUniqueInput[]
+    connect?: UserAcademicInformationWhereUniqueInput | UserAcademicInformationWhereUniqueInput[]
+    update?: UserAcademicInformationUpdateWithWhereUniqueWithoutUserInput | UserAcademicInformationUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: UserAcademicInformationUpdateManyWithWhereWithoutUserInput | UserAcademicInformationUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: UserAcademicInformationScalarWhereInput | UserAcademicInformationScalarWhereInput[]
+  }
+
+  export type UserSkillUncheckedUpdateOneWithoutUserNestedInput = {
+    create?: XOR<UserSkillCreateWithoutUserInput, UserSkillUncheckedCreateWithoutUserInput>
+    connectOrCreate?: UserSkillCreateOrConnectWithoutUserInput
+    upsert?: UserSkillUpsertWithoutUserInput
+    disconnect?: UserSkillWhereInput | boolean
+    delete?: UserSkillWhereInput | boolean
+    connect?: UserSkillWhereUniqueInput
+    update?: XOR<XOR<UserSkillUpdateToOneWithWhereWithoutUserInput, UserSkillUpdateWithoutUserInput>, UserSkillUncheckedUpdateWithoutUserInput>
   }
 
   export type UserCreateNestedOneWithoutSessionsInput = {
@@ -6819,6 +12875,70 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutAccountsInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutAccountsInput, UserUpdateWithoutAccountsInput>, UserUncheckedUpdateWithoutAccountsInput>
+  }
+
+  export type UserCreateNestedOneWithoutUser_professional_experiencesInput = {
+    create?: XOR<UserCreateWithoutUser_professional_experiencesInput, UserUncheckedCreateWithoutUser_professional_experiencesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutUser_professional_experiencesInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type UserUpdateOneRequiredWithoutUser_professional_experiencesNestedInput = {
+    create?: XOR<UserCreateWithoutUser_professional_experiencesInput, UserUncheckedCreateWithoutUser_professional_experiencesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutUser_professional_experiencesInput
+    upsert?: UserUpsertWithoutUser_professional_experiencesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutUser_professional_experiencesInput, UserUpdateWithoutUser_professional_experiencesInput>, UserUncheckedUpdateWithoutUser_professional_experiencesInput>
+  }
+
+  export type UserCreateNestedOneWithoutUser_professional_summaryInput = {
+    create?: XOR<UserCreateWithoutUser_professional_summaryInput, UserUncheckedCreateWithoutUser_professional_summaryInput>
+    connectOrCreate?: UserCreateOrConnectWithoutUser_professional_summaryInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutUser_professional_summaryNestedInput = {
+    create?: XOR<UserCreateWithoutUser_professional_summaryInput, UserUncheckedCreateWithoutUser_professional_summaryInput>
+    connectOrCreate?: UserCreateOrConnectWithoutUser_professional_summaryInput
+    upsert?: UserUpsertWithoutUser_professional_summaryInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutUser_professional_summaryInput, UserUpdateWithoutUser_professional_summaryInput>, UserUncheckedUpdateWithoutUser_professional_summaryInput>
+  }
+
+  export type UserCreateNestedOneWithoutUser_academic_informationInput = {
+    create?: XOR<UserCreateWithoutUser_academic_informationInput, UserUncheckedCreateWithoutUser_academic_informationInput>
+    connectOrCreate?: UserCreateOrConnectWithoutUser_academic_informationInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutUser_academic_informationNestedInput = {
+    create?: XOR<UserCreateWithoutUser_academic_informationInput, UserUncheckedCreateWithoutUser_academic_informationInput>
+    connectOrCreate?: UserCreateOrConnectWithoutUser_academic_informationInput
+    upsert?: UserUpsertWithoutUser_academic_informationInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutUser_academic_informationInput, UserUpdateWithoutUser_academic_informationInput>, UserUncheckedUpdateWithoutUser_academic_informationInput>
+  }
+
+  export type UserCreateNestedOneWithoutUser_skillInput = {
+    create?: XOR<UserCreateWithoutUser_skillInput, UserUncheckedCreateWithoutUser_skillInput>
+    connectOrCreate?: UserCreateOrConnectWithoutUser_skillInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutUser_skillNestedInput = {
+    create?: XOR<UserCreateWithoutUser_skillInput, UserUncheckedCreateWithoutUser_skillInput>
+    connectOrCreate?: UserCreateOrConnectWithoutUser_skillInput
+    upsert?: UserUpsertWithoutUser_skillInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutUser_skillInput, UserUpdateWithoutUser_skillInput>, UserUncheckedUpdateWithoutUser_skillInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -6968,6 +13088,33 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
   export type SessionCreateWithoutUserInput = {
     id: string
     expiresAt: Date | string
@@ -7038,6 +13185,115 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type UserProfessionalSummaryCreateWithoutUserInput = {
+    id?: string
+    experience_years: number
+    summary?: string | null
+    version?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UserProfessionalSummaryUncheckedCreateWithoutUserInput = {
+    id?: string
+    experience_years: number
+    summary?: string | null
+    version?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UserProfessionalSummaryCreateOrConnectWithoutUserInput = {
+    where: UserProfessionalSummaryWhereUniqueInput
+    create: XOR<UserProfessionalSummaryCreateWithoutUserInput, UserProfessionalSummaryUncheckedCreateWithoutUserInput>
+  }
+
+  export type UserProfessionalExperienceCreateWithoutUserInput = {
+    id?: string
+    institution: string
+    role: string
+    start_date?: Date | string | null
+    end_date?: Date | string | null
+    summary?: string | null
+    version?: number
+    at_university?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UserProfessionalExperienceUncheckedCreateWithoutUserInput = {
+    id?: string
+    institution: string
+    role: string
+    start_date?: Date | string | null
+    end_date?: Date | string | null
+    summary?: string | null
+    version?: number
+    at_university?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UserProfessionalExperienceCreateOrConnectWithoutUserInput = {
+    where: UserProfessionalExperienceWhereUniqueInput
+    create: XOR<UserProfessionalExperienceCreateWithoutUserInput, UserProfessionalExperienceUncheckedCreateWithoutUserInput>
+  }
+
+  export type UserProfessionalExperienceCreateManyUserInputEnvelope = {
+    data: UserProfessionalExperienceCreateManyUserInput | UserProfessionalExperienceCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type UserAcademicInformationCreateWithoutUserInput = {
+    id?: string
+    institution: string
+    major: string
+    start_date: Date | string
+    end_date?: Date | string | null
+    summary?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UserAcademicInformationUncheckedCreateWithoutUserInput = {
+    id?: string
+    institution: string
+    major: string
+    start_date: Date | string
+    end_date?: Date | string | null
+    summary?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UserAcademicInformationCreateOrConnectWithoutUserInput = {
+    where: UserAcademicInformationWhereUniqueInput
+    create: XOR<UserAcademicInformationCreateWithoutUserInput, UserAcademicInformationUncheckedCreateWithoutUserInput>
+  }
+
+  export type UserAcademicInformationCreateManyUserInputEnvelope = {
+    data: UserAcademicInformationCreateManyUserInput | UserAcademicInformationCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type UserSkillCreateWithoutUserInput = {
+    skills: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UserSkillUncheckedCreateWithoutUserInput = {
+    id?: number
+    skills: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UserSkillCreateOrConnectWithoutUserInput = {
+    where: UserSkillWhereUniqueInput
+    create: XOR<UserSkillCreateWithoutUserInput, UserSkillUncheckedCreateWithoutUserInput>
+  }
+
   export type SessionUpsertWithWhereUniqueWithoutUserInput = {
     where: SessionWhereUniqueInput
     update: XOR<SessionUpdateWithoutUserInput, SessionUncheckedUpdateWithoutUserInput>
@@ -7103,6 +13359,123 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Account"> | Date | string
   }
 
+  export type UserProfessionalSummaryUpsertWithoutUserInput = {
+    update: XOR<UserProfessionalSummaryUpdateWithoutUserInput, UserProfessionalSummaryUncheckedUpdateWithoutUserInput>
+    create: XOR<UserProfessionalSummaryCreateWithoutUserInput, UserProfessionalSummaryUncheckedCreateWithoutUserInput>
+    where?: UserProfessionalSummaryWhereInput
+  }
+
+  export type UserProfessionalSummaryUpdateToOneWithWhereWithoutUserInput = {
+    where?: UserProfessionalSummaryWhereInput
+    data: XOR<UserProfessionalSummaryUpdateWithoutUserInput, UserProfessionalSummaryUncheckedUpdateWithoutUserInput>
+  }
+
+  export type UserProfessionalSummaryUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    experience_years?: IntFieldUpdateOperationsInput | number
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    version?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserProfessionalSummaryUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    experience_years?: IntFieldUpdateOperationsInput | number
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    version?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserProfessionalExperienceUpsertWithWhereUniqueWithoutUserInput = {
+    where: UserProfessionalExperienceWhereUniqueInput
+    update: XOR<UserProfessionalExperienceUpdateWithoutUserInput, UserProfessionalExperienceUncheckedUpdateWithoutUserInput>
+    create: XOR<UserProfessionalExperienceCreateWithoutUserInput, UserProfessionalExperienceUncheckedCreateWithoutUserInput>
+  }
+
+  export type UserProfessionalExperienceUpdateWithWhereUniqueWithoutUserInput = {
+    where: UserProfessionalExperienceWhereUniqueInput
+    data: XOR<UserProfessionalExperienceUpdateWithoutUserInput, UserProfessionalExperienceUncheckedUpdateWithoutUserInput>
+  }
+
+  export type UserProfessionalExperienceUpdateManyWithWhereWithoutUserInput = {
+    where: UserProfessionalExperienceScalarWhereInput
+    data: XOR<UserProfessionalExperienceUpdateManyMutationInput, UserProfessionalExperienceUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type UserProfessionalExperienceScalarWhereInput = {
+    AND?: UserProfessionalExperienceScalarWhereInput | UserProfessionalExperienceScalarWhereInput[]
+    OR?: UserProfessionalExperienceScalarWhereInput[]
+    NOT?: UserProfessionalExperienceScalarWhereInput | UserProfessionalExperienceScalarWhereInput[]
+    id?: StringFilter<"UserProfessionalExperience"> | string
+    institution?: StringFilter<"UserProfessionalExperience"> | string
+    role?: StringFilter<"UserProfessionalExperience"> | string
+    start_date?: DateTimeNullableFilter<"UserProfessionalExperience"> | Date | string | null
+    end_date?: DateTimeNullableFilter<"UserProfessionalExperience"> | Date | string | null
+    summary?: StringNullableFilter<"UserProfessionalExperience"> | string | null
+    version?: IntFilter<"UserProfessionalExperience"> | number
+    userId?: StringFilter<"UserProfessionalExperience"> | string
+    at_university?: BoolFilter<"UserProfessionalExperience"> | boolean
+    createdAt?: DateTimeFilter<"UserProfessionalExperience"> | Date | string
+    updatedAt?: DateTimeFilter<"UserProfessionalExperience"> | Date | string
+  }
+
+  export type UserAcademicInformationUpsertWithWhereUniqueWithoutUserInput = {
+    where: UserAcademicInformationWhereUniqueInput
+    update: XOR<UserAcademicInformationUpdateWithoutUserInput, UserAcademicInformationUncheckedUpdateWithoutUserInput>
+    create: XOR<UserAcademicInformationCreateWithoutUserInput, UserAcademicInformationUncheckedCreateWithoutUserInput>
+  }
+
+  export type UserAcademicInformationUpdateWithWhereUniqueWithoutUserInput = {
+    where: UserAcademicInformationWhereUniqueInput
+    data: XOR<UserAcademicInformationUpdateWithoutUserInput, UserAcademicInformationUncheckedUpdateWithoutUserInput>
+  }
+
+  export type UserAcademicInformationUpdateManyWithWhereWithoutUserInput = {
+    where: UserAcademicInformationScalarWhereInput
+    data: XOR<UserAcademicInformationUpdateManyMutationInput, UserAcademicInformationUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type UserAcademicInformationScalarWhereInput = {
+    AND?: UserAcademicInformationScalarWhereInput | UserAcademicInformationScalarWhereInput[]
+    OR?: UserAcademicInformationScalarWhereInput[]
+    NOT?: UserAcademicInformationScalarWhereInput | UserAcademicInformationScalarWhereInput[]
+    id?: StringFilter<"UserAcademicInformation"> | string
+    institution?: StringFilter<"UserAcademicInformation"> | string
+    major?: StringFilter<"UserAcademicInformation"> | string
+    start_date?: DateTimeFilter<"UserAcademicInformation"> | Date | string
+    end_date?: DateTimeNullableFilter<"UserAcademicInformation"> | Date | string | null
+    summary?: StringNullableFilter<"UserAcademicInformation"> | string | null
+    userId?: StringFilter<"UserAcademicInformation"> | string
+    createdAt?: DateTimeFilter<"UserAcademicInformation"> | Date | string
+    updatedAt?: DateTimeFilter<"UserAcademicInformation"> | Date | string
+  }
+
+  export type UserSkillUpsertWithoutUserInput = {
+    update: XOR<UserSkillUpdateWithoutUserInput, UserSkillUncheckedUpdateWithoutUserInput>
+    create: XOR<UserSkillCreateWithoutUserInput, UserSkillUncheckedCreateWithoutUserInput>
+    where?: UserSkillWhereInput
+  }
+
+  export type UserSkillUpdateToOneWithWhereWithoutUserInput = {
+    where?: UserSkillWhereInput
+    data: XOR<UserSkillUpdateWithoutUserInput, UserSkillUncheckedUpdateWithoutUserInput>
+  }
+
+  export type UserSkillUpdateWithoutUserInput = {
+    skills?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserSkillUncheckedUpdateWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    skills?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type UserCreateWithoutSessionsInput = {
     id: string
     name: string
@@ -7113,7 +13486,12 @@ export namespace Prisma {
     updatedAt?: Date | string
     username?: string | null
     displayUsername?: string | null
+    onboarded?: boolean
     accounts?: AccountCreateNestedManyWithoutUserInput
+    user_professional_summary?: UserProfessionalSummaryCreateNestedOneWithoutUserInput
+    user_professional_experiences?: UserProfessionalExperienceCreateNestedManyWithoutUserInput
+    user_academic_information?: UserAcademicInformationCreateNestedManyWithoutUserInput
+    user_skill?: UserSkillCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSessionsInput = {
@@ -7126,7 +13504,12 @@ export namespace Prisma {
     updatedAt?: Date | string
     username?: string | null
     displayUsername?: string | null
+    onboarded?: boolean
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    user_professional_summary?: UserProfessionalSummaryUncheckedCreateNestedOneWithoutUserInput
+    user_professional_experiences?: UserProfessionalExperienceUncheckedCreateNestedManyWithoutUserInput
+    user_academic_information?: UserAcademicInformationUncheckedCreateNestedManyWithoutUserInput
+    user_skill?: UserSkillUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSessionsInput = {
@@ -7155,7 +13538,12 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
     displayUsername?: NullableStringFieldUpdateOperationsInput | string | null
+    onboarded?: BoolFieldUpdateOperationsInput | boolean
     accounts?: AccountUpdateManyWithoutUserNestedInput
+    user_professional_summary?: UserProfessionalSummaryUpdateOneWithoutUserNestedInput
+    user_professional_experiences?: UserProfessionalExperienceUpdateManyWithoutUserNestedInput
+    user_academic_information?: UserAcademicInformationUpdateManyWithoutUserNestedInput
+    user_skill?: UserSkillUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -7168,7 +13556,12 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
     displayUsername?: NullableStringFieldUpdateOperationsInput | string | null
+    onboarded?: BoolFieldUpdateOperationsInput | boolean
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    user_professional_summary?: UserProfessionalSummaryUncheckedUpdateOneWithoutUserNestedInput
+    user_professional_experiences?: UserProfessionalExperienceUncheckedUpdateManyWithoutUserNestedInput
+    user_academic_information?: UserAcademicInformationUncheckedUpdateManyWithoutUserNestedInput
+    user_skill?: UserSkillUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type UserCreateWithoutAccountsInput = {
@@ -7181,7 +13574,12 @@ export namespace Prisma {
     updatedAt?: Date | string
     username?: string | null
     displayUsername?: string | null
+    onboarded?: boolean
     sessions?: SessionCreateNestedManyWithoutUserInput
+    user_professional_summary?: UserProfessionalSummaryCreateNestedOneWithoutUserInput
+    user_professional_experiences?: UserProfessionalExperienceCreateNestedManyWithoutUserInput
+    user_academic_information?: UserAcademicInformationCreateNestedManyWithoutUserInput
+    user_skill?: UserSkillCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAccountsInput = {
@@ -7194,7 +13592,12 @@ export namespace Prisma {
     updatedAt?: Date | string
     username?: string | null
     displayUsername?: string | null
+    onboarded?: boolean
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    user_professional_summary?: UserProfessionalSummaryUncheckedCreateNestedOneWithoutUserInput
+    user_professional_experiences?: UserProfessionalExperienceUncheckedCreateNestedManyWithoutUserInput
+    user_academic_information?: UserAcademicInformationUncheckedCreateNestedManyWithoutUserInput
+    user_skill?: UserSkillUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAccountsInput = {
@@ -7223,7 +13626,12 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
     displayUsername?: NullableStringFieldUpdateOperationsInput | string | null
+    onboarded?: BoolFieldUpdateOperationsInput | boolean
     sessions?: SessionUpdateManyWithoutUserNestedInput
+    user_professional_summary?: UserProfessionalSummaryUpdateOneWithoutUserNestedInput
+    user_professional_experiences?: UserProfessionalExperienceUpdateManyWithoutUserNestedInput
+    user_academic_information?: UserAcademicInformationUpdateManyWithoutUserNestedInput
+    user_skill?: UserSkillUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -7236,7 +13644,364 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
     displayUsername?: NullableStringFieldUpdateOperationsInput | string | null
+    onboarded?: BoolFieldUpdateOperationsInput | boolean
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    user_professional_summary?: UserProfessionalSummaryUncheckedUpdateOneWithoutUserNestedInput
+    user_professional_experiences?: UserProfessionalExperienceUncheckedUpdateManyWithoutUserNestedInput
+    user_academic_information?: UserAcademicInformationUncheckedUpdateManyWithoutUserNestedInput
+    user_skill?: UserSkillUncheckedUpdateOneWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutUser_professional_experiencesInput = {
+    id: string
+    name: string
+    email: string
+    emailVerified?: boolean
+    image?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    username?: string | null
+    displayUsername?: string | null
+    onboarded?: boolean
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    user_professional_summary?: UserProfessionalSummaryCreateNestedOneWithoutUserInput
+    user_academic_information?: UserAcademicInformationCreateNestedManyWithoutUserInput
+    user_skill?: UserSkillCreateNestedOneWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutUser_professional_experiencesInput = {
+    id: string
+    name: string
+    email: string
+    emailVerified?: boolean
+    image?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    username?: string | null
+    displayUsername?: string | null
+    onboarded?: boolean
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    user_professional_summary?: UserProfessionalSummaryUncheckedCreateNestedOneWithoutUserInput
+    user_academic_information?: UserAcademicInformationUncheckedCreateNestedManyWithoutUserInput
+    user_skill?: UserSkillUncheckedCreateNestedOneWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutUser_professional_experiencesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutUser_professional_experiencesInput, UserUncheckedCreateWithoutUser_professional_experiencesInput>
+  }
+
+  export type UserUpsertWithoutUser_professional_experiencesInput = {
+    update: XOR<UserUpdateWithoutUser_professional_experiencesInput, UserUncheckedUpdateWithoutUser_professional_experiencesInput>
+    create: XOR<UserCreateWithoutUser_professional_experiencesInput, UserUncheckedCreateWithoutUser_professional_experiencesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutUser_professional_experiencesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutUser_professional_experiencesInput, UserUncheckedUpdateWithoutUser_professional_experiencesInput>
+  }
+
+  export type UserUpdateWithoutUser_professional_experiencesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    username?: NullableStringFieldUpdateOperationsInput | string | null
+    displayUsername?: NullableStringFieldUpdateOperationsInput | string | null
+    onboarded?: BoolFieldUpdateOperationsInput | boolean
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    user_professional_summary?: UserProfessionalSummaryUpdateOneWithoutUserNestedInput
+    user_academic_information?: UserAcademicInformationUpdateManyWithoutUserNestedInput
+    user_skill?: UserSkillUpdateOneWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutUser_professional_experiencesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    username?: NullableStringFieldUpdateOperationsInput | string | null
+    displayUsername?: NullableStringFieldUpdateOperationsInput | string | null
+    onboarded?: BoolFieldUpdateOperationsInput | boolean
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    user_professional_summary?: UserProfessionalSummaryUncheckedUpdateOneWithoutUserNestedInput
+    user_academic_information?: UserAcademicInformationUncheckedUpdateManyWithoutUserNestedInput
+    user_skill?: UserSkillUncheckedUpdateOneWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutUser_professional_summaryInput = {
+    id: string
+    name: string
+    email: string
+    emailVerified?: boolean
+    image?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    username?: string | null
+    displayUsername?: string | null
+    onboarded?: boolean
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    user_professional_experiences?: UserProfessionalExperienceCreateNestedManyWithoutUserInput
+    user_academic_information?: UserAcademicInformationCreateNestedManyWithoutUserInput
+    user_skill?: UserSkillCreateNestedOneWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutUser_professional_summaryInput = {
+    id: string
+    name: string
+    email: string
+    emailVerified?: boolean
+    image?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    username?: string | null
+    displayUsername?: string | null
+    onboarded?: boolean
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    user_professional_experiences?: UserProfessionalExperienceUncheckedCreateNestedManyWithoutUserInput
+    user_academic_information?: UserAcademicInformationUncheckedCreateNestedManyWithoutUserInput
+    user_skill?: UserSkillUncheckedCreateNestedOneWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutUser_professional_summaryInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutUser_professional_summaryInput, UserUncheckedCreateWithoutUser_professional_summaryInput>
+  }
+
+  export type UserUpsertWithoutUser_professional_summaryInput = {
+    update: XOR<UserUpdateWithoutUser_professional_summaryInput, UserUncheckedUpdateWithoutUser_professional_summaryInput>
+    create: XOR<UserCreateWithoutUser_professional_summaryInput, UserUncheckedCreateWithoutUser_professional_summaryInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutUser_professional_summaryInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutUser_professional_summaryInput, UserUncheckedUpdateWithoutUser_professional_summaryInput>
+  }
+
+  export type UserUpdateWithoutUser_professional_summaryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    username?: NullableStringFieldUpdateOperationsInput | string | null
+    displayUsername?: NullableStringFieldUpdateOperationsInput | string | null
+    onboarded?: BoolFieldUpdateOperationsInput | boolean
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    user_professional_experiences?: UserProfessionalExperienceUpdateManyWithoutUserNestedInput
+    user_academic_information?: UserAcademicInformationUpdateManyWithoutUserNestedInput
+    user_skill?: UserSkillUpdateOneWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutUser_professional_summaryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    username?: NullableStringFieldUpdateOperationsInput | string | null
+    displayUsername?: NullableStringFieldUpdateOperationsInput | string | null
+    onboarded?: BoolFieldUpdateOperationsInput | boolean
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    user_professional_experiences?: UserProfessionalExperienceUncheckedUpdateManyWithoutUserNestedInput
+    user_academic_information?: UserAcademicInformationUncheckedUpdateManyWithoutUserNestedInput
+    user_skill?: UserSkillUncheckedUpdateOneWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutUser_academic_informationInput = {
+    id: string
+    name: string
+    email: string
+    emailVerified?: boolean
+    image?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    username?: string | null
+    displayUsername?: string | null
+    onboarded?: boolean
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    user_professional_summary?: UserProfessionalSummaryCreateNestedOneWithoutUserInput
+    user_professional_experiences?: UserProfessionalExperienceCreateNestedManyWithoutUserInput
+    user_skill?: UserSkillCreateNestedOneWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutUser_academic_informationInput = {
+    id: string
+    name: string
+    email: string
+    emailVerified?: boolean
+    image?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    username?: string | null
+    displayUsername?: string | null
+    onboarded?: boolean
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    user_professional_summary?: UserProfessionalSummaryUncheckedCreateNestedOneWithoutUserInput
+    user_professional_experiences?: UserProfessionalExperienceUncheckedCreateNestedManyWithoutUserInput
+    user_skill?: UserSkillUncheckedCreateNestedOneWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutUser_academic_informationInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutUser_academic_informationInput, UserUncheckedCreateWithoutUser_academic_informationInput>
+  }
+
+  export type UserUpsertWithoutUser_academic_informationInput = {
+    update: XOR<UserUpdateWithoutUser_academic_informationInput, UserUncheckedUpdateWithoutUser_academic_informationInput>
+    create: XOR<UserCreateWithoutUser_academic_informationInput, UserUncheckedCreateWithoutUser_academic_informationInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutUser_academic_informationInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutUser_academic_informationInput, UserUncheckedUpdateWithoutUser_academic_informationInput>
+  }
+
+  export type UserUpdateWithoutUser_academic_informationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    username?: NullableStringFieldUpdateOperationsInput | string | null
+    displayUsername?: NullableStringFieldUpdateOperationsInput | string | null
+    onboarded?: BoolFieldUpdateOperationsInput | boolean
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    user_professional_summary?: UserProfessionalSummaryUpdateOneWithoutUserNestedInput
+    user_professional_experiences?: UserProfessionalExperienceUpdateManyWithoutUserNestedInput
+    user_skill?: UserSkillUpdateOneWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutUser_academic_informationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    username?: NullableStringFieldUpdateOperationsInput | string | null
+    displayUsername?: NullableStringFieldUpdateOperationsInput | string | null
+    onboarded?: BoolFieldUpdateOperationsInput | boolean
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    user_professional_summary?: UserProfessionalSummaryUncheckedUpdateOneWithoutUserNestedInput
+    user_professional_experiences?: UserProfessionalExperienceUncheckedUpdateManyWithoutUserNestedInput
+    user_skill?: UserSkillUncheckedUpdateOneWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutUser_skillInput = {
+    id: string
+    name: string
+    email: string
+    emailVerified?: boolean
+    image?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    username?: string | null
+    displayUsername?: string | null
+    onboarded?: boolean
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    user_professional_summary?: UserProfessionalSummaryCreateNestedOneWithoutUserInput
+    user_professional_experiences?: UserProfessionalExperienceCreateNestedManyWithoutUserInput
+    user_academic_information?: UserAcademicInformationCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutUser_skillInput = {
+    id: string
+    name: string
+    email: string
+    emailVerified?: boolean
+    image?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    username?: string | null
+    displayUsername?: string | null
+    onboarded?: boolean
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    user_professional_summary?: UserProfessionalSummaryUncheckedCreateNestedOneWithoutUserInput
+    user_professional_experiences?: UserProfessionalExperienceUncheckedCreateNestedManyWithoutUserInput
+    user_academic_information?: UserAcademicInformationUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutUser_skillInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutUser_skillInput, UserUncheckedCreateWithoutUser_skillInput>
+  }
+
+  export type UserUpsertWithoutUser_skillInput = {
+    update: XOR<UserUpdateWithoutUser_skillInput, UserUncheckedUpdateWithoutUser_skillInput>
+    create: XOR<UserCreateWithoutUser_skillInput, UserUncheckedCreateWithoutUser_skillInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutUser_skillInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutUser_skillInput, UserUncheckedUpdateWithoutUser_skillInput>
+  }
+
+  export type UserUpdateWithoutUser_skillInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    username?: NullableStringFieldUpdateOperationsInput | string | null
+    displayUsername?: NullableStringFieldUpdateOperationsInput | string | null
+    onboarded?: BoolFieldUpdateOperationsInput | boolean
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    user_professional_summary?: UserProfessionalSummaryUpdateOneWithoutUserNestedInput
+    user_professional_experiences?: UserProfessionalExperienceUpdateManyWithoutUserNestedInput
+    user_academic_information?: UserAcademicInformationUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutUser_skillInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    username?: NullableStringFieldUpdateOperationsInput | string | null
+    displayUsername?: NullableStringFieldUpdateOperationsInput | string | null
+    onboarded?: BoolFieldUpdateOperationsInput | boolean
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    user_professional_summary?: UserProfessionalSummaryUncheckedUpdateOneWithoutUserNestedInput
+    user_professional_experiences?: UserProfessionalExperienceUncheckedUpdateManyWithoutUserNestedInput
+    user_academic_information?: UserAcademicInformationUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type SessionCreateManyUserInput = {
@@ -7260,6 +14025,30 @@ export namespace Prisma {
     refreshTokenExpiresAt?: Date | string | null
     scope?: string | null
     password?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UserProfessionalExperienceCreateManyUserInput = {
+    id?: string
+    institution: string
+    role: string
+    start_date?: Date | string | null
+    end_date?: Date | string | null
+    summary?: string | null
+    version?: number
+    at_university?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UserAcademicInformationCreateManyUserInput = {
+    id?: string
+    institution: string
+    major: string
+    start_date: Date | string
+    end_date?: Date | string | null
+    summary?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -7335,6 +14124,78 @@ export namespace Prisma {
     refreshTokenExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     scope?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserProfessionalExperienceUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    institution?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    start_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    end_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    version?: IntFieldUpdateOperationsInput | number
+    at_university?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserProfessionalExperienceUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    institution?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    start_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    end_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    version?: IntFieldUpdateOperationsInput | number
+    at_university?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserProfessionalExperienceUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    institution?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    start_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    end_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    version?: IntFieldUpdateOperationsInput | number
+    at_university?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserAcademicInformationUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    institution?: StringFieldUpdateOperationsInput | string
+    major?: StringFieldUpdateOperationsInput | string
+    start_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    end_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserAcademicInformationUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    institution?: StringFieldUpdateOperationsInput | string
+    major?: StringFieldUpdateOperationsInput | string
+    start_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    end_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserAcademicInformationUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    institution?: StringFieldUpdateOperationsInput | string
+    major?: StringFieldUpdateOperationsInput | string
+    start_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    end_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

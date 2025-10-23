@@ -20,12 +20,12 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 6.17.1
- * Query Engine version: 272a37d34178c2894197e17273bf937f25acdeac
+ * Prisma Client JS version: 6.18.0
+ * Query Engine version: 34b5a692b7bd79939a9a2c3ef97d816e749cda2f
  */
 Prisma.prismaVersion = {
-  client: "6.17.1",
-  engine: "272a37d34178c2894197e17273bf937f25acdeac"
+  client: "6.18.0",
+  engine: "34b5a692b7bd79939a9a2c3ef97d816e749cda2f"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -129,7 +129,8 @@ exports.Prisma.UserScalarFieldEnum = {
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   username: 'username',
-  displayUsername: 'displayUsername'
+  displayUsername: 'displayUsername',
+  onboarded: 'onboarded'
 };
 
 exports.Prisma.SessionScalarFieldEnum = {
@@ -168,6 +169,50 @@ exports.Prisma.VerificationScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.UserProfessionalExperienceScalarFieldEnum = {
+  id: 'id',
+  institution: 'institution',
+  role: 'role',
+  start_date: 'start_date',
+  end_date: 'end_date',
+  summary: 'summary',
+  version: 'version',
+  userId: 'userId',
+  at_university: 'at_university',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.UserProfessionalSummaryScalarFieldEnum = {
+  id: 'id',
+  experience_years: 'experience_years',
+  summary: 'summary',
+  version: 'version',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.UserAcademicInformationScalarFieldEnum = {
+  id: 'id',
+  institution: 'institution',
+  major: 'major',
+  start_date: 'start_date',
+  end_date: 'end_date',
+  summary: 'summary',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.UserSkillScalarFieldEnum = {
+  id: 'id',
+  skills: 'skills',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -188,7 +233,11 @@ exports.Prisma.ModelName = {
   User: 'User',
   Session: 'Session',
   Account: 'Account',
-  Verification: 'Verification'
+  Verification: 'Verification',
+  UserProfessionalExperience: 'UserProfessionalExperience',
+  UserProfessionalSummary: 'UserProfessionalSummary',
+  UserAcademicInformation: 'UserAcademicInformation',
+  UserSkill: 'UserSkill'
 };
 
 /**

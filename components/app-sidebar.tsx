@@ -31,17 +31,18 @@ import {
 } from '@/components/ui/sidebar';
 import { OrigamiIcon } from 'lucide-react';
 import { User } from '@/prisma/generated/prisma';
+import { APPLICATION_PAGE_URL, PROFESSIONAL_SUMMARY_URL } from '@/lib/helpers';
 
 const data = {
   navMain: [
     {
       title: 'Applications',
-      url: '#',
+      url: APPLICATION_PAGE_URL,
       icon: IconDashboard,
     },
     {
       title: 'Professional Summary',
-      url: '#',
+      url: PROFESSIONAL_SUMMARY_URL,
       icon: IconListDetails,
     },
     {
@@ -129,9 +130,9 @@ export function AppSidebar({ ...props }: Props) {
             >
               <a href="#">
                 <span className="bg-rose-500 p-1 text-black rounded-md flex justify-center items-center">
-                  <OrigamiIcon className="size-5" />
+                  <OrigamiIcon className="size-4 sm:size-5" />
                 </span>
-                <span className="text-rose-500 font-semibold">Persona</span>
+                <span className="text-rose-500 font-semibold text-sm sm:text-base">Persona</span>
               </a>
             </SidebarMenuButton>
           </SidebarMenuItem>

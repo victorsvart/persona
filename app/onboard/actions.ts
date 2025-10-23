@@ -1,0 +1,86 @@
+'use server';
+
+import { prisma } from '@/prisma/client';
+import { auth } from '@/lib/auth';
+import { headers } from 'next/headers';
+import { redirect } from 'next/navigation';
+import {
+  onboardSchema,
+  OnboardSchemaValues,
+} from '@/types/forms/onboard.schema';
+import { makeAuthError } from '@/lib/utils';
+import { AuthError } from '@/types/errors/auth-error';
+import { APPLICATION_PAGE_URL } from '@/lib/helpers';
+
+export async function saveOnboardingData(
+  values: OnboardSchemaValues,
+): Promise<undefined | AuthError> {
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
+  if (!session) {
+    redirect('/login');
+  }
+
+  try {
+    await prisma.userProfessionalSummary.upsert({
+      where: { userId: session.user.id },
+      create: {
+        userId: session.user.id,
+        experience_years: values.experience_years,
+        summary: values.professional_summary || null,
+      },
+      update: {
+        experience_years: values.experience_years,
+        summary: values.professional_summary || null,
+      },
+    });
+
+    if (values.professional_experiences?.length) {
+      await prisma.userProfessionalExperience.createMany({
+        data: values.professional_experiences.map((exp) => ({
+          userId: session.user.id,
+          institution: exp.institution,
+          role: exp.role,
+          start_date: new Date(exp.start_date),
+          end_date: exp.end_date ? new Date(exp.end_date) : null,
+          summary: exp.summary || null,
+          at_university: exp.at_university,
+        })),
+      });
+    }
+
+    if (values.academic_information?.length) {
+      await prisma.userAcademicInformation.createMany({
+        data: values.academic_information.map((acad) => ({
+          userId: session.user.id,
+          institution: acad.institution,
+          major: acad.major,
+          start_date: new Date(acad.start_date),
+          end_date: acad.end_date ? new Date(acad.end_date) : null,
+          summary: acad.summary || null,
+        })),
+      });
+    }
+
+    await prisma.userSkill.upsert({
+      where: { userId: session.user.id },
+      create: {
+        userId: session.user.id,
+        skills: values.skills,
+      },
+      update: {
+        skills: values.skills,
+      },
+    });
+  } catch (error) {
+    console.error('Error saving onboarding data:', error);
+    return makeAuthError({
+      message: 'Failed to save onboarding data',
+      status: 500,
+    } as any);
+  }
+
+  redirect(APPLICATION_PAGE_URL);
+}
