@@ -4,9 +4,13 @@ import { prisma } from '@/prisma/client';
 import { auth } from '@/lib/auth';
 import { headers } from 'next/headers';
 import { redirect } from 'next/navigation';
-import { onboardSchema, OnboardSchemaValues } from '@/types/forms/onboard.schema';
+import {
+  onboardSchema,
+  OnboardSchemaValues,
+} from '@/types/forms/onboard.schema';
 import { makeAuthError } from '@/lib/utils';
 import { AuthError } from '@/types/errors/auth-error';
+import { APPLICATION_PAGE_URL } from '@/lib/helpers';
 
 export async function saveOnboardingData(
   values: OnboardSchemaValues,
@@ -20,34 +24,22 @@ export async function saveOnboardingData(
   }
 
   try {
-    const validatedData = onboardSchema.parse(values);
-
-    // Note: Basic user info (username, displayUsername) is already set during signup
-
-    // Create professional summary
     await prisma.userProfessionalSummary.upsert({
       where: { userId: session.user.id },
       create: {
         userId: session.user.id,
-        experience_years: validatedData.experience_years,
-        summary: validatedData.professional_summary || null,
+        experience_years: values.experience_years,
+        summary: values.professional_summary || null,
       },
       update: {
-        experience_years: validatedData.experience_years,
-        summary: validatedData.professional_summary || null,
+        experience_years: values.experience_years,
+        summary: values.professional_summary || null,
       },
     });
 
-    // Create professional experiences
-    if (validatedData.professional_experiences?.length) {
-      // Delete existing experiences
-      await prisma.userProfessionalExperience.deleteMany({
-        where: { userId: session.user.id },
-      });
-
-      // Create new experiences
+    if (values.professional_experiences?.length) {
       await prisma.userProfessionalExperience.createMany({
-        data: validatedData.professional_experiences.map(exp => ({
+        data: values.professional_experiences.map((exp) => ({
           userId: session.user.id,
           institution: exp.institution,
           role: exp.role,
@@ -59,16 +51,9 @@ export async function saveOnboardingData(
       });
     }
 
-    // Create academic information
-    if (validatedData.academic_information?.length) {
-      // Delete existing academic info
-      await prisma.userAcademicInformation.deleteMany({
-        where: { userId: session.user.id },
-      });
-
-      // Create new academic info
+    if (values.academic_information?.length) {
       await prisma.userAcademicInformation.createMany({
-        data: validatedData.academic_information.map(acad => ({
+        data: values.academic_information.map((acad) => ({
           userId: session.user.id,
           institution: acad.institution,
           major: acad.major,
@@ -79,19 +64,16 @@ export async function saveOnboardingData(
       });
     }
 
-    // Create skills
     await prisma.userSkill.upsert({
       where: { userId: session.user.id },
       create: {
         userId: session.user.id,
-        skills: validatedData.skills,
+        skills: values.skills,
       },
       update: {
-        skills: validatedData.skills,
+        skills: values.skills,
       },
     });
-
-    redirect('/dashboard');
   } catch (error) {
     console.error('Error saving onboarding data:', error);
     return makeAuthError({
@@ -99,4 +81,6 @@ export async function saveOnboardingData(
       status: 500,
     } as any);
   }
+
+  redirect(APPLICATION_PAGE_URL);
 }

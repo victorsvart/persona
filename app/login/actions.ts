@@ -1,6 +1,7 @@
 'use server';
 
 import { auth } from '@/lib/auth';
+import { APPLICATION_PAGE_URL } from '@/lib/helpers';
 import { makeAuthError } from '@/lib/utils';
 import { AuthError } from '@/types/errors/auth-error';
 import { LoginSchemaValues } from '@/types/forms/login.schema';
@@ -22,5 +23,5 @@ export async function signIn(
     throw error;
   }
 
-  redirect('/dashboard');
+  redirect(APPLICATION_PAGE_URL);
 }

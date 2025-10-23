@@ -8,6 +8,8 @@ import { User } from '@/prisma/generated/prisma';
 import { headers } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { ReactNode } from 'react';
+import { isOnboarded } from './actions';
+import { LOGIN_PAGE_URL, ONBOARD_PAGE_URL } from '@/lib/helpers';
 
 export default async function DashboardLayout({
   children,
@@ -22,12 +24,17 @@ export default async function DashboardLayout({
     redirect('/login');
   }
 
+  const userOnboarded = await isOnboarded(session.user.id);
+  if (!userOnboarded) {
+    redirect(ONBOARD_PAGE_URL);
+  }
+
   return (
     <SidebarProvider
       style={
         {
-          '--sidebar-width': 'calc(var(--spacing) * 72)',
-          '--header-height': 'calc(var(--spacing) * 12)',
+          '--sidebar-width': 'clamp(14rem, 16vw, 18rem)',
+          '--header-height': 'clamp(3rem, 4vw, 4rem)',
         } as React.CSSProperties
       }
     >
@@ -35,7 +42,7 @@ export default async function DashboardLayout({
       <SidebarInset>
         <SiteHeader />
         <div className="flex flex-1 flex-col">
-          <div className="@container/main flex flex-1 flex-col gap-2">
+          <div className="@container/main flex flex-1 flex-col gap-2 px-6">
             {children}
           </div>
         </div>

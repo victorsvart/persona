@@ -1,6 +1,7 @@
 'use server';
 
 import { auth } from '@/lib/auth';
+import { ONBOARD_PAGE_URL } from '@/lib/helpers';
 import { makeAuthError } from '@/lib/utils';
 import { AuthError } from '@/types/errors/auth-error';
 import { SignUpSchemaValues } from '@/types/forms/signup.schema';
@@ -20,5 +21,5 @@ export async function signUp(
     }
   }
 
-  redirect('/dashboard');
+  redirect(ONBOARD_PAGE_URL);
 }

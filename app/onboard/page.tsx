@@ -17,14 +17,20 @@ export default async function OnboardPage() {
   const name = session.user.name?.split(' ')[0] || 'there';
 
   return (
-    <div className="flex flex-col items-center space-y-6">
-      <div className="text-center">
-        <h1 className="text-3xl font-bold text-rose-500">Welcome, {name}!</h1>
-        <p className="text-muted-foreground mt-2">
-          Let's build your professional profile to create targeted resumes for job applications
-        </p>
+    <div className="min-h-screen bg-background">
+      <div className="container mx-auto px-4 py-6 sm:py-8">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-8 sm:mb-12">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-foreground mb-3 sm:mb-4 tracking-tight">
+              Welcome, {name}
+            </h1>
+            <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+              Let's build your professional profile to create targeted resumes for job applications
+            </p>
+          </div>
+          <OnboardForm />
+        </div>
       </div>
-      <OnboardForm />
     </div>
   );
 }
