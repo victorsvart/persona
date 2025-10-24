@@ -25,6 +25,17 @@ import {
 import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
 import { Checkbox } from './ui/checkbox';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from './ui/alert-dialog';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
@@ -35,17 +46,22 @@ import { UserProfessionalExperience } from '@/prisma/generated/prisma';
 import { useState } from 'react';
 import { toast } from 'sonner';
 import { Badge } from './ui/badge';
+import { saveWorkExperience, deleteWorkExperience } from '@/app/dashboard/work-experience/actions';
 
 type Props = {
   experienceFields: Array<UserProfessionalExperience>;
 };
 
-export const WorkExperienceForm: React.FC<Props> = ({ experienceFields }) => {
+export const WorkExperienceForm: React.FC<Props> = ({ 
+  experienceFields
+}) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [selectedExperience, setSelectedExperience] =
     useState<UserProfessionalExperience | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [isEditing, setIsEditing] = useState(false);
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+  const [experienceToDelete, setExperienceToDelete] = useState<string | null>(null);
 
   const itemsPerPage = 4;
   const totalPages = Math.ceil(experienceFields.length / itemsPerPage);
@@ -116,9 +132,33 @@ export const WorkExperienceForm: React.FC<Props> = ({ experienceFields }) => {
     form.reset();
   };
 
-  const handleRemoveExperience = (index: number) => {
-    // TODO IMPLEMENT DELETE
-    console.log('Remove experience at index:', index);
+  const handleRemoveExperience = (experienceId: string) => {
+    setExperienceToDelete(experienceId);
+    setDeleteDialogOpen(true);
+  };
+
+  const confirmDeleteExperience = async () => {
+    if (!experienceToDelete) return;
+
+    setIsSubmitting(true);
+    try {
+      const result = await deleteWorkExperience(experienceToDelete);
+      
+      if (result) {
+        toast.error(result.message || 'Failed to delete work experience');
+        return;
+      }
+
+      toast.success('Work experience deleted successfully!');
+      setDeleteDialogOpen(false);
+      setExperienceToDelete(null);
+      handleBackToCards();
+    } catch (error) {
+      console.error('Error deleting work experience:', error);
+      toast.error('Failed to delete work experience. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const formatDate = (date: Date | string | null) => {
@@ -277,11 +317,12 @@ export const WorkExperienceForm: React.FC<Props> = ({ experienceFields }) => {
   const onSubmit = async (data: ProfessionalExperienceValues) => {
     setIsSubmitting(true);
     try {
-      // TODO: Implement actual save functionality
-      console.log('Saving work experience:', data);
-
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      const result = await saveWorkExperience(data, selectedExperience?.id);
+      
+      if (result) {
+        toast.error(result.message || 'Failed to save work experience');
+        return;
+      }
 
       toast.success('Work experience saved successfully!');
       handleBackToCards();
@@ -381,14 +422,41 @@ export const WorkExperienceForm: React.FC<Props> = ({ experienceFields }) => {
                       Back to experiences
                     </Button>
                     {selectedExperience?.id && (
-                      <Button
-                        type="button"
-                        size="icon"
-                        variant="destructive"
-                        onClick={() => handleRemoveExperience(0)}
-                      >
-                        <Trash2 className="h-4 w-4" />
-                      </Button>
+                      <AlertDialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
+                        <AlertDialogTrigger asChild>
+                          <Button
+                            type="button"
+                            size="icon"
+                            variant="destructive"
+                            onClick={() => setExperienceToDelete(selectedExperience?.id || null)}
+                          >
+                            <Trash2 className="h-4 w-4" />
+                          </Button>
+                        </AlertDialogTrigger>
+                        <AlertDialogContent>
+                          <AlertDialogHeader>
+                            <AlertDialogTitle>Delete Work Experience</AlertDialogTitle>
+                            <AlertDialogDescription>
+                              Are you sure you want to delete this work experience? This action cannot be undone.
+                              <br />
+                              <br />
+                              <strong>{selectedExperience?.institution}</strong> - {selectedExperience?.role}
+                            </AlertDialogDescription>
+                          </AlertDialogHeader>
+                          <AlertDialogFooter>
+                            <AlertDialogCancel disabled={isSubmitting}>
+                              Cancel
+                            </AlertDialogCancel>
+                            <AlertDialogAction
+                              onClick={confirmDeleteExperience}
+                              disabled={isSubmitting}
+                              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+                            >
+                              {isSubmitting ? 'Deleting...' : 'Delete'}
+                            </AlertDialogAction>
+                          </AlertDialogFooter>
+                        </AlertDialogContent>
+                      </AlertDialog>
                     )}
                   </div>
                 </div>
