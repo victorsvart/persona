@@ -24,9 +24,13 @@ export default async function ProfessionalSummaryPage() {
   const userExperienceInfo = await getUserProfessionalInfo(user.id);
 
   // Calculate completion status
-  const hasSummary = userExperienceInfo.summary && userExperienceInfo.summary.length >= 50;
-  const hasExperiences = userExperienceInfo.experiences && userExperienceInfo.experiences.length > 0;
-  const summaryProgress = hasSummary ? 100 : (userExperienceInfo.summary?.length || 0) / 50 * 100;
+  const hasSummary =
+    userExperienceInfo.summary && userExperienceInfo.summary.length >= 50;
+  const hasExperiences =
+    userExperienceInfo.experiences && userExperienceInfo.experiences.length > 0;
+  const summaryProgress = hasSummary
+    ? 100
+    : ((userExperienceInfo.summary?.length || 0) / 50) * 100;
   const experienceProgress = hasExperiences ? 100 : 0;
 
   const tabs = [
@@ -34,10 +38,12 @@ export default async function ProfessionalSummaryPage() {
       key: 'summary',
       label: 'Professional Summary',
       icon: FileText,
-      content: <ProfessionalSummaryForm 
-        summary={userExperienceInfo.summary} 
-        experience_years={userExperienceInfo.experience_years}
-      />,
+      content: (
+        <ProfessionalSummaryForm
+          summary={userExperienceInfo.summary}
+          experience_years={userExperienceInfo.experience_years}
+        />
+      ),
       completed: hasSummary,
     },
     {
@@ -65,7 +71,9 @@ export default async function ProfessionalSummaryPage() {
             </div>
             <div className="hidden md:flex items-center gap-4">
               <div className="text-right">
-                <div className="text-sm text-muted-foreground">Profile Completion</div>
+                <div className="text-sm text-muted-foreground">
+                  Profile Completion
+                </div>
                 <div className="text-2xl font-bold">
                   {Math.round((summaryProgress + experienceProgress) / 2)}%
                 </div>
@@ -99,16 +107,20 @@ export default async function ProfessionalSummaryPage() {
                         }`}
                       >
                         <div className="flex items-center gap-3">
-                          <div className={`p-2 rounded-lg ${
-                            tab.completed 
-                              ? 'bg-green-100 dark:bg-green-800' 
-                              : 'bg-muted'
-                          }`}>
-                            <Icon className={`h-5 w-5 ${
-                              tab.completed 
-                                ? 'text-green-600 dark:text-green-400' 
-                                : 'text-muted-foreground'
-                            }`} />
+                          <div
+                            className={`p-2 rounded-lg ${
+                              tab.completed
+                                ? 'bg-green-100 dark:bg-green-800'
+                                : 'bg-muted'
+                            }`}
+                          >
+                            <Icon
+                              className={`h-5 w-5 ${
+                                tab.completed
+                                  ? 'text-green-600 dark:text-green-400'
+                                  : 'text-muted-foreground'
+                              }`}
+                            />
                           </div>
                           <div className="flex-1">
                             <div className="font-medium">{tab.label}</div>
@@ -116,7 +128,9 @@ export default async function ProfessionalSummaryPage() {
                               {tab.completed ? 'Complete' : 'In Progress'}
                             </div>
                           </div>
-                          {tab.completed && <CheckCircle className="h-5 w-5 text-green-500" />}
+                          {tab.completed && (
+                            <CheckCircle className="h-5 w-5 text-green-500" />
+                          )}
                         </div>
                       </div>
                     );
@@ -129,19 +143,25 @@ export default async function ProfessionalSummaryPage() {
                 <h3 className="text-lg font-semibold mb-4">Quick Stats</h3>
                 <div className="space-y-4">
                   <div className="flex justify-between items-center">
-                    <span className="text-sm text-muted-foreground">Years of Experience</span>
+                    <span className="text-sm text-muted-foreground">
+                      Years of Experience
+                    </span>
                     <span className="font-bold">
                       {userExperienceInfo.experience_years || 0}
                     </span>
                   </div>
                   <div className="flex justify-between items-center">
-                    <span className="text-sm text-muted-foreground">Work Experiences</span>
+                    <span className="text-sm text-muted-foreground">
+                      Work Experiences
+                    </span>
                     <span className="font-bold">
                       {userExperienceInfo.experiences?.length || 0}
                     </span>
                   </div>
                   <div className="flex justify-between items-center">
-                    <span className="text-sm text-muted-foreground">Summary Length</span>
+                    <span className="text-sm text-muted-foreground">
+                      Summary Length
+                    </span>
                     <span className="font-bold">
                       {userExperienceInfo.summary?.length || 0} chars
                     </span>
@@ -157,14 +177,16 @@ export default async function ProfessionalSummaryPage() {
                   {tabs.map((tab) => {
                     const Icon = tab.icon;
                     return (
-                      <TabsTrigger 
-                        key={tab.key} 
-                        value={tab.key} 
+                      <TabsTrigger
+                        key={tab.key}
+                        value={tab.key}
                         className="flex items-center gap-2"
                       >
                         <Icon className="h-4 w-4" />
                         {tab.label}
-                        {tab.completed && <CheckCircle className="h-4 w-4 text-green-500" />}
+                        {tab.completed && (
+                          <CheckCircle className="h-4 w-4 text-green-500" />
+                        )}
                       </TabsTrigger>
                     );
                   })}
@@ -198,18 +220,23 @@ export default async function ProfessionalSummaryPage() {
                 </span>
               </div>
             </div>
-            
+
             <div className="space-y-2">
               <div className="space-y-1">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-medium text-muted-foreground">Summary</span>
-                  <Badge variant={hasSummary ? "default" : "secondary"} className="text-xs">
+                  <span className="text-xs font-medium text-muted-foreground">
+                    Summary
+                  </span>
+                  <Badge
+                    variant={hasSummary ? 'default' : 'secondary'}
+                    className="text-xs"
+                  >
                     {Math.round(summaryProgress)}%
                   </Badge>
                 </div>
                 <div className="w-full bg-muted rounded-full h-1.5">
-                  <div 
-                    className="bg-primary h-1.5 rounded-full transition-all duration-300" 
+                  <div
+                    className="bg-primary h-1.5 rounded-full transition-all duration-300"
                     style={{ width: `${Math.min(summaryProgress, 100)}%` }}
                   />
                 </div>
@@ -217,14 +244,19 @@ export default async function ProfessionalSummaryPage() {
 
               <div className="space-y-1">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-medium text-muted-foreground">Experience</span>
-                  <Badge variant={hasExperiences ? "default" : "secondary"} className="text-xs">
+                  <span className="text-xs font-medium text-muted-foreground">
+                    Experience
+                  </span>
+                  <Badge
+                    variant={hasExperiences ? 'default' : 'secondary'}
+                    className="text-xs"
+                  >
                     {userExperienceInfo.experiences?.length || 0}
                   </Badge>
                 </div>
                 <div className="w-full bg-muted rounded-full h-1.5">
-                  <div 
-                    className="bg-primary h-1.5 rounded-full transition-all duration-300" 
+                  <div
+                    className="bg-primary h-1.5 rounded-full transition-all duration-300"
                     style={{ width: `${experienceProgress}%` }}
                   />
                 </div>
