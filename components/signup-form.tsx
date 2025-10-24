@@ -24,6 +24,7 @@ import { signUpSchema, SignUpSchemaValues } from '@/types/forms/signup.schema';
 import { signUp } from '@/app/signup/actions';
 import { toast } from 'sonner';
 import { ThreeDotLoad } from './ui/three-dot-load';
+import Image from 'next/image';
 
 export function SignupForm({
   className,
@@ -188,10 +189,11 @@ export function SignupForm({
             </form>
           </Form>
           <div className="bg-muted relative hidden md:block">
-            <img
+            <Image
               src="/login-image.jpg"
               alt="Image"
-              className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
+              fill
+              className="object-cover dark:brightness-[0.2] dark:grayscale"
             />
           </div>
         </CardContent>

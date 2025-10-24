@@ -11,7 +11,7 @@ export async function isOnboarded(userId: string) {
     });
 
     return isOnboarded;
-  } catch (error) {
+  } catch {
     redirect('/login');
   }
 }

@@ -217,10 +217,10 @@ export default function OnboardForm() {
         <CardHeader className="pb-6 sm:pb-8 px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8">
           <div className="text-center mb-6 sm:mb-8">
             <CardTitle className="text-xl sm:text-2xl md:text-3xl font-semibold text-foreground mb-3 sm:mb-4 tracking-tight">
-              Let's build your professional profile
+              Let&apos;s build your professional profile
             </CardTitle>
             <p className="text-muted-foreground text-sm sm:text-base md:text-lg max-w-3xl mx-auto leading-relaxed">
-              We'll gather information about your background to create targeted
+              We&apos;ll gather information about your background to create targeted
               resumes for your job applications. You can always update this
               information later.
             </p>

@@ -1,17 +1,20 @@
 'use client';
-import React, { createContext, ReactNode, useState, useCallback } from 'react';
+import React, { createContext, ReactNode, useState, useCallback, useMemo } from 'react';
 import { SignOutTriggerDialog } from '@/components/signout-trigger-dialog';
 
 type Event = {
   eventName: string;
-  trigger: (props: any) => React.ReactElement;
+  trigger: (props: {
+    open: boolean;
+    onOpenChange: (open: boolean) => void;
+  }) => React.ReactElement;
   untrigger: () => void;
 };
 
 type AppEventContextType = {
   events: Event[];
   activeEvents: Set<string>;
-  triggerEvent: (eventName: string, props?: any) => void;
+  triggerEvent: (eventName: string) => void;
   untriggerEvent: (eventName: string) => void;
   isEventActive: (eventName: string) => boolean;
 };
@@ -27,7 +30,7 @@ const AppEventContext = createContext<AppEventContextType>({
 export const AppEventProvider = ({ children }: { children: ReactNode }) => {
   const [activeEvents, setActiveEvents] = useState<Set<string>>(new Set());
 
-  const events: Event[] = [
+  const events: Event[] = useMemo(() => [
     {
       eventName: 'signOut',
       trigger: (props: {
@@ -38,9 +41,9 @@ export const AppEventProvider = ({ children }: { children: ReactNode }) => {
         console.log('Sign-out completed');
       },
     },
-  ];
+  ], []);
 
-  const triggerEvent = useCallback((eventName: string, _: any) => {
+  const triggerEvent = useCallback((eventName: string) => {
     setActiveEvents((prev) => new Set(prev).add(eventName));
   }, []);
 
