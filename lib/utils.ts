@@ -13,3 +13,10 @@ export function makeAuthError(error: APIError): AuthError {
     message: error.message,
   };
 }
+
+export function toISOString(date: Date | null): string {
+  if (!date) {
+    return '';
+  }
+  return new Date(date).toISOString().split('T')[0];
+}
