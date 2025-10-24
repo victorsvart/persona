@@ -12,15 +12,31 @@ import { makeAuthError } from '@/lib/utils';
 import { AuthError } from '@/types/errors/auth-error';
 import { APPLICATION_PAGE_URL } from '@/lib/helpers';
 
+export type OnboardError = {
+  message: string;
+  throwToStep: number;
+};
+
 export async function saveOnboardingData(
   values: OnboardSchemaValues,
-): Promise<undefined | AuthError> {
+): Promise<undefined | AuthError | OnboardError> {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
 
   if (!session) {
     redirect('/login');
+  }
+
+  if (
+    values.experience_years > 0 &&
+    values.professional_experiences.length === 0
+  ) {
+    return {
+      message:
+        'If you have more than 0 years of experience, a work experience should be added.',
+      throwToStep: 3,
+    };
   }
 
   try {

@@ -4,16 +4,11 @@ import * as React from 'react';
 import {
   IconCamera,
   IconDashboard,
-  IconDatabase,
   IconFileAi,
   IconFileDescription,
-  IconFileWord,
   IconFolder,
   IconHelp,
   IconListDetails,
-  IconReport,
-  IconSearch,
-  IconSettings,
   IconUsers,
 } from '@tabler/icons-react';
 
@@ -132,7 +127,9 @@ export function AppSidebar({ ...props }: Props) {
                 <span className="bg-rose-500 p-1 text-black rounded-md flex justify-center items-center">
                   <OrigamiIcon className="size-4 sm:size-5" />
                 </span>
-                <span className="text-rose-500 font-semibold text-sm sm:text-base">Persona</span>
+                <span className="text-rose-500 font-semibold text-sm sm:text-base">
+                  Persona
+                </span>
               </a>
             </SidebarMenuButton>
           </SidebarMenuItem>

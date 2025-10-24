@@ -29,6 +29,7 @@ export function NavMain({
         <SidebarMenu>
           {items.map((item) => (
             <Link
+              key={item.title}
               href={item.url}
               className={cn(
                 pathname.includes(item.url) ? 'bg-accent rounded-md' : '',
