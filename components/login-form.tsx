@@ -26,6 +26,7 @@ import { Toaster } from './ui/sonner';
 import { toast } from 'sonner';
 import { ThreeDotLoad } from './ui/three-dot-load';
 import { OrigamiIcon } from 'lucide-react';
+import Image from 'next/image';
 
 export function LoginForm({
   className,
@@ -152,10 +153,11 @@ export function LoginForm({
             </form>
           </Form>
           <div className="bg-muted relative hidden md:block">
-            <img
+            <Image
               src="/login-image.jpg"
               alt="Image"
-              className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
+              fill
+              className="object-cover dark:brightness-[0.2] dark:grayscale"
             />
           </div>
         </CardContent>

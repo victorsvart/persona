@@ -46,7 +46,7 @@ export const OnboardStepFour: React.FC<OnboardStepFourProps> = ({
                 />
               </FormControl>
               <FormDescription className="text-sm sm:text-base md:text-lg text-muted-foreground">
-                Include both technical and soft skills. Don't worry about
+                Include both technical and soft skills. Don&apos;t worry about
                 being comprehensive - you can always add more skills later
                 as you grow.
               </FormDescription>
@@ -86,7 +86,7 @@ export const OnboardStepFour: React.FC<OnboardStepFourProps> = ({
               <li>• Mention tools and technologies you use</li>
               <li>• Add industry-specific knowledge</li>
               <li>
-                • Don't worry about being perfect - you can always update
+                • Don&apos;t worry about being perfect - you can always update
                 this
               </li>
             </ul>

@@ -4,11 +4,7 @@ import { prisma } from '@/prisma/client';
 import { auth } from '@/lib/auth';
 import { headers } from 'next/headers';
 import { redirect } from 'next/navigation';
-import {
-  onboardSchema,
-  OnboardSchemaValues,
-} from '@/types/forms/onboard.schema';
-import { makeAuthError } from '@/lib/utils';
+import { OnboardSchemaValues } from '@/types/forms/onboard.schema';
 import { AuthError } from '@/types/errors/auth-error';
 import { APPLICATION_PAGE_URL } from '@/lib/helpers';
 
@@ -92,10 +88,10 @@ export async function saveOnboardingData(
     });
   } catch (error) {
     console.error('Error saving onboarding data:', error);
-    return makeAuthError({
+    return {
       message: 'Failed to save onboarding data',
       status: 500,
-    } as any);
+    };
   }
 
   redirect(APPLICATION_PAGE_URL);

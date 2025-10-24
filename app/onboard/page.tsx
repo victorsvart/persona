@@ -25,7 +25,7 @@ export default async function OnboardPage() {
               Welcome, {name}
             </h1>
             <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              Let's build your professional profile to create targeted resumes for job applications
+              Let&apos;s build your professional profile to create targeted resumes for job applications
             </p>
           </div>
           <OnboardForm />

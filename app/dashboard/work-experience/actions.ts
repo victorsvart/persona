@@ -5,7 +5,6 @@ import { auth } from '@/lib/auth';
 import { headers } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { ProfessionalExperienceValues } from '@/types/forms/work-experience.schema';
-import { makeAuthError } from '@/lib/utils';
 import { AuthError } from '@/types/errors/auth-error';
 import { revalidatePath } from 'next/cache';
 import { ProfessionalSummaryValues } from '@/types/forms/professional-summary.schema';
@@ -31,8 +30,8 @@ export async function getWorkExperiences() {
     });
 
     return experiences;
-  } catch (error) {
-    console.error('Error fetching work experiences:', error);
+  } catch {
+    console.error('Error fetching work experiences');
     return [];
   }
 }
@@ -61,7 +60,7 @@ export async function saveProfessionalSummary(
     });
 
     revalidatePath(PROFESSIONAL_SUMMARY_URL);
-  } catch (error) {
+  } catch {
     throw new Error('Failed to save professional summary');
   }
 }
@@ -93,10 +92,10 @@ export async function saveWorkExperience(
     revalidatePath(PROFESSIONAL_SUMMARY_URL);
   } catch (error) {
     console.error('Error saving work experience:', error);
-    return makeAuthError({
+    return {
       message: 'Failed to save work experience',
       status: 500,
-    } as any);
+    };
   }
 }
 
@@ -122,9 +121,9 @@ export async function deleteWorkExperience(
     revalidatePath(PROFESSIONAL_SUMMARY_URL);
   } catch (error) {
     console.error('Error deleting work experience:', error);
-    return makeAuthError({
+    return {
       message: 'Failed to delete work experience',
       status: 500,
-    } as any);
+    };
   }
 }

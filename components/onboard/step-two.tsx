@@ -162,7 +162,7 @@ export const OnboardStepTwo: React.FC<OnboardStepTwoProps> = ({
                       />
                     </FormControl>
                     <FormDescription className="text-xs sm:text-sm md:text-base text-muted-foreground">
-                      Leave blank if you're still working there
+                      Leave blank if you&apos;re still working there
                     </FormDescription>
                     <FormMessage />
                   </FormItem>

@@ -162,7 +162,7 @@ export const OnboardStepThree: React.FC<OnboardStepThreeProps> = ({
                       />
                     </FormControl>
                     <FormDescription className="text-xs sm:text-sm md:text-base text-muted-foreground">
-                      Leave blank if you're still studying
+                      Leave blank if you&apos;re still studying
                     </FormDescription>
                     <FormMessage />
                   </FormItem>

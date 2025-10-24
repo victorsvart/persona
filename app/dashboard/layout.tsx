@@ -9,7 +9,7 @@ import { headers } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { ReactNode } from 'react';
 import { isOnboarded } from './actions';
-import { LOGIN_PAGE_URL, ONBOARD_PAGE_URL } from '@/lib/helpers';
+import { ONBOARD_PAGE_URL } from '@/lib/helpers';
 
 export default async function DashboardLayout({
   children,
