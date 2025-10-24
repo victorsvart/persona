@@ -14,6 +14,23 @@ export function makeAuthError(error: APIError): AuthError {
   };
 }
 
+export function formatDate(date: Date | string | null) {
+  if (!date) return '';
+  if (date instanceof Date) {
+    return date.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'short',
+    });
+  }
+  if (typeof date === 'string') {
+    return new Date(date).toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'short',
+    });
+  }
+  return '';
+}
+
 export function toISOString(date: Date | null): string {
   if (!date) {
     return '';

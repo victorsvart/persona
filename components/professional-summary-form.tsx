@@ -17,8 +17,12 @@ import {
 } from './ui/form';
 import { Textarea } from './ui/textarea';
 import { Input } from './ui/input';
-import { professionalSummarySchema, ProfessionalSummaryValues } from '@/types/forms/professional-summary.schema';
+import {
+  professionalSummarySchema,
+  ProfessionalSummaryValues,
+} from '@/types/forms/professional-summary.schema';
 import { toast } from 'sonner';
+import { saveProfessionalSummary } from '@/app/dashboard/work-experience/actions';
 
 type Props = {
   summary: string | null;
@@ -42,12 +46,7 @@ export const ProfessionalSummaryForm: React.FC<Props> = ({
   const onSubmit = async (data: ProfessionalSummaryValues) => {
     setIsSubmitting(true);
     try {
-      // TODO: Implement actual save functionality
-      console.log('Saving professional summary:', data);
-      
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
+      await saveProfessionalSummary(data);
       toast.success('Professional summary saved successfully!');
     } catch (error) {
       console.error('Error saving professional summary:', error);
@@ -72,7 +71,8 @@ export const ProfessionalSummaryForm: React.FC<Props> = ({
           <div>
             <h2 className="text-2xl font-bold">Professional Summary</h2>
             <p className="text-muted-foreground">
-              Write a compelling summary that highlights your key skills, experience, and career goals.
+              Write a compelling summary that highlights your key skills,
+              experience, and career goals.
             </p>
           </div>
         </div>
@@ -91,7 +91,7 @@ export const ProfessionalSummaryForm: React.FC<Props> = ({
                   </div>
                   <h3 className="text-lg font-semibold">Experience Level</h3>
                 </div>
-                
+
                 <FormField
                   control={form.control}
                   name="experience_years"
@@ -107,7 +107,9 @@ export const ProfessionalSummaryForm: React.FC<Props> = ({
                             max="50"
                             className="pl-12 text-lg font-medium"
                             {...field}
-                            onChange={(e) => field.onChange(parseInt(e.target.value) || 0)}
+                            onChange={(e) =>
+                              field.onChange(parseInt(e.target.value) || 0)
+                            }
                           />
                           <div className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground">
                             <Briefcase className="h-4 w-4" />
@@ -131,9 +133,11 @@ export const ProfessionalSummaryForm: React.FC<Props> = ({
                   <div className="p-2 rounded-lg bg-primary/10">
                     <FileText className="h-5 w-5 text-primary" />
                   </div>
-                  <h3 className="text-lg font-semibold">Professional Summary</h3>
+                  <h3 className="text-lg font-semibold">
+                    Professional Summary
+                  </h3>
                 </div>
-                
+
                 <FormField
                   control={form.control}
                   name="summary"
@@ -149,10 +153,13 @@ export const ProfessionalSummaryForm: React.FC<Props> = ({
                       </FormControl>
                       <div className="flex justify-between items-center">
                         <FormDescription>
-                          Aim for 50-2000 characters. This summary will be used in your professional profile.
+                          Aim for 50-2000 characters. This summary will be used
+                          in your professional profile.
                         </FormDescription>
                         <div className="flex items-center gap-2">
-                          <span className={`text-sm font-medium ${isOverLimit ? 'text-destructive' : 'text-muted-foreground'}`}>
+                          <span
+                            className={`text-sm font-medium ${isOverLimit ? 'text-destructive' : 'text-muted-foreground'}`}
+                          >
                             {characterCount}/2000
                           </span>
                           {isOverLimit && (
@@ -177,14 +184,20 @@ export const ProfessionalSummaryForm: React.FC<Props> = ({
                   <div>
                     <h3 className="font-semibold">Ready to Save?</h3>
                     <p className="text-sm text-muted-foreground">
-                      Your professional summary will be saved and used across your profile.
+                      Your professional summary will be saved and used across
+                      your profile.
                     </p>
                   </div>
                 </div>
-                <Button 
-                  type="submit" 
-                  size="lg" 
-                  disabled={isSubmitting || isOverLimit || experienceYears < 0 || experienceYears > 50}
+                <Button
+                  type="submit"
+                  size="lg"
+                  disabled={
+                    isSubmitting ||
+                    isOverLimit ||
+                    experienceYears < 0 ||
+                    experienceYears > 50
+                  }
                 >
                   {isSubmitting ? (
                     <div className="flex items-center gap-2">

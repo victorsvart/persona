@@ -10,6 +10,7 @@ import {
   ChevronLeft,
   ChevronRight,
   Edit,
+  PlusIcon,
 } from 'lucide-react';
 import { Button } from './ui/button';
 import { Card, CardContent, CardHeader } from './ui/card';
@@ -46,22 +47,26 @@ import { UserProfessionalExperience } from '@/prisma/generated/prisma';
 import { useState } from 'react';
 import { toast } from 'sonner';
 import { Badge } from './ui/badge';
-import { saveWorkExperience, deleteWorkExperience } from '@/app/dashboard/work-experience/actions';
+import {
+  saveWorkExperience,
+  deleteWorkExperience,
+} from '@/app/dashboard/work-experience/actions';
+import { formatDate } from '@/lib/utils';
 
 type Props = {
   experienceFields: Array<UserProfessionalExperience>;
 };
 
-export const WorkExperienceForm: React.FC<Props> = ({ 
-  experienceFields
-}) => {
+export const WorkExperienceForm: React.FC<Props> = ({ experienceFields }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [selectedExperience, setSelectedExperience] =
     useState<UserProfessionalExperience | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [isEditing, setIsEditing] = useState(false);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
-  const [experienceToDelete, setExperienceToDelete] = useState<string | null>(null);
+  const [experienceToDelete, setExperienceToDelete] = useState<string | null>(
+    null,
+  );
 
   const itemsPerPage = 4;
   const totalPages = Math.ceil(experienceFields.length / itemsPerPage);
@@ -132,20 +137,15 @@ export const WorkExperienceForm: React.FC<Props> = ({
     form.reset();
   };
 
-  const handleRemoveExperience = (experienceId: string) => {
-    setExperienceToDelete(experienceId);
-    setDeleteDialogOpen(true);
-  };
-
   const confirmDeleteExperience = async () => {
     if (!experienceToDelete) return;
 
     setIsSubmitting(true);
     try {
-      const result = await deleteWorkExperience(experienceToDelete);
-      
-      if (result) {
-        toast.error(result.message || 'Failed to delete work experience');
+      const error = await deleteWorkExperience(experienceToDelete);
+
+      if (error) {
+        toast.error(error.message || 'Failed to delete work experience');
         return;
       }
 
@@ -159,23 +159,6 @@ export const WorkExperienceForm: React.FC<Props> = ({
     } finally {
       setIsSubmitting(false);
     }
-  };
-
-  const formatDate = (date: Date | string | null) => {
-    if (!date) return '';
-    if (date instanceof Date) {
-      return date.toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'short',
-      });
-    }
-    if (typeof date === 'string') {
-      return new Date(date).toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'short',
-      });
-    }
-    return '';
   };
 
   const renderExperienceCards = () => {
@@ -318,7 +301,7 @@ export const WorkExperienceForm: React.FC<Props> = ({
     setIsSubmitting(true);
     try {
       const result = await saveWorkExperience(data, selectedExperience?.id);
-      
+
       if (result) {
         toast.error(result.message || 'Failed to save work experience');
         return;
@@ -355,36 +338,21 @@ export const WorkExperienceForm: React.FC<Props> = ({
       {!isEditing ? (
         // Cards View
         <div className="space-y-6">
-          {/* Add Experience Card */}
-          <Card className="p-6">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <div className="p-2 rounded-lg bg-primary/10">
-                  <Plus className="h-5 w-5 text-primary" />
-                </div>
-                <div>
-                  <h3 className="font-semibold">Add New Experience</h3>
-                  <p className="text-sm text-muted-foreground">
-                    Click to add a new work experience entry
-                  </p>
-                </div>
-              </div>
-              <Button type="button" onClick={handleAddExperience}>
-                <Plus className="h-4 w-4 mr-2" /> Add Experience
-              </Button>
-            </div>
-          </Card>
-
-          {/* Experience Cards */}
           <Card className="p-6">
             <div className="flex items-center justify-between mb-6">
-              <h3 className="text-lg font-semibold">Your Experiences</h3>
-              {experienceFields.length > 0 && (
-                <div className="text-sm text-muted-foreground">
-                  {experienceFields.length} experience
-                  {experienceFields.length !== 1 ? 's' : ''}
-                </div>
-              )}
+              <div className="flex flex-col">
+                <h3 className="text-lg font-semibold">Your Experiences</h3>
+                {experienceFields.length > 0 && (
+                  <div className="text-sm text-muted-foreground">
+                    {experienceFields.length} experience
+                    {experienceFields.length !== 1 ? 's' : ''}
+                  </div>
+                )}
+              </div>
+              <Button onClick={handleAddExperience} className="flex gap-2">
+                <PlusIcon />
+                Add Experience
+              </Button>
             </div>
             {renderExperienceCards()}
             {renderPagination()}
@@ -422,25 +390,38 @@ export const WorkExperienceForm: React.FC<Props> = ({
                       Back to experiences
                     </Button>
                     {selectedExperience?.id && (
-                      <AlertDialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
+                      <AlertDialog
+                        open={deleteDialogOpen}
+                        onOpenChange={setDeleteDialogOpen}
+                      >
                         <AlertDialogTrigger asChild>
                           <Button
                             type="button"
                             size="icon"
                             variant="destructive"
-                            onClick={() => setExperienceToDelete(selectedExperience?.id || null)}
+                            onClick={() =>
+                              setExperienceToDelete(
+                                selectedExperience?.id || null,
+                              )
+                            }
                           >
                             <Trash2 className="h-4 w-4" />
                           </Button>
                         </AlertDialogTrigger>
                         <AlertDialogContent>
                           <AlertDialogHeader>
-                            <AlertDialogTitle>Delete Work Experience</AlertDialogTitle>
+                            <AlertDialogTitle>
+                              Delete Work Experience
+                            </AlertDialogTitle>
                             <AlertDialogDescription>
-                              Are you sure you want to delete this work experience? This action cannot be undone.
+                              Are you sure you want to delete this work
+                              experience? This action cannot be undone.
                               <br />
                               <br />
-                              <strong>{selectedExperience?.institution}</strong> - {selectedExperience?.role}
+                              <strong>
+                                {selectedExperience?.institution}
+                              </strong>{' '}
+                              - {selectedExperience?.role}
                             </AlertDialogDescription>
                           </AlertDialogHeader>
                           <AlertDialogFooter>

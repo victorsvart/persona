@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useForm, useFieldArray } from 'react-hook-form';
+import { useForm, useFieldArray, FieldErrors } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -60,159 +60,44 @@ export default function OnboardForm() {
     name: 'academic_information',
   });
 
-  const validateStep = (step: number): boolean => {
-    const formData = form.getValues();
-
-    switch (step) {
-      case 1:
-        // Only validate if user has entered something
-        if (
-          formData.experience_years !== undefined &&
-          formData.experience_years < 0
-        ) {
-          form.setError('experience_years', {
-            type: 'manual',
-            message: 'Please enter a valid number of years',
-          });
-          return false;
-        }
-        return true;
-
-      case 2:
-        // Only validate if user has started adding experiences
-        if (
-          formData.professional_experiences &&
-          formData.professional_experiences.length > 0
-        ) {
-          for (let i = 0; i < formData.professional_experiences.length; i++) {
-            const exp = formData.professional_experiences[i];
-            // Only validate if user has started filling out this experience
-            const hasStarted = exp.institution || exp.role || exp.start_date;
-            if (
-              hasStarted &&
-              (!exp.institution || !exp.role || !exp.start_date)
-            ) {
-              if (!exp.institution) {
-                form.setError(`professional_experiences.${i}.institution`, {
-                  type: 'manual',
-                  message: 'Please add the company name',
-                });
-              } else if (!exp.role) {
-                form.setError(`professional_experiences.${i}.role`, {
-                  type: 'manual',
-                  message: 'Please add your job title',
-                });
-              } else if (!exp.start_date) {
-                form.setError(`professional_experiences.${i}.start_date`, {
-                  type: 'manual',
-                  message: 'Please add when you started',
-                });
-              }
-              return false;
-            }
-          }
-        }
-        return true;
-
-      case 3:
-        // Only validate if user has started adding academic info
-        if (
-          formData.academic_information &&
-          formData.academic_information.length > 0
-        ) {
-          for (let i = 0; i < formData.academic_information.length; i++) {
-            const acad = formData.academic_information[i];
-            // Only validate if user has started filling out this education
-            const hasStarted =
-              acad.institution || acad.major || acad.start_date;
-            if (
-              hasStarted &&
-              (!acad.institution || !acad.major || !acad.start_date)
-            ) {
-              if (!acad.institution) {
-                form.setError(`academic_information.${i}.institution`, {
-                  type: 'manual',
-                  message: 'Please add the school name',
-                });
-              } else if (!acad.major) {
-                form.setError(`academic_information.${i}.major`, {
-                  type: 'manual',
-                  message: 'Please add your field of study',
-                });
-              } else if (!acad.start_date) {
-                form.setError(`academic_information.${i}.start_date`, {
-                  type: 'manual',
-                  message: 'Please add when you started',
-                });
-              }
-              return false;
-            }
-          }
-        }
-        return true;
-
-      case 4:
-        // Only validate if user has started adding skills
-        if (
-          formData.skills &&
-          formData.skills.trim() !== '' &&
-          formData.skills.trim().length < 3
-        ) {
-          form.setError('skills', {
-            type: 'manual',
-            message:
-              'Please add a few more skills to help us create better resumes',
-          });
-          return false;
-        }
-        return true;
-
-      default:
-        return true;
+  const onError = (errors: FieldErrors<OnboardSchemaValues>) => {
+    const firstErrorPath = Object.keys(errors)[0];
+    const firstInvalidElement = document.querySelector(
+      '[data-invalid="false"]',
+    );
+    if (firstInvalidElement) {
+      firstInvalidElement.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center',
+      });
+      (firstInvalidElement as HTMLElement).focus();
     }
-  };
 
-  const validateAllSteps = (): number | null => {
-    for (let step = 1; step <= totalSteps; step++) {
-      if (!validateStep(step)) {
-        return step;
-      }
-    }
-    return null;
+    toast.error('Please fix the highlighted fields before continuing.');
+
+    const pathStep: Record<string, number> = {
+      experience_years: 1,
+      professional_summary: 1,
+      professional_experiences: 2,
+      academic_information: 3,
+      skills: 4,
+    };
+
+    setCurrentStep(pathStep[firstErrorPath]);
   };
 
   const onSubmit = async (data: OnboardSchemaValues) => {
-    // First validate all steps
-    const firstInvalidStep = validateAllSteps();
-
-    if (firstInvalidStep !== null) {
-      // Navigate to the first step with validation errors
-      setCurrentStep(firstInvalidStep);
-
-      // Focus on the first field with an error after a short delay
-      setTimeout(() => {
-        const firstErrorField = document.querySelector(
-          '[data-invalid="true"]',
-        ) as HTMLElement;
-        if (firstErrorField) {
-          firstErrorField.focus();
-          firstErrorField.scrollIntoView({
-            behavior: 'smooth',
-            block: 'center',
-          });
-        }
-      }, 200);
-
-      toast.error(
-        `Let's finish filling out step ${firstInvalidStep} - don't worry, you can always come back and edit this later!`,
-      );
+    const error = await saveOnboardingData(data);
+    if (!error) {
       return;
     }
 
-    const error = await saveOnboardingData(data);
-    if (error) {
+    if ('status' in error) {
       toast.error(`${error.status} - ${error.message}`);
+      return;
     }
+
+    toast.error(`${error.message}`);
   };
 
   const nextStep = () => {
@@ -928,7 +813,10 @@ export default function OnboardForm() {
         </CardHeader>
         <CardContent className="px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+            <form
+              onSubmit={form.handleSubmit(onSubmit, onError)}
+              className="space-y-8"
+            >
               {renderStep()}
 
               <div className="flex flex-col sm:flex-row justify-between items-center mt-8 sm:mt-12 md:mt-16 pt-4 sm:pt-6 md:pt-8 border-t border-border space-y-4 sm:space-y-0">
