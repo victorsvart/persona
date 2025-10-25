@@ -27,11 +27,17 @@ import { toast } from 'sonner';
 import { ThreeDotLoad } from './ui/three-dot-load';
 import { OrigamiIcon } from 'lucide-react';
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
+import Link from 'next/link';
+import { LanguageSwitcher } from '@/components/language-switcher';
 
 export function LoginForm({
   className,
   ...props
 }: React.ComponentProps<'div'>) {
+  const t = useTranslations('auth.login');
+  const tCommon = useTranslations('common');
+  
   const form = useForm<LoginSchemaValues>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
@@ -50,11 +56,14 @@ export function LoginForm({
   return (
     <div className={cn('flex flex-col gap-6', className)} {...props}>
       <Toaster position="bottom-center" />
-      <div className="flex justify-center items-center gap-2">
-        <div className="bg-rose-500 flex items-center justify-center rounded-md p-1">
-          <OrigamiIcon className="text-black" />
+      <div className="flex justify-between items-center">
+        <div className="flex items-center gap-2">
+          <div className="bg-rose-500 flex items-center justify-center rounded-md p-1">
+            <OrigamiIcon className="text-black" />
+          </div>
+          <span className="text-rose-500 font-semibold">{tCommon('appName')}</span>
         </div>
-        <span className="text-rose-500 font-semibold">Persona</span>
+        <LanguageSwitcher variant="ghost" size="sm" />
       </div>
       <Card className="overflow-hidden p-0">
         <CardContent className="grid p-0 md:grid-cols-2">
@@ -66,9 +75,9 @@ export function LoginForm({
             >
               <FieldGroup>
                 <div className="flex flex-col items-center gap-2 text-center">
-                  <h1 className="text-2xl font-bold">Welcome back</h1>
+                  <h1 className="text-2xl font-bold">{t('title')}</h1>
                   <p className="text-muted-foreground text-balance">
-                    Login to your Persona account
+                    {t('subtitle')}
                   </p>
                 </div>
 
@@ -77,9 +86,9 @@ export function LoginForm({
                   name="username"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Username</FormLabel>
+                      <FormLabel>{t('username')}</FormLabel>
                       <FormControl>
-                        <Input type="text" placeholder="john.doe" {...field} />
+                        <Input type="text" placeholder={t('usernamePlaceholder')} {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -92,12 +101,12 @@ export function LoginForm({
                   render={({ field }) => (
                     <FormItem>
                       <div className="flex items-center">
-                        <FormLabel>Password</FormLabel>
+                        <FormLabel>{t('password')}</FormLabel>
                         <a
                           href="#"
                           className="ml-auto text-sm underline-offset-2 hover:underline"
                         >
-                          Forgot your password?
+                          {t('forgotPassword')}
                         </a>
                       </div>
                       <FormControl>
@@ -117,12 +126,12 @@ export function LoginForm({
                         : '',
                     )}
                   >
-                    {form.formState.isSubmitting ? <ThreeDotLoad /> : 'Sign In'}
+                    {form.formState.isSubmitting ? <ThreeDotLoad /> : t('signIn')}
                   </Button>
                 </Field>
 
                 <FieldSeparator className="*:data-[slot=field-separator-content]:bg-card">
-                  Or continue with
+                  {t('orContinueWith')}
                 </FieldSeparator>
 
                 <Field className="grid grid-cols-2 gap-4">
@@ -133,7 +142,7 @@ export function LoginForm({
                         fill="currentColor"
                       />
                     </svg>
-                    <span className="sr-only">Login with Google</span>
+                    <span className="sr-only">{t('loginWithGoogle')}</span>
                   </Button>
                   <Button variant="outline" type="button">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -142,12 +151,12 @@ export function LoginForm({
                         fill="currentColor"
                       />
                     </svg>
-                    <span className="sr-only">Login with Meta</span>
+                    <span className="sr-only">{t('loginWithMeta')}</span>
                   </Button>
                 </Field>
 
                 <FieldDescription className="text-center">
-                  Don&apos;t have an account? <a href="/signup">Sign up</a>
+                  {t('noAccount')} <Link href="/signup">{t('signUp')}</Link>
                 </FieldDescription>
               </FieldGroup>
             </form>
@@ -163,8 +172,10 @@ export function LoginForm({
         </CardContent>
       </Card>
       <FieldDescription className="px-6 text-center">
-        By signing in, you agree to our <a href="#">Terms of Service</a> and{' '}
-        <a href="#">Privacy Policy</a>.
+        {t.rich('agreement', {
+          termsOfService: (chunks) => <a href="#">{tCommon('termsOfService')}</a>,
+          privacyPolicy: (chunks) => <a href="#">{tCommon('privacyPolicy')}</a>,
+        })}
       </FieldDescription>
     </div>
   );

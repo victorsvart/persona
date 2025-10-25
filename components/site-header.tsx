@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { SidebarTrigger } from '@/components/ui/sidebar';
 import { usePathname } from 'next/navigation';
+import { LanguageSwitcher } from '@/components/language-switcher';
 
 export function SiteHeader() {
   const pathname = usePathname();
@@ -27,6 +28,7 @@ export function SiteHeader() {
         />
         <h1 className="text-sm sm:text-base font-medium">{title}</h1>
         <div className="ml-auto flex items-center gap-2">
+          <LanguageSwitcher variant="ghost" size="sm" />
           <Button variant="ghost" asChild size="sm" className="hidden sm:flex text-xs sm:text-sm">
             <a
               href="https://github.com/shadcn-ui/ui/tree/main/apps/v4/app/(examples)/dashboard"

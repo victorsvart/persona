@@ -1,0 +1,197 @@
+{
+  "common": {
+    "appName": "Persona",
+    "welcome": "Bienvenido",
+    "loading": "Cargando...",
+    "submit": "Enviar",
+    "cancel": "Cancelar",
+    "save": "Guardar",
+    "edit": "Editar",
+    "delete": "Eliminar",
+    "close": "Cerrar",
+    "back": "Volver",
+    "next": "Siguiente",
+    "continue": "Continuar",
+    "previous": "Anterior",
+    "finish": "Finalizar",
+    "search": "Buscar",
+    "filter": "Filtrar",
+    "sort": "Ordenar",
+    "actions": "Acciones",
+    "settings": "Configuración",
+    "profile": "Perfil",
+    "help": "Ayuda",
+    "logout": "Cerrar sesión",
+    "termsOfService": "Términos de Servicio",
+    "privacyPolicy": "Política de Privacidad",
+    "language": "Idioma",
+    "changeLanguage": "Cambiar Idioma"
+  },
+  "languages": {
+    "en": "English",
+    "es": "Español",
+    "pt-BR": "Português (Brasil)"
+  },
+  "auth": {
+    "login": {
+      "title": "Bienvenido de nuevo",
+      "subtitle": "Inicia sesión en tu cuenta de Persona",
+      "username": "Nombre de usuario",
+      "usernamePlaceholder": "juan.perez",
+      "password": "Contraseña",
+      "forgotPassword": "¿Olvidaste tu contraseña?",
+      "signIn": "Iniciar sesión",
+      "orContinueWith": "O continúa con",
+      "loginWithGoogle": "Iniciar sesión con Google",
+      "loginWithMeta": "Iniciar sesión con Meta",
+      "noAccount": "¿No tienes una cuenta?",
+      "signUp": "Regístrate",
+      "agreement": "Al iniciar sesión, aceptas nuestros {termsOfService} y {privacyPolicy}."
+    },
+    "signup": {
+      "title": "Crea tu cuenta",
+      "subtitle": "Ingresa tu correo electrónico a continuación para crear tu cuenta",
+      "email": "Correo electrónico",
+      "emailPlaceholder": "juan.perez@ejemplo.com",
+      "emailDescription": "Lo usaremos para contactarte. No compartiremos tu correo con nadie más.",
+      "name": "Nombre",
+      "namePlaceholder": "Juan Pérez",
+      "username": "Nombre de usuario",
+      "usernamePlaceholder": "juanperez",
+      "password": "Contraseña",
+      "confirmPassword": "Confirmar Contraseña",
+      "passwordRequirements": "Debe tener al menos 8 caracteres.",
+      "createAccount": "Crear Cuenta",
+      "orContinueWith": "O continúa con",
+      "signUpWithGoogle": "Registrarse con Google",
+      "signUpWithMeta": "Registrarse con Meta",
+      "hasAccount": "¿Ya tienes una cuenta?",
+      "signIn": "Iniciar sesión",
+      "agreement": "Al hacer clic en continuar, aceptas nuestros {termsOfService} y {privacyPolicy}."
+    }
+  },
+  "onboard": {
+    "welcome": "Bienvenido, {name}",
+    "subtitle": "Construyamos tu perfil profesional para crear currículums dirigidos a tus aplicaciones de trabajo",
+    "formTitle": "Construyamos tu perfil profesional",
+    "formSubtitle": "Recopilaremos información sobre tu trayectoria para crear currículums dirigidos a tus aplicaciones de trabajo. Siempre puedes actualizar esta información más tarde.",
+    "steps": {
+      "experience": "Experiencia",
+      "workHistory": "Historial Laboral",
+      "education": "Educación",
+      "skills": "Habilidades"
+    },
+    "stepIndicator": "Paso {current} de {total}",
+    "buttons": {
+      "back": "← Volver",
+      "continue": "Continuar →",
+      "complete": "Completar Perfil y Comenzar a Crear Currículums",
+      "completeShort": "Completar Perfil",
+      "autoFill": "Rellenar"
+    },
+    "errors": {
+      "fixFields": "Por favor, corrige los campos destacados antes de continuar.",
+      "autoFillSuccess": "¡Formulario rellenado automáticamente con datos de ejemplo!"
+    },
+    "step1": {
+      "title": "Experiencia Profesional",
+      "experienceYears": "Años de Experiencia Profesional",
+      "experienceYearsDescription": "¿Cuántos años has estado trabajando profesionalmente? Esto nos ayuda a entender tu nivel de carrera.",
+      "professionalSummary": "Resumen Profesional",
+      "professionalSummaryDescription": "Escribe un breve resumen sobre ti, tu experiencia y lo que te hace único. Esta será la introducción en tu currículum."
+    },
+    "step2": {
+      "title": "Experiencia Laboral",
+      "subtitle": "Agrega tu experiencia laboral profesional, pasantías y posiciones relevantes.",
+      "addExperience": "Agregar Experiencia Laboral",
+      "removeExperience": "Eliminar Experiencia",
+      "company": "Empresa/Organización",
+      "companyPlaceholder": "TechCorp Inc.",
+      "role": "Puesto/Función",
+      "rolePlaceholder": "Ingeniero de Software",
+      "startDate": "Fecha de Inicio",
+      "endDate": "Fecha de Finalización (Dejar vacío si es actual)",
+      "endDatePlaceholder": "DD/MM/AAAA o dejar vacío si es posición actual",
+      "atUniversity": "Esto fue durante la universidad",
+      "summary": "Descripción del Trabajo y Logros",
+      "summaryDescription": "Describe tus responsabilidades, logros e impacto en este puesto. Incluye métricas y logros específicos cuando sea posible.",
+      "noExperiences": "Aún no se han agregado experiencias laborales"
+    },
+    "step3": {
+      "title": "Educación",
+      "subtitle": "Agrega tu formación académica, títulos y certificaciones.",
+      "addEducation": "Agregar Educación",
+      "removeEducation": "Eliminar Educación",
+      "institution": "Institución",
+      "institutionPlaceholder": "Universidad de Tecnología",
+      "major": "Carrera/Especialización",
+      "majorPlaceholder": "Ciencias de la Computación",
+      "startDate": "Fecha de Inicio",
+      "endDate": "Fecha de Graduación",
+      "endDatePlaceholder": "DD/MM/AAAA",
+      "summary": "Logros y Actividades",
+      "summaryDescription": "Lista cursos relevantes, honores, actividades, promedio (si es alto) y cualquier logro notable.",
+      "noEducation": "Aún no se han agregado registros de educación"
+    },
+    "step4": {
+      "title": "Habilidades y Experiencia",
+      "subtitle": "Lista tus habilidades técnicas, habilidades blandas, herramientas y tecnologías.",
+      "skills": "Tus Habilidades",
+      "skillsDescription": "Lista tus habilidades separadas por comas. Incluye habilidades técnicas, blandas, lenguajes de programación, frameworks, herramientas y cualquier otra experiencia relevante.",
+      "skillsPlaceholder": "JavaScript, React, Node.js, Python, Liderazgo, Comunicación, Gestión de Proyectos..."
+    }
+  },
+  "dashboard": {
+    "applications": {
+      "title": "Aplicaciones de Trabajo",
+      "subtitle": "Rastrea y administra tus aplicaciones de trabajo",
+      "addApplication": "Agregar Aplicación",
+      "noApplicationsYet": "Aún No Hay Aplicaciones",
+      "noApplicationsDescription": "Comienza a rastrear tus aplicaciones de trabajo creando tu primera aplicación",
+      "columns": {
+        "company": "Empresa",
+        "position": "Posición",
+        "status": "Estado",
+        "appliedDate": "Fecha de Aplicación",
+        "actions": "Acciones"
+      }
+    },
+    "professionalSummary": {
+      "title": "Resumen Profesional",
+      "update": "Actualizar Resumen",
+      "pageTitle": "Perfil Profesional",
+      "pageSubtitle": "Construye tu identidad profesional y muestra tu experiencia",
+      "profileCompletion": "Finalización del Perfil",
+      "profileSections": "Secciones del Perfil",
+      "complete": "Completo",
+      "inProgress": "En Progreso",
+      "quickStats": "Estadísticas Rápidas",
+      "yearsOfExperience": "Años de Experiencia",
+      "workExperiences": "Experiencias Laborales",
+      "summaryLength": "Longitud del Resumen",
+      "chars": "caracteres",
+      "progress": "Progreso",
+      "summary": "Resumen",
+      "experience": "Experiencia",
+      "professionalSummary": "Resumen Profesional",
+      "workExperience": "Experiencia Laboral"
+    },
+    "sidebar": {
+      "applications": "Aplicaciones",
+      "professionalSummary": "Resumen Profesional",
+      "personalProjects": "Proyectos Personales",
+      "academic": "Académico",
+      "needHelp": "¿Necesitas ayuda?"
+    }
+  },
+  "home": {
+    "getStarted": "Comienza editando",
+    "saveAndSee": "Guarda y ve tus cambios al instante.",
+    "deployNow": "Implementar ahora",
+    "readDocs": "Lee nuestra documentación",
+    "learn": "Aprender",
+    "examples": "Ejemplos",
+    "goToNextJs": "Ir a nextjs.org →"
+  }
+}
+

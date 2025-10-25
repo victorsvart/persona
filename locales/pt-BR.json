@@ -1,0 +1,197 @@
+{
+  "common": {
+    "appName": "Persona",
+    "welcome": "Bem-vindo",
+    "loading": "Carregando...",
+    "submit": "Enviar",
+    "cancel": "Cancelar",
+    "save": "Salvar",
+    "edit": "Editar",
+    "delete": "Excluir",
+    "close": "Fechar",
+    "back": "Voltar",
+    "next": "Próximo",
+    "continue": "Continuar",
+    "previous": "Anterior",
+    "finish": "Finalizar",
+    "search": "Buscar",
+    "filter": "Filtrar",
+    "sort": "Ordenar",
+    "actions": "Ações",
+    "settings": "Configurações",
+    "profile": "Perfil",
+    "help": "Ajuda",
+    "logout": "Sair",
+    "termsOfService": "Termos de Serviço",
+    "privacyPolicy": "Política de Privacidade",
+    "language": "Idioma",
+    "changeLanguage": "Alterar Idioma"
+  },
+  "languages": {
+    "en": "English",
+    "es": "Español",
+    "pt-BR": "Português (Brasil)"
+  },
+  "auth": {
+    "login": {
+      "title": "Bem-vindo de volta",
+      "subtitle": "Entre na sua conta Persona",
+      "username": "Nome de usuário",
+      "usernamePlaceholder": "joao.silva",
+      "password": "Senha",
+      "forgotPassword": "Esqueceu sua senha?",
+      "signIn": "Entrar",
+      "orContinueWith": "Ou continue com",
+      "loginWithGoogle": "Entrar com Google",
+      "loginWithMeta": "Entrar com Meta",
+      "noAccount": "Não tem uma conta?",
+      "signUp": "Cadastre-se",
+      "agreement": "Ao entrar, você concorda com nossos {termsOfService} e {privacyPolicy}."
+    },
+    "signup": {
+      "title": "Crie sua conta",
+      "subtitle": "Digite seu e-mail abaixo para criar sua conta",
+      "email": "E-mail",
+      "emailPlaceholder": "joao.silva@exemplo.com",
+      "emailDescription": "Usaremos isso para entrar em contato. Não compartilharemos seu e-mail com ninguém.",
+      "name": "Nome",
+      "namePlaceholder": "João Silva",
+      "username": "Nome de usuário",
+      "usernamePlaceholder": "joaosilva",
+      "password": "Senha",
+      "confirmPassword": "Confirmar Senha",
+      "passwordRequirements": "Deve ter pelo menos 8 caracteres.",
+      "createAccount": "Criar Conta",
+      "orContinueWith": "Ou continue com",
+      "signUpWithGoogle": "Cadastrar com Google",
+      "signUpWithMeta": "Cadastrar com Meta",
+      "hasAccount": "Já tem uma conta?",
+      "signIn": "Entrar",
+      "agreement": "Ao clicar em continuar, você concorda com nossos {termsOfService} e {privacyPolicy}."
+    }
+  },
+  "onboard": {
+    "welcome": "Bem-vindo, {name}",
+    "subtitle": "Vamos construir seu perfil profissional para criar currículos direcionados para suas candidaturas",
+    "formTitle": "Vamos construir seu perfil profissional",
+    "formSubtitle": "Vamos coletar informações sobre seu histórico para criar currículos direcionados para suas candidaturas. Você sempre pode atualizar essas informações depois.",
+    "steps": {
+      "experience": "Experiência",
+      "workHistory": "Histórico de Trabalho",
+      "education": "Educação",
+      "skills": "Habilidades"
+    },
+    "stepIndicator": "Etapa {current} de {total}",
+    "buttons": {
+      "back": "← Voltar",
+      "continue": "Continuar →",
+      "complete": "Concluir Perfil e Começar a Criar Currículos",
+      "completeShort": "Concluir Perfil",
+      "autoFill": "Preencher"
+    },
+    "errors": {
+      "fixFields": "Por favor, corrija os campos destacados antes de continuar.",
+      "autoFillSuccess": "Formulário preenchido automaticamente com dados de exemplo!"
+    },
+    "step1": {
+      "title": "Experiência Profissional",
+      "experienceYears": "Anos de Experiência Profissional",
+      "experienceYearsDescription": "Há quantos anos você trabalha profissionalmente? Isso nos ajuda a entender seu nível de carreira.",
+      "professionalSummary": "Resumo Profissional",
+      "professionalSummaryDescription": "Escreva um breve resumo sobre você, sua experiência e o que o torna único. Esta será a introdução no seu currículo."
+    },
+    "step2": {
+      "title": "Experiência de Trabalho",
+      "subtitle": "Adicione sua experiência profissional, estágios e posições relevantes.",
+      "addExperience": "Adicionar Experiência de Trabalho",
+      "removeExperience": "Remover Experiência",
+      "company": "Empresa/Organização",
+      "companyPlaceholder": "TechCorp Inc.",
+      "role": "Cargo/Função",
+      "rolePlaceholder": "Engenheiro de Software",
+      "startDate": "Data de Início",
+      "endDate": "Data de Término (Deixe vazio se atual)",
+      "endDatePlaceholder": "DD/MM/AAAA ou deixe vazio se for posição atual",
+      "atUniversity": "Isso foi durante a universidade",
+      "summary": "Descrição do Trabalho e Conquistas",
+      "summaryDescription": "Descreva suas responsabilidades, conquistas e impacto nesta função. Inclua métricas e realizações específicas quando possível.",
+      "noExperiences": "Nenhuma experiência de trabalho adicionada ainda"
+    },
+    "step3": {
+      "title": "Educação",
+      "subtitle": "Adicione sua formação acadêmica, diplomas e certificações.",
+      "addEducation": "Adicionar Educação",
+      "removeEducation": "Remover Educação",
+      "institution": "Instituição",
+      "institutionPlaceholder": "Universidade de Tecnologia",
+      "major": "Curso/Especialização",
+      "majorPlaceholder": "Ciência da Computação",
+      "startDate": "Data de Início",
+      "endDate": "Data de Formatura",
+      "endDatePlaceholder": "DD/MM/AAAA",
+      "summary": "Conquistas e Atividades",
+      "summaryDescription": "Liste cursos relevantes, honras, atividades, nota média (se boa) e quaisquer conquistas notáveis.",
+      "noEducation": "Nenhum registro de educação adicionado ainda"
+    },
+    "step4": {
+      "title": "Habilidades e Conhecimentos",
+      "subtitle": "Liste suas habilidades técnicas, habilidades interpessoais, ferramentas e tecnologias.",
+      "skills": "Suas Habilidades",
+      "skillsDescription": "Liste suas habilidades separadas por vírgulas. Inclua habilidades técnicas, interpessoais, linguagens de programação, frameworks, ferramentas e qualquer outra experiência relevante.",
+      "skillsPlaceholder": "JavaScript, React, Node.js, Python, Liderança, Comunicação, Gestão de Projetos..."
+    }
+  },
+  "dashboard": {
+    "applications": {
+      "title": "Candidaturas de Emprego",
+      "subtitle": "Acompanhe e gerencie suas candidaturas de emprego",
+      "addApplication": "Adicionar Candidatura",
+      "noApplicationsYet": "Nenhuma Candidatura Ainda",
+      "noApplicationsDescription": "Comece a acompanhar suas candidaturas de emprego criando a primeira",
+      "columns": {
+        "company": "Empresa",
+        "position": "Cargo",
+        "status": "Status",
+        "appliedDate": "Data da Candidatura",
+        "actions": "Ações"
+      }
+    },
+    "professionalSummary": {
+      "title": "Resumo Profissional",
+      "update": "Atualizar Resumo",
+      "pageTitle": "Perfil Profissional",
+      "pageSubtitle": "Construa sua identidade profissional e mostre sua experiência",
+      "profileCompletion": "Conclusão do Perfil",
+      "profileSections": "Seções do Perfil",
+      "complete": "Completo",
+      "inProgress": "Em Progresso",
+      "quickStats": "Estatísticas Rápidas",
+      "yearsOfExperience": "Anos de Experiência",
+      "workExperiences": "Experiências de Trabalho",
+      "summaryLength": "Tamanho do Resumo",
+      "chars": "caracteres",
+      "progress": "Progresso",
+      "summary": "Resumo",
+      "experience": "Experiência",
+      "professionalSummary": "Resumo Profissional",
+      "workExperience": "Experiência de Trabalho"
+    },
+    "sidebar": {
+      "applications": "Candidaturas",
+      "professionalSummary": "Resumo Profissional",
+      "personalProjects": "Projetos Pessoais",
+      "academic": "Acadêmico",
+      "needHelp": "Precisa de ajuda?"
+    }
+  },
+  "home": {
+    "getStarted": "Comece editando",
+    "saveAndSee": "Salve e veja suas alterações instantaneamente.",
+    "deployNow": "Implantar agora",
+    "readDocs": "Leia nossa documentação",
+    "learn": "Aprender",
+    "examples": "Exemplos",
+    "goToNextJs": "Ir para nextjs.org →"
+  }
+}
+

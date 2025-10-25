@@ -27,86 +27,8 @@ import {
 import { OrigamiIcon } from 'lucide-react';
 import { User } from '@/prisma/generated/prisma';
 import { APPLICATION_PAGE_URL, PROFESSIONAL_SUMMARY_URL } from '@/lib/helpers';
-
-const data = {
-  navMain: [
-    {
-      title: 'Applications',
-      url: APPLICATION_PAGE_URL,
-      icon: IconDashboard,
-    },
-    {
-      title: 'Professional Summary',
-      url: PROFESSIONAL_SUMMARY_URL,
-      icon: IconListDetails,
-    },
-    {
-      title: 'Personal Projects',
-      url: '#',
-      icon: IconFolder,
-    },
-    {
-      title: 'Academic',
-      url: '#',
-      icon: IconUsers,
-    },
-  ],
-  navClouds: [
-    {
-      title: 'Capture',
-      icon: IconCamera,
-      isActive: true,
-      url: '#',
-      items: [
-        {
-          title: 'Active Proposals',
-          url: '#',
-        },
-        {
-          title: 'Archived',
-          url: '#',
-        },
-      ],
-    },
-    {
-      title: 'Proposal',
-      icon: IconFileDescription,
-      url: '#',
-      items: [
-        {
-          title: 'Active Proposals',
-          url: '#',
-        },
-        {
-          title: 'Archived',
-          url: '#',
-        },
-      ],
-    },
-    {
-      title: 'Prompts',
-      icon: IconFileAi,
-      url: '#',
-      items: [
-        {
-          title: 'Active Proposals',
-          url: '#',
-        },
-        {
-          title: 'Archived',
-          url: '#',
-        },
-      ],
-    },
-  ],
-  navSecondary: [
-    {
-      title: 'Need help?',
-      url: '#',
-      icon: IconHelp,
-    },
-  ],
-};
+import { useTranslations } from 'next-intl';
+import { LanguageSwitcher } from '@/components/language-switcher';
 
 type Props = {
   user: User;
@@ -114,6 +36,41 @@ type Props = {
 
 export function AppSidebar({ ...props }: Props) {
   const { user } = props;
+  const t = useTranslations('dashboard.sidebar');
+  const tCommon = useTranslations('common');
+  
+  const data = {
+    navMain: [
+      {
+        title: t('applications'),
+        url: APPLICATION_PAGE_URL,
+        icon: IconDashboard,
+      },
+      {
+        title: t('professionalSummary'),
+        url: PROFESSIONAL_SUMMARY_URL,
+        icon: IconListDetails,
+      },
+      {
+        title: t('personalProjects'),
+        url: '#',
+        icon: IconFolder,
+      },
+      {
+        title: t('academic'),
+        url: '#',
+        icon: IconUsers,
+      },
+    ],
+    navSecondary: [
+      {
+        title: t('needHelp'),
+        url: '#',
+        icon: IconHelp,
+      },
+    ],
+  };
+  
   return (
     <Sidebar collapsible="offcanvas" {...props}>
       <SidebarHeader>
@@ -128,7 +85,7 @@ export function AppSidebar({ ...props }: Props) {
                   <OrigamiIcon className="size-4 sm:size-5" />
                 </span>
                 <span className="text-rose-500 font-semibold text-sm sm:text-base">
-                  Persona
+                  {tCommon('appName')}
                 </span>
               </a>
             </SidebarMenuButton>
@@ -140,6 +97,9 @@ export function AppSidebar({ ...props }: Props) {
         <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>
+        <div className="p-2 border-t">
+          <LanguageSwitcher variant="ghost" size="sm" showLabel />
+        </div>
         <NavUser user={user} />
       </SidebarFooter>
     </Sidebar>

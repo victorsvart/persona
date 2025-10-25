@@ -1,0 +1,197 @@
+{
+  "common": {
+    "appName": "Persona",
+    "welcome": "Welcome",
+    "loading": "Loading...",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "save": "Save",
+    "edit": "Edit",
+    "delete": "Delete",
+    "close": "Close",
+    "back": "Go Back",
+    "next": "Next",
+    "continue": "Continue",
+    "previous": "Previous",
+    "finish": "Finish",
+    "search": "Search",
+    "filter": "Filter",
+    "sort": "Sort",
+    "actions": "Actions",
+    "settings": "Settings",
+    "profile": "Profile",
+    "help": "Help",
+    "logout": "Logout",
+    "termsOfService": "Terms of Service",
+    "privacyPolicy": "Privacy Policy",
+    "language": "Language",
+    "changeLanguage": "Change Language"
+  },
+  "languages": {
+    "en": "English",
+    "es": "Español",
+    "pt-BR": "Português (Brasil)"
+  },
+  "auth": {
+    "login": {
+      "title": "Welcome back",
+      "subtitle": "Login to your Persona account",
+      "username": "Username",
+      "usernamePlaceholder": "john.doe",
+      "password": "Password",
+      "forgotPassword": "Forgot your password?",
+      "signIn": "Sign In",
+      "orContinueWith": "Or continue with",
+      "loginWithGoogle": "Login with Google",
+      "loginWithMeta": "Login with Meta",
+      "noAccount": "Don't have an account?",
+      "signUp": "Sign up",
+      "agreement": "By signing in, you agree to our {termsOfService} and {privacyPolicy}."
+    },
+    "signup": {
+      "title": "Create your account",
+      "subtitle": "Enter your email below to create your account",
+      "email": "Email",
+      "emailPlaceholder": "john.doe@example.com",
+      "emailDescription": "We'll use this to contact you. We will not share your email with anyone else.",
+      "name": "Name",
+      "namePlaceholder": "John Doe",
+      "username": "Username",
+      "usernamePlaceholder": "johndoe",
+      "password": "Password",
+      "confirmPassword": "Confirm Password",
+      "passwordRequirements": "Must be at least 8 characters long.",
+      "createAccount": "Create Account",
+      "orContinueWith": "Or continue with",
+      "signUpWithGoogle": "Sign up with Google",
+      "signUpWithMeta": "Sign up with Meta",
+      "hasAccount": "Already have an account?",
+      "signIn": "Sign in",
+      "agreement": "By clicking continue, you agree to our {termsOfService} and {privacyPolicy}."
+    }
+  },
+  "onboard": {
+    "welcome": "Welcome, {name}",
+    "subtitle": "Let's build your professional profile to create targeted resumes for job applications",
+    "formTitle": "Let's build your professional profile",
+    "formSubtitle": "We'll gather information about your background to create targeted resumes for your job applications. You can always update this information later.",
+    "steps": {
+      "experience": "Experience",
+      "workHistory": "Work History",
+      "education": "Education",
+      "skills": "Skills"
+    },
+    "stepIndicator": "Step {current} of {total}",
+    "buttons": {
+      "back": "← Go Back",
+      "continue": "Continue →",
+      "complete": "Complete Profile & Start Building Resumes",
+      "completeShort": "Complete Profile",
+      "autoFill": "Fill"
+    },
+    "errors": {
+      "fixFields": "Please fix the highlighted fields before continuing.",
+      "autoFillSuccess": "Form auto-filled with sample data!"
+    },
+    "step1": {
+      "title": "Professional Experience",
+      "experienceYears": "Years of Professional Experience",
+      "experienceYearsDescription": "How many years have you been working professionally? This helps us understand your career level.",
+      "professionalSummary": "Professional Summary",
+      "professionalSummaryDescription": "Write a brief summary about yourself, your expertise, and what makes you unique. This will be the introduction on your resume."
+    },
+    "step2": {
+      "title": "Work Experience",
+      "subtitle": "Add your professional work experience, internships, and relevant positions.",
+      "addExperience": "Add Work Experience",
+      "removeExperience": "Remove Experience",
+      "company": "Company/Organization",
+      "companyPlaceholder": "TechCorp Inc.",
+      "role": "Job Title/Role",
+      "rolePlaceholder": "Software Engineer",
+      "startDate": "Start Date",
+      "endDate": "End Date (Leave empty if current)",
+      "endDatePlaceholder": "MM/DD/YYYY or leave empty if current position",
+      "atUniversity": "This was during university",
+      "summary": "Job Description & Achievements",
+      "summaryDescription": "Describe your responsibilities, achievements, and impact in this role. Include metrics and specific accomplishments when possible.",
+      "noExperiences": "No work experiences added yet"
+    },
+    "step3": {
+      "title": "Education",
+      "subtitle": "Add your academic background, degrees, and certifications.",
+      "addEducation": "Add Education",
+      "removeEducation": "Remove Education",
+      "institution": "Institution",
+      "institutionPlaceholder": "University of Technology",
+      "major": "Degree/Major",
+      "majorPlaceholder": "Computer Science",
+      "startDate": "Start Date",
+      "endDate": "Graduation Date",
+      "endDatePlaceholder": "MM/DD/YYYY",
+      "summary": "Achievements & Activities",
+      "summaryDescription": "List relevant coursework, honors, activities, GPA (if strong), and any notable achievements.",
+      "noEducation": "No education records added yet"
+    },
+    "step4": {
+      "title": "Skills & Expertise",
+      "subtitle": "List your technical skills, soft skills, tools, and technologies.",
+      "skills": "Your Skills",
+      "skillsDescription": "List your skills separated by commas. Include technical skills, soft skills, programming languages, frameworks, tools, and any other relevant expertise.",
+      "skillsPlaceholder": "JavaScript, React, Node.js, Python, Leadership, Communication, Project Management..."
+    }
+  },
+  "dashboard": {
+    "applications": {
+      "title": "Job Applications",
+      "subtitle": "Track and manage your job applications",
+      "addApplication": "Add Application",
+      "noApplicationsYet": "No Applications Yet",
+      "noApplicationsDescription": "Start tracking your job applications by creating your first one",
+      "columns": {
+        "company": "Company",
+        "position": "Position",
+        "status": "Status",
+        "appliedDate": "Applied Date",
+        "actions": "Actions"
+      }
+    },
+    "professionalSummary": {
+      "title": "Professional Summary",
+      "update": "Update Summary",
+      "pageTitle": "Professional Profile",
+      "pageSubtitle": "Build your professional identity and showcase your experience",
+      "profileCompletion": "Profile Completion",
+      "profileSections": "Profile Sections",
+      "complete": "Complete",
+      "inProgress": "In Progress",
+      "quickStats": "Quick Stats",
+      "yearsOfExperience": "Years of Experience",
+      "workExperiences": "Work Experiences",
+      "summaryLength": "Summary Length",
+      "chars": "chars",
+      "progress": "Progress",
+      "summary": "Summary",
+      "experience": "Experience",
+      "professionalSummary": "Professional Summary",
+      "workExperience": "Work Experience"
+    },
+    "sidebar": {
+      "applications": "Applications",
+      "professionalSummary": "Professional Summary",
+      "personalProjects": "Personal Projects",
+      "academic": "Academic",
+      "needHelp": "Need help?"
+    }
+  },
+  "home": {
+    "getStarted": "Get started by editing",
+    "saveAndSee": "Save and see your changes instantly.",
+    "deployNow": "Deploy now",
+    "readDocs": "Read our docs",
+    "learn": "Learn",
+    "examples": "Examples",
+    "goToNextJs": "Go to nextjs.org →"
+  }
+}
+
