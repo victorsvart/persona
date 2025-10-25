@@ -1,5 +1,3 @@
-'use server';
-
 import { auth } from '@/lib/auth';
 import { headers } from 'next/headers';
 import { redirect } from 'next/navigation';
@@ -10,6 +8,16 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card } from '@/components/ui/card';
 import { FileText, Briefcase, CheckCircle, AlertCircle } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Professional Profile',
+  description: 'Build your professional identity. Add your work experience and professional summary to create targeted resumes.',
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 export default async function ProfessionalSummaryPage() {
   const session = await auth.api.getSession({

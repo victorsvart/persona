@@ -1,9 +1,17 @@
-'use server';
-
 import { auth } from '@/lib/auth';
 import { headers } from 'next/headers';
 import { redirect } from 'next/navigation';
 import OnboardForm from '@/components/onboard/onboard-form';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Get Started',
+  description: 'Complete your professional profile to start creating targeted resumes with AI.',
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 export default async function OnboardPage() {
   const session = await auth.api.getSession({

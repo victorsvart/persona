@@ -1,9 +1,23 @@
-'use server';
-
 import { LoginForm } from '@/components/login-form';
 import { auth } from '@/lib/auth';
 import { headers } from 'next/headers';
 import { redirect } from 'next/navigation';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Login',
+  description:
+    'Sign in to your Persona account to access your resumes, track job applications, and manage your professional profile.',
+  openGraph: {
+    title: 'Login to Persona',
+    description:
+      'Sign in to your Persona account to access your resumes, track job applications, and manage your professional profile.',
+  },
+  robots: {
+    index: false,
+    follow: true,
+  },
+};
 
 export default async function LoginPage() {
   const session = await auth.api.getSession({

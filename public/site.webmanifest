@@ -1,0 +1,25 @@
+{
+  "name": "Persona - AI-Powered Resume Builder",
+  "short_name": "Persona",
+  "description": "Create targeted, ATS-optimized resumes for each job application using AI. Track applications and land your dream job faster.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#3b82f6",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "/apple-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ],
+  "categories": ["productivity", "business"],
+  "screenshots": []
+}
+

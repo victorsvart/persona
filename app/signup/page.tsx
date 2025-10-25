@@ -1,4 +1,20 @@
 import { SignupForm } from "@/components/signup-form"
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Sign Up',
+  description:
+    'Create your free Persona account and start building AI-powered, ATS-optimized resumes tailored for each job application. Join thousands of job seekers landing their dream jobs.',
+  openGraph: {
+    title: 'Sign Up for Persona',
+    description:
+      'Create your free Persona account and start building AI-powered, ATS-optimized resumes tailored for each job application.',
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+};
 
 export default function SignupPage() {
   return (
