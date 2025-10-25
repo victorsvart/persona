@@ -16,5 +16,5 @@ export default async function ResumePage({ params }: ResumePageProps) {
     notFound();
   }
 
-  return <ResumePageClient application={application} />;
+  return <ResumePageClient application={application as any} />;
 }

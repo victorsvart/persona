@@ -33,6 +33,7 @@ model User {
   displayUsername               String?
   onboarded                     Boolean                      @default(false)
   applications                  UserApplications[]
+  resumes                       UserResume[]
 
   @@unique([email])
   @@unique([username])
@@ -155,9 +156,28 @@ model UserApplications {
   job_post     String
   userId       String
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  resumes      UserResume[]
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
   @@map("user_applications")
+  @@schema("public")
+}
+
+model UserResume {
+  id            String            @id @default(uuid())
+  applicationId String
+  application   UserApplications  @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  userId        String
+  user          User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  version       Int               @default(1)
+  title         String            @default("Resume")
+  content       String            // HTML content
+  isActive      Boolean           @default(true)
+  createdAt     DateTime          @default(now())
+  updatedAt     DateTime          @updatedAt
+
+  @@unique([applicationId, version])
+  @@map("user_resume")
   @@schema("public")
 }

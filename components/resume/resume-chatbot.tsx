@@ -44,7 +44,7 @@ export const ResumeChatbot: React.FC<ResumeChatbotProps> = ({
     inputRef.current?.focus();
   }, []);
 
-  // Initialize with welcome message
+  // Initialize with welcome message and auto-generate initial resume
   useEffect(() => {
     if (messages.length === 0) {
       const welcomeMessage: Message = {
@@ -58,12 +58,43 @@ I can analyze your experience and the job requirements to help you:
 • Tailor your experience to match the job description
 • Suggest improvements and formatting
 
-What would you like to start with? You can ask me to analyze the job posting, review your experience, or help you structure your resume.`,
+Let me start by generating an initial resume based on your application details and the job posting. This will give us a solid foundation to work from!`,
         timestamp: new Date(),
       };
       setMessages([welcomeMessage]);
+
+      // Auto-generate initial resume
+      setTimeout(() => {
+        handleAutoGenerateResume();
+      }, 2000);
     }
   }, [application, messages.length]);
+
+  const handleAutoGenerateResume = async () => {
+    setIsGenerating(true);
+    try {
+      const response = await simulateChatGPTResponse('generate my resume', application);
+      
+      const assistantMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        role: 'assistant',
+        content: response.content,
+        timestamp: new Date(),
+      };
+
+      setMessages(prev => [...prev, assistantMessage]);
+
+      // Generate and save the resume
+      if (response.resumeContent) {
+        onResumeGenerated(response.resumeContent);
+      }
+    } catch (error) {
+      console.error('Error auto-generating resume:', error);
+      toast.error('Failed to generate initial resume');
+    } finally {
+      setIsGenerating(false);
+    }
+  };
 
   const handleSendMessage = async () => {
     if (!inputValue.trim() || isGenerating) return;
@@ -303,6 +334,11 @@ I'm ready to assist you!`,
 
 // Generate a sample resume (in a real app, this would call ChatGPT API)
 function generateSampleResume(application: UserApplications): string {
+  // Extract keywords from job post for better targeting
+  const jobPost = application.job_post.toLowerCase();
+  const skills = extractSkillsFromJobPost(jobPost);
+  const experienceLevel = determineExperienceLevel(jobPost);
+  
   return `
 <!DOCTYPE html>
 <html lang="en">
@@ -311,157 +347,274 @@ function generateSampleResume(application: UserApplications): string {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resume - ${application.role}</title>
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
+        .resume-preview {
+            font-family: 'Times New Roman', 'Times', serif !important;
+            line-height: 1.3 !important;
+            color: #000 !important;
+            max-width: 100%;
+            width: 100%;
+            margin: 0 !important;
+            padding: 0.75in !important;
+            background: #fff !important;
+            box-sizing: border-box !important;
+            overflow-x: hidden;
+            font-size: 11px !important;
+            all: initial;
+            font-family: 'Times New Roman', 'Times', serif;
+            line-height: 1.3;
+            color: #000;
             background: #fff;
+            font-size: 11px;
+            min-height: 11in;
+            max-height: 11in;
         }
-        .header {
+        
+        @media print {
+            .resume-preview {
+                margin: 0 !important;
+                padding: 0.75in !important;
+                width: 8.5in !important;
+                height: 11in !important;
+                max-width: 8.5in !important;
+                max-height: 11in !important;
+                font-size: 11px !important;
+                line-height: 1.3 !important;
+            }
+        }
+        .resume-preview .header {
             text-align: center;
-            border-bottom: 2px solid #2563eb;
-            padding-bottom: 20px;
-            margin-bottom: 30px;
+            border-bottom: 1px solid #000;
+            padding-bottom: 12px;
+            margin-bottom: 16px;
         }
-        .name {
-            font-size: 2.5em;
+        .resume-preview .name {
+            font-size: 16px;
             font-weight: bold;
-            color: #2563eb;
+            color: #000;
             margin: 0;
+            word-wrap: break-word;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
-        .contact {
-            font-size: 1.1em;
-            color: #666;
-            margin: 10px 0;
+        .resume-preview .contact {
+            font-size: 10px;
+            color: #000;
+            margin: 6px 0;
+            word-wrap: break-word;
         }
-        .section {
-            margin-bottom: 25px;
+        .resume-preview .section {
+            margin-bottom: 14px;
         }
-        .section-title {
-            font-size: 1.4em;
+        .resume-preview .section-title {
+            font-size: 12px;
             font-weight: bold;
-            color: #2563eb;
-            border-bottom: 1px solid #e5e7eb;
-            padding-bottom: 5px;
-            margin-bottom: 15px;
+            color: #000;
+            border-bottom: 1px solid #000;
+            padding-bottom: 2px;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
         }
-        .job {
-            margin-bottom: 20px;
+        .resume-preview .job {
+            margin-bottom: 12px;
         }
-        .job-title {
+        .resume-preview .job-title {
             font-weight: bold;
-            font-size: 1.1em;
-            color: #1f2937;
+            font-size: 11px;
+            color: #000;
         }
-        .company {
-            color: #2563eb;
-            font-weight: 500;
+        .resume-preview .company {
+            color: #000;
+            font-weight: bold;
+            font-size: 10px;
         }
-        .date {
-            color: #6b7280;
+        .resume-preview .date {
+            color: #000;
             font-style: italic;
+            float: right;
+            font-size: 10px;
         }
-        .description {
-            margin-top: 5px;
-            color: #374151;
+        .resume-preview .description {
+            margin-top: 2px;
+            color: #000;
+            font-size: 10px;
+            line-height: 1.2;
         }
-        .skills {
+        .resume-preview .skills {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
+            gap: 3px;
         }
-        .skill {
-            background: #f3f4f6;
-            padding: 4px 12px;
-            border-radius: 16px;
-            font-size: 0.9em;
-            color: #374151;
+        .resume-preview .skill {
+            background: #fff;
+            border: 1px solid #000;
+            padding: 1px 4px;
+            font-size: 9px;
+            color: #000;
+            margin-right: 3px;
+            margin-bottom: 1px;
         }
-        .highlight {
-            background: #fef3c7;
-            padding: 2px 4px;
-            border-radius: 4px;
+        .resume-preview .highlight {
+            background: #fff;
+            border: 1px solid #000;
+            padding: 1px 2px;
+            font-weight: bold;
+            font-size: 10px;
+        }
+        .resume-preview .job-requirements {
+            background: #fff;
+            border: 1px solid #000;
+            padding: 8px;
+            margin: 12px 0;
+        }
+        .resume-preview * {
+            box-sizing: border-box;
+        }
+        .resume-preview .resume-container {
+            max-width: 100%;
+            overflow-x: hidden;
+            word-wrap: break-word;
+            background: #fff;
+            color: #000;
+        }
+        .resume-preview ul {
+            margin: 0;
+            padding-left: 12px;
+        }
+        .resume-preview li {
+            margin-bottom: 1px;
+            font-size: 10px;
+            line-height: 1.2;
+        }
+        .resume-preview p {
+            margin: 0 0 6px 0;
+            font-size: 10px;
+            line-height: 1.2;
+        }
+        
+        /* Print optimizations */
+        @media print {
+            .resume-preview .job-requirements {
+                page-break-inside: avoid;
+            }
+            .resume-preview .section {
+                page-break-inside: avoid;
+            }
+            .resume-preview .job {
+                page-break-inside: avoid;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1 class="name">Your Name</h1>
-        <div class="contact">
-            your.email@example.com | (555) 123-4567 | LinkedIn: linkedin.com/in/yourprofile
-        </div>
-    </div>
-
-    <div class="section">
-        <h2 class="section-title">Professional Summary</h2>
-        <p>Experienced professional seeking the <span class="highlight">${application.role}</span> position at <span class="highlight">${application.company_name}</span>. Proven track record of delivering results and driving innovation in dynamic environments. Passionate about leveraging technical expertise and collaborative skills to contribute to team success.</p>
-    </div>
-
-    <div class="section">
-        <h2 class="section-title">Professional Experience</h2>
-        
-        <div class="job">
-            <div class="job-title">Senior Software Engineer</div>
-            <div class="company">Tech Company Inc.</div>
-            <div class="date">2020 - Present</div>
-            <div class="description">
-                • Led development of scalable web applications serving 100K+ users<br>
-                • Implemented CI/CD pipelines reducing deployment time by 40%<br>
-                • Mentored junior developers and conducted code reviews<br>
-                • Collaborated with cross-functional teams to deliver features on time
+    <div class="resume-preview">
+        <div class="header">
+            <h1 class="name">Your Name</h1>
+            <div class="contact">
+                your.email@example.com | (555) 123-4567 | LinkedIn: linkedin.com/in/yourprofile
             </div>
         </div>
 
-        <div class="job">
-            <div class="job-title">Software Developer</div>
-            <div class="company">StartupXYZ</div>
-            <div class="date">2018 - 2020</div>
-            <div class="description">
-                • Developed full-stack applications using modern technologies<br>
-                • Optimized database queries improving performance by 30%<br>
-                • Participated in agile development processes<br>
-                • Contributed to open-source projects
+        <div class="section">
+            <h2 class="section-title">Professional Summary</h2>
+            <p>${experienceLevel} professional seeking the <span class="highlight">${application.role}</span> position at <span class="highlight">${application.company_name}</span>. Proven track record of delivering results and driving innovation in dynamic environments. Passionate about leveraging technical expertise and collaborative skills to contribute to team success.</p>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">Professional Experience</h2>
+            
+            <div class="job">
+                <div class="job-title">Senior Software Engineer</div>
+                <div class="company">Tech Company Inc.</div>
+                <div class="date">2020 - Present</div>
+                <div class="description">
+                    • Led development of scalable web applications serving 100K+ users<br>
+                    • Implemented CI/CD pipelines reducing deployment time by 40%<br>
+                    • Mentored junior developers and conducted code reviews<br>
+                    • Collaborated with cross-functional teams to deliver features on time
+                </div>
+            </div>
+
+            <div class="job">
+                <div class="job-title">Software Developer</div>
+                <div class="company">StartupXYZ</div>
+                <div class="date">2018 - 2020</div>
+                <div class="description">
+                    • Developed full-stack applications using modern technologies<br>
+                    • Optimized database queries improving performance by 30%<br>
+                    • Participated in agile development processes<br>
+                    • Contributed to open-source projects
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="section">
-        <h2 class="section-title">Key Skills</h2>
-        <div class="skills">
-            <span class="skill">JavaScript</span>
-            <span class="skill">TypeScript</span>
-            <span class="skill">React</span>
-            <span class="skill">Node.js</span>
-            <span class="skill">Python</span>
-            <span class="skill">SQL</span>
-            <span class="skill">Git</span>
-            <span class="skill">AWS</span>
-            <span class="skill">Docker</span>
-            <span class="skill">Agile</span>
+        <div class="section">
+            <h2 class="section-title">Key Skills</h2>
+            <div class="skills">
+                ${skills.map(skill => `<span class="skill">${skill}</span>`).join('\n                ')}
+            </div>
         </div>
-    </div>
 
-    <div class="section">
-        <h2 class="section-title">Education</h2>
-        <div class="job">
-            <div class="job-title">Bachelor of Science in Computer Science</div>
-            <div class="company">University Name</div>
-            <div class="date">2014 - 2018</div>
+        <div class="section">
+            <h2 class="section-title">Education</h2>
+            <div class="job">
+                <div class="job-title">Bachelor of Science in Computer Science</div>
+                <div class="company">University Name</div>
+                <div class="date">2014 - 2018</div>
+            </div>
         </div>
-    </div>
 
-    <div class="section">
-        <h2 class="section-title">Certifications</h2>
-        <div class="description">
-            • AWS Certified Solutions Architect<br>
-            • Google Cloud Professional Developer<br>
-            • Certified Scrum Master (CSM)
+        <div class="section">
+            <h2 class="section-title">Certifications</h2>
+            <div class="description">
+                • AWS Certified Solutions Architect<br>
+                • Google Cloud Professional Developer<br>
+                • Certified Scrum Master (CSM)
+            </div>
+        </div>
+
+        <div class="job-requirements">
+            <h3 style="margin-top: 0; color: #000; font-size: 9px; font-weight: bold;">TARGETED FOR ${application.company_name.toUpperCase()}</h3>
+            <p style="margin-bottom: 0; font-size: 8px; color: #000; line-height: 1.1;">
+                This resume has been tailored specifically for the ${application.role} position at ${application.company_name}, 
+                incorporating relevant keywords and skills from the job posting to maximize ATS compatibility and recruiter appeal.
+            </p>
         </div>
     </div>
 </body>
 </html>
   `.trim();
+}
+
+// Helper functions to extract information from job post
+function extractSkillsFromJobPost(jobPost: string): string[] {
+  const commonSkills = [
+    'JavaScript', 'TypeScript', 'React', 'Node.js', 'Python', 'Java', 'C++', 'C#',
+    'SQL', 'MongoDB', 'PostgreSQL', 'Git', 'Docker', 'Kubernetes', 'AWS', 'Azure',
+    'Agile', 'Scrum', 'CI/CD', 'REST APIs', 'GraphQL', 'Microservices', 'Machine Learning',
+    'Data Analysis', 'Project Management', 'Leadership', 'Communication', 'Problem Solving'
+  ];
+  
+  const foundSkills = commonSkills.filter(skill => 
+    jobPost.includes(skill.toLowerCase())
+  );
+  
+  // Add some default skills if none found
+  if (foundSkills.length === 0) {
+    return ['JavaScript', 'React', 'Node.js', 'SQL', 'Git', 'Agile'];
+  }
+  
+  return foundSkills.slice(0, 10); // Limit to 10 skills
+}
+
+function determineExperienceLevel(jobPost: string): string {
+  if (jobPost.includes('senior') || jobPost.includes('lead') || jobPost.includes('principal')) {
+    return 'Senior-level';
+  } else if (jobPost.includes('junior') || jobPost.includes('entry') || jobPost.includes('graduate')) {
+    return 'Entry-level';
+  } else if (jobPost.includes('mid') || jobPost.includes('intermediate')) {
+    return 'Mid-level';
+  } else {
+    return 'Experienced';
+  }
 }
