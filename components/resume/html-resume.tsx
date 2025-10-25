@@ -1,8 +1,7 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import { UserApplications, UserResume } from '@/prisma/generated/prisma';
-import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -69,7 +68,7 @@ export const HTMLResume: React.FC<HTMLResumeProps> = ({
             const newActive = remainingResumes.find(r => r.isActive) || remainingResumes[0];
             onResumeUpdated(newActive);
           } else {
-            onResumeUpdated(null as any);
+            onResumeUpdated(null as unknown as UserResume);
           }
         }
         toast.success('Resume version deleted successfully!');
