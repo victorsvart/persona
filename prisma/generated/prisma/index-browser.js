@@ -223,6 +223,18 @@ exports.Prisma.UserApplicationsScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.UserResumeScalarFieldEnum = {
+  id: 'id',
+  applicationId: 'applicationId',
+  userId: 'userId',
+  version: 'version',
+  title: 'title',
+  content: 'content',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -248,7 +260,8 @@ exports.Prisma.ModelName = {
   UserProfessionalSummary: 'UserProfessionalSummary',
   UserAcademicInformation: 'UserAcademicInformation',
   UserSkill: 'UserSkill',
-  UserApplications: 'UserApplications'
+  UserApplications: 'UserApplications',
+  UserResume: 'UserResume'
 };
 
 /**
