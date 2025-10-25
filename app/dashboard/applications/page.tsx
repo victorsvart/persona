@@ -11,6 +11,16 @@ import {
 } from '@/components/ui/empty';
 import { Plus } from 'lucide-react';
 import { ApplicationPageClient } from './application-page-client';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Job Applications',
+  description: 'Track and manage all your job applications in one place. Monitor application status, deadlines, and progress.',
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 export default async function ApplicationPage() {
   const apps = await getApplications();
