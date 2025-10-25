@@ -32,6 +32,7 @@ model User {
   username                      String?
   displayUsername               String?
   onboarded                     Boolean                      @default(false)
+  applications                  UserApplications[]
 
   @@unique([email])
   @@unique([username])
@@ -144,5 +145,19 @@ model UserSkill {
   updatedAt DateTime @updatedAt
 
   @@map("user_skill")
+  @@schema("public")
+}
+
+model UserApplications {
+  id           String   @id @default(uuid())
+  company_name String
+  role         String
+  job_post     String
+  userId       String
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@map("user_applications")
   @@schema("public")
 }

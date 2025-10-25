@@ -6,7 +6,7 @@ import { headers } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { OnboardSchemaValues } from '@/types/forms/onboard.schema';
 import { AuthError } from '@/types/errors/auth-error';
-import { APPLICATION_PAGE_URL } from '@/lib/helpers';
+import { APPLICATION_PAGE_URL, LOGIN_PAGE_URL } from '@/lib/helpers';
 
 export type OnboardError = {
   message: string;
@@ -21,7 +21,7 @@ export async function saveOnboardingData(
   });
 
   if (!session) {
-    redirect('/login');
+    redirect(LOGIN_PAGE_URL);
   }
 
   if (
