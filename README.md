@@ -1,24 +1,107 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Persona
 
-## Getting Started
+A Next.js application for managing professional profiles, resumes, and job applications.
 
-First, run the development server:
+## Prerequisites
+
+Before you begin, ensure you have the following installed:
+- [Node.js](https://nodejs.org/) (v18 or higher)
+- [pnpm](https://pnpm.io/) (v8 or higher)
+- [Docker](https://docs.docker.com/get-docker/) and Docker Compose
+
+## Quick Setup
+
+Run the automated setup script to configure everything:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+./setup.sh
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+This script will:
+- ✓ Check for required dependencies (Docker, pnpm)
+- ✓ Create a `.env` file if it doesn't exist
+- ✓ Install Node.js dependencies
+- ✓ Start Docker containers (PostgreSQL + Adminer)
+- ✓ Generate Prisma client
+- ✓ Run database migrations
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Manual Setup
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+If you prefer to set up manually:
+
+1. **Install dependencies:**
+   ```bash
+   pnpm install
+   ```
+
+2. **Create environment file:**
+   ```bash
+   cp .env.example .env  # or create manually
+   ```
+   
+   Add required environment variables:
+   ```env
+   DATABASE_URL="postgresql://postgres:postgres@localhost:5432/persona?schema=public"
+   OPENAI_API_KEY=your_openai_api_key_here
+   ```
+
+3. **Start Docker containers:**
+   ```bash
+   pnpm run docker:up
+   ```
+
+4. **Generate Prisma client:**
+   ```bash
+   pnpm run db:generate
+   ```
+
+5. **Run database migrations:**
+   ```bash
+   pnpm run db:migrate
+   ```
+
+## Development
+
+Start the development server:
+
+```bash
+pnpm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the application.
+
+## Available Scripts
+
+- `pnpm run dev` - Start development server with Turbopack
+- `pnpm run build` - Build for production
+- `pnpm run start` - Start production server
+- `pnpm run lint` - Run ESLint and fix issues
+- `pnpm run type-check` - Run TypeScript type checking
+
+### Database Scripts
+
+- `pnpm run db:generate` - Generate Prisma client
+- `pnpm run db:migrate` - Run database migrations
+- `pnpm run db:push` - Push schema changes to database
+- `pnpm run db:studio` - Open Prisma Studio (database GUI)
+- `pnpm run db:reset` - Reset database
+
+### Docker Scripts
+
+- `pnpm run docker:up` - Start Docker containers
+- `pnpm run docker:down` - Stop Docker containers
+- `pnpm run docker:logs` - View Docker logs
+
+## Database Management
+
+Access the database through:
+- **Prisma Studio:** Run `pnpm run db:studio` and open [http://localhost:5555](http://localhost:5555)
+- **Adminer:** Open [http://localhost:8080](http://localhost:8080)
+  - System: PostgreSQL
+  - Server: db
+  - Username: postgres
+  - Password: postgres
+  - Database: persona
 
 ## Learn More
 
