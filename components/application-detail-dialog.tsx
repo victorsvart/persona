@@ -42,6 +42,7 @@ import {
 } from '@/types/forms/application.schema';
 import { updateApplication } from '@/app/dashboard/applications/actions';
 import { toast } from 'sonner';
+import { useRouter } from 'next/navigation';
 
 interface ApplicationDetailDialogProps {
   application: UserApplications | null;
@@ -77,6 +78,7 @@ export const ApplicationDetailDialog: React.FC<
   const [copied, setCopied] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const router = useRouter();
 
   const form = useForm<ApplicationValues>({
     resolver: zodResolver(applicationSchema),
@@ -164,9 +166,13 @@ export const ApplicationDetailDialog: React.FC<
   };
 
   const handleGoToResume = () => {
-    // TODO: Navigate to resume page
-    console.log('Navigate to resume for application:', application?.id);
-    toast.info('Resume feature coming soon!');
+    if (!application) return;
+    
+    // Close the dialog first
+    onOpenChange(false);
+    
+    // Navigate to resume page
+    router.push(`/dashboard/resume/${application.id}`);
   };
 
   if (!application) return null;
