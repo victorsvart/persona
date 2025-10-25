@@ -1,14 +1,26 @@
 export class ContentLoader {
-  private static contentCache = new Map<string, string>();
+  private static contentCache = new Map<string, { content: string; timestamp: number }>();
+  private static readonly CACHE_TTL = 1000 * 60 * 60; // 1 hour cache TTL in production
+  private static readonly isDevelopment = process.env.NODE_ENV === 'development';
 
   /**
    * Load content from a markdown or HTML file
    * This works in both server and client environments
    */
   static async loadContent(filePath: string): Promise<string> {
-    // Check cache first
-    if (this.contentCache.has(filePath)) {
-      return this.contentCache.get(filePath)!;
+    // In development, skip cache to allow for hot reloading
+    if (!this.isDevelopment) {
+      // Check cache first
+      const cached = this.contentCache.get(filePath);
+      if (cached) {
+        const age = Date.now() - cached.timestamp;
+        if (age < this.CACHE_TTL) {
+          return cached.content;
+        } else {
+          // Cache expired, remove it
+          this.contentCache.delete(filePath);
+        }
+      }
     }
 
     try {
@@ -17,25 +29,52 @@ export class ContentLoader {
       // Check if we're running on the server
       if (typeof window === 'undefined') {
         // Server-side: use file system
-        const { readFileSync } = await import('fs');
+        const { readFileSync, existsSync } = await import('fs');
         const { join } = await import('path');
         const fullPath = join(process.cwd(), 'public', 'content', filePath);
+        
+        // Check if file exists
+        if (!existsSync(fullPath)) {
+          throw new Error(`Content file not found: ${filePath}`);
+        }
+        
         content = readFileSync(fullPath, 'utf-8');
       } else {
         // Client-side: use fetch
         const response = await fetch(`/content/${filePath}`);
         if (!response.ok) {
-          throw new Error(`Failed to fetch content: ${response.statusText}`);
+          if (response.status === 404) {
+            throw new Error(`Content file not found: ${filePath}`);
+          }
+          throw new Error(`Failed to fetch content (${response.status}): ${response.statusText}`);
         }
         content = await response.text();
       }
       
+      // Validate content is not empty
+      if (!content || content.trim().length === 0) {
+        throw new Error(`Content file is empty: ${filePath}`);
+      }
+      
       // Cache the content
-      this.contentCache.set(filePath, content);
+      if (!this.isDevelopment) {
+        this.contentCache.set(filePath, {
+          content,
+          timestamp: Date.now(),
+        });
+      }
       
       return content;
     } catch (error) {
-      console.error(`Error loading content from ${filePath}:`, error);
+      console.error(`Error loading content from ${filePath}:`, {
+        message: error instanceof Error ? error.message : 'Unknown error',
+        filePath,
+      });
+      
+      if (error instanceof Error) {
+        throw error;
+      }
+      
       throw new Error(`Failed to load content from ${filePath}`);
     }
   }
