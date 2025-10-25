@@ -192,6 +192,46 @@
     "learn": "Learn",
     "examples": "Examples",
     "goToNextJs": "Go to nextjs.org →"
+  },
+  "landing": {
+    "header": {
+      "title": "Persona",
+      "login": "Login",
+      "getStarted": "Get Started"
+    },
+    "hero": {
+      "badge": "AI-Powered Resume Builder",
+      "title": "Transform Your Job Search with",
+      "titleHighlight": "AI-Powered Resumes",
+      "description": "Create targeted, ATS-optimized resumes for each job application. Track applications, manage your professional profile, and land your dream job faster.",
+      "startBuilding": "Start Building Free",
+      "signIn": "Sign In"
+    },
+    "features": {
+      "title": "Everything You Need to Land Your Dream Job",
+      "aiPowered": {
+        "title": "AI-Powered Generation",
+        "description": "Generate tailored resumes instantly using advanced AI. Customize content for each job application automatically."
+      },
+      "atsOptimized": {
+        "title": "ATS Optimized",
+        "description": "Ensure your resume passes Applicant Tracking Systems with our optimized formatting and keyword suggestions."
+      },
+      "tracking": {
+        "title": "Application Tracking",
+        "description": "Keep track of all your job applications, deadlines, and follow-ups in one organized dashboard."
+      }
+    },
+    "cta": {
+      "title": "Ready to Transform Your Job Search?",
+      "description": "Join thousands of job seekers who are landing their dream jobs with Persona. Start creating your professional profile today.",
+      "button": "Get Started for Free"
+    },
+    "footer": {
+      "copyright": "© 2025 Persona. All rights reserved.",
+      "login": "Login",
+      "signup": "Sign Up"
+    }
   }
 }
 

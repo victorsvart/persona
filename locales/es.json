@@ -192,6 +192,46 @@
     "learn": "Aprender",
     "examples": "Ejemplos",
     "goToNextJs": "Ir a nextjs.org →"
+  },
+  "landing": {
+    "header": {
+      "title": "Persona",
+      "login": "Iniciar sesión",
+      "getStarted": "Comenzar"
+    },
+    "hero": {
+      "badge": "Generador de Currículums con IA",
+      "title": "Transforma Tu Búsqueda de Empleo con",
+      "titleHighlight": "Currículums Potenciados por IA",
+      "description": "Crea currículums dirigidos y optimizados para ATS para cada aplicación de trabajo. Rastrea aplicaciones, administra tu perfil profesional y consigue tu trabajo soñado más rápido.",
+      "startBuilding": "Comenzar Gratis",
+      "signIn": "Iniciar Sesión"
+    },
+    "features": {
+      "title": "Todo lo que Necesitas para Conseguir Tu Trabajo Soñado",
+      "aiPowered": {
+        "title": "Generación con IA",
+        "description": "Genera currículums personalizados al instante usando IA avanzada. Personaliza el contenido para cada aplicación de trabajo automáticamente."
+      },
+      "atsOptimized": {
+        "title": "Optimizado para ATS",
+        "description": "Asegura que tu currículum pase los Sistemas de Seguimiento de Candidatos con nuestro formato optimizado y sugerencias de palabras clave."
+      },
+      "tracking": {
+        "title": "Seguimiento de Aplicaciones",
+        "description": "Mantén un registro de todas tus aplicaciones de trabajo, fechas límite y seguimientos en un panel organizado."
+      }
+    },
+    "cta": {
+      "title": "¿Listo para Transformar Tu Búsqueda de Empleo?",
+      "description": "Únete a miles de buscadores de empleo que están consiguiendo sus trabajos soñados con Persona. Comienza a crear tu perfil profesional hoy.",
+      "button": "Comenzar Gratis"
+    },
+    "footer": {
+      "copyright": "© 2025 Persona. Todos los derechos reservados.",
+      "login": "Iniciar sesión",
+      "signup": "Registrarse"
+    }
   }
 }
 

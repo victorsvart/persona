@@ -192,6 +192,46 @@
     "learn": "Aprender",
     "examples": "Exemplos",
     "goToNextJs": "Ir para nextjs.org →"
+  },
+  "landing": {
+    "header": {
+      "title": "Persona",
+      "login": "Entrar",
+      "getStarted": "Começar"
+    },
+    "hero": {
+      "badge": "Gerador de Currículos com IA",
+      "title": "Transforme Sua Busca por Emprego com",
+      "titleHighlight": "Currículos Potencializados por IA",
+      "description": "Crie currículos direcionados e otimizados para ATS para cada candidatura. Acompanhe candidaturas, gerencie seu perfil profissional e consiga seu emprego dos sonhos mais rápido.",
+      "startBuilding": "Começar Gratuitamente",
+      "signIn": "Entrar"
+    },
+    "features": {
+      "title": "Tudo que Você Precisa para Conseguir Seu Emprego dos Sonhos",
+      "aiPowered": {
+        "title": "Geração com IA",
+        "description": "Gere currículos personalizados instantaneamente usando IA avançada. Personalize o conteúdo para cada candidatura automaticamente."
+      },
+      "atsOptimized": {
+        "title": "Otimizado para ATS",
+        "description": "Garanta que seu currículo passe pelos Sistemas de Rastreamento de Candidatos com nossa formatação otimizada e sugestões de palavras-chave."
+      },
+      "tracking": {
+        "title": "Rastreamento de Candidaturas",
+        "description": "Mantenha o controle de todas as suas candidaturas, prazos e acompanhamentos em um painel organizado."
+      }
+    },
+    "cta": {
+      "title": "Pronto para Transformar Sua Busca por Emprego?",
+      "description": "Junte-se a milhares de candidatos que estão conseguindo seus empregos dos sonhos com Persona. Comece a criar seu perfil profissional hoje.",
+      "button": "Começar Gratuitamente"
+    },
+    "footer": {
+      "copyright": "© 2025 Persona. Todos os direitos reservados.",
+      "login": "Entrar",
+      "signup": "Cadastrar"
+    }
   }
 }
 
