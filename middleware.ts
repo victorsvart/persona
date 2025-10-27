@@ -11,8 +11,8 @@ export default createMiddleware({
   // Automatically detect the user's locale based on the Accept-Language header
   localeDetection: true,
 
-  // Always show locale prefix in URL for consistency
-  localePrefix: 'always',
+  // Show locale prefix only when needed (hide default locale)
+  localePrefix: 'as-needed',
 });
 
 export const config = {
