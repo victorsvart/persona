@@ -7,10 +7,75 @@ import { Sparkles, CheckCircle, TrendingUp, Zap } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
 import { Link } from '@/lib/navigation';
 import { LanguageSwitcher } from '@/components/language-switcher';
+import { auth } from '@/lib/auth';
+import { headers } from 'next/headers';
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+} from '@/components/ui/dropdown-menu';
+import { IconDotsVertical, IconUserCircle } from '@tabler/icons-react';
+import { AvatarAndFallback } from '@/components/avatar-fallback';
+import { APPLICATION_PAGE_URL } from '@/lib/helpers';
 
 export default async function Home() {
   const t = await getTranslations('landing');
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
 
+  const renderNavNoSession = (): React.ReactElement => {
+    return (
+      <>
+        <Link href="/login">
+          <Button variant="ghost">{t('header.login')}</Button>
+        </Link>
+        <Link href="/signup">
+          <Button>{t('header.getStarted')}</Button>
+        </Link>
+      </>
+    );
+  };
+
+  const renderNavSession = (): React.ReactElement => {
+    const user = session!.user;
+    return (
+      <>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button
+              className="flex justify-center items-center"
+              variant="ghost"
+              size="lg"
+            >
+              {/*<AvatarAndFallback user={user} />*/}
+              <span className="truncate font-medium">{user.name}</span>
+              <IconDotsVertical className="ml-auto size-4" />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent
+            className="w-(--radix-dropdown-menu-trigger-width) min-w-56 rounded-lg"
+            side="bottom"
+            align="end"
+            sideOffset={4}
+          >
+            <DropdownMenuGroup>
+              <Link href={APPLICATION_PAGE_URL}>
+                <DropdownMenuItem>
+                  <IconUserCircle />
+                  Go to dashboard
+                </DropdownMenuItem>
+              </Link>
+            </DropdownMenuGroup>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </>
+    );
+  };
   return (
     <>
       <WebApplicationStructuredData />
@@ -23,12 +88,7 @@ export default async function Home() {
             <h1 className="text-2xl font-bold">{t('header.title')}</h1>
             <nav className="flex items-center gap-4">
               <LanguageSwitcher variant="ghost" size="sm" />
-              <Link href="/login">
-                <Button variant="ghost">{t('header.login')}</Button>
-              </Link>
-              <Link href="/signup">
-                <Button>{t('header.getStarted')}</Button>
-              </Link>
+              {!session ? renderNavNoSession() : renderNavSession()}
             </nav>
           </div>
         </header>

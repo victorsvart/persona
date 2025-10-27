@@ -28,6 +28,7 @@ import { clientAuth } from '@/lib/auth';
 import { useRouter } from 'next/navigation';
 import { useAppEvent } from '@/contexts/AppEventContext';
 import { User } from '@/prisma/generated/prisma';
+import { AvatarAndFallback } from './avatar-fallback';
 
 export function NavUser({ user }: { user: User }) {
   const { isMobile } = useSidebar();
@@ -52,17 +53,6 @@ export function NavUser({ user }: { user: User }) {
     }
   };
 
-  const AvatarAndFallback: React.FC = () => {
-    return (
-      <Avatar className="h-8 w-8 rounded-lg grayscale">
-        <AvatarImage src={user?.image ?? undefined} alt={user.name} />
-        <AvatarFallback className="rounded-lg">
-          {user.name.split(' ').map((x) => x[0])}
-        </AvatarFallback>
-      </Avatar>
-    );
-  };
-
   return (
     <SidebarMenu>
       <SidebarMenuItem>
@@ -72,7 +62,7 @@ export function NavUser({ user }: { user: User }) {
               size="lg"
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
             >
-              <AvatarAndFallback />
+              <AvatarAndFallback user={user} />
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-medium">{user.name}</span>
                 <span className="text-muted-foreground truncate text-xs">
@@ -90,7 +80,7 @@ export function NavUser({ user }: { user: User }) {
           >
             <DropdownMenuLabel className="p-0 font-normal">
               <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-                <AvatarAndFallback />
+                <AvatarAndFallback user={user} />
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-medium">{user.name}</span>
                   <span className="text-muted-foreground truncate text-xs">
