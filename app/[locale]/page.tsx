@@ -1,12 +1,16 @@
-import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import {
   WebApplicationStructuredData,
   OrganizationStructuredData,
 } from '@/components/structured-data';
 import { Sparkles, CheckCircle, TrendingUp, Zap } from 'lucide-react';
+import { getTranslations } from 'next-intl/server';
+import { Link } from '@/lib/navigation';
+import { LanguageSwitcher } from '@/components/language-switcher';
 
-export default function Home() {
+export default async function Home() {
+  const t = await getTranslations('landing');
+
   return (
     <>
       <WebApplicationStructuredData />
@@ -16,13 +20,14 @@ export default function Home() {
         {/* Header */}
         <header className="border-b">
           <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-            <h1 className="text-2xl font-bold">Persona</h1>
+            <h1 className="text-2xl font-bold">{t('header.title')}</h1>
             <nav className="flex items-center gap-4">
+              <LanguageSwitcher variant="ghost" size="sm" />
               <Link href="/login">
-                <Button variant="ghost">Login</Button>
+                <Button variant="ghost">{t('header.login')}</Button>
               </Link>
               <Link href="/signup">
-                <Button>Get Started</Button>
+                <Button>{t('header.getStarted')}</Button>
               </Link>
             </nav>
           </div>
@@ -34,29 +39,27 @@ export default function Home() {
             <div className="max-w-4xl mx-auto text-center space-y-8">
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">
                 <Sparkles className="w-4 h-4" />
-                AI-Powered Resume Builder
+                {t('hero.badge')}
               </div>
 
               <h1 className="text-4xl md:text-6xl font-bold tracking-tight">
-                Transform Your Job Search with{' '}
-                <span className="text-primary">AI-Powered Resumes</span>
+                {t('hero.title')}{' '}
+                <span className="text-primary">{t('hero.titleHighlight')}</span>
               </h1>
 
               <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                Create targeted, ATS-optimized resumes for each job application.
-                Track applications, manage your professional profile, and land
-                your dream job faster.
+                {t('hero.description')}
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
                 <Link href="/signup">
                   <Button size="lg" className="text-lg px-8">
-                    Start Building Free
+                    {t('hero.startBuilding')}
                   </Button>
                 </Link>
                 <Link href="/login">
                   <Button size="lg" variant="outline" className="text-lg px-8">
-                    Sign In
+                    {t('hero.signIn')}
                   </Button>
                 </Link>
               </div>
@@ -67,7 +70,7 @@ export default function Home() {
           <section className="bg-muted/50 py-20">
             <div className="container mx-auto px-4">
               <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
-                Everything You Need to Land Your Dream Job
+                {t('features.title')}
               </h2>
 
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
@@ -76,11 +79,10 @@ export default function Home() {
                     <Zap className="w-6 h-6 text-primary" />
                   </div>
                   <h3 className="text-xl font-semibold mb-2">
-                    AI-Powered Generation
+                    {t('features.aiPowered.title')}
                   </h3>
                   <p className="text-muted-foreground">
-                    Generate tailored resumes instantly using advanced AI.
-                    Customize content for each job application automatically.
+                    {t('features.aiPowered.description')}
                   </p>
                 </div>
 
@@ -88,10 +90,11 @@ export default function Home() {
                   <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
                     <CheckCircle className="w-6 h-6 text-primary" />
                   </div>
-                  <h3 className="text-xl font-semibold mb-2">ATS Optimized</h3>
+                  <h3 className="text-xl font-semibold mb-2">
+                    {t('features.atsOptimized.title')}
+                  </h3>
                   <p className="text-muted-foreground">
-                    Ensure your resume passes Applicant Tracking Systems with
-                    our optimized formatting and keyword suggestions.
+                    {t('features.atsOptimized.description')}
                   </p>
                 </div>
 
@@ -100,11 +103,10 @@ export default function Home() {
                     <TrendingUp className="w-6 h-6 text-primary" />
                   </div>
                   <h3 className="text-xl font-semibold mb-2">
-                    Application Tracking
+                    {t('features.tracking.title')}
                   </h3>
                   <p className="text-muted-foreground">
-                    Keep track of all your job applications, deadlines, and
-                    follow-ups in one organized dashboard.
+                    {t('features.tracking.description')}
                   </p>
                 </div>
               </div>
@@ -116,15 +118,14 @@ export default function Home() {
             <div className="container mx-auto px-4">
               <div className="max-w-3xl mx-auto text-center space-y-6 bg-primary/5 border border-primary/20 rounded-2xl p-12">
                 <h2 className="text-3xl md:text-4xl font-bold">
-                  Ready to Transform Your Job Search?
+                  {t('cta.title')}
                 </h2>
                 <p className="text-lg text-muted-foreground">
-                  Join thousands of job seekers who are landing their dream jobs
-                  with Persona. Start creating your professional profile today.
+                  {t('cta.description')}
                 </p>
                 <Link href="/signup">
                   <Button size="lg" className="text-lg px-8">
-                    Get Started for Free
+                    {t('cta.button')}
                   </Button>
                 </Link>
               </div>
@@ -137,20 +138,20 @@ export default function Home() {
           <div className="container mx-auto px-4">
             <div className="flex flex-col md:flex-row items-center justify-between gap-4">
               <p className="text-sm text-muted-foreground">
-                © 2025 Persona. All rights reserved.
+                {t('footer.copyright')}
               </p>
               <nav className="flex gap-6">
                 <Link
                   href="/login"
                   className="text-sm text-muted-foreground hover:text-foreground"
                 >
-                  Login
+                  {t('footer.login')}
                 </Link>
                 <Link
                   href="/signup"
                   className="text-sm text-muted-foreground hover:text-foreground"
                 >
-                  Sign Up
+                  {t('footer.signup')}
                 </Link>
               </nav>
             </div>

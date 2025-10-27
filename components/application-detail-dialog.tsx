@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
@@ -88,8 +88,7 @@ export const ApplicationDetailDialog: React.FC<
     },
   });
 
-  // Update form when application changes
-  React.useEffect(() => {
+  useEffect(() => {
     if (application) {
       form.reset({
         company_name: application.company_name,
@@ -126,8 +125,10 @@ export const ApplicationDetailDialog: React.FC<
   };
 
   const handleSave = async (data: ApplicationValues) => {
-    if (!application) return;
-    
+    if (!application) {
+      return;
+    }
+
     setIsSubmitting(true);
     try {
       const formData = new FormData();
@@ -136,7 +137,7 @@ export const ApplicationDetailDialog: React.FC<
       formData.append('job_post', data.job_post);
 
       const result = await updateApplication(application.id, formData);
-      
+
       if (result.success) {
         toast.success('Application updated successfully!');
         setIsEditing(false);
@@ -166,10 +167,10 @@ export const ApplicationDetailDialog: React.FC<
 
   const handleGoToResume = () => {
     if (!application) return;
-    
+
     // Close the dialog first
     onOpenChange(false);
-    
+
     // Navigate to resume page
     router.push(`/dashboard/resume/${application.id}`);
   };

@@ -18,8 +18,10 @@ import { OnboardStepOne } from './step-one';
 import { OnboardStepTwo } from './step-two';
 import { OnboardStepThree } from './step-three';
 import { OnboardStepFour } from './step-four';
+import { useTranslations } from 'next-intl';
 
 export default function OnboardForm() {
+  const t = useTranslations('onboard');
   const [currentStep, setCurrentStep] = useState(1);
   const totalSteps = 4;
   const isDevelopment = process.env.NODE_ENV === 'development';
@@ -66,7 +68,7 @@ export default function OnboardForm() {
       (firstInvalidElement as HTMLElement).focus();
     }
 
-    toast.error('Please fix the highlighted fields before continuing.');
+    toast.error(t('errors.fixFields'));
 
     const pathStep: Record<string, number> = {
       experience_years: 1,
@@ -179,7 +181,7 @@ export default function OnboardForm() {
         break;
     }
 
-    toast.success('Form auto-filled with sample data!');
+    toast.success(t('errors.autoFillSuccess'));
   };
 
   const renderStep = () => {
@@ -217,21 +219,19 @@ export default function OnboardForm() {
         <CardHeader className="pb-6 sm:pb-8 px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8">
           <div className="text-center mb-6 sm:mb-8">
             <CardTitle className="text-xl sm:text-2xl md:text-3xl font-semibold text-foreground mb-3 sm:mb-4 tracking-tight">
-              Let&apos;s build your professional profile
+              {t('formTitle')}
             </CardTitle>
             <p className="text-muted-foreground text-sm sm:text-base md:text-lg max-w-3xl mx-auto leading-relaxed">
-              We&apos;ll gather information about your background to create targeted
-              resumes for your job applications. You can always update this
-              information later.
+              {t('formSubtitle')}
             </p>
           </div>
 
           <div className="space-y-4 sm:space-y-6">
             <div className="flex items-center justify-between text-xs sm:text-sm text-muted-foreground">
-              <span className="font-medium">Experience</span>
-              <span className="font-medium">Work History</span>
-              <span className="font-medium">Education</span>
-              <span className="font-medium">Skills</span>
+              <span className="font-medium">{t('steps.experience')}</span>
+              <span className="font-medium">{t('steps.workHistory')}</span>
+              <span className="font-medium">{t('steps.education')}</span>
+              <span className="font-medium">{t('steps.skills')}</span>
             </div>
             <div className="flex items-center space-x-3 sm:space-x-4">
               <div className="flex-1 bg-muted rounded-full h-2 sm:h-3 overflow-hidden">
@@ -263,7 +263,7 @@ export default function OnboardForm() {
                     disabled={currentStep === 1}
                     className="h-10 sm:h-12 md:h-14 px-4 sm:px-6 md:px-8 text-sm sm:text-base md:text-lg rounded-xl sm:rounded-2xl transition-all duration-200 w-full sm:w-auto"
                   >
-                    ← Go Back
+                    {t('buttons.back')}
                   </Button>
 
                   {isDevelopment && (
@@ -274,14 +274,14 @@ export default function OnboardForm() {
                       className="h-8 sm:h-10 px-2 sm:px-3 text-xs sm:text-sm rounded-md sm:rounded-lg border-dashed hover:border-solid transition-all duration-200"
                     >
                       <Wand2 className="h-3 w-3 mr-1" />
-                      Fill
+                      {t('buttons.autoFill')}
                     </Button>
                   )}
                 </div>
 
                 <div className="flex items-center space-x-2 text-sm sm:text-base md:text-lg text-muted-foreground">
                   <span>
-                    Step {currentStep} of {totalSteps}
+                    {t('stepIndicator', { current: currentStep, total: totalSteps })}
                   </span>
                 </div>
 
@@ -291,7 +291,7 @@ export default function OnboardForm() {
                     onClick={nextStep}
                     className="h-10 sm:h-12 md:h-14 px-6 sm:px-8 md:px-10 text-sm sm:text-base md:text-lg rounded-xl sm:rounded-2xl bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg hover:shadow-xl transition-all duration-200 w-full sm:w-auto"
                   >
-                    Continue →
+                    {t('buttons.continue')}
                   </Button>
                 ) : (
                   <Button
@@ -304,9 +304,9 @@ export default function OnboardForm() {
                     ) : (
                       <>
                         <span className="hidden sm:inline">
-                          Complete Profile & Start Building Resumes
+                          {t('buttons.complete')}
                         </span>
-                        <span className="sm:hidden">Complete Profile</span>
+                        <span className="sm:hidden">{t('buttons.completeShort')}</span>
                       </>
                     )}
                   </Button>

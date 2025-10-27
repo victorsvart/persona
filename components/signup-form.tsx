@@ -25,11 +25,17 @@ import { signUp } from '@/app/signup/actions';
 import { toast } from 'sonner';
 import { ThreeDotLoad } from './ui/three-dot-load';
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
+import Link from 'next/link';
+import { LanguageSwitcher } from '@/components/language-switcher';
 
 export function SignupForm({
   className,
   ...props
 }: React.ComponentProps<'div'>) {
+  const t = useTranslations('auth.signup');
+  const tCommon = useTranslations('common');
+  
   const form = useForm<SignUpSchemaValues>({
     resolver: zodResolver(signUpSchema),
     defaultValues: {
@@ -50,15 +56,18 @@ export function SignupForm({
 
   return (
     <div className={cn('flex flex-col gap-6', className)} {...props}>
+      <div className="flex justify-end">
+        <LanguageSwitcher variant="ghost" size="sm" />
+      </div>
       <Card className="overflow-hidden p-0">
         <CardContent className="grid p-0 md:grid-cols-2">
           <Form {...form}>
             <form className="p-6 md:p-8" onSubmit={form.handleSubmit(onSubmit)}>
               <FieldGroup>
                 <div className="flex flex-col items-center gap-2 text-center">
-                  <h1 className="text-2xl font-bold">Create your account</h1>
+                  <h1 className="text-2xl font-bold">{t('title')}</h1>
                   <p className="text-muted-foreground text-sm text-balance">
-                    Enter your email below to create your account
+                    {t('subtitle')}
                   </p>
                 </div>
 
@@ -67,17 +76,16 @@ export function SignupForm({
                   name="email"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Email</FormLabel>
+                      <FormLabel>{t('email')}</FormLabel>
                       <FormControl>
                         <Input
                           type="email"
-                          placeholder="john.doe@example.com"
+                          placeholder={t('emailPlaceholder')}
                           {...field}
                         />
                       </FormControl>
                       <FormDescription>
-                        We&apos;ll use this to contact you. We will not share
-                        your email with anyone else.
+                        {t('emailDescription')}
                       </FormDescription>
                       <FormMessage />
                     </FormItem>
@@ -89,9 +97,9 @@ export function SignupForm({
                   name="name"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Name</FormLabel>
+                      <FormLabel>{t('name')}</FormLabel>
                       <FormControl>
-                        <Input type="text" placeholder="John Doe" {...field} />
+                        <Input type="text" placeholder={t('namePlaceholder')} {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -103,9 +111,9 @@ export function SignupForm({
                   name="username"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Username</FormLabel>
+                      <FormLabel>{t('username')}</FormLabel>
                       <FormControl>
-                        <Input type="text" placeholder="johndoe" {...field} />
+                        <Input type="text" placeholder={t('usernamePlaceholder')} {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -119,7 +127,7 @@ export function SignupForm({
                       name="password"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Password</FormLabel>
+                          <FormLabel>{t('password')}</FormLabel>
                           <FormControl>
                             <Input type="password" {...field} />
                           </FormControl>
@@ -133,7 +141,7 @@ export function SignupForm({
                       name="confirmPassword"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Confirm Password</FormLabel>
+                          <FormLabel>{t('confirmPassword')}</FormLabel>
                           <FormControl>
                             <Input type="password" {...field} />
                           </FormControl>
@@ -143,7 +151,7 @@ export function SignupForm({
                     />
                   </div>
                   <FieldDescription>
-                    Must be at least 8 characters long.
+                    {t('passwordRequirements')}
                   </FieldDescription>
                 </Field>
 
@@ -152,13 +160,13 @@ export function SignupForm({
                     {form.formState.isSubmitting ? (
                       <ThreeDotLoad />
                     ) : (
-                      'Create Account'
+                      t('createAccount')
                     )}
                   </Button>
                 </Field>
 
                 <FieldSeparator className="*:data-[slot=field-separator-content]:bg-card">
-                  Or continue with
+                  {t('orContinueWith')}
                 </FieldSeparator>
 
                 <Field className="grid grid-cols-2 gap-4">
@@ -169,7 +177,7 @@ export function SignupForm({
                         fill="currentColor"
                       />
                     </svg>
-                    <span className="sr-only">Sign up with Google</span>
+                    <span className="sr-only">{t('signUpWithGoogle')}</span>
                   </Button>
                   <Button variant="outline" type="button">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -178,12 +186,12 @@ export function SignupForm({
                         fill="currentColor"
                       />
                     </svg>
-                    <span className="sr-only">Sign up with Meta</span>
+                    <span className="sr-only">{t('signUpWithMeta')}</span>
                   </Button>
                 </Field>
 
                 <FieldDescription className="text-center">
-                  Already have an account? <a href="/login">Sign in</a>
+                  {t('hasAccount')} <Link href="/login">{t('signIn')}</Link>
                 </FieldDescription>
               </FieldGroup>
             </form>
@@ -199,8 +207,10 @@ export function SignupForm({
         </CardContent>
       </Card>
       <FieldDescription className="px-6 text-center">
-        By clicking continue, you agree to our <a href="#">Terms of Service</a>{' '}
-        and <a href="#">Privacy Policy</a>.
+        {t.rich('agreement', {
+          termsOfService: (chunks) => <a href="#">{tCommon('termsOfService')}</a>,
+          privacyPolicy: (chunks) => <a href="#">{tCommon('privacyPolicy')}</a>,
+        })}
       </FieldDescription>
     </div>
   );
