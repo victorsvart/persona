@@ -18,7 +18,9 @@ interface ResumePageClientProps {
   };
 }
 
-export const ResumePageClient: React.FC<ResumePageClientProps> = ({ application }) => {
+export const ResumePageClient: React.FC<ResumePageClientProps> = ({
+  application,
+}) => {
   const router = useRouter();
   const [activeResume, setActiveResume] = useState<UserResume | null>(null);
   const [isGenerating, setIsGenerating] = useState(false);
@@ -26,7 +28,8 @@ export const ResumePageClient: React.FC<ResumePageClientProps> = ({ application 
   // Set active resume on mount
   useEffect(() => {
     if (application.resumes.length > 0) {
-      const active = application.resumes.find(r => r.isActive) || application.resumes[0];
+      const active =
+        application.resumes.find((r) => r.isActive) || application.resumes[0];
       setActiveResume(active);
     }
   }, [application.resumes]);
@@ -34,7 +37,11 @@ export const ResumePageClient: React.FC<ResumePageClientProps> = ({ application 
   const handleResumeGenerated = async (content: string) => {
     setIsGenerating(true);
     try {
-      const result = await createResume(application.id, content, `Resume v${application.resumes.length + 1}`);
+      const result = await createResume(
+        application.id,
+        content,
+        `Resume v${application.resumes.length + 1}`,
+      );
       if (result.success && result.resume) {
         setActiveResume(result.resume);
         toast.success('Resume saved successfully!');
@@ -60,7 +67,7 @@ export const ResumePageClient: React.FC<ResumePageClientProps> = ({ application 
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <div className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <div className="border-b bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
@@ -100,13 +107,14 @@ export const ResumePageClient: React.FC<ResumePageClientProps> = ({ application 
           {/* Left Side - Chatbot */}
           <div className="flex flex-col min-h-0">
             <Card className="flex-1 flex flex-col min-h-0">
-              <CardHeader className="pb-4 flex-shrink-0">
+              <CardHeader className="pb-4 shrink-0">
                 <CardTitle className="flex items-center gap-2">
                   <Briefcase className="h-5 w-5" />
                   AI Resume Assistant
                 </CardTitle>
                 <p className="text-sm text-muted-foreground">
-                  Chat with our AI to build a personalized resume for this application
+                  Chat with our AI to build a personalized resume for this
+                  application
                 </p>
               </CardHeader>
               <CardContent className="flex-1 flex flex-col p-0 min-h-0">
@@ -123,7 +131,7 @@ export const ResumePageClient: React.FC<ResumePageClientProps> = ({ application 
           {/* Right Side - HTML Resume */}
           <div className="flex flex-col min-h-0">
             <Card className="flex-1 flex flex-col min-h-0">
-              <CardHeader className="pb-4 flex-shrink-0">
+              <CardHeader className="pb-4 shrink-0">
                 <CardTitle className="flex items-center gap-2">
                   <FileText className="h-5 w-5" />
                   Resume Preview

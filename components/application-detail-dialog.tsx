@@ -39,9 +39,9 @@ import {
   applicationSchema,
   ApplicationValues,
 } from '@/types/forms/application.schema';
-import { updateApplication } from '@/app/dashboard/applications/actions';
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
+import { updateApplication } from '@/app/[locale]/dashboard/applications/actions';
 
 interface ApplicationDetailDialogProps {
   application: UserApplications | null;

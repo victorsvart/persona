@@ -4,19 +4,28 @@ import React from 'react';
 import { UserApplications, UserResume } from '@/prisma/generated/prisma';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { 
-  FileText, 
-  Download, 
-  Eye, 
-  Loader2, 
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import {
+  FileText,
+  Download,
+  Eye,
+  Loader2,
   AlertCircle,
   CheckCircle2,
   History,
-  Plus
+  Plus,
 } from 'lucide-react';
 import { toast } from 'sonner';
-import { setActiveResume, deleteResume } from '@/app/dashboard/resume/actions';
+import {
+  deleteResume,
+  setActiveResume,
+} from '@/app/[locale]/dashboard/resume/actions';
 
 interface HTMLResumeProps {
   resume: UserResume | null;
@@ -39,7 +48,9 @@ export const HTMLResume: React.FC<HTMLResumeProps> = ({
     try {
       const result = await setActiveResume(resumeId);
       if (result.success) {
-        const selectedResume = application.resumes.find(r => r.id === resumeId);
+        const selectedResume = application.resumes.find(
+          (r) => r.id === resumeId,
+        );
         if (selectedResume) {
           onResumeUpdated(selectedResume);
           toast.success('Resume version switched successfully!');
@@ -63,9 +74,12 @@ export const HTMLResume: React.FC<HTMLResumeProps> = ({
       if (result.success) {
         // If we deleted the active resume, switch to another one
         if (resume?.id === resumeId) {
-          const remainingResumes = application.resumes.filter(r => r.id !== resumeId);
+          const remainingResumes = application.resumes.filter(
+            (r) => r.id !== resumeId,
+          );
           if (remainingResumes.length > 0) {
-            const newActive = remainingResumes.find(r => r.isActive) || remainingResumes[0];
+            const newActive =
+              remainingResumes.find((r) => r.isActive) || remainingResumes[0];
             onResumeUpdated(newActive);
           } else {
             onResumeUpdated(null as unknown as UserResume);
@@ -92,7 +106,11 @@ export const HTMLResume: React.FC<HTMLResumeProps> = ({
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `resume-${application.company_name.toLowerCase().replace(/\s+/g, '-')}-${application.role.toLowerCase().replace(/\s+/g, '-')}-v${resume.version}.html`;
+      a.download = `resume-${application.company_name
+        .toLowerCase()
+        .replace(/\s+/g, '-')}-${application.role
+        .toLowerCase()
+        .replace(/\s+/g, '-')}-v${resume.version}.html`;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
@@ -152,7 +170,8 @@ export const HTMLResume: React.FC<HTMLResumeProps> = ({
           <div>
             <h3 className="font-semibold">No Resume Generated Yet</h3>
             <p className="text-sm text-muted-foreground">
-              Start a conversation with the AI assistant to generate your personalized resume for this application.
+              Start a conversation with the AI assistant to generate your
+              personalized resume for this application.
             </p>
           </div>
           <div className="flex items-center gap-2 justify-center text-xs text-muted-foreground">
@@ -192,7 +211,9 @@ export const HTMLResume: React.FC<HTMLResumeProps> = ({
                       <SelectItem key={r.id} value={r.id}>
                         <div className="flex items-center gap-2">
                           <span>v{r.version}</span>
-                          {r.isActive && <CheckCircle2 className="h-3 w-3 text-green-500" />}
+                          {r.isActive && (
+                            <CheckCircle2 className="h-3 w-3 text-green-500" />
+                          )}
                         </div>
                       </SelectItem>
                     ))}
@@ -201,18 +222,22 @@ export const HTMLResume: React.FC<HTMLResumeProps> = ({
               </div>
             )}
           </div>
-          
+
           {/* Bottom row - Action buttons */}
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <Button
                 variant="outline"
                 size="sm"
-                onClick={() => setViewMode(viewMode === 'preview' ? 'html' : 'preview')}
+                onClick={() =>
+                  setViewMode(viewMode === 'preview' ? 'html' : 'preview')
+                }
                 className="flex items-center gap-1.5 h-8 px-3"
               >
                 <Eye className="h-3.5 w-3.5" />
-                <span className="text-xs">{viewMode === 'preview' ? 'HTML' : 'Preview'}</span>
+                <span className="text-xs">
+                  {viewMode === 'preview' ? 'HTML' : 'Preview'}
+                </span>
               </Button>
               <Button
                 variant="outline"
@@ -224,7 +249,7 @@ export const HTMLResume: React.FC<HTMLResumeProps> = ({
                 <span className="text-xs">Print</span>
               </Button>
             </div>
-            
+
             <div className="flex items-center gap-2">
               <Button
                 size="sm"
@@ -254,7 +279,7 @@ export const HTMLResume: React.FC<HTMLResumeProps> = ({
       <div className="flex-1 overflow-hidden">
         {viewMode === 'preview' ? (
           <div className="h-full overflow-auto p-4 bg-white">
-            <div 
+            <div
               className="resume-preview max-w-full bg-white"
               style={{
                 maxHeight: '100%',
@@ -262,7 +287,7 @@ export const HTMLResume: React.FC<HTMLResumeProps> = ({
                 padding: '0',
                 margin: '0',
                 backgroundColor: '#ffffff',
-                isolation: 'isolate'
+                isolation: 'isolate',
               }}
               dangerouslySetInnerHTML={{ __html: resume.content }}
             />

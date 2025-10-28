@@ -3,7 +3,6 @@
 import { auth } from '@/lib/auth';
 import { headers } from 'next/headers';
 import { redirect } from 'next/navigation';
-import { getUserProfessionalInfo } from './actions';
 import { ProfessionalSummaryForm } from '@/components/professional-summary-form';
 import { WorkExperienceForm } from '@/components/work-experience-form';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -11,6 +10,7 @@ import { Card } from '@/components/ui/card';
 import { FileText, Briefcase, CheckCircle, AlertCircle } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { getTranslations } from 'next-intl/server';
+import { getUserProfessionalInfo } from './actions';
 
 export default async function ProfessionalSummaryPage() {
   const session = await auth.api.getSession({
@@ -67,9 +67,7 @@ export default async function ProfessionalSummaryPage() {
           <div className="flex items-center justify-between">
             <div>
               <h1 className="text-4xl font-bold">{t('pageTitle')}</h1>
-              <p className="text-muted-foreground mt-2">
-                {t('pageSubtitle')}
-              </p>
+              <p className="text-muted-foreground mt-2">{t('pageSubtitle')}</p>
             </div>
             <div className="hidden md:flex items-center gap-4">
               <div className="text-right">
@@ -95,7 +93,9 @@ export default async function ProfessionalSummaryPage() {
             {/* Left Column - Navigation Cards */}
             <div className="lg:col-span-1 space-y-4">
               <Card className="p-6">
-                <h3 className="text-lg font-semibold mb-4">{t('profileSections')}</h3>
+                <h3 className="text-lg font-semibold mb-4">
+                  {t('profileSections')}
+                </h3>
                 <div className="space-y-3">
                   {tabs.map((tab) => {
                     const Icon = tab.icon;
@@ -142,7 +142,9 @@ export default async function ProfessionalSummaryPage() {
 
               {/* Quick Stats Card */}
               <Card className="p-6 bg-muted/50">
-                <h3 className="text-lg font-semibold mb-4">{t('quickStats')}</h3>
+                <h3 className="text-lg font-semibold mb-4">
+                  {t('quickStats')}
+                </h3>
                 <div className="space-y-4">
                   <div className="flex justify-between items-center">
                     <span className="text-sm text-muted-foreground">
@@ -218,7 +220,9 @@ export default async function ProfessionalSummaryPage() {
                   <AlertCircle className="h-4 w-4 text-amber-500" />
                 )}
                 <span className="text-xs font-medium text-muted-foreground">
-                  {hasSummary && hasExperiences ? t('complete') : t('inProgress')}
+                  {hasSummary && hasExperiences
+                    ? t('complete')
+                    : t('inProgress')}
                 </span>
               </div>
             </div>

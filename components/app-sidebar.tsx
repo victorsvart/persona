@@ -2,10 +2,7 @@
 
 import * as React from 'react';
 import {
-  IconCamera,
   IconDashboard,
-  IconFileAi,
-  IconFileDescription,
   IconFolder,
   IconHelp,
   IconListDetails,
@@ -38,7 +35,7 @@ export function AppSidebar({ ...props }: Props) {
   const { user } = props;
   const t = useTranslations('dashboard.sidebar');
   const tCommon = useTranslations('common');
-  
+
   const data = {
     navMain: [
       {
@@ -70,7 +67,7 @@ export function AppSidebar({ ...props }: Props) {
       },
     ],
   };
-  
+
   return (
     <Sidebar collapsible="offcanvas" {...props}>
       <SidebarHeader>
@@ -97,9 +94,6 @@ export function AppSidebar({ ...props }: Props) {
         <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>
-        <div className="p-2 border-t">
-          <LanguageSwitcher variant="ghost" size="sm" showLabel />
-        </div>
         <NavUser user={user} />
       </SidebarFooter>
     </Sidebar>

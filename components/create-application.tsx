@@ -24,9 +24,12 @@ import {
 } from './ui/form';
 import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
-import { applicationSchema, ApplicationValues } from '@/types/forms/application.schema';
-import { createApplication } from '@/app/dashboard/applications/actions';
+import {
+  applicationSchema,
+  ApplicationValues,
+} from '@/types/forms/application.schema';
 import { toast } from 'sonner';
+import { createApplication } from '@/app/[locale]/dashboard/applications/actions';
 
 export const CreateApplicationDialog: React.FC = () => {
   const [open, setOpen] = useState(false);
@@ -50,7 +53,7 @@ export const CreateApplicationDialog: React.FC = () => {
       formData.append('job_post', data.job_post);
 
       const result = await createApplication(formData);
-      
+
       if (result.success) {
         toast.success('Application created successfully!');
         form.reset();
@@ -94,7 +97,7 @@ export const CreateApplicationDialog: React.FC = () => {
             Add a new job application to track your progress.
           </DialogDescription>
         </DialogHeader>
-        
+
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -125,7 +128,10 @@ export const CreateApplicationDialog: React.FC = () => {
                       Job Role
                     </FormLabel>
                     <FormControl>
-                      <Input placeholder="e.g., Software Engineer, Product Manager" {...field} />
+                      <Input
+                        placeholder="e.g., Software Engineer, Product Manager"
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -151,11 +157,16 @@ export const CreateApplicationDialog: React.FC = () => {
                   </FormControl>
                   <div className="flex justify-between items-center">
                     <FormDescription>
-                      Copy and paste the complete job posting content for reference.
+                      Copy and paste the complete job posting content for
+                      reference.
                     </FormDescription>
                     <div className="flex items-center gap-2">
                       <span
-                        className={`text-sm font-medium ${isOverLimit ? 'text-destructive' : 'text-muted-foreground'}`}
+                        className={`text-sm font-medium ${
+                          isOverLimit
+                            ? 'text-destructive'
+                            : 'text-muted-foreground'
+                        }`}
                       >
                         {characterCount}/5000
                       </span>
@@ -178,10 +189,7 @@ export const CreateApplicationDialog: React.FC = () => {
               >
                 Cancel
               </Button>
-              <Button
-                type="submit"
-                disabled={isSubmitting || isOverLimit}
-              >
+              <Button type="submit" disabled={isSubmitting || isOverLimit}>
                 {isSubmitting ? (
                   <div className="flex items-center gap-2">
                     <div className="w-4 h-4 border-2 border-primary-foreground border-t-transparent rounded-full animate-spin"></div>

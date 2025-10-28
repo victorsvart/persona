@@ -1,5 +1,3 @@
-'use server';
-
 import { AppSidebar } from '@/components/app-sidebar';
 import { SiteHeader } from '@/components/site-header';
 import { SidebarProvider, SidebarInset } from '@/components/ui/sidebar';
@@ -25,7 +23,9 @@ export default async function DashboardLayout({
   }
 
   const userOnboarded = await isOnboarded(session.user.id);
+  console.log(userOnboarded);
   if (!userOnboarded) {
+    console.log('chegou');
     redirect(ONBOARD_PAGE_URL);
   }
 
