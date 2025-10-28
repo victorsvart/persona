@@ -13,13 +13,10 @@ import {
   DropdownMenu,
   DropdownMenuTrigger,
   DropdownMenuContent,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuGroup,
   DropdownMenuItem,
 } from '@/components/ui/dropdown-menu';
 import { IconDotsVertical, IconUserCircle } from '@tabler/icons-react';
-import { AvatarAndFallback } from '@/components/avatar-fallback';
 import { APPLICATION_PAGE_URL } from '@/lib/helpers';
 
 export default async function Home() {

@@ -1,7 +1,8 @@
 import OpenAI from 'openai';
 import { ContentLoader } from './content-loader';
+import { loadPublicFile } from './utils';
+import { global_suggestions_list } from './const';
 
-// Validate API key
 const apiKey = process.env.OPENAI_API_KEY;
 if (!apiKey) {
   throw new Error('OPENAI_API_KEY environment variable is required');
@@ -10,11 +11,10 @@ if (!apiKey) {
 // Initialize OpenAI client with best practices
 const openai = new OpenAI({
   apiKey,
-  maxRetries: 3, // Retry failed requests up to 3 times
-  timeout: 60000, // 60 second timeout
+  maxRetries: 3,
+  timeout: 60000,
 });
 
-// Configuration for OpenAI model
 export const OPENAI_CONFIG = {
   model: process.env.OPENAI_MODEL || 'gpt-4o',
   temperature: parseFloat(process.env.OPENAI_TEMPERATURE || '0.7'),
@@ -83,13 +83,12 @@ export class OpenAIError extends Error {
     message: string,
     public readonly code?: string,
     public readonly statusCode?: number,
-    public readonly originalError?: unknown
+    public readonly originalError?: unknown,
   ) {
     super(message);
     this.name = 'OpenAIError';
   }
 }
-
 
 export class ResumeAgent {
   private static async getSystemPrompt(): Promise<string> {
@@ -100,47 +99,69 @@ export class ResumeAgent {
    * Validates the resume generation request
    */
   private static validateRequest(request: ResumeGenerationRequest): void {
-    if (!request.application?.company_name || !request.application?.role || !request.application?.job_post) {
-      throw new OpenAIError('Missing required application information', 'INVALID_REQUEST', 400);
+    if (
+      !request.application?.company_name ||
+      !request.application?.role ||
+      !request.application?.job_post
+    ) {
+      throw new OpenAIError(
+        'Missing required application information',
+        'INVALID_REQUEST',
+        400,
+      );
     }
 
     if (!request.user?.name) {
-      throw new OpenAIError('Missing required user information', 'INVALID_REQUEST', 400);
+      throw new OpenAIError(
+        'Missing required user information',
+        'INVALID_REQUEST',
+        400,
+      );
     }
 
-    // Validate job post length (OpenAI token limits)
+    // Validate job post token limits
     if (request.application.job_post.length > 20000) {
-      throw new OpenAIError('Job post is too long. Please provide a shorter version.', 'REQUEST_TOO_LARGE', 400);
+      throw new OpenAIError(
+        'Job post is too long. Please provide a shorter version.',
+        'REQUEST_TOO_LARGE',
+        400,
+      );
     }
   }
 
-  static async generateResume(request: ResumeGenerationRequest): Promise<ResumeGenerationResponse> {
+  static async generateResume(
+    request: ResumeGenerationRequest,
+  ): Promise<ResumeGenerationResponse> {
     try {
-      // Validate request
       this.validateRequest(request);
 
       const prompt = await this.buildPrompt(request);
       const systemPrompt = await this.getSystemPrompt();
-      
-      // Build messages array with conversation history if available
-      const messages: Array<{ role: 'system' | 'user' | 'assistant'; content: string }> = [
+
+      // Conversation history if available
+      const messages: Array<{
+        role: 'system' | 'user' | 'assistant';
+        content: string;
+      }> = [
         {
           role: 'system',
-          content: systemPrompt
-        }
+          content: systemPrompt,
+        },
       ];
 
       // Add conversation history if present (for context continuity)
-      if (request.conversationHistory && request.conversationHistory.length > 0) {
-        // Limit history to last 10 messages to avoid token limits
+      // Limited to the last 10 messages to avoid token limits
+      if (
+        request.conversationHistory &&
+        request.conversationHistory.length > 0
+      ) {
         const recentHistory = request.conversationHistory.slice(-10);
         messages.push(...recentHistory);
       }
 
-      // Add current user message
       messages.push({
         role: 'user',
-        content: prompt
+        content: prompt,
       });
 
       const completion = await openai.chat.completions.create({
@@ -154,7 +175,11 @@ export class ResumeAgent {
 
       const response = completion.choices[0]?.message?.content;
       if (!response) {
-        throw new OpenAIError('Empty response from OpenAI', 'EMPTY_RESPONSE', 500);
+        throw new OpenAIError(
+          'Empty response from OpenAI',
+          'EMPTY_RESPONSE',
+          500,
+        );
       }
 
       // Check if response was truncated
@@ -162,8 +187,10 @@ export class ResumeAgent {
         console.warn('OpenAI response was truncated due to max_tokens limit');
       }
 
-      // Parse the response to extract content and resume HTML
-      const { content, resumeContent } = await this.parseResponse(response, request);
+      const { content, resumeContent } = await this.parseResponse(
+        response,
+        request,
+      );
 
       return {
         content,
@@ -171,30 +198,32 @@ export class ResumeAgent {
         suggestions: this.generateSuggestions(request),
       };
     } catch (error) {
-      // Handle different types of errors appropriately
       if (error instanceof OpenAIError) {
         throw error;
       }
 
-      // Handle OpenAI API errors
       if (error && typeof error === 'object' && 'status' in error) {
-        const apiError = error as { status?: number; message?: string; code?: string };
-        
+        const apiError = error as {
+          status?: number;
+          message?: string;
+          code?: string;
+        };
+
         if (apiError.status === 429) {
           throw new OpenAIError(
             'Rate limit exceeded. Please try again in a few moments.',
             'RATE_LIMIT',
             429,
-            error
+            error,
           );
         }
-        
+
         if (apiError.status === 401) {
           throw new OpenAIError(
             'Invalid API key configuration.',
             'INVALID_API_KEY',
             401,
-            error
+            error,
           );
         }
 
@@ -203,12 +232,11 @@ export class ResumeAgent {
             'OpenAI service is temporarily unavailable. Please try again later.',
             'SERVICE_UNAVAILABLE',
             apiError.status,
-            error
+            error,
           );
         }
       }
 
-      // Log error for debugging (sanitize sensitive data)
       console.error('Error generating resume:', {
         message: error instanceof Error ? error.message : 'Unknown error',
         company: request.application.company_name,
@@ -219,7 +247,7 @@ export class ResumeAgent {
         'Failed to generate resume. Please try again.',
         'GENERATION_FAILED',
         500,
-        error
+        error,
       );
     }
   }
@@ -229,25 +257,30 @@ export class ResumeAgent {
    * Returns an async generator that yields content chunks
    */
   static async *generateResumeStream(
-    request: ResumeGenerationRequest
+    request: ResumeGenerationRequest,
   ): AsyncGenerator<StreamChunk, void, unknown> {
     try {
-      // Validate request
       this.validateRequest(request);
 
       const prompt = await this.buildPrompt(request);
       const systemPrompt = await this.getSystemPrompt();
-      
+
       // Build messages array with conversation history if available
-      const messages: Array<{ role: 'system' | 'user' | 'assistant'; content: string }> = [
+      const messages: Array<{
+        role: 'system' | 'user' | 'assistant';
+        content: string;
+      }> = [
         {
           role: 'system',
-          content: systemPrompt
-        }
+          content: systemPrompt,
+        },
       ];
 
       // Add conversation history if present
-      if (request.conversationHistory && request.conversationHistory.length > 0) {
+      if (
+        request.conversationHistory &&
+        request.conversationHistory.length > 0
+      ) {
         const recentHistory = request.conversationHistory.slice(-10);
         messages.push(...recentHistory);
       }
@@ -255,7 +288,7 @@ export class ResumeAgent {
       // Add current user message
       messages.push({
         role: 'user',
-        content: prompt
+        content: prompt,
       });
 
       // Create streaming completion
@@ -266,7 +299,7 @@ export class ResumeAgent {
         max_tokens: OPENAI_CONFIG.maxTokens,
         presence_penalty: 0.1,
         frequency_penalty: 0.1,
-        stream: true, // Enable streaming
+        stream: true,
       });
 
       let fullContent = '';
@@ -274,10 +307,10 @@ export class ResumeAgent {
       // Stream the response
       for await (const chunk of stream) {
         const content = chunk.choices[0]?.delta?.content;
-        
+
         if (content) {
           fullContent += content;
-          
+
           // Yield content chunk
           yield {
             type: 'content',
@@ -285,13 +318,13 @@ export class ResumeAgent {
           };
         }
 
-        // Check if stream is done
         if (chunk.choices[0]?.finish_reason === 'stop') {
-          // Parse the complete response
-          const { resumeContent } = await this.parseResponse(fullContent, request);
+          const { resumeContent } = await this.parseResponse(
+            fullContent,
+            request,
+          );
           const suggestions = this.generateSuggestions(request);
 
-          // Yield final chunk with resume and suggestions
           yield {
             type: 'done',
             content: fullContent,
@@ -301,7 +334,6 @@ export class ResumeAgent {
         }
       }
     } catch (error) {
-      // Handle errors
       let errorMessage = 'Failed to generate resume. Please try again.';
       let errorCode = 'GENERATION_FAILED';
 
@@ -310,27 +342,27 @@ export class ResumeAgent {
         errorCode = error.code || 'GENERATION_FAILED';
       } else if (error && typeof error === 'object' && 'status' in error) {
         const apiError = error as { status?: number; message?: string };
-        
+
         if (apiError.status === 429) {
-          errorMessage = 'Rate limit exceeded. Please try again in a few moments.';
+          errorMessage =
+            'Rate limit exceeded. Please try again in a few moments.';
           errorCode = 'RATE_LIMIT';
         } else if (apiError.status === 401) {
           errorMessage = 'Invalid API key configuration.';
           errorCode = 'INVALID_API_KEY';
         } else if (apiError.status && apiError.status >= 500) {
-          errorMessage = 'OpenAI service is temporarily unavailable. Please try again later.';
+          errorMessage =
+            'OpenAI service is temporarily unavailable. Please try again later.';
           errorCode = 'SERVICE_UNAVAILABLE';
         }
       }
 
-      // Log error
       console.error('Error streaming resume:', {
         message: error instanceof Error ? error.message : 'Unknown error',
         company: request.application.company_name,
         role: request.application.role,
       });
 
-      // Yield error chunk
       yield {
         type: 'error',
         error: errorMessage,
@@ -338,49 +370,53 @@ export class ResumeAgent {
     }
   }
 
-  private static async buildPrompt(request: ResumeGenerationRequest): Promise<string> {
+  private static async buildPrompt(
+    request: ResumeGenerationRequest,
+  ): Promise<string> {
     const { application, userExperience, userMessage } = request;
-    
-    // Load the main prompt template
+
     const promptTemplate = await ContentLoader.loadResumeGenerationPrompt();
-    
-    // Build user experience section
     let userExperienceSection = '';
+
     if (userExperience && this.hasUserExperience(userExperience)) {
       const userExpTemplate = await ContentLoader.loadUserExperienceTemplate();
-      
+
       let professionalSummarySection = '';
       if (userExperience.professional_summary?.trim()) {
         professionalSummarySection = `**Professional Summary:** ${userExperience.professional_summary.trim()}`;
       }
-      
+
       let workExperienceSection = '';
       if (userExperience.work_experience?.length) {
         workExperienceSection = `**Work Experience:**\n`;
         userExperience.work_experience.forEach((exp, index) => {
           const startDate = exp.start_date || 'Date not specified';
           const endDate = exp.end_date || 'Present';
-          workExperienceSection += `${index + 1}. ${exp.role} at ${exp.institution} (${startDate} - ${endDate})\n`;
+          workExperienceSection += `${index + 1}. ${exp.role} at ${
+            exp.institution
+          } (${startDate} - ${endDate})\n`;
           if (exp.summary?.trim()) {
             workExperienceSection += `   ${exp.summary.trim()}\n`;
           }
         });
       }
-      
+
       let skillsSection = '';
       if (userExperience.skills?.length) {
-        const validSkills = userExperience.skills.filter(s => s?.trim());
+        const validSkills = userExperience.skills.filter((s) => s?.trim());
         if (validSkills.length > 0) {
           skillsSection = `**Skills:** ${validSkills.join(', ')}`;
         }
       }
-      
+
       let educationSection = '';
       if (userExperience.education?.length) {
         educationSection = `**Education:**\n`;
         userExperience.education.forEach((edu, index) => {
           const endDate = edu.end_date || 'Present';
-          educationSection += `${index + 1}. ${edu.major} at ${edu.institution} (${edu.start_date} - ${endDate})\n`;
+          educationSection += `${index + 1}. ${edu.major} at ${
+            edu.institution
+          } (${edu.start_date} - ${endDate})\n`;
         });
       }
 
@@ -388,29 +424,33 @@ export class ResumeAgent {
       if (userExperience.certifications?.length) {
         certificationsSection = `**Certifications:**\n`;
         userExperience.certifications.forEach((cert, index) => {
-          certificationsSection += `${index + 1}. ${cert.name} - ${cert.issuer}`;
+          certificationsSection += `${index + 1}. ${cert.name} - ${
+            cert.issuer
+          }`;
           if (cert.date) {
             certificationsSection += ` (${cert.date})`;
           }
           certificationsSection += '\n';
         });
       }
-      
-      userExperienceSection = ContentLoader.replacePlaceholders(userExpTemplate, {
-        PROFESSIONAL_SUMMARY_SECTION: professionalSummarySection,
-        WORK_EXPERIENCE_SECTION: workExperienceSection,
-        SKILLS_SECTION: skillsSection,
-        EDUCATION_SECTION: educationSection,
-        CERTIFICATIONS_SECTION: certificationsSection,
-      });
+
+      userExperienceSection = ContentLoader.replacePlaceholders(
+        userExpTemplate,
+        {
+          PROFESSIONAL_SUMMARY_SECTION: professionalSummarySection,
+          WORK_EXPERIENCE_SECTION: workExperienceSection,
+          SKILLS_SECTION: skillsSection,
+          EDUCATION_SECTION: educationSection,
+          CERTIFICATIONS_SECTION: certificationsSection,
+        },
+      );
     }
-    
-    // Build user request section
+
     let userRequestSection = '';
     if (userMessage?.trim()) {
       userRequestSection = `## USER REQUEST:\n${userMessage.trim()}`;
     }
-    
+
     // Replace placeholders in the main prompt
     const prompt = ContentLoader.replacePlaceholders(promptTemplate, {
       COMPANY_NAME: application.company_name,
@@ -426,60 +466,65 @@ export class ResumeAgent {
   /**
    * Check if user has provided any experience data
    */
-  private static hasUserExperience(userExperience?: ResumeGenerationRequest['userExperience']): boolean {
+  private static hasUserExperience(
+    userExperience?: ResumeGenerationRequest['userExperience'],
+  ): boolean {
     if (!userExperience) return false;
-    
+
     return !!(
       userExperience.professional_summary?.trim() ||
-      (userExperience.work_experience && userExperience.work_experience.length > 0) ||
+      (userExperience.work_experience &&
+        userExperience.work_experience.length > 0) ||
       (userExperience.skills && userExperience.skills.length > 0) ||
       (userExperience.education && userExperience.education.length > 0) ||
-      (userExperience.certifications && userExperience.certifications.length > 0)
+      (userExperience.certifications &&
+        userExperience.certifications.length > 0)
     );
   }
 
-  private static async parseResponse(response: string, request: ResumeGenerationRequest): Promise<{ content: string; resumeContent: string }> {
-    // Extract the main content (chat response)
+  private static async parseResponse(
+    response: string,
+    request: ResumeGenerationRequest,
+  ): Promise<{ content: string; resumeContent: string }> {
     const content = response;
-
-    // Generate the resume HTML by replacing placeholders
     const resumeContent = await this.generateResumeHTML(response, request);
 
     return { content, resumeContent };
   }
 
-  private static async generateResumeHTML(response: string, request: ResumeGenerationRequest): Promise<string> {
-    // Load the templates
+  private static async generateResumeHTML(
+    _response: string,
+    request: ResumeGenerationRequest,
+  ): Promise<string> {
     const template = await ContentLoader.loadResumeTemplate();
     const contentTemplate = await ContentLoader.loadResumeContentTemplate();
-    
-    // Build contact information from user data
+
     const contactParts: string[] = [];
-    
+
     if (request.user.email) {
       contactParts.push(request.user.email);
     }
-    
+
     if (request.user.phone) {
       contactParts.push(request.user.phone);
     }
-    
+
     if (request.user.linkedin) {
-      // Format LinkedIn URL if it's not already a full URL
-      const linkedinUrl = request.user.linkedin.startsWith('http') 
-        ? request.user.linkedin 
+      const linkedinUrl = request.user.linkedin.startsWith('http')
+        ? request.user.linkedin
         : `linkedin.com/in/${request.user.linkedin}`;
       contactParts.push(`LinkedIn: ${linkedinUrl}`);
     }
-    
+
     if (request.user.location) {
       contactParts.push(request.user.location);
     }
-    
-    const contact = contactParts.length > 0 
-      ? contactParts.join(' | ') 
-      : 'Contact information not provided';
-    
+
+    const contact =
+      contactParts.length > 0
+        ? contactParts.join(' | ')
+        : 'Contact information not provided';
+
     // Generate the resume content using the external template
     const resumeContent = ContentLoader.replacePlaceholders(contentTemplate, {
       NAME: request.user.name,
@@ -488,7 +533,7 @@ export class ResumeAgent {
       TARGET_COMPANY: request.application.company_name,
       TARGET_COMPANY_UPPER: request.application.company_name.toUpperCase(),
     });
-    
+
     // Generate the complete resume HTML
     const resumeHTML = ContentLoader.replacePlaceholders(template, {
       ROLE: request.application.role,
@@ -498,43 +543,42 @@ export class ResumeAgent {
     return resumeHTML;
   }
 
-  private static generateSuggestions(request: ResumeGenerationRequest): string[] {
-    const suggestions: string[] = [];
+  private static generateSuggestions(
+    request: ResumeGenerationRequest,
+  ): string[] {
     const { userExperience } = request;
+    const suggestions: string[] = [];
 
-    // Dynamic suggestions based on what's missing or could be improved
     if (!userExperience || !this.hasUserExperience(userExperience)) {
-      suggestions.push("Add your professional experience to create a more personalized resume");
-      suggestions.push("Include your skills to better match job requirements");
-      suggestions.push("Add your education background for a complete profile");
+      suggestions.push(...global_suggestions_list.profile);
       return suggestions;
     }
 
     if (!userExperience.professional_summary?.trim()) {
-      suggestions.push("Consider adding a professional summary to highlight your key strengths");
+      suggestions.push(...global_suggestions_list.professional_summary);
     }
 
     if (!userExperience.skills || userExperience.skills.length < 5) {
-      suggestions.push("Add more relevant skills mentioned in the job posting");
+      suggestions.push(...global_suggestions_list.skills);
     }
 
-    if (!userExperience.certifications || userExperience.certifications.length === 0) {
-      suggestions.push("Include relevant certifications to strengthen your profile");
+    if (
+      !userExperience.certifications ||
+      userExperience.certifications.length === 0
+    ) {
+      suggestions.push(...global_suggestions_list.certifications);
     }
 
     // Check if work experience has quantifiable achievements
-    const hasQuantifiableAchievements = userExperience.work_experience?.some(exp => 
-      exp.summary && /\d+/.test(exp.summary) // Check if summary contains numbers
+    const hasQuantifiableAchievements = userExperience.work_experience?.some(
+      (exp) => exp.summary && /\d+/.test(exp.summary), // Check if summary contains numbers
     );
 
     if (!hasQuantifiableAchievements) {
-      suggestions.push("Add quantifiable achievements (e.g., increased sales by 30%, led team of 5)");
+      suggestions.push(...global_suggestions_list.qualifiable);
     }
 
-    // Generic helpful suggestions
-    suggestions.push("Review for keywords from the job description");
-    suggestions.push("Ensure your most relevant experience is highlighted");
-    suggestions.push("Consider tailoring your professional summary for this specific role");
+    suggestions.push(...global_suggestions_list.general);
 
     // Return top 5 suggestions
     return suggestions.slice(0, 5);

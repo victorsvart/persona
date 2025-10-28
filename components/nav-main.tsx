@@ -27,6 +27,7 @@ export function NavMain({
     <SidebarGroup>
       <SidebarGroupContent className="flex flex-col gap-2">
         <SidebarMenu>
+          <span className="text-xs text-zinc-300 p-1">Main Menu</span>
           {items.map((item) => (
             <Link
               key={item.title}

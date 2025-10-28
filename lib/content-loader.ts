@@ -1,7 +1,13 @@
+import { loadPublicFile } from './utils';
+
 export class ContentLoader {
-  private static contentCache = new Map<string, { content: string; timestamp: number }>();
+  private static contentCache = new Map<
+    string,
+    { content: string; timestamp: number }
+  >();
   private static readonly CACHE_TTL = 1000 * 60 * 60; // 1 hour cache TTL in production
-  private static readonly isDevelopment = process.env.NODE_ENV === 'development';
+  private static readonly isDevelopment =
+    process.env.NODE_ENV === 'development';
 
   /**
    * Load content from a markdown or HTML file
@@ -24,38 +30,11 @@ export class ContentLoader {
     }
 
     try {
-      let content: string;
-      
-      // Check if we're running on the server
-      if (typeof window === 'undefined') {
-        // Server-side: use file system
-        const { readFileSync, existsSync } = await import('fs');
-        const { join } = await import('path');
-        const fullPath = join(process.cwd(), 'public', 'content', filePath);
-        
-        // Check if file exists
-        if (!existsSync(fullPath)) {
-          throw new Error(`Content file not found: ${filePath}`);
-        }
-        
-        content = readFileSync(fullPath, 'utf-8');
-      } else {
-        // Client-side: use fetch
-        const response = await fetch(`/content/${filePath}`);
-        if (!response.ok) {
-          if (response.status === 404) {
-            throw new Error(`Content file not found: ${filePath}`);
-          }
-          throw new Error(`Failed to fetch content (${response.status}): ${response.statusText}`);
-        }
-        content = await response.text();
-      }
-      
-      // Validate content is not empty
+      let content: string = await loadPublicFile(filePath);
       if (!content || content.trim().length === 0) {
         throw new Error(`Content file is empty: ${filePath}`);
       }
-      
+
       // Cache the content
       if (!this.isDevelopment) {
         this.contentCache.set(filePath, {
@@ -63,18 +42,18 @@ export class ContentLoader {
           timestamp: Date.now(),
         });
       }
-      
+
       return content;
     } catch (error) {
       console.error(`Error loading content from ${filePath}:`, {
         message: error instanceof Error ? error.message : 'Unknown error',
         filePath,
       });
-      
+
       if (error instanceof Error) {
         throw error;
       }
-      
+
       throw new Error(`Failed to load content from ${filePath}`);
     }
   }
@@ -124,14 +103,17 @@ export class ContentLoader {
   /**
    * Replace placeholders in content with actual values
    */
-  static replacePlaceholders(content: string, replacements: Record<string, string>): string {
+  static replacePlaceholders(
+    content: string,
+    replacements: Record<string, string>,
+  ): string {
     let result = content;
-    
+
     for (const [placeholder, value] of Object.entries(replacements)) {
       const regex = new RegExp(`{{${placeholder}}}`, 'g');
       result = result.replace(regex, value);
     }
-    
+
     return result;
   }
 
