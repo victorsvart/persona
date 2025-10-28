@@ -86,6 +86,11 @@ export async function saveOnboardingData(
         skills: values.skills,
       },
     });
+
+    await prisma.user.update({
+      where: { id: session.user.id },
+      data: { onboarded: true },
+    });
   } catch (error) {
     console.error('Error saving onboarding data:', error);
     return {

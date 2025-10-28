@@ -22,7 +22,10 @@ import {
   Plus,
 } from 'lucide-react';
 import { toast } from 'sonner';
-import { setActiveResume, deleteResume } from '@/app/dashboard/resume/actions';
+import {
+  deleteResume,
+  setActiveResume,
+} from '@/app/[locale]/dashboard/resume/actions';
 
 interface HTMLResumeProps {
   resume: UserResume | null;

@@ -10,7 +10,6 @@ import {
   onboardSchema,
   OnboardSchemaValues,
 } from '@/types/forms/onboard.schema';
-import { saveOnboardingData } from '@/app/onboard/actions';
 import { toast } from 'sonner';
 import { ThreeDotLoad } from '../ui/three-dot-load';
 import { Wand2 } from 'lucide-react';
@@ -19,6 +18,7 @@ import { OnboardStepTwo } from './step-two';
 import { OnboardStepThree } from './step-three';
 import { OnboardStepFour } from './step-four';
 import { useTranslations } from 'next-intl';
+import { saveOnboardingData } from '@/app/[locale]/onboard/actions';
 
 export default function OnboardForm() {
   const t = useTranslations('onboard');
@@ -281,7 +281,10 @@ export default function OnboardForm() {
 
                 <div className="flex items-center space-x-2 text-sm sm:text-base md:text-lg text-muted-foreground">
                   <span>
-                    {t('stepIndicator', { current: currentStep, total: totalSteps })}
+                    {t('stepIndicator', {
+                      current: currentStep,
+                      total: totalSteps,
+                    })}
                   </span>
                 </div>
 
@@ -306,7 +309,9 @@ export default function OnboardForm() {
                         <span className="hidden sm:inline">
                           {t('buttons.complete')}
                         </span>
-                        <span className="sm:hidden">{t('buttons.completeShort')}</span>
+                        <span className="sm:hidden">
+                          {t('buttons.completeShort')}
+                        </span>
                       </>
                     )}
                   </Button>

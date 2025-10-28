@@ -47,11 +47,11 @@ import { UserProfessionalExperience } from '@/prisma/generated/prisma';
 import { useState } from 'react';
 import { toast } from 'sonner';
 import { Badge } from './ui/badge';
-import {
-  saveWorkExperience,
-  deleteWorkExperience,
-} from '@/app/dashboard/work-experience/actions';
 import { formatDate } from '@/lib/utils';
+import {
+  deleteWorkExperience,
+  saveWorkExperience,
+} from '@/app/[locale]/dashboard/work-experience/actions';
 
 type Props = {
   experienceFields: Array<UserProfessionalExperience>;
@@ -512,8 +512,8 @@ export const WorkExperienceForm: React.FC<Props> = ({ experienceFields }) => {
                                   ? typeof field.value === 'string'
                                     ? field.value
                                     : field.value instanceof Date
-                                      ? field.value.toISOString().split('T')[0]
-                                      : ''
+                                    ? field.value.toISOString().split('T')[0]
+                                    : ''
                                   : ''
                               }
                             />
@@ -543,8 +543,8 @@ export const WorkExperienceForm: React.FC<Props> = ({ experienceFields }) => {
                                   ? typeof field.value === 'string'
                                     ? field.value
                                     : field.value instanceof Date
-                                      ? field.value.toISOString().split('T')[0]
-                                      : ''
+                                    ? field.value.toISOString().split('T')[0]
+                                    : ''
                                   : ''
                               }
                             />

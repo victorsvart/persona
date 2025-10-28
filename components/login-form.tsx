@@ -21,7 +21,6 @@ import {
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { loginSchema, LoginSchemaValues } from '@/types/forms/login.schema';
-import { signIn } from '@/app/login/actions';
 import { Toaster } from './ui/sonner';
 import { toast } from 'sonner';
 import { ThreeDotLoad } from './ui/three-dot-load';
@@ -30,6 +29,7 @@ import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { LanguageSwitcher } from '@/components/language-switcher';
+import { signIn } from '@/app/[locale]/login/actions';
 
 export function LoginForm({
   className,
@@ -37,7 +37,7 @@ export function LoginForm({
 }: React.ComponentProps<'div'>) {
   const t = useTranslations('auth.login');
   const tCommon = useTranslations('common');
-  
+
   const form = useForm<LoginSchemaValues>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
@@ -61,7 +61,9 @@ export function LoginForm({
           <div className="bg-rose-500 flex items-center justify-center rounded-md p-1">
             <OrigamiIcon className="text-black" />
           </div>
-          <span className="text-rose-500 font-semibold">{tCommon('appName')}</span>
+          <span className="text-rose-500 font-semibold">
+            {tCommon('appName')}
+          </span>
         </div>
         <LanguageSwitcher variant="ghost" size="sm" />
       </div>
@@ -88,7 +90,11 @@ export function LoginForm({
                     <FormItem>
                       <FormLabel>{t('username')}</FormLabel>
                       <FormControl>
-                        <Input type="text" placeholder={t('usernamePlaceholder')} {...field} />
+                        <Input
+                          type="text"
+                          placeholder={t('usernamePlaceholder')}
+                          {...field}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -126,7 +132,11 @@ export function LoginForm({
                         : '',
                     )}
                   >
-                    {form.formState.isSubmitting ? <ThreeDotLoad /> : t('signIn')}
+                    {form.formState.isSubmitting ? (
+                      <ThreeDotLoad />
+                    ) : (
+                      t('signIn')
+                    )}
                   </Button>
                 </Field>
 
@@ -173,7 +183,9 @@ export function LoginForm({
       </Card>
       <FieldDescription className="px-6 text-center">
         {t.rich('agreement', {
-          termsOfService: (chunks) => <a href="#">{tCommon('termsOfService')}</a>,
+          termsOfService: (chunks) => (
+            <a href="#">{tCommon('termsOfService')}</a>
+          ),
           privacyPolicy: (chunks) => <a href="#">{tCommon('privacyPolicy')}</a>,
         })}
       </FieldDescription>

@@ -22,7 +22,7 @@ import {
   ProfessionalSummaryValues,
 } from '@/types/forms/professional-summary.schema';
 import { toast } from 'sonner';
-import { saveProfessionalSummary } from '@/app/dashboard/work-experience/actions';
+import { saveProfessionalSummary } from '@/app/[locale]/dashboard/work-experience/actions';
 
 type Props = {
   summary: string | null;
@@ -158,7 +158,11 @@ export const ProfessionalSummaryForm: React.FC<Props> = ({
                         </FormDescription>
                         <div className="flex items-center gap-2">
                           <span
-                            className={`text-sm font-medium ${isOverLimit ? 'text-destructive' : 'text-muted-foreground'}`}
+                            className={`text-sm font-medium ${
+                              isOverLimit
+                                ? 'text-destructive'
+                                : 'text-muted-foreground'
+                            }`}
                           >
                             {characterCount}/2000
                           </span>

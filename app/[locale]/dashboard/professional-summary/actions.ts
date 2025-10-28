@@ -1,10 +1,12 @@
 'use server';
 
+import { ONBOARD_PAGE_URL } from '@/lib/helpers';
 import { prisma } from '@/prisma/client';
 import {
   UserProfessionalExperience,
   UserProfessionalSummary,
 } from '@/prisma/generated/prisma';
+import { redirect } from 'next/navigation';
 
 export type UserProfessionalInfo = UserProfessionalSummary & {
   experiences: Array<UserProfessionalExperience>;
@@ -22,7 +24,7 @@ export async function getUserProfessionalInfo(
     });
 
   if (!userProfessionalSummary) {
-    throw new Error('User not onboarded');
+    redirect(ONBOARD_PAGE_URL);
   }
 
   const userProfessionalExperience =

@@ -21,13 +21,13 @@ import {
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { signUpSchema, SignUpSchemaValues } from '@/types/forms/signup.schema';
-import { signUp } from '@/app/signup/actions';
 import { toast } from 'sonner';
 import { ThreeDotLoad } from './ui/three-dot-load';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { LanguageSwitcher } from '@/components/language-switcher';
+import { signUp } from '@/app/[locale]/signup/actions';
 
 export function SignupForm({
   className,
@@ -35,7 +35,7 @@ export function SignupForm({
 }: React.ComponentProps<'div'>) {
   const t = useTranslations('auth.signup');
   const tCommon = useTranslations('common');
-  
+
   const form = useForm<SignUpSchemaValues>({
     resolver: zodResolver(signUpSchema),
     defaultValues: {
@@ -84,9 +84,7 @@ export function SignupForm({
                           {...field}
                         />
                       </FormControl>
-                      <FormDescription>
-                        {t('emailDescription')}
-                      </FormDescription>
+                      <FormDescription>{t('emailDescription')}</FormDescription>
                       <FormMessage />
                     </FormItem>
                   )}
@@ -99,7 +97,11 @@ export function SignupForm({
                     <FormItem>
                       <FormLabel>{t('name')}</FormLabel>
                       <FormControl>
-                        <Input type="text" placeholder={t('namePlaceholder')} {...field} />
+                        <Input
+                          type="text"
+                          placeholder={t('namePlaceholder')}
+                          {...field}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -113,7 +115,11 @@ export function SignupForm({
                     <FormItem>
                       <FormLabel>{t('username')}</FormLabel>
                       <FormControl>
-                        <Input type="text" placeholder={t('usernamePlaceholder')} {...field} />
+                        <Input
+                          type="text"
+                          placeholder={t('usernamePlaceholder')}
+                          {...field}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -208,7 +214,9 @@ export function SignupForm({
       </Card>
       <FieldDescription className="px-6 text-center">
         {t.rich('agreement', {
-          termsOfService: (chunks) => <a href="#">{tCommon('termsOfService')}</a>,
+          termsOfService: (chunks) => (
+            <a href="#">{tCommon('termsOfService')}</a>
+          ),
           privacyPolicy: (chunks) => <a href="#">{tCommon('privacyPolicy')}</a>,
         })}
       </FieldDescription>
