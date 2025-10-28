@@ -1,6 +1,5 @@
 import OpenAI from 'openai';
 import { ContentLoader } from './content-loader';
-import { loadPublicFile } from './utils';
 import { global_suggestions_list } from './const';
 
 const apiKey = process.env.OPENAI_API_KEY;
