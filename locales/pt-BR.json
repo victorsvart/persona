@@ -167,7 +167,7 @@
       "inProgress": "Em Progresso",
       "quickStats": "Estatísticas Rápidas",
       "yearsOfExperience": "Anos de Experiência",
-      "workExperiences": "Experiências de Trabalho",
+      "professionalExperience": "Experiências Profissionais",
       "summaryLength": "Tamanho do Resumo",
       "chars": "caracteres",
       "progress": "Progresso",
@@ -182,6 +182,21 @@
       "personalProjects": "Projetos Pessoais",
       "academic": "Acadêmico",
       "needHelp": "Precisa de ajuda?"
+    },
+    "academic": {
+      "pageTitle": "Experiência Acadêmica",
+      "pageSubtitle": "Gerencie sua educação e conquistas acadêmicas",
+      "profileSections": "Seções do Perfil",
+      "education": "Educação",
+      "complete": "Completo",
+      "inProgress": "Em Progresso",
+      "incomplete": "Incompleto",
+      "quickStats": "Estatísticas Rápidas",
+      "totalEducation": "Educação Total",
+      "status": "Status",
+      "tip": "Dica",
+      "tipMessage": "Adicione seus projetos e experiências da faculdade — eles também contam como experiência profissional! Basta registrá-los e marcá-los como parte da sua jornada acadêmica.",
+      "goToSummary": "Ir para resumo profissional"
     }
   },
   "home": {
@@ -234,4 +249,3 @@
     }
   }
 }
-

@@ -167,7 +167,7 @@
       "inProgress": "In Progress",
       "quickStats": "Quick Stats",
       "yearsOfExperience": "Years of Experience",
-      "workExperiences": "Work Experiences",
+      "professionalExperience": "Professional Experiences",
       "summaryLength": "Summary Length",
       "chars": "chars",
       "progress": "Progress",
@@ -182,6 +182,21 @@
       "personalProjects": "Personal Projects",
       "academic": "Academic",
       "needHelp": "Need help?"
+    },
+    "academic": {
+      "pageTitle": "Academic Experience",
+      "pageSubtitle": "Manage your education and academic achievements",
+      "profileSections": "Profile Sections",
+      "education": "Education",
+      "complete": "Complete",
+      "inProgress": "In Progress",
+      "incomplete": "Incomplete",
+      "quickStats": "Quick Stats",
+      "totalEducation": "Total Education",
+      "status": "Status",
+      "tip": "Tip",
+      "tipMessage": "Add your college projects and experiences — they count as professional experience too! Just register them and tag them as part of your academic journey.",
+      "goToSummary": "Go to professional summary"
     }
   },
   "home": {
@@ -234,4 +249,3 @@
     }
   }
 }
-

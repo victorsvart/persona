@@ -23,7 +23,11 @@ import {
 } from '@/components/ui/sidebar';
 import { OrigamiIcon } from 'lucide-react';
 import { User } from '@/prisma/generated/prisma';
-import { APPLICATION_PAGE_URL, PROFESSIONAL_SUMMARY_URL } from '@/lib/helpers';
+import {
+  ACADEMIC_URL,
+  APPLICATION_PAGE_URL,
+  PROFESSIONAL_SUMMARY_URL,
+} from '@/lib/helpers';
 import { useTranslations } from 'next-intl';
 import { LanguageSwitcher } from '@/components/language-switcher';
 
@@ -49,14 +53,14 @@ export function AppSidebar({ ...props }: Props) {
         icon: IconListDetails,
       },
       {
+        title: t('academic'),
+        url: ACADEMIC_URL,
+        icon: IconUsers,
+      },
+      {
         title: t('personalProjects'),
         url: '#',
         icon: IconFolder,
-      },
-      {
-        title: t('academic'),
-        url: '#',
-        icon: IconUsers,
       },
     ],
     navSecondary: [
