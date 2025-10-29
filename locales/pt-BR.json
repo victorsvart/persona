@@ -197,6 +197,21 @@
       "tip": "Dica",
       "tipMessage": "Adicione seus projetos e experiências da faculdade — eles também contam como experiência profissional! Basta registrá-los e marcá-los como parte da sua jornada acadêmica.",
       "goToSummary": "Ir para resumo profissional"
+    },
+    "personalProjects": {
+      "pageTitle": "Projetos Pessoais",
+      "pageSubtitle": "Mostre seus projetos pessoais e trabalhos paralelos",
+      "profileSections": "Seções do Perfil",
+      "projects": "Projetos Pessoais",
+      "complete": "Completo",
+      "inProgress": "Em Progresso",
+      "incomplete": "Incompleto",
+      "quickStats": "Estatísticas Rápidas",
+      "totalProjects": "Total de Projetos",
+      "status": "Status",
+      "tip": "Dica",
+      "tipMessage": "Mostre seus projetos pessoais para demonstrar suas habilidades e iniciativa. Depois de concluir, vá para candidaturas para começar a acompanhar sua busca por emprego.",
+      "goToApplications": "Ir para Candidaturas"
     }
   },
   "home": {

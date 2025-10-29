@@ -197,6 +197,21 @@
       "tip": "Tip",
       "tipMessage": "Add your college projects and experiences — they count as professional experience too! Just register them and tag them as part of your academic journey.",
       "goToSummary": "Go to professional summary"
+    },
+    "personalProjects": {
+      "pageTitle": "Personal Projects",
+      "pageSubtitle": "Showcase your personal projects and side work",
+      "profileSections": "Profile Sections",
+      "projects": "Personal Projects",
+      "complete": "Complete",
+      "inProgress": "In Progress",
+      "incomplete": "Incomplete",
+      "quickStats": "Quick Stats",
+      "totalProjects": "Total Projects",
+      "status": "Status",
+      "tip": "Tip",
+      "tipMessage": "Showcase your personal projects to demonstrate your skills and initiative. Once done, head to applications to start tracking your job search.",
+      "goToApplications": "Go to Applications"
     }
   },
   "home": {

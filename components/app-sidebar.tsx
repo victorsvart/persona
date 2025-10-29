@@ -26,6 +26,7 @@ import { User } from '@/prisma/generated/prisma';
 import {
   ACADEMIC_URL,
   APPLICATION_PAGE_URL,
+  PERSONAL_PROJECTS_URL,
   PROFESSIONAL_SUMMARY_URL,
 } from '@/lib/helpers';
 import { useTranslations } from 'next-intl';
@@ -59,7 +60,7 @@ export function AppSidebar({ ...props }: Props) {
       },
       {
         title: t('personalProjects'),
-        url: '#',
+        url: PERSONAL_PROJECTS_URL,
         icon: IconFolder,
       },
     ],

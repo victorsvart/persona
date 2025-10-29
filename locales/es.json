@@ -194,9 +194,24 @@
       "quickStats": "Estadísticas Rápidas",
       "totalEducation": "Educación Total",
       "status": "Estado",
-      "tip": "Dica",
+      "tip": "Consejo",
       "tipMessage": "Agrega tus proyectos y experiencias universitarias — ¡también cuentan como experiencia profesional! Solo regístralos y márcalos como parte de tu trayectoria académica.",
-      "goToSummary": "Navegar para tu perfil profissional"
+      "goToSummary": "Ir al resumen profesional"
+    },
+    "personalProjects": {
+      "pageTitle": "Proyectos Personales",
+      "pageSubtitle": "Muestra tus proyectos personales y trabajos secundarios",
+      "profileSections": "Secciones del Perfil",
+      "projects": "Proyectos Personales",
+      "complete": "Completo",
+      "inProgress": "En Progreso",
+      "incomplete": "Incompleto",
+      "quickStats": "Estadísticas Rápidas",
+      "totalProjects": "Total de Proyectos",
+      "status": "Estado",
+      "tip": "Consejo",
+      "tipMessage": "Muestra tus proyectos personales para demostrar tus habilidades e iniciativa. Una vez terminado, ve a aplicaciones para comenzar a rastrear tu búsqueda de trabajo.",
+      "goToApplications": "Ir a Aplicaciones"
     }
   },
   "home": {
