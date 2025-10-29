@@ -3,3 +3,4 @@ export const ONBOARD_PAGE_URL = '/onboard';
 export const APPLICATION_PAGE_URL = '/dashboard/applications';
 export const PROFESSIONAL_SUMMARY_URL = '/dashboard/professional-summary';
 export const ACADEMIC_URL = '/dashboard/academic';
+export const PERSONAL_PROJECTS_URL = '/dashboard/personal-projects';
