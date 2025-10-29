@@ -174,7 +174,7 @@
       "summary": "Resumen",
       "experience": "Experiencia",
       "professionalSummary": "Resumen Profesional",
-      "workExperience": "Experiencia Laboral"
+      "professionalExperience": "Experiencia Profesional"
     },
     "sidebar": {
       "applications": "Aplicaciones",
@@ -182,6 +182,21 @@
       "personalProjects": "Proyectos Personales",
       "academic": "Académico",
       "needHelp": "¿Necesitas ayuda?"
+    },
+    "academic": {
+      "pageTitle": "Experiencia Académica",
+      "pageSubtitle": "Administra tu educación y logros académicos",
+      "profileSections": "Secciones del Perfil",
+      "education": "Educación",
+      "complete": "Completo",
+      "inProgress": "En Progreso",
+      "incomplete": "Incompleto",
+      "quickStats": "Estadísticas Rápidas",
+      "totalEducation": "Educación Total",
+      "status": "Estado",
+      "tip": "Dica",
+      "tipMessage": "Agrega tus proyectos y experiencias universitarias — ¡también cuentan como experiencia profesional! Solo regístralos y márcalos como parte de tu trayectoria académica.",
+      "goToSummary": "Navegar para tu perfil profissional"
     }
   },
   "home": {
@@ -234,4 +249,3 @@
     }
   }
 }
-

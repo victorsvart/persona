@@ -78,14 +78,32 @@ export async function saveWorkExperience(
   }
 
   try {
+    // Convert date strings to Date objects
+    const data = {
+      institution: values.institution,
+      role: values.role,
+      start_date:
+        typeof values.start_date === 'string'
+          ? new Date(values.start_date)
+          : values.start_date,
+      end_date:
+        values.end_date && values.end_date !== ''
+          ? typeof values.end_date === 'string'
+            ? new Date(values.end_date)
+            : values.end_date
+          : null,
+      summary: values.summary || null,
+      at_university: values.at_university,
+    };
+
     await prisma.userProfessionalExperience.upsert({
-      where: { id: experienceId },
+      where: { id: experienceId || '' },
       create: {
         userId: session.user.id,
-        ...values,
+        ...data,
       },
       update: {
-        ...values,
+        ...data,
       },
     });
 

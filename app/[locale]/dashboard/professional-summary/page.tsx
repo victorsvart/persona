@@ -50,7 +50,7 @@ export default async function ProfessionalSummaryPage() {
     },
     {
       key: 'experience',
-      label: t('workExperience'),
+      label: t('professionalExperience'),
       icon: Briefcase,
       content: (
         <WorkExperienceForm experienceFields={userExperienceInfo.experiences} />
