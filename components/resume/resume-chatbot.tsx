@@ -112,13 +112,7 @@ export const ResumeChatbot: React.FC<ResumeChatbotProps> = ({
           applicationId: application.id,
           userMessage:
             'Generate a professional resume tailored for this position',
-          userExperience: {
-            // TODO: Add user experience data from profile
-            professional_summary: '',
-            work_experience: [],
-            skills: [],
-            education: [],
-          },
+          // userExperience is now fetched from database by the backend
           conversationHistory: [],
           stream: false, // Disable streaming
         }),
@@ -138,6 +132,33 @@ export const ResumeChatbot: React.FC<ResumeChatbotProps> = ({
       // Generate and save the resume
       if (data.resumeContent) {
         onResumeGenerated(data.resumeContent);
+      }
+      
+      // Show modifications if applied
+      if (data.modificationsApplied && data.modificationsApplied.length > 0) {
+        console.log('Modifications applied:', data.modificationsApplied);
+        
+        const modificationsMessage: Message = {
+          id: `modifications-${Date.now()}`,
+          role: 'assistant',
+          content: `✅ **Applied changes:**\n\n${data.modificationsApplied.map((m: string, i: number) => `${i + 1}. ${m}`).join('\n')}`,
+          timestamp: new Date(),
+        };
+        setMessages((prev) => [...prev, modificationsMessage]);
+      }
+      
+      // Show suggestions if available
+      if (data.suggestions && data.suggestions.length > 0) {
+        console.log('Initial resume suggestions:', data.suggestions);
+        
+        // Display suggestions to the user as a helpful message
+        const suggestionsMessage: Message = {
+          id: `suggestions-${Date.now()}`,
+          role: 'assistant',
+          content: `📋 **Suggestions to improve your resume:**\n\n${data.suggestions.map((s: string, i: number) => `${i + 1}. ${s}`).join('\n')}`,
+          timestamp: new Date(),
+        };
+        setMessages((prev) => [...prev, suggestionsMessage]);
       }
     } catch (error) {
       console.error('Error auto-generating resume:', error);
@@ -279,13 +300,7 @@ export const ResumeChatbot: React.FC<ResumeChatbotProps> = ({
         body: JSON.stringify({
           applicationId: application.id,
           userMessage: currentInput,
-          userExperience: {
-            // TODO: Add user experience data from profile
-            professional_summary: '',
-            work_experience: [],
-            skills: [],
-            education: [],
-          },
+          // userExperience is now fetched from database by the backend
           conversationHistory,
           stream: false, // Disable streaming
         }),
@@ -312,9 +327,31 @@ export const ResumeChatbot: React.FC<ResumeChatbotProps> = ({
         onResumeGenerated(data.resumeContent);
       }
 
+      // Show modifications if applied
+      if (data.modificationsApplied && data.modificationsApplied.length > 0) {
+        console.log('Modifications applied:', data.modificationsApplied);
+        
+        const modificationsMessage: Message = {
+          id: `modifications-${Date.now()}`,
+          role: 'assistant',
+          content: `✅ **Applied changes:**\n\n${data.modificationsApplied.map((m: string, i: number) => `${i + 1}. ${m}`).join('\n')}`,
+          timestamp: new Date(),
+        };
+        setMessages((prev) => [...prev, modificationsMessage]);
+      }
+      
       // Show suggestions if available
       if (data.suggestions && data.suggestions.length > 0) {
         console.log('Resume suggestions:', data.suggestions);
+        
+        // Display suggestions to the user as a helpful message
+        const suggestionsMessage: Message = {
+          id: `suggestions-${Date.now()}`,
+          role: 'assistant',
+          content: `📋 **Suggestions to improve your resume:**\n\n${data.suggestions.map((s: string, i: number) => `${i + 1}. ${s}`).join('\n')}`,
+          timestamp: new Date(),
+        };
+        setMessages((prev) => [...prev, suggestionsMessage]);
       }
     } catch (error) {
       console.error('Error sending message:', error);

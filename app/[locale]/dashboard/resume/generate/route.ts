@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { auth } from '@/lib/auth';
 import { headers } from 'next/headers';
 import { redirect } from 'next/navigation';
-import { LOGIN_PAGE_URL } from '@/lib/helpers';
+import { LOGIN_PAGE_URL, getUserProfileData } from '@/lib/helpers';
 import { ResumeAgent, ResumeGenerationRequest, OpenAIError } from '@/lib/openai';
 import { prisma } from '@/prisma/client';
 
@@ -42,7 +42,8 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json();
-    const { applicationId, userMessage, userExperience, conversationHistory, stream = false } = body;
+    const { applicationId, userMessage, conversationHistory, stream = false } = body;
+    // Note: userExperience will be fetched from database, not from request
 
     // Validate request body
     if (!applicationId) {
@@ -67,6 +68,18 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Fetch user profile data from database
+    const userProfileData = await getUserProfileData(session.user.id);
+    
+    console.log('Fetched user profile data:', {
+      hasProfile: !!userProfileData,
+      hasSummary: !!userProfileData?.professional_summary,
+      workExpCount: userProfileData?.work_experience?.length || 0,
+      skillsCount: userProfileData?.skills?.length || 0,
+      educationCount: userProfileData?.education?.length || 0,
+      projectsCount: userProfileData?.personal_projects?.length || 0,
+    });
+
     // Prepare the request for OpenAI
     const resumeRequest: ResumeGenerationRequest = {
       application: {
@@ -79,7 +92,7 @@ export async function POST(request: NextRequest) {
         email: session.user.email,
         // TODO: Add phone, linkedin, location from user profile when available
       },
-      userExperience,
+      userExperience: userProfileData || undefined, // Use fetched data instead of request body
       userMessage,
       conversationHistory,
     };

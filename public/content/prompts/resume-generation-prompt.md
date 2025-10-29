@@ -18,26 +18,20 @@ Please generate a professional resume that:
 3. Highlights the most relevant experience and skills
 4. Uses professional formatting suitable for A4 printing
 5. Is optimized for ATS systems
-6. Fits on one page
+6. **APPLIES ANY SPECIFIC USER REQUESTS** (if provided above)
 
-## Output Format:
-Return the resume content in HTML format using this structure:
-- Header with name and contact information
-- Professional Summary
-- Professional Experience (with quantifiable achievements)
-- Key Skills (matching job requirements)
-- Education
-- Certifications (if relevant)
-- A note about being tailored for this specific application
+## Instructions for User Requests:
 
-## Template Placeholders:
-Use the following placeholders in your HTML:
-- `{{NAME}}` for the candidate's name
-- `{{CONTACT}}` for contact information
-- `{{SUMMARY}}` for professional summary
-- `{{EXPERIENCE}}` for work experience
-- `{{SKILLS}}` for skills section
-- `{{EDUCATION}}` for education
-- `{{CERTIFICATIONS}}` for certifications
-- `{{TARGET_COMPANY}}` for the target company
-- `{{TARGET_ROLE}}` for the target role
+**If the user has requested specific changes or emphasis**, you MUST apply those changes by providing guidance on:
+
+1. **Professional Summary**: How should it be rewritten? What should be emphasized?
+2. **Work Experience**: Which responsibilities should be highlighted? What language should be used?
+3. **Skills**: Which skills should be featured? In what order?
+4. **Tone & Style**: What adjustments to language and presentation?
+
+**Examples:**
+- If user says "make it more technical" → suggest emphasizing technical achievements, using technical terminology
+- If user says "focus on leadership" → suggest highlighting team management, mentoring experiences
+- If user says "emphasize [X skill]" → suggest placing that skill prominently and relating experiences to it
+
+Provide your response as structured guidance that will be used to tailor the user's actual profile data.
