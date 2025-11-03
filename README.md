@@ -1,107 +1,87 @@
-# Persona
+# Persona - AI-Powered Resumé Generator
 
-A Next.js application for managing professional profiles, resumes, and job applications.
+Persona is an intelligent resumé building application that leverages AI to help you create professional, ATS-optimized resumés. Built with Next.js and powered by advanced language models, Persona guides you through the process of crafting compelling resumes that stand out to recruiters and hiring managers.
 
-## Prerequisites
+## Features
 
-Before you begin, ensure you have the following installed:
-- [Node.js](https://nodejs.org/) (v18 or higher)
-- [pnpm](https://pnpm.io/) (v8 or higher)
-- [Docker](https://docs.docker.com/get-docker/) and Docker Compose
+- **AI-Powered Assistance**: Get intelligent suggestions for resume content and formatting
+- **ATS-Optimized**: Ensures your resume passes Applicant Tracking Systems
+- **Interactive Chat Interface**: Natural conversation flow to build your resume
+- **Resume History**: Save and manage multiple resume versions
+- **Professional Templates**: Modern, clean designs that showcase your skills
 
-## Quick Setup
+---
 
-Run the automated setup script to configure everything:
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-```bash
-./setup.sh
-```
+## Getting Started
 
-This script will:
-- ✓ Check for required dependencies (Docker, pnpm)
-- ✓ Create a `.env` file if it doesn't exist
-- ✓ Install Node.js dependencies
-- ✓ Start Docker containers (PostgreSQL + Adminer)
-- ✓ Generate Prisma client
-- ✓ Run database migrations
+### Prerequisites
 
-## Manual Setup
+- Node.js 18+ and pnpm
+- Docker and Docker Compose (for database)
 
-If you prefer to set up manually:
+### 1. Database Setup
 
-1. **Install dependencies:**
-   ```bash
-   pnpm install
-   ```
-
-2. **Create environment file:**
-   ```bash
-   cp .env.example .env  # or create manually
-   ```
-   
-   Add required environment variables:
-   ```env
-   DATABASE_URL="postgresql://postgres:postgres@localhost:5432/persona?schema=public"
-   OPENAI_API_KEY=your_openai_api_key_here
-   ```
-
-3. **Start Docker containers:**
-   ```bash
-   pnpm run docker:up
-   ```
-
-4. **Generate Prisma client:**
-   ```bash
-   pnpm run db:generate
-   ```
-
-5. **Run database migrations:**
-   ```bash
-   pnpm run db:migrate
-   ```
-
-## Development
-
-Start the development server:
+Start the PostgreSQL database and Adminer using Docker Compose:
 
 ```bash
-pnpm run dev
+docker compose up -d
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the application.
+This will start:
+- **PostgreSQL** on `localhost:5433` (uses port 5433 to avoid conflicts with local PostgreSQL)
+  - Database: `persona_db`
+  - User: `persona_user`
+  - Password: `persona_password`
+- **Adminer** (database management UI) on `http://localhost:8080`
 
-## Available Scripts
+To access Adminer:
+1. Open [http://localhost:8080](http://localhost:8080)
+2. Login with:
+   - System: `PostgreSQL`
+   - Server: `postgres`
+   - Username: `persona_user`
+   - Password: `persona_password`
+   - Database: `persona_db`
 
-- `pnpm run dev` - Start development server with Turbopack
-- `pnpm run build` - Build for production
-- `pnpm run start` - Start production server
-- `pnpm run lint` - Run ESLint and fix issues
-- `pnpm run type-check` - Run TypeScript type checking
+To stop the database:
+```bash
+docker compose down
+```
 
-### Database Scripts
+To stop and remove all data:
+```bash
+docker compose down -v
+```
 
-- `pnpm run db:generate` - Generate Prisma client
-- `pnpm run db:migrate` - Run database migrations
-- `pnpm run db:push` - Push schema changes to database
-- `pnpm run db:studio` - Open Prisma Studio (database GUI)
-- `pnpm run db:reset` - Reset database
+### 2. Environment Variables
 
-### Docker Scripts
+Copy the example environment file and configure as needed:
 
-- `pnpm run docker:up` - Start Docker containers
-- `pnpm run docker:down` - Stop Docker containers
-- `pnpm run docker:logs` - View Docker logs
+```bash
+cp env.example .env.local
+```
 
-## Database Management
+The default values in `env.example` match the Docker Compose setup.
 
-Access the database through:
-- **Prisma Studio:** Run `pnpm run db:studio` and open [http://localhost:5555](http://localhost:5555)
-- **Adminer:** Open [http://localhost:8080](http://localhost:8080)
-  - System: PostgreSQL
-  - Server: db
-  - Username: postgres
-  - Password: postgres
-  - Database: persona
+### 3. Install Dependencies
+
+```bash
+pnpm install
+```
+
+### 4. Run the Development Server
+
+```bash
+pnpm dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
 ## Learn More
 

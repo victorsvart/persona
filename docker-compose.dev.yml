@@ -1,23 +1,38 @@
-# Use the docker:up script. Check package.json scripts.
 services:
-  db:
-    image: postgres
-    restart: always
-    shm_size: 128mb
-    ports:
-      - '5432:5432'
+  postgres:
+    image: postgres:16-alpine
+    container_name: persona-postgres
+    restart: unless-stopped
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: persona
+      POSTGRES_USER: persona_user
+      POSTGRES_PASSWORD: persona_password
+      POSTGRES_DB: persona_db
+    ports:
+      - "5433:5432"
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U persona_user -d persona_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   adminer:
-    image: adminer
-    restart: always
+    image: adminer:latest
+    container_name: persona-adminer
+    restart: unless-stopped
     ports:
-      - '8080:8080'
+      - "8080:8080"
+    environment:
+      ADMINER_DEFAULT_SERVER: postgres
+      ADMINER_DESIGN: nette
+    depends_on:
+      postgres:
+        condition: service_healthy
 
 volumes:
-  pgdata: {}
+  postgres_data:
+    name: persona_postgres_data
+
+
+

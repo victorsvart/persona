@@ -1,40 +1,37 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
-  output   = "../prisma/generated/prisma"
 }
 
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
-  schemas  = ["auth", "public"]
+  schemas  = ["public", "auth"]
 }
 
 model User {
-  id                            String                       @id
-  name                          String
-  email                         String
-  emailVerified                 Boolean                      @default(false)
-  image                         String?
-  createdAt                     DateTime                     @default(now())
-  updatedAt                     DateTime                     @default(now()) @updatedAt
-  sessions                      Session[]
-  accounts                      Account[]
-  user_professional_summary     UserProfessionalSummary?
-  user_professional_experiences UserProfessionalExperience[]
-  user_academic_information     UserAcademicInformation[]
-  user_skill                    UserSkill?
-  username                      String?
-  displayUsername               String?
-  onboarded                     Boolean                      @default(false)
-  applications                  UserApplications[]
-  resumes                       UserResume[]
-  personal_projects             UserPersonalProjects[]
+  id              String    @id
+  name            String
+  email           String
+  emailVerified   Boolean   @default(false)
+  image           String?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @default(now()) @updatedAt
+  username        String?
+  displayUsername String?
+  sessions        Session[]
+  accounts        Account[]
+  
+  // Resume-related relations
+  workExperiences  WorkExperience[]
+  educations       Education[]
+  projects         Project[]
+  skills           Skill[]
+  certifications   Certification[]
+  languages        Language[]
+  customSections   CustomSection[]
 
   @@unique([email])
   @@unique([username])
@@ -90,109 +87,153 @@ model Verification {
   @@schema("auth")
 }
 
-model UserProfessionalExperience {
-  id            String    @id @default(uuid())
-  institution   String
-  role          String
-  start_date    DateTime?
-  end_date      DateTime?
-  summary       String?
-  version       Int       @default(1)
-  userId        String
-  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  at_university Boolean   @default(false)
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+// Resume-related models in public schema
 
-  @@map("user_professional_experience")
+model WorkExperience {
+  id              String    @id @default(cuid())
+  userId          String
+  user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  company         String
+  position        String
+  employmentType  String?   // Full-time, Part-time, Contract, Freelance, Internship
+  location        String?
+  locationType    String?   // On-site, Remote, Hybrid
+  startDate       DateTime
+  endDate         DateTime?
+  isCurrentRole   Boolean   @default(false)
+  
+  description     String?   @db.Text
+  achievements    String[]  // Array of achievement bullet points
+  
+  sortOrder       Int       @default(0)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  @@map("work_experience")
   @@schema("public")
 }
 
-model UserProfessionalSummary {
-  id               String   @id @default(uuid())
-  experience_years Int
-  summary          String?
-  version          Int      @default(1)
-  userId           String   @unique
-  user             User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  createdAt        DateTime @default(now())
-  updatedAt        DateTime @updatedAt
+model Education {
+  id              String    @id @default(cuid())
+  userId          String
+  user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  institution     String
+  degree          String    // Bachelor's, Master's, PhD, Certificate, etc.
+  fieldOfStudy    String
+  location        String?
+  startDate       DateTime
+  endDate         DateTime?
+  isCurrentlyEnrolled Boolean @default(false)
+  
+  gpa             String?
+  honors          String?   @db.Text
+  activities      String[]  // Clubs, organizations, etc.
+  coursework      String[]  // Relevant courses
+  
+  sortOrder       Int       @default(0)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
 
-  @@map("user_professional_summary")
+  @@map("education")
   @@schema("public")
 }
 
-model UserAcademicInformation {
-  id          String    @id @default(uuid())
-  institution String
-  major       String
-  start_date  DateTime
-  end_date    DateTime?
-  summary     String?
-  userId      String
-  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+model Project {
+  id              String    @id @default(cuid())
+  userId          String
+  user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  name            String
+  description     String    @db.Text
+  role            String?   // Your role in the project
+  technologies    String[]  // Technologies/tools used
+  
+  startDate       DateTime?
+  endDate         DateTime?
+  isOngoing       Boolean   @default(false)
+  
+  url             String?
+  githubUrl       String?
+  highlights      String[]  // Key achievements/highlights
+  
+  sortOrder       Int       @default(0)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
 
-  @@map("user_academic_information")
+  @@map("project")
   @@schema("public")
 }
 
-model UserSkill {
-  id        Int      @id @default(autoincrement())
-  skills    String
-  userId    String   @unique
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+model Skill {
+  id              String    @id @default(cuid())
+  userId          String
+  user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  name            String
+  category        String    // Technical, Soft Skills, Tools, Languages, etc.
+  proficiency     String?   // Beginner, Intermediate, Advanced, Expert
+  yearsOfExperience Int?
+  
+  sortOrder       Int       @default(0)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
 
-  @@map("user_skill")
+  @@map("skill")
   @@schema("public")
 }
 
-model UserApplications {
-  id           String       @id @default(uuid())
-  company_name String
-  role         String
-  job_post     String
-  userId       String
-  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
-  resumes      UserResume[]
-  createdAt    DateTime     @default(now())
-  updatedAt    DateTime     @updatedAt
+model Certification {
+  id              String    @id @default(cuid())
+  userId          String
+  user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  name            String
+  issuingOrganization String
+  issueDate       DateTime
+  expirationDate  DateTime?
+  doesNotExpire   Boolean   @default(false)
+  credentialId    String?
+  credentialUrl   String?
+  
+  sortOrder       Int       @default(0)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
 
-  @@map("user_applications")
+  @@map("certification")
   @@schema("public")
 }
 
-model UserPersonalProjects {
-  id             String   @id @default(uuid())
-  name           String
-  year_worked_on Int
-  description    String
-  userId         String
-  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
+model Language {
+  id              String    @id @default(cuid())
+  userId          String
+  user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  name            String
+  proficiency     String    // Native, Fluent, Professional, Intermediate, Basic
+  
+  sortOrder       Int       @default(0)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
 
-  @@map("user_personal_projects")
+  @@map("language")
   @@schema("public")
 }
 
-model UserResume {
-  id            String           @id @default(uuid())
-  applicationId String
-  application   UserApplications @relation(fields: [applicationId], references: [id], onDelete: Cascade)
-  userId        String
-  user          User             @relation(fields: [userId], references: [id], onDelete: Cascade)
-  version       Int              @default(1)
-  title         String           @default("Resume")
-  content       String // HTML content
-  isActive      Boolean          @default(true)
-  createdAt     DateTime         @default(now())
-  updatedAt     DateTime         @updatedAt
+model CustomSection {
+  id              String    @id @default(cuid())
+  userId          String
+  user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  title           String    // Volunteer Work, Awards, Publications, etc.
+  entries         Json      // Flexible JSON structure for custom entries
+  
+  sortOrder       Int       @default(0)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
 
-  @@unique([applicationId, version])
-  @@map("user_resume")
+  @@map("custom_section")
   @@schema("public")
 }
+

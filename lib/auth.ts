@@ -1,15 +1,12 @@
-/* About this:  https://www.better-auth.com/docs/installation */
 import { prisma } from '@/prisma/client';
 import { betterAuth } from 'better-auth';
 import { prismaAdapter } from 'better-auth/adapters/prisma';
 import { nextCookies } from 'better-auth/next-js';
 import { username } from 'better-auth/plugins';
-import { createAuthClient } from 'better-auth/react';
-import { usernameClient } from 'better-auth/client/plugins';
 
 export const auth = betterAuth({
   database: prismaAdapter(prisma, {
-    provider: 'postgresql', // or "mysql", "sqlite", ...etc
+    provider: 'postgresql',
   }),
   emailAndPassword: {
     enabled: true,
@@ -22,8 +19,4 @@ export const auth = betterAuth({
   //       clientSecret: process.env.GITHUB_CLIENT_SECRET as string,
   //     },
   //   },
-});
-
-export const clientAuth = createAuthClient({
-  plugins: [usernameClient()],
 });

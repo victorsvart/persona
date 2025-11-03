@@ -1,14 +1,19 @@
-'use client';
+"use client"
 
+import * as React from "react"
 import {
   IconCreditCard,
   IconDotsVertical,
   IconLogout,
   IconNotification,
   IconUserCircle,
-} from '@tabler/icons-react';
+} from "@tabler/icons-react"
 
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/components/ui/avatar"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -17,41 +22,26 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
+} from "@/components/ui/dropdown-menu"
 import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
   useSidebar,
-} from '@/components/ui/sidebar';
-import { clientAuth } from '@/lib/auth';
-import { useRouter } from 'next/navigation';
-import { useAppEvent } from '@/contexts/AppEventContext';
-import { User } from '@/prisma/generated/prisma';
-import { AvatarAndFallback } from './avatar-fallback';
+} from "@/components/ui/sidebar"
+import { UserSettingsDialog } from "@/components/user-settings-dialog"
 
-export function NavUser({ user }: { user: User }) {
-  const { isMobile } = useSidebar();
-  const { triggerEvent, untriggerEvent } = useAppEvent();
-  const router = useRouter();
-
-  const logout = async () => {
-    triggerEvent('signOut');
-
-    try {
-      await clientAuth.signOut({
-        fetchOptions: {
-          onSuccess: () => {
-            router.push('/login');
-          },
-        },
-      });
-    } catch (error) {
-      console.error('Sign out error:', error);
-    } finally {
-      untriggerEvent('signOut');
-    }
-  };
+export function NavUser({
+  user,
+}: {
+  user: {
+    name: string
+    email: string
+    avatar: string
+  }
+}) {
+  const { isMobile } = useSidebar()
+  const [settingsOpen, setSettingsOpen] = React.useState(false)
 
   return (
     <SidebarMenu>
@@ -62,7 +52,10 @@ export function NavUser({ user }: { user: User }) {
               size="lg"
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
             >
-              <AvatarAndFallback user={user} />
+              <Avatar className="h-8 w-8 rounded-lg grayscale">
+                <AvatarImage src={user.avatar} alt={user.name} />
+                <AvatarFallback className="rounded-lg">CN</AvatarFallback>
+              </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-medium">{user.name}</span>
                 <span className="text-muted-foreground truncate text-xs">
@@ -74,13 +67,16 @@ export function NavUser({ user }: { user: User }) {
           </DropdownMenuTrigger>
           <DropdownMenuContent
             className="w-(--radix-dropdown-menu-trigger-width) min-w-56 rounded-lg"
-            side={isMobile ? 'bottom' : 'right'}
+            side={isMobile ? "bottom" : "right"}
             align="end"
             sideOffset={4}
           >
             <DropdownMenuLabel className="p-0 font-normal">
               <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-                <AvatarAndFallback user={user} />
+                <Avatar className="h-8 w-8 rounded-lg">
+                  <AvatarImage src={user.avatar} alt={user.name} />
+                  <AvatarFallback className="rounded-lg">CN</AvatarFallback>
+                </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-medium">{user.name}</span>
                   <span className="text-muted-foreground truncate text-xs">
@@ -91,7 +87,7 @@ export function NavUser({ user }: { user: User }) {
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem>
+              <DropdownMenuItem onClick={() => setSettingsOpen(true)}>
                 <IconUserCircle />
                 Account
               </DropdownMenuItem>
@@ -105,13 +101,15 @@ export function NavUser({ user }: { user: User }) {
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={logout}>
+            <DropdownMenuItem>
               <IconLogout />
               Log out
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
+        
+        <UserSettingsDialog open={settingsOpen} onOpenChange={setSettingsOpen} />
       </SidebarMenuItem>
     </SidebarMenu>
-  );
+  )
 }

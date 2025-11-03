@@ -1,650 +1,404 @@
 'use client';
 
-import {
-  Plus,
-  Trash2,
-  Calendar,
-  Building2,
-  Briefcase,
-  CheckCircle,
-  ChevronLeft,
-  ChevronRight,
-  Edit,
-  PlusIcon,
-} from 'lucide-react';
-import { Button } from './ui/button';
-import { Card, CardContent, CardHeader } from './ui/card';
-import {
-  Form,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormControl,
-  FormMessage,
-  FormDescription,
-} from './ui/form';
-import { Input } from './ui/input';
-import { Textarea } from './ui/textarea';
-import { Checkbox } from './ui/checkbox';
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from './ui/alert-dialog';
+import * as React from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import * as z from 'zod';
 import {
-  professional_experiences,
-  ProfessionalExperienceValues,
-} from '@/types/forms/work-experience.schema';
-import { UserProfessionalExperience } from '@/prisma/generated/prisma';
-import { useState } from 'react';
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+} from '@/components/ui/drawer';
+import { Form } from '@/components/ui/form';
+import { Button } from '@/components/ui/button';
+import { IconX } from '@tabler/icons-react';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { CompanyPositionFields } from '@/components/settings/work-experience/company-position-fields';
+import { EmploymentLocationFields } from '@/components/settings/work-experience/employment-location-fields';
+import { DateFields } from '@/components/settings/work-experience/date-fields';
+import { DescriptionField } from '@/components/settings/work-experience/description-field';
+import { AchievementsSection } from '@/components/settings/work-experience/achievements-section';
+import { createWorkExperience, updateWorkExperience } from '@/app/actions/work-experience';
 import { toast } from 'sonner';
-import { Badge } from './ui/badge';
-import { formatDate } from '@/lib/utils';
+import { format } from 'date-fns';
+import { WorkExperience } from '@prisma/client';
 import {
-  deleteWorkExperience,
-  saveWorkExperience,
-} from '@/app/[locale]/dashboard/work-experience/actions';
+  workExperienceSchema,
+  WorkExperienceFormValues,
+} from '@/lib/types/forms/work-experience.form';
 
-type Props = {
-  experienceFields: Array<UserProfessionalExperience>;
-};
+interface WorkExperienceFormProps {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+  workExperience?: WorkExperience | null;
+}
 
-export const WorkExperienceForm: React.FC<Props> = ({ experienceFields }) => {
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [selectedExperience, setSelectedExperience] =
-    useState<UserProfessionalExperience | null>(null);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [isEditing, setIsEditing] = useState(false);
-  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
-  const [experienceToDelete, setExperienceToDelete] = useState<string | null>(
-    null,
-  );
+export function WorkExperienceForm({
+  open,
+  onOpenChange,
+  workExperience,
+}: WorkExperienceFormProps) {
+  const [achievements, setAchievements] = React.useState<string[]>(['']);
+  const [isMobile, setIsMobile] = React.useState(false);
+  const [achievementPage, setAchievementPage] = React.useState(1);
+  const achievementsPerPage = 3;
+  const isEditing = !!workExperience;
 
-  const itemsPerPage = 4;
-  const totalPages = Math.ceil(experienceFields.length / itemsPerPage);
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const currentExperiences = experienceFields.slice(startIndex, endIndex);
+  React.useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
-  const form = useForm<ProfessionalExperienceValues>({
-    resolver: zodResolver(professional_experiences),
+  const form = useForm<WorkExperienceFormValues>({
+    resolver: zodResolver(workExperienceSchema),
     defaultValues: {
-      institution: '',
-      role: '',
-      start_date: '',
-      end_date: '',
-      summary: '',
-      at_university: false,
+      company: workExperience?.company || '',
+      position: workExperience?.position || '',
+      employmentType: (workExperience?.employmentType as any) || 'Full-time',
+      location: workExperience?.location || '',
+      locationType: (workExperience?.locationType as any) || 'On-site',
+      startDate: workExperience?.startDate 
+        ? format(new Date(workExperience.startDate), 'yyyy-MM')
+        : '',
+      endDate: workExperience?.endDate 
+        ? format(new Date(workExperience.endDate), 'yyyy-MM')
+        : '',
+      isCurrentRole: workExperience?.isCurrentRole || false,
+      description: workExperience?.description || '',
+      achievements: [],
     },
   });
 
-  const handleAddExperience = () => {
-    const newExperience: UserProfessionalExperience = {
-      id: '',
-      institution: '',
-      role: '',
-      start_date: new Date(),
-      end_date: new Date(),
-      summary: '',
-      at_university: false,
-      userId: '',
-      createdAt: new Date(),
-      updatedAt: new Date(),
-      version: 1,
-    };
-    setSelectedExperience(newExperience);
-    setIsEditing(true);
-    form.reset({
-      institution: '',
-      role: '',
-      start_date: '',
-      end_date: '',
-      summary: '',
-      at_university: false,
-    });
-  };
-
-  const handleEditExperience = (experience: UserProfessionalExperience) => {
-    setSelectedExperience(experience);
-    setIsEditing(true);
-    form.reset({
-      institution: experience.institution,
-      role: experience.role,
-      start_date:
-        experience.start_date instanceof Date
-          ? experience.start_date.toISOString().split('T')[0]
-          : experience.start_date || '',
-      end_date:
-        experience.end_date instanceof Date
-          ? experience.end_date.toISOString().split('T')[0]
-          : experience.end_date || '',
-      summary: experience.summary || '',
-      at_university: experience.at_university,
-    });
-  };
-
-  const handleBackToCards = () => {
-    setSelectedExperience(null);
-    setIsEditing(false);
-    form.reset();
-  };
-
-  const confirmDeleteExperience = async () => {
-    if (!experienceToDelete) return;
-
-    setIsSubmitting(true);
-    try {
-      const error = await deleteWorkExperience(experienceToDelete);
-
-      if (error) {
-        toast.error(error.message || 'Failed to delete work experience');
-        return;
+  // Load achievements and reset form when workExperience changes
+  React.useEffect(() => {
+    if (workExperience) {
+      // Editing mode - populate form
+      form.reset({
+        company: workExperience.company,
+        position: workExperience.position,
+        employmentType: (workExperience.employmentType as any) || 'Full-time',
+        location: workExperience.location || '',
+        locationType: (workExperience.locationType as any) || 'On-site',
+        startDate: format(new Date(workExperience.startDate), 'yyyy-MM'),
+        endDate: workExperience.endDate 
+          ? format(new Date(workExperience.endDate), 'yyyy-MM')
+          : '',
+        isCurrentRole: workExperience.isCurrentRole,
+        description: workExperience.description || '',
+        achievements: [],
+      });
+      
+      if (workExperience.achievements && workExperience.achievements.length > 0) {
+        setAchievements(workExperience.achievements);
+      } else {
+        setAchievements(['']);
       }
+    } else {
+      // Create mode - reset to empty
+      form.reset({
+        company: '',
+        position: '',
+        employmentType: 'Full-time',
+        location: '',
+        locationType: 'On-site',
+        startDate: '',
+        endDate: '',
+        isCurrentRole: false,
+        description: '',
+        achievements: [],
+      });
+      setAchievements(['']);
+    }
+    setAchievementPage(1);
+  }, [workExperience, form]);
 
-      toast.success('Work experience deleted successfully!');
-      setDeleteDialogOpen(false);
-      setExperienceToDelete(null);
-      handleBackToCards();
+  const isCurrentRole = form.watch('isCurrentRole');
+
+  const onSubmit = async (data: WorkExperienceFormValues) => {
+    try {
+      // Filter out empty achievements
+      const filteredAchievements = achievements.filter((a) => a.trim() !== '');
+      const formData = {
+        ...data,
+        achievements: filteredAchievements,
+      };
+
+      // Call server action (create or update)
+      const result = isEditing && workExperience
+        ? await updateWorkExperience(workExperience.id, formData)
+        : await createWorkExperience(formData);
+
+      if (result.success) {
+        toast.success(
+          isEditing
+            ? 'Work experience updated successfully!'
+            : 'Work experience saved successfully!'
+        );
+        // Reset form
+        form.reset();
+        setAchievements(['']);
+        setAchievementPage(1);
+        onOpenChange(false);
+      } else {
+        toast.error(result.error || 'Failed to save work experience');
+      }
     } catch (error) {
-      console.error('Error deleting work experience:', error);
-      toast.error('Failed to delete work experience. Please try again.');
-    } finally {
-      setIsSubmitting(false);
+      console.error('Error submitting form:', error);
+      toast.error('An unexpected error occurred. Please try again.');
     }
   };
 
-  const renderExperienceCards = () => {
-    if (currentExperiences.length === 0) {
-      return (
-        <Card className="p-12 text-center bg-muted/50">
-          <div className="mx-auto w-20 h-20 bg-muted rounded-full flex items-center justify-center mb-6">
-            <Briefcase className="h-10 w-10 text-muted-foreground" />
-          </div>
-          <h3 className="text-xl font-semibold mb-2">
-            No work experiences yet
-          </h3>
-          <p className="text-muted-foreground mb-6 max-w-md mx-auto">
-            Start building your professional profile by adding your work
-            experiences. This will help showcase your career journey.
-          </p>
-          <Button onClick={handleAddExperience}>
-            <Plus className="h-4 w-4 mr-2" /> Add Your First Experience
-          </Button>
-        </Card>
-      );
-    }
+  const addAchievement = () => {
+    const newAchievements = [...achievements, ''];
+    setAchievements(newAchievements);
+    // Navigate to the page with the new achievement
+    const newPage = Math.ceil(newAchievements.length / achievementsPerPage);
+    setAchievementPage(newPage);
+  };
 
+  const updateAchievement = (index: number, value: string) => {
+    const newAchievements = [...achievements];
+    newAchievements[index] = value;
+    setAchievements(newAchievements);
+  };
+
+  const removeAchievement = (index: number) => {
+    const newAchievements = achievements.filter((_, i) => i !== index);
+    setAchievements(newAchievements);
+    // Adjust page if we deleted the last item on the current page
+    const maxPage = Math.ceil(newAchievements.length / achievementsPerPage) || 1;
+    if (achievementPage > maxPage) {
+      setAchievementPage(maxPage);
+    }
+  };
+
+  const fillDemoData = () => {
+    form.setValue('company', 'Google Inc.');
+    form.setValue('position', 'Senior Software Engineer');
+    form.setValue('employmentType', 'Full-time');
+    form.setValue('location', 'Mountain View, CA');
+    form.setValue('locationType', 'Hybrid');
+    form.setValue('startDate', '2020-03');
+    form.setValue('endDate', '2023-12');
+    form.setValue('isCurrentRole', false);
+    form.setValue(
+      'description',
+      'Led the development of cloud-based solutions and microservices architecture. Collaborated with cross-functional teams to deliver high-quality software products.'
+    );
+    setAchievements([
+      'Increased system performance by 40% through optimization techniques',
+      'Led a team of 5 engineers to deliver a major feature ahead of schedule',
+      'Reduced deployment time by 60% by implementing CI/CD pipelines',
+      'Mentored junior developers and conducted code reviews',
+      'Implemented automated testing that improved code coverage to 95%',
+    ]);
+  };
+
+  const totalPages = Math.ceil(achievements.length / achievementsPerPage);
+  const startIndex = (achievementPage - 1) * achievementsPerPage;
+  const endIndex = startIndex + achievementsPerPage;
+  const currentAchievements = achievements.slice(startIndex, endIndex);
+
+  const isDevelopment = process.env.NODE_ENV === 'development';
+
+  // Desktop version - contained within dialog
+  if (!isMobile && open) {
     return (
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {currentExperiences.map((experience, idx) => (
-          <Card
-            key={experience.id || idx}
-            className="p-6 cursor-pointer hover:shadow-md transition-shadow border-2 hover:border-primary/20"
-            onClick={() => handleEditExperience(experience)}
-          >
-            <CardHeader className="pb-3">
-              <div className="flex items-start justify-between">
-                <div className="flex-1">
-                  <div className="flex items-center gap-2 mb-2">
-                    <h3 className="font-semibold text-lg">
-                      {experience.institution}
-                    </h3>
-                    <Badge
-                      variant={
-                        experience.at_university ? 'secondary' : 'default'
-                      }
-                    >
-                      {experience.at_university ? 'Academic' : 'Work'}
-                    </Badge>
-                  </div>
-                  <p className="text-muted-foreground font-medium">
-                    {experience.role}
-                  </p>
-                </div>
+      <div className="absolute inset-0 z-50 flex items-end bg-black/50 animate-in fade-in">
+        <div className="bg-background w-full max-h-[85vh] flex flex-col rounded-t-lg border-t shadow-lg animate-in slide-in-from-bottom duration-300">
+          <div className="border-b px-6 py-4 flex items-center justify-between shrink-0">
+            <div>
+              <h3 className="font-semibold text-lg">
+                {isEditing ? 'Edit Work Experience' : 'Add Work Experience'}
+              </h3>
+              <p className="text-sm text-muted-foreground">
+                {isEditing
+                  ? 'Update your work experience details'
+                  : 'Add details about your professional work experience'}
+              </p>
+            </div>
+            <div className="flex items-center gap-2">
+              {isDevelopment && (
                 <Button
+                  variant="outline"
                   size="sm"
-                  variant="ghost"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleEditExperience(experience);
-                  }}
+                  onClick={fillDemoData}
+                  className="text-xs"
                 >
-                  <Edit className="h-4 w-4" />
+                  Fill Demo Data
                 </Button>
-              </div>
-            </CardHeader>
-            <CardContent className="space-y-3">
-              <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                <div className="flex items-center gap-1">
-                  <Calendar className="h-4 w-4" />
-                  <span>{formatDate(experience.start_date)}</span>
-                  {experience.end_date && (
-                    <>
-                      <span>-</span>
-                      <span>{formatDate(experience.end_date)}</span>
-                    </>
-                  )}
-                </div>
-              </div>
-              {experience.summary && (
-                <p
-                  className="text-sm text-muted-foreground overflow-hidden"
-                  style={{
-                    display: '-webkit-box',
-                    WebkitLineClamp: 3,
-                    WebkitBoxOrient: 'vertical',
-                  }}
-                >
-                  {experience.summary}
-                </p>
               )}
-            </CardContent>
-          </Card>
-        ))}
-      </div>
-    );
-  };
-
-  const renderPagination = () => {
-    if (totalPages <= 1) return null;
-
-    return (
-      <div className="flex items-center justify-center gap-2 mt-6">
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-          disabled={currentPage === 1}
-        >
-          <ChevronLeft className="h-4 w-4" />
-          Previous
-        </Button>
-
-        <div className="flex items-center gap-1">
-          {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-            <Button
-              key={page}
-              variant={currentPage === page ? 'default' : 'outline'}
-              size="sm"
-              onClick={() => setCurrentPage(page)}
-              className="w-8 h-8 p-0"
-            >
-              {page}
-            </Button>
-          ))}
-        </div>
-
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() =>
-            setCurrentPage((prev) => Math.min(prev + 1, totalPages))
-          }
-          disabled={currentPage === totalPages}
-        >
-          Next
-          <ChevronRight className="h-4 w-4" />
-        </Button>
-      </div>
-    );
-  };
-
-  const onSubmit = async (data: ProfessionalExperienceValues) => {
-    setIsSubmitting(true);
-    try {
-      const result = await saveWorkExperience(data, selectedExperience?.id);
-
-      if (result) {
-        toast.error(result.message || 'Failed to save work experience');
-        return;
-      }
-
-      toast.success('Work experience saved successfully!');
-      handleBackToCards();
-    } catch (error) {
-      console.error('Error saving work experience:', error);
-      toast.error('Failed to save work experience. Please try again.');
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  return (
-    <div className="space-y-6">
-      {/* Header Card */}
-      <Card className="p-6 bg-muted/50">
-        <div className="flex items-center gap-4">
-          <div className="p-3 rounded-xl bg-primary/10">
-            <Briefcase className="h-6 w-6 text-primary" />
-          </div>
-          <div>
-            <h2 className="text-2xl font-bold">Work Experience</h2>
-            <p className="text-muted-foreground">
-              Add details about your previous roles and professional
-              experiences.
-            </p>
-          </div>
-        </div>
-      </Card>
-
-      {!isEditing ? (
-        // Cards View
-        <div className="space-y-6">
-          <Card className="p-6">
-            <div className="flex items-center justify-between mb-6">
-              <div className="flex flex-col">
-                <h3 className="text-lg font-semibold">Your Experiences</h3>
-                {experienceFields.length > 0 && (
-                  <div className="text-sm text-muted-foreground">
-                    {experienceFields.length} experience
-                    {experienceFields.length !== 1 ? 's' : ''}
-                  </div>
-                )}
-              </div>
-              <Button onClick={handleAddExperience} className="flex gap-2">
-                <PlusIcon />
-                Add Experience
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => onOpenChange(false)}
+              >
+                <IconX className="h-4 w-4" />
               </Button>
             </div>
-            {renderExperienceCards()}
-            {renderPagination()}
-          </Card>
-        </div>
-      ) : (
-        // Form View
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-            <Card className="p-8">
-              <div className="space-y-6">
-                {/* Header */}
-                <div className="flex justify-between items-center">
-                  <div className="flex items-center gap-3">
-                    <div className="p-2 rounded-lg bg-primary/10">
-                      <Briefcase className="h-5 w-5 text-primary" />
-                    </div>
-                    <div>
-                      <h4 className="text-lg font-semibold">
-                        {selectedExperience?.institution || 'New Experience'}
-                      </h4>
-                      <p className="text-sm text-muted-foreground">
-                        {selectedExperience?.id
-                          ? 'Edit work experience'
-                          : 'Add new work experience'}
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Button
-                      type="button"
-                      variant="outline"
-                      onClick={handleBackToCards}
-                    >
-                      Back to experiences
-                    </Button>
-                    {selectedExperience?.id && (
-                      <AlertDialog
-                        open={deleteDialogOpen}
-                        onOpenChange={setDeleteDialogOpen}
-                      >
-                        <AlertDialogTrigger asChild>
-                          <Button
-                            type="button"
-                            size="icon"
-                            variant="destructive"
-                            onClick={() =>
-                              setExperienceToDelete(
-                                selectedExperience?.id || null,
-                              )
-                            }
-                          >
-                            <Trash2 className="h-4 w-4" />
-                          </Button>
-                        </AlertDialogTrigger>
-                        <AlertDialogContent>
-                          <AlertDialogHeader>
-                            <AlertDialogTitle>
-                              Delete Work Experience
-                            </AlertDialogTitle>
-                            <AlertDialogDescription>
-                              Are you sure you want to delete this work
-                              experience? This action cannot be undone.
-                              <br />
-                              <br />
-                              <strong>
-                                {selectedExperience?.institution}
-                              </strong>{' '}
-                              - {selectedExperience?.role}
-                            </AlertDialogDescription>
-                          </AlertDialogHeader>
-                          <AlertDialogFooter>
-                            <AlertDialogCancel disabled={isSubmitting}>
-                              Cancel
-                            </AlertDialogCancel>
-                            <AlertDialogAction
-                              onClick={confirmDeleteExperience}
-                              disabled={isSubmitting}
-                              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
-                            >
-                              {isSubmitting ? 'Deleting...' : 'Delete'}
-                            </AlertDialogAction>
-                          </AlertDialogFooter>
-                        </AlertDialogContent>
-                      </AlertDialog>
-                    )}
-                  </div>
-                </div>
+          </div>
 
-                {/* Basic Information */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <Card className="p-4 bg-muted/50">
-                    <FormField
-                      control={form.control}
-                      name="institution"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="flex items-center gap-2">
-                            <Building2 className="h-4 w-4" />
-                            Institution *
-                          </FormLabel>
-                          <FormControl>
-                            <Input
-                              placeholder="e.g. Google, Microsoft, University"
-                              {...field}
-                              value={field.value || ''}
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </Card>
-
-                  <Card className="p-4 bg-muted/50">
-                    <FormField
-                      control={form.control}
-                      name="role"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="flex items-center gap-2">
-                            <Briefcase className="h-4 w-4" />
-                            Role *
-                          </FormLabel>
-                          <FormControl>
-                            <Input
-                              placeholder="e.g. Software Engineer, Intern, Research Assistant"
-                              {...field}
-                              value={field.value || ''}
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </Card>
-                </div>
-
-                {/* Date Information */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <Card className="p-4 bg-muted/50">
-                    <FormField
-                      control={form.control}
-                      name="start_date"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="flex items-center gap-2">
-                            <Calendar className="h-4 w-4" />
-                            Start Date *
-                          </FormLabel>
-                          <FormControl>
-                            <Input
-                              type="date"
-                              {...field}
-                              value={
-                                field.value
-                                  ? typeof field.value === 'string'
-                                    ? field.value
-                                    : field.value instanceof Date
-                                    ? field.value.toISOString().split('T')[0]
-                                    : ''
-                                  : ''
-                              }
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </Card>
-
-                  <Card className="p-4 bg-muted/50">
-                    <FormField
-                      control={form.control}
-                      name="end_date"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="flex items-center gap-2">
-                            <Calendar className="h-4 w-4" />
-                            End Date
-                          </FormLabel>
-                          <FormControl>
-                            <Input
-                              type="date"
-                              {...field}
-                              value={
-                                field.value
-                                  ? typeof field.value === 'string'
-                                    ? field.value
-                                    : field.value instanceof Date
-                                    ? field.value.toISOString().split('T')[0]
-                                    : ''
-                                  : ''
-                              }
-                            />
-                          </FormControl>
-                          <FormDescription>
-                            Leave empty if this is your current position
-                          </FormDescription>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </Card>
-                </div>
-
-                {/* Summary */}
-                <Card className="p-4 bg-muted/50">
-                  <FormField
-                    control={form.control}
-                    name="summary"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Summary</FormLabel>
-                        <FormControl>
-                          <Textarea
-                            placeholder="Describe your key responsibilities, achievements, and skills gained in this role..."
-                            className="min-h-[120px] resize-y"
-                            {...field}
-                            value={field.value || ''}
-                          />
-                        </FormControl>
-                        <FormDescription>
-                          Highlight your key achievements and responsibilities
-                        </FormDescription>
-                        <FormMessage />
-                      </FormItem>
-                    )}
+          <ScrollArea className="flex-1 overflow-y-auto">
+            <div className="p-6">
+              <Form {...form}>
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                  <FormFields
+                    form={form}
+                    isCurrentRole={isCurrentRole}
+                    achievements={achievements}
+                    currentAchievements={currentAchievements}
+                    achievementPage={achievementPage}
+                    totalPages={totalPages}
+                    startIndex={startIndex}
+                    setAchievementPage={setAchievementPage}
+                    updateAchievement={updateAchievement}
+                    removeAchievement={removeAchievement}
+                    addAchievement={addAchievement}
                   />
-                </Card>
+                </form>
+              </Form>
+            </div>
+          </ScrollArea>
 
-                {/* University Checkbox */}
-                <Card className="p-4 bg-muted/50">
-                  <FormField
-                    control={form.control}
-                    name="at_university"
-                    render={({ field }) => (
-                      <FormItem className="flex flex-row items-center space-x-3 space-y-0">
-                        <FormControl>
-                          <Checkbox
-                            checked={field.value || false}
-                            onCheckedChange={field.onChange}
-                          />
-                        </FormControl>
-                        <div className="space-y-1 leading-none">
-                          <FormLabel>
-                            This was at a university or school
-                          </FormLabel>
-                          <FormDescription>
-                            Check if this experience was part of your academic
-                            journey
-                          </FormDescription>
-                        </div>
-                      </FormItem>
-                    )}
-                  />
-                </Card>
-
-                {/* Save Button */}
-                <Card className="p-6 bg-muted/50">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <div className="p-2 rounded-lg bg-primary/10">
-                        <CheckCircle className="h-5 w-5 text-primary" />
-                      </div>
-                      <div>
-                        <h3 className="font-semibold">Ready to Save?</h3>
-                        <p className="text-sm text-muted-foreground">
-                          Save this work experience to your profile.
-                        </p>
-                      </div>
-                    </div>
-                    <Button type="submit" size="lg" disabled={isSubmitting}>
-                      {isSubmitting ? (
-                        <div className="flex items-center gap-2">
-                          <div className="w-4 h-4 border-2 border-primary-foreground border-t-transparent rounded-full animate-spin"></div>
-                          Saving...
-                        </div>
-                      ) : (
-                        <div className="flex items-center gap-2">
-                          <CheckCircle className="h-4 w-4" />
-                          Save Experience
-                        </div>
-                      )}
-                    </Button>
-                  </div>
-                </Card>
+          <div className="border-t p-4 shrink-0 bg-background">
+            <div className="flex gap-2 justify-between">
+              <div>
+                {isDevelopment && (
+                  <Button
+                    variant="secondary"
+                    size="sm"
+                    onClick={fillDemoData}
+                  >
+                    Fill Demo Data
+                  </Button>
+                )}
               </div>
-            </Card>
-          </form>
-        </Form>
-      )}
-    </div>
+              <div className="flex gap-2">
+                <Button variant="outline" onClick={() => onOpenChange(false)}>
+                  Cancel
+                </Button>
+                <Button onClick={form.handleSubmit(onSubmit)}>
+                  {isEditing ? 'Update Work Experience' : 'Save Work Experience'}
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Mobile version - full screen drawer
+  return (
+    <Drawer open={open} onOpenChange={onOpenChange} direction="bottom">
+      <DrawerContent className="max-h-[90vh] flex flex-col">
+        <DrawerHeader className="border-b shrink-0">
+          <DrawerTitle>
+            {isEditing ? 'Edit Work Experience' : 'Add Work Experience'}
+          </DrawerTitle>
+          <DrawerDescription>
+            {isEditing
+              ? 'Update your work experience details'
+              : 'Add details about your professional work experience'}
+          </DrawerDescription>
+        </DrawerHeader>
+
+        <ScrollArea className="flex-1 overflow-y-auto">
+          <div className="p-6">
+            <Form {...form}>
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                <FormFields
+                  form={form}
+                  isCurrentRole={isCurrentRole}
+                  achievements={achievements}
+                  currentAchievements={currentAchievements}
+                  achievementPage={achievementPage}
+                  totalPages={totalPages}
+                  startIndex={startIndex}
+                  setAchievementPage={setAchievementPage}
+                  updateAchievement={updateAchievement}
+                  removeAchievement={removeAchievement}
+                  addAchievement={addAchievement}
+                />
+              </form>
+            </Form>
+          </div>
+        </ScrollArea>
+
+        <DrawerFooter className="border-t shrink-0 bg-background">
+          <div className="flex gap-2 justify-between">
+            <div>
+              {isDevelopment && (
+                <Button variant="secondary" size="sm" onClick={fillDemoData}>
+                  Fill Demo Data
+                </Button>
+              )}
+            </div>
+            <div className="flex gap-2">
+              <DrawerClose asChild>
+                <Button variant="outline">Cancel</Button>
+              </DrawerClose>
+              <Button onClick={form.handleSubmit(onSubmit)}>
+                {isEditing ? 'Update Work Experience' : 'Save Work Experience'}
+              </Button>
+            </div>
+          </div>
+        </DrawerFooter>
+      </DrawerContent>
+    </Drawer>
   );
-};
+}
+
+// Extracted form fields component to avoid duplication
+function FormFields({
+  form,
+  isCurrentRole,
+  achievements,
+  currentAchievements,
+  achievementPage,
+  totalPages,
+  startIndex,
+  setAchievementPage,
+  updateAchievement,
+  removeAchievement,
+  addAchievement,
+}: {
+  form: any;
+  isCurrentRole: boolean;
+  achievements: string[];
+  currentAchievements: string[];
+  achievementPage: number;
+  totalPages: number;
+  startIndex: number;
+  setAchievementPage: (page: number) => void;
+  updateAchievement: (index: number, value: string) => void;
+  removeAchievement: (index: number) => void;
+  addAchievement: () => void;
+}) {
+  return (
+    <>
+      <CompanyPositionFields form={form} />
+      <EmploymentLocationFields form={form} />
+      <DateFields form={form} isCurrentRole={isCurrentRole} />
+      <DescriptionField form={form} />
+      <AchievementsSection
+        achievements={achievements}
+        currentAchievements={currentAchievements}
+        achievementPage={achievementPage}
+        totalPages={totalPages}
+        startIndex={startIndex}
+        setAchievementPage={setAchievementPage}
+        updateAchievement={updateAchievement}
+        removeAchievement={removeAchievement}
+        addAchievement={addAchievement}
+      />
+    </>
+  );
+}
+

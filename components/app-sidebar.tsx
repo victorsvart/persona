@@ -2,15 +2,13 @@
 
 import * as React from 'react';
 import {
-  IconDashboard,
-  IconFolder,
-  IconHelp,
-  IconListDetails,
-  IconUsers,
+  IconMessage,
+  IconPlus,
+  IconTrash,
+  IconEdit,
+  IconInnerShadowTop,
 } from '@tabler/icons-react';
 
-import { NavMain } from '@/components/nav-main';
-import { NavSecondary } from '@/components/nav-secondary';
 import { NavUser } from '@/components/nav-user';
 import {
   Sidebar,
@@ -20,58 +18,76 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarGroup,
+  SidebarGroupLabel,
+  SidebarGroupContent,
 } from '@/components/ui/sidebar';
-import { OrigamiIcon } from 'lucide-react';
-import { User } from '@/prisma/generated/prisma';
-import {
-  ACADEMIC_URL,
-  APPLICATION_PAGE_URL,
-  PERSONAL_PROJECTS_URL,
-  PROFESSIONAL_SUMMARY_URL,
-} from '@/lib/helpers';
-import { useTranslations } from 'next-intl';
-import { LanguageSwitcher } from '@/components/language-switcher';
+import { Button } from '@/components/ui/button';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { cn } from '@/lib/utils';
 
-type Props = {
-  user: User;
-} & React.ComponentProps<typeof Sidebar>;
+// Mock chat history data
+const mockChatHistory = [
+  {
+    id: '1',
+    title: 'Software Engineer Resumé',
+    timestamp: '2 hours ago',
+    preview: 'Help me create a resumé for a senior software engineer position...',
+  },
+  {
+    id: '2',
+    title: 'Product Manager CV',
+    timestamp: 'Yesterday',
+    preview: 'I need a compelling resumé for a product manager role...',
+  },
+  {
+    id: '3',
+    title: 'Entry-level Data Analyst',
+    timestamp: '2 days ago',
+    preview: 'Creating my first professional resumé for data analyst positions...',
+  },
+  {
+    id: '4',
+    title: 'UX Designer Portfolio',
+    timestamp: '3 days ago',
+    preview: 'Help me highlight my design skills and projects...',
+  },
+  {
+    id: '5',
+    title: 'Marketing Manager Resumé',
+    timestamp: '1 week ago',
+    preview: 'Need to emphasize my digital marketing achievements...',
+  },
+  {
+    id: '6',
+    title: 'DevOps Engineer CV',
+    timestamp: '1 week ago',
+    preview: 'Showcasing my cloud infrastructure expertise...',
+  },
+  {
+    id: '7',
+    title: 'Career Change Resumé',
+    timestamp: '2 weeks ago',
+    preview: 'Transitioning from teaching to tech, need help...',
+  },
+  {
+    id: '8',
+    title: 'Executive Leadership CV',
+    timestamp: '2 weeks ago',
+    preview: 'Creating a C-level executive resumé...',
+  },
+];
 
-export function AppSidebar({ ...props }: Props) {
-  const { user } = props;
-  const t = useTranslations('dashboard.sidebar');
-  const tCommon = useTranslations('common');
+const data = {
+  user: {
+    name: 'User',
+    email: 'm@example.com',
+    avatar: '/avatars/user.jpg',
+  },
+};
 
-  const data = {
-    navMain: [
-      {
-        title: t('applications'),
-        url: APPLICATION_PAGE_URL,
-        icon: IconDashboard,
-      },
-      {
-        title: t('professionalSummary'),
-        url: PROFESSIONAL_SUMMARY_URL,
-        icon: IconListDetails,
-      },
-      {
-        title: t('academic'),
-        url: ACADEMIC_URL,
-        icon: IconUsers,
-      },
-      {
-        title: t('personalProjects'),
-        url: PERSONAL_PROJECTS_URL,
-        icon: IconFolder,
-      },
-    ],
-    navSecondary: [
-      {
-        title: t('needHelp'),
-        url: '#',
-        icon: IconHelp,
-      },
-    ],
-  };
+export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const [activeChat, setActiveChat] = React.useState<string | null>('1');
 
   return (
     <Sidebar collapsible="offcanvas" {...props}>
@@ -80,26 +96,84 @@ export function AppSidebar({ ...props }: Props) {
           <SidebarMenuItem>
             <SidebarMenuButton
               asChild
-              className="data-[slot=sidebar-menu-button]:p-1.5!"
+              className="data-[slot=sidebar-menu-button]:!p-1.5"
             >
               <a href="#">
-                <span className="bg-rose-500 p-1 text-black rounded-md flex justify-center items-center">
-                  <OrigamiIcon className="size-4 sm:size-5" />
-                </span>
-                <span className="text-rose-500 font-semibold text-sm sm:text-base">
-                  {tCommon('appName')}
-                </span>
+                <IconInnerShadowTop className="!size-5" />
+                <span className="text-base font-semibold">Persona</span>
               </a>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
+        <div className="px-2 pt-2">
+          <Button className="w-full" size="sm">
+            <IconPlus className="mr-2 h-4 w-4" />
+            New Resumé
+          </Button>
+        </div>
       </SidebarHeader>
       <SidebarContent>
-        <NavMain items={data.navMain} />
-        <NavSecondary items={data.navSecondary} className="mt-auto" />
+        <SidebarGroup>
+          <SidebarGroupLabel>Resumé History</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <ScrollArea className="h-[calc(100vh-280px)]">
+              <div className="space-y-1 px-2">
+                {mockChatHistory.map((chat) => (
+                  <button
+                    key={chat.id}
+                    onClick={() => setActiveChat(chat.id)}
+                    className={cn(
+                      'group relative w-full rounded-md px-3 py-2 text-left transition-colors hover:bg-accent',
+                      activeChat === chat.id && 'bg-accent'
+                    )}
+                  >
+                    <div className="flex items-start gap-2">
+                      <IconMessage className="mt-0.5 h-4 w-4 shrink-0 text-muted-foreground" />
+                      <div className="flex-1 overflow-hidden">
+                        <p className="truncate text-sm font-medium">
+                          {chat.title}
+                        </p>
+                        <p className="truncate text-xs text-muted-foreground">
+                          {chat.preview}
+                        </p>
+                        <p className="mt-1 text-xs text-muted-foreground">
+                          {chat.timestamp}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="absolute right-2 top-2 hidden gap-1 group-hover:flex">
+                      <Button
+                        size="icon"
+                        variant="ghost"
+                        className="h-6 w-6"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          // Handle edit
+                        }}
+                      >
+                        <IconEdit className="h-3 w-3" />
+                      </Button>
+                      <Button
+                        size="icon"
+                        variant="ghost"
+                        className="h-6 w-6 text-destructive"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          // Handle delete
+                        }}
+                      >
+                        <IconTrash className="h-3 w-3" />
+                      </Button>
+                    </div>
+                  </button>
+                ))}
+              </div>
+            </ScrollArea>
+          </SidebarGroupContent>
+        </SidebarGroup>
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={user} />
+        <NavUser user={data.user} />
       </SidebarFooter>
     </Sidebar>
   );
