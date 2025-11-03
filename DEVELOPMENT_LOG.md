@@ -335,7 +335,9 @@ persona/
 │   │   ├── work-experience.ts             # Work experience CRUD actions
 │   │   ├── education.ts                   # Education CRUD actions
 │   │   ├── projects.ts                    # Projects CRUD actions
-│   │   └── skills.ts                      # Skills CRUD actions
+│   │   ├── skills.ts                      # Skills CRUD actions
+│   │   ├── certifications.ts              # Certifications CRUD actions
+│   │   └── languages.ts                   # Languages CRUD actions
 │   └── api/
 │       └── chat/
 │           └── route.ts                    # OpenAI integration
@@ -349,6 +351,8 @@ persona/
 │   ├── education-form.tsx                  # Education form (main)
 │   ├── project-form.tsx                    # Project form (main)
 │   ├── skill-form.tsx                      # Skill form (main)
+│   ├── certification-form.tsx              # Certification form (main)
+│   ├── language-form.tsx                   # Language form (main)
 │   │
 │   ├── settings/
 │   │   ├── settings-sidebar.tsx            # Settings navigation sidebar
@@ -382,11 +386,18 @@ persona/
 │   │   │   ├── project-card.tsx
 │   │   │   └── project-list.tsx
 │   │   │
-│   │   └── skills/
-│   │       ├── name-category-fields.tsx
-│   │       ├── proficiency-experience-fields.tsx
-│   │       ├── skill-card.tsx
-│   │       └── skill-list.tsx
+│   │   ├── skills/
+│   │   │   ├── name-category-fields.tsx
+│   │   │   ├── proficiency-experience-fields.tsx
+│   │   │   ├── skill-card.tsx
+│   │   │   └── skill-list.tsx
+│   │   │
+│   │   └── certifications/
+│   │       ├── name-organization-fields.tsx
+│   │       ├── date-fields.tsx
+│   │       ├── credential-fields.tsx
+│   │       ├── certification-card.tsx
+│   │       └── certification-list.tsx
 │   │
 │   └── ui/                                 # Shadcn UI components
 │       ├── dialog.tsx                      # Modified for custom widths
@@ -403,6 +414,7 @@ persona/
 │           ├── education.form.ts           # Education Zod schema
 │           ├── project.form.ts             # Project Zod schema
 │           ├── skill.form.ts               # Skill Zod schema
+│           ├── certification.form.ts       # Certification Zod schema
 │           ├── login.form.ts               # Existing
 │           └── register.form.ts            # Existing
 │
@@ -925,17 +937,225 @@ interface EducationCardProps {
 
 ---
 
+### Phase 9: Certifications Implementation (Completed)
+
+#### 9.1 Backend - Server Actions
+**File:** `app/actions/certifications.ts`
+
+**Functions Implemented:**
+- `createCertification(data)` - Create new certification entry
+- `getCertifications()` - Fetch all user's certifications (ordered by issue date)
+- `updateCertification(id, data)` - Update existing entry
+- `deleteCertification(id)` - Delete entry
+
+**Features:**
+- Same security patterns as previous sections
+- Authentication and ownership verification
+- Date conversion with expiration handling
+- Supports "does not expire" option
+- Cache revalidation
+
+#### 9.2 Form Schema
+**File:** `lib/types/forms/certification.form.ts`
+
+**Schema Fields:**
+- name (required)
+- issuingOrganization (required)
+- issueDate (required, YYYY-MM format)
+- expirationDate (optional, YYYY-MM format)
+- doesNotExpire (boolean)
+- credentialId (optional)
+- credentialUrl (optional)
+
+#### 9.3 Main Form Component
+**File:** `components/certification-form.tsx`
+
+**Features:**
+- Same responsive design pattern
+- Create and Edit modes
+- Calendar date pickers for issue and expiration dates
+- "Does not expire" checkbox that disables expiration date
+- Credential ID and URL fields
+- Development-only demo data button
+- Toast notifications
+
+#### 9.4 Form Field Sub-Components
+**Directory:** `components/settings/certifications/`
+
+**Files Created:**
+1. `name-organization-fields.tsx`
+   - Certification Name input
+   - Issuing Organization input
+   - 2-column grid layout
+
+2. `date-fields.tsx`
+   - Issue Date calendar picker (required)
+   - Expiration Date calendar picker (optional, disabled if "does not expire")
+   - "This certification does not expire" checkbox
+   - Uses Shadcn Calendar and Popover
+
+3. `credential-fields.tsx`
+   - Credential ID input
+   - Credential URL input
+   - 2-column grid layout
+
+#### 9.5 Display Components
+**Directory:** `components/settings/certifications/`
+
+**Files Created:**
+1. `certification-card.tsx`
+   - Card layout with certification name and organization
+   - Issue date and expiration date display
+   - Credential ID and verification link indicators
+   - **Smart status badges:**
+     - 🟢 **Active** - Valid and not expiring soon
+     - 🟠 **Expiring Soon** - Less than 90 days until expiration
+     - 🔴 **Expired** - Past expiration date
+     - ⚪ **No Expiration** - Lifetime certification
+   - Color-coded visual feedback
+   - Clickable to open edit form
+
+2. `certification-list.tsx`
+   - Fetches data from server actions
+   - Loading skeletons
+   - Empty state
+   - Auto-refresh support
+
+#### 9.6 Integration
+**File:** `components/user-settings-dialog.tsx`
+
+**Updates:**
+- Added CertificationForm import and integration
+- Added certification state management
+- Updated handleAddNew for certifications section
+- Added handleEditCertification handler
+- Added handleCertificationFormClose handler
+- Updated SectionContent to render CertificationList
+- Certifications section now fully functional in settings dialog
+
+---
+
+## Testing the Certifications Section
+
+### Certifications Flow
+1. In settings dialog, click "Certifications" in sidebar
+2. Click "Add New" → Drawer slides up
+3. Fill certification name and issuing organization
+4. Select issue date
+5. Optionally select expiration date or check "Does not expire"
+6. Optionally add credential ID and verification URL
+7. Click "Save Certification"
+8. Card appears in the list showing:
+   - Certification name and issuing organization
+   - Issue date and expiration date
+   - Smart status badge (Active, Expiring Soon, Expired, or No Expiration)
+   - Credential information
+9. Click card to edit and update
+
+---
+
+### Phase 10: Languages Implementation (Completed)
+
+#### 10.1 Backend - Server Actions
+**File:** `app/actions/languages.ts`
+
+**Functions Implemented:**
+- `createLanguage(data)` - Create new language entry
+- `getLanguages()` - Fetch all user's languages (ordered alphabetically)
+- `updateLanguage(id, data)` - Update existing entry
+- `deleteLanguage(id)` - Delete entry
+
+**Features:**
+- Same security patterns as previous sections
+- Authentication and ownership verification
+- Simple data structure (name + proficiency)
+- Cache revalidation
+
+#### 10.2 Form Schema
+**File:** `lib/types/forms/language.form.ts`
+
+**Schema Fields:**
+- name (required)
+- proficiency (required enum: Native, Fluent, Professional, Intermediate, Basic)
+
+#### 10.3 Main Form Component
+**File:** `components/language-form.tsx`
+
+**Features:**
+- Simplest form in the application (only 2 fields)
+- Same responsive design pattern
+- Create and Edit modes
+- Radio buttons for proficiency with descriptions
+- Development-only demo data button
+- Toast notifications
+
+#### 10.4 Form Field Sub-Component
+**Directory:** `components/settings/languages/`
+
+**Files Created:**
+1. `name-proficiency-fields.tsx`
+   - Language Name input
+   - Proficiency Level radio buttons in vertical list
+   - Each option includes helpful description:
+     - **Native:** Native or bilingual proficiency
+     - **Fluent:** Full professional proficiency
+     - **Professional:** Professional working proficiency
+     - **Intermediate:** Limited working proficiency
+     - **Basic:** Elementary proficiency
+
+#### 10.5 Display Components
+**Directory:** `components/settings/languages/`
+
+**Files Created:**
+1. `language-card.tsx`
+   - Compact card layout (smaller than other sections)
+   - Language name with icon
+   - Color-coded proficiency badge:
+     - Native: Purple
+     - Fluent: Green
+     - Professional: Blue
+     - Intermediate: Yellow
+     - Basic: Gray
+   - Clickable to open edit form
+
+2. `language-list.tsx`
+   - Fetches data from server actions
+   - **2-column grid layout** (more compact than other sections)
+   - Loading skeletons
+   - Empty state
+   - Auto-refresh support
+
+#### 10.6 Integration
+**File:** `components/user-settings-dialog.tsx`
+
+**Updates:**
+- Added LanguageForm import and integration
+- Added language state management
+- Updated handleAddNew for languages section
+- Added handleEditLanguage handler
+- Added handleLanguageFormClose handler
+- Updated SectionContent to render LanguageList
+- Languages section now fully functional in settings dialog
+- **All 6 profile sections now complete!**
+
+---
+
+## Testing the Languages Section
+
+### Languages Flow
+1. In settings dialog, click "Languages" in sidebar
+2. Click "Add New" → Drawer slides up
+3. Fill language name (e.g., "Spanish")
+4. Select proficiency level using radio buttons (each with description)
+5. Click "Save Language"
+6. Compact card appears in 2-column grid showing:
+   - Language name
+   - Color-coded proficiency badge
+7. Click card to edit and update
+
+---
+
 ## Future Enhancements
-
-### Phase 9: Certifications Section (Planned)
-- Certificate name, issuing organization, dates
-- Credential ID and verification URL
-- Expiration tracking
-- Badge display
-
-### Phase 10: Languages Section (Planned)
-- Language name and proficiency (Native, Fluent, Intermediate, Basic)
-- Simple card or table layout
 
 ### Phase 11: Custom Sections (Planned)
 - User-defined sections (Publications, Volunteer Work, etc.)
@@ -1075,23 +1295,30 @@ if (!entry || entry.userId !== session.user.id) {
 
 This implementation provides a solid foundation for the Persona resume builder. The modular architecture makes it easy to extend with new sections, and the consistent patterns ensure maintainability as the codebase grows.
 
-With Work Experience, Education, Projects, and Skills sections now complete, users can build comprehensive professional profiles covering the most essential resume components. Each section follows the same architectural patterns, making the codebase consistent and easy to maintain.
+With Work Experience, Education, Projects, Skills, and Certifications sections now complete, users can build comprehensive professional profiles covering the most essential resume components. Each section follows the same architectural patterns, making the codebase consistent and easy to maintain.
 
-The Skills section introduces some unique features like category-based grouping and color-coded proficiency levels, demonstrating the flexibility of the architecture while maintaining consistency.
+**Key Features Across Sections:**
+- **Work Experience & Education:** Full CRUD with dates, achievements, and detailed information
+- **Projects:** Technology tracking, highlights, and external links
+- **Skills:** Category-based grouping with color-coded proficiency levels
+- **Certifications:** Smart expiration tracking with visual status indicators (Active, Expiring Soon, Expired)
+
+The Certifications section introduces intelligent status tracking, demonstrating the flexibility of the architecture while maintaining consistency.
 
 **Next Steps:**
 1. Test thoroughly with real user data
 2. Gather feedback on UX
-3. Implement remaining sections (Certifications, Languages)
+3. Implement Languages section (final profile section)
 4. Build AI-powered resume generation using stored profile data
 5. Add PDF export functionality
 6. Implement resume templates
 7. Add delete functionality with confirmation dialogs
+8. Implement drag-and-drop reordering for sections
 
 ---
 
 **Last Updated:** November 3, 2025  
-**Phase Completed:** Phase 8 - Skills Section (Full CRUD)  
-**Completed Sections:** Work Experience, Education, Projects, Skills  
-**Next Phase:** Certifications Section
+**Phase Completed:** Phase 9 - Certifications Section (Full CRUD)  
+**Completed Sections:** Work Experience, Education, Projects, Skills, Certifications  
+**Next Phase:** Languages Section (Final Profile Section)
 

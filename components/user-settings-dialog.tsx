@@ -7,6 +7,8 @@ import { WorkExperienceForm } from '@/components/work-experience-form';
 import { EducationForm } from '@/components/education-form';
 import { ProjectForm } from '@/components/project-form';
 import { SkillForm } from '@/components/skill-form';
+import { CertificationForm } from '@/components/certification-form';
+import { LanguageForm } from '@/components/language-form';
 import {
   SettingsSidebar,
   SettingsSection,
@@ -18,7 +20,9 @@ import { WorkExperienceList } from '@/components/settings/work-experience/work-e
 import { EducationList } from '@/components/settings/education/education-list';
 import { ProjectList } from '@/components/settings/projects/project-list';
 import { SkillList } from '@/components/settings/skills/skill-list';
-import { WorkExperience, Education, Project, Skill } from '@prisma/client';
+import { CertificationList } from '@/components/settings/certifications/certification-list';
+import { LanguageList } from '@/components/settings/languages/language-list';
+import { WorkExperience, Education, Project, Skill, Certification, Language } from '@prisma/client';
 
 interface UserSettingsDialogProps {
   open: boolean;
@@ -35,10 +39,14 @@ export function UserSettingsDialog({
   const [educationFormOpen, setEducationFormOpen] = React.useState(false);
   const [projectFormOpen, setProjectFormOpen] = React.useState(false);
   const [skillFormOpen, setSkillFormOpen] = React.useState(false);
+  const [certificationFormOpen, setCertificationFormOpen] = React.useState(false);
+  const [languageFormOpen, setLanguageFormOpen] = React.useState(false);
   const [editingWorkExp, setEditingWorkExp] = React.useState<WorkExperience | null>(null);
   const [editingEducation, setEditingEducation] = React.useState<Education | null>(null);
   const [editingProject, setEditingProject] = React.useState<Project | null>(null);
   const [editingSkill, setEditingSkill] = React.useState<Skill | null>(null);
+  const [editingCertification, setEditingCertification] = React.useState<Certification | null>(null);
+  const [editingLanguage, setEditingLanguage] = React.useState<Language | null>(null);
   const [refreshTrigger, setRefreshTrigger] = React.useState(0);
 
   const handleAddNew = () => {
@@ -54,8 +62,13 @@ export function UserSettingsDialog({
     } else if (activeSection === 'skills') {
       setEditingSkill(null);
       setSkillFormOpen(true);
+    } else if (activeSection === 'certifications') {
+      setEditingCertification(null);
+      setCertificationFormOpen(true);
+    } else if (activeSection === 'languages') {
+      setEditingLanguage(null);
+      setLanguageFormOpen(true);
     }
-    // TODO: Add handlers for other sections
   };
 
   const handleEditWorkExp = (workExp: WorkExperience) => {
@@ -76,6 +89,16 @@ export function UserSettingsDialog({
   const handleEditSkill = (skill: Skill) => {
     setEditingSkill(skill);
     setSkillFormOpen(true);
+  };
+
+  const handleEditCertification = (certification: Certification) => {
+    setEditingCertification(certification);
+    setCertificationFormOpen(true);
+  };
+
+  const handleEditLanguage = (language: Language) => {
+    setEditingLanguage(language);
+    setLanguageFormOpen(true);
   };
 
   const handleWorkExpFormClose = (open: boolean) => {
@@ -114,6 +137,24 @@ export function UserSettingsDialog({
     }
   };
 
+  const handleCertificationFormClose = (open: boolean) => {
+    setCertificationFormOpen(open);
+    if (!open) {
+      setEditingCertification(null);
+      // Trigger refresh of the list
+      setRefreshTrigger((prev) => prev + 1);
+    }
+  };
+
+  const handleLanguageFormClose = (open: boolean) => {
+    setLanguageFormOpen(open);
+    if (!open) {
+      setEditingLanguage(null);
+      // Trigger refresh of the list
+      setRefreshTrigger((prev) => prev + 1);
+    }
+  };
+
   const currentSection = sections.find((s) => s.id === activeSection);
 
   return (
@@ -139,6 +180,8 @@ export function UserSettingsDialog({
                 onEditEducation={handleEditEducation}
                 onEditProject={handleEditProject}
                 onEditSkill={handleEditSkill}
+                onEditCertification={handleEditCertification}
+                onEditLanguage={handleEditLanguage}
                 refreshTrigger={refreshTrigger}
               />
             </ScrollArea>
@@ -168,6 +211,18 @@ export function UserSettingsDialog({
           onOpenChange={handleSkillFormClose}
           skill={editingSkill}
         />
+
+        <CertificationForm
+          open={certificationFormOpen}
+          onOpenChange={handleCertificationFormClose}
+          certification={editingCertification}
+        />
+
+        <LanguageForm
+          open={languageFormOpen}
+          onOpenChange={handleLanguageFormClose}
+          language={editingLanguage}
+        />
       </DialogContent>
     </Dialog>
   );
@@ -179,6 +234,8 @@ function SectionContent({
   onEditEducation,
   onEditProject,
   onEditSkill,
+  onEditCertification,
+  onEditLanguage,
   refreshTrigger,
 }: { 
   section: SettingsSection;
@@ -186,6 +243,8 @@ function SectionContent({
   onEditEducation: (education: Education) => void;
   onEditProject: (project: Project) => void;
   onEditSkill: (skill: Skill) => void;
+  onEditCertification: (certification: Certification) => void;
+  onEditLanguage: (language: Language) => void;
   refreshTrigger: number;
 }) {
   return (
@@ -214,27 +273,19 @@ function SectionContent({
           refreshTrigger={refreshTrigger}
         />
       )}
-      {section === 'certifications' && <CertificationsContent />}
-      {section === 'languages' && <LanguagesContent />}
+      {section === 'certifications' && (
+        <CertificationList
+          onEdit={onEditCertification}
+          refreshTrigger={refreshTrigger}
+        />
+      )}
+      {section === 'languages' && (
+        <LanguageList
+          onEdit={onEditLanguage}
+          refreshTrigger={refreshTrigger}
+        />
+      )}
     </div>
-  );
-}
-
-function CertificationsContent() {
-  return (
-    <EmptyState
-      title="No certifications added yet"
-      description="Add professional certifications to boost your credentials"
-    />
-  );
-}
-
-function LanguagesContent() {
-  return (
-    <EmptyState
-      title="No languages added yet"
-      description="List the languages you speak and your proficiency level"
-    />
   );
 }
 
