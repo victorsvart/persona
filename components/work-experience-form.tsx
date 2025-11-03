@@ -22,6 +22,10 @@ import { EmploymentLocationFields } from '@/components/settings/work-experience/
 import { DateFields } from '@/components/settings/work-experience/date-fields';
 import { DescriptionField } from '@/components/settings/work-experience/description-field';
 import { AchievementsSection } from '@/components/settings/work-experience/achievements-section';
+import { createWorkExperience, updateWorkExperience } from '@/app/actions/work-experience';
+import { toast } from 'sonner';
+import { format } from 'date-fns';
+import { WorkExperience } from '@prisma/client';
 
 const workExperienceSchema = z.object({
   company: z.string().min(1, 'Company name is required'),
@@ -47,16 +51,19 @@ type WorkExperienceFormValues = z.infer<typeof workExperienceSchema>;
 interface WorkExperienceFormProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
+  workExperience?: WorkExperience | null;
 }
 
 export function WorkExperienceForm({
   open,
   onOpenChange,
+  workExperience,
 }: WorkExperienceFormProps) {
   const [achievements, setAchievements] = React.useState<string[]>(['']);
   const [isMobile, setIsMobile] = React.useState(false);
   const [achievementPage, setAchievementPage] = React.useState(1);
   const achievementsPerPage = 3;
+  const isEditing = !!workExperience;
 
   React.useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
@@ -68,31 +75,100 @@ export function WorkExperienceForm({
   const form = useForm<WorkExperienceFormValues>({
     resolver: zodResolver(workExperienceSchema),
     defaultValues: {
-      company: '',
-      position: '',
-      employmentType: 'Full-time',
-      location: '',
-      locationType: 'On-site',
-      startDate: '',
-      endDate: '',
-      isCurrentRole: false,
-      description: '',
+      company: workExperience?.company || '',
+      position: workExperience?.position || '',
+      employmentType: (workExperience?.employmentType as any) || 'Full-time',
+      location: workExperience?.location || '',
+      locationType: (workExperience?.locationType as any) || 'On-site',
+      startDate: workExperience?.startDate 
+        ? format(new Date(workExperience.startDate), 'yyyy-MM')
+        : '',
+      endDate: workExperience?.endDate 
+        ? format(new Date(workExperience.endDate), 'yyyy-MM')
+        : '',
+      isCurrentRole: workExperience?.isCurrentRole || false,
+      description: workExperience?.description || '',
       achievements: [],
     },
   });
 
+  // Load achievements and reset form when workExperience changes
+  React.useEffect(() => {
+    if (workExperience) {
+      // Editing mode - populate form
+      form.reset({
+        company: workExperience.company,
+        position: workExperience.position,
+        employmentType: (workExperience.employmentType as any) || 'Full-time',
+        location: workExperience.location || '',
+        locationType: (workExperience.locationType as any) || 'On-site',
+        startDate: format(new Date(workExperience.startDate), 'yyyy-MM'),
+        endDate: workExperience.endDate 
+          ? format(new Date(workExperience.endDate), 'yyyy-MM')
+          : '',
+        isCurrentRole: workExperience.isCurrentRole,
+        description: workExperience.description || '',
+        achievements: [],
+      });
+      
+      if (workExperience.achievements && workExperience.achievements.length > 0) {
+        setAchievements(workExperience.achievements);
+      } else {
+        setAchievements(['']);
+      }
+    } else {
+      // Create mode - reset to empty
+      form.reset({
+        company: '',
+        position: '',
+        employmentType: 'Full-time',
+        location: '',
+        locationType: 'On-site',
+        startDate: '',
+        endDate: '',
+        isCurrentRole: false,
+        description: '',
+        achievements: [],
+      });
+      setAchievements(['']);
+    }
+    setAchievementPage(1);
+  }, [workExperience, form]);
+
   const isCurrentRole = form.watch('isCurrentRole');
 
   const onSubmit = async (data: WorkExperienceFormValues) => {
-    // Filter out empty achievements
-    const filteredAchievements = achievements.filter((a) => a.trim() !== '');
-    const formData = {
-      ...data,
-      achievements: filteredAchievements,
-    };
-    console.log('Work Experience Data:', formData);
-    // TODO: API call to save data
-    onOpenChange(false);
+    try {
+      // Filter out empty achievements
+      const filteredAchievements = achievements.filter((a) => a.trim() !== '');
+      const formData = {
+        ...data,
+        achievements: filteredAchievements,
+      };
+
+      // Call server action (create or update)
+      const result = isEditing && workExperience
+        ? await updateWorkExperience(workExperience.id, formData)
+        : await createWorkExperience(formData);
+
+      if (result.success) {
+        toast.success(
+          isEditing
+            ? 'Work experience updated successfully!'
+            : 'Work experience saved successfully!'
+        );
+        // Reset form
+        form.reset();
+        setAchievements(['']);
+        setAchievementPage(1);
+        onOpenChange(false);
+      } else {
+        toast.error(result.error || 'Failed to save work experience');
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      toast.error('An unexpected error occurred. Please try again.');
+    }
   };
 
   const addAchievement = () => {
@@ -155,9 +231,13 @@ export function WorkExperienceForm({
         <div className="bg-background w-full max-h-[85vh] flex flex-col rounded-t-lg border-t shadow-lg animate-in slide-in-from-bottom duration-300">
           <div className="border-b px-6 py-4 flex items-center justify-between shrink-0">
             <div>
-              <h3 className="font-semibold text-lg">Add Work Experience</h3>
+              <h3 className="font-semibold text-lg">
+                {isEditing ? 'Edit Work Experience' : 'Add Work Experience'}
+              </h3>
               <p className="text-sm text-muted-foreground">
-                Add details about your professional work experience
+                {isEditing
+                  ? 'Update your work experience details'
+                  : 'Add details about your professional work experience'}
               </p>
             </div>
             <div className="flex items-center gap-2">
@@ -221,7 +301,7 @@ export function WorkExperienceForm({
                   Cancel
                 </Button>
                 <Button onClick={form.handleSubmit(onSubmit)}>
-                  Save Work Experience
+                  {isEditing ? 'Update Work Experience' : 'Save Work Experience'}
                 </Button>
               </div>
             </div>
@@ -236,9 +316,13 @@ export function WorkExperienceForm({
     <Drawer open={open} onOpenChange={onOpenChange} direction="bottom">
       <DrawerContent className="max-h-[90vh] flex flex-col">
         <DrawerHeader className="border-b shrink-0">
-          <DrawerTitle>Add Work Experience</DrawerTitle>
+          <DrawerTitle>
+            {isEditing ? 'Edit Work Experience' : 'Add Work Experience'}
+          </DrawerTitle>
           <DrawerDescription>
-            Add details about your professional work experience
+            {isEditing
+              ? 'Update your work experience details'
+              : 'Add details about your professional work experience'}
           </DrawerDescription>
         </DrawerHeader>
 
@@ -278,7 +362,7 @@ export function WorkExperienceForm({
                 <Button variant="outline">Cancel</Button>
               </DrawerClose>
               <Button onClick={form.handleSubmit(onSubmit)}>
-                Save Work Experience
+                {isEditing ? 'Update Work Experience' : 'Save Work Experience'}
               </Button>
             </div>
           </div>

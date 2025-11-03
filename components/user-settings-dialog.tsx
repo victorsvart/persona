@@ -11,6 +11,8 @@ import {
 } from '@/components/settings/settings-sidebar';
 import { SettingsContentHeader } from '@/components/settings/settings-content-header';
 import { EmptyState } from '@/components/settings/empty-state';
+import { WorkExperienceList } from '@/components/settings/work-experience/work-experience-list';
+import { WorkExperience } from '@prisma/client';
 
 interface UserSettingsDialogProps {
   open: boolean;
@@ -24,12 +26,29 @@ export function UserSettingsDialog({
   const [activeSection, setActiveSection] =
     React.useState<SettingsSection>('work');
   const [workExpFormOpen, setWorkExpFormOpen] = React.useState(false);
+  const [editingWorkExp, setEditingWorkExp] = React.useState<WorkExperience | null>(null);
+  const [refreshTrigger, setRefreshTrigger] = React.useState(0);
 
   const handleAddNew = () => {
     if (activeSection === 'work') {
+      setEditingWorkExp(null);
       setWorkExpFormOpen(true);
     }
     // TODO: Add handlers for other sections
+  };
+
+  const handleEditWorkExp = (workExp: WorkExperience) => {
+    setEditingWorkExp(workExp);
+    setWorkExpFormOpen(true);
+  };
+
+  const handleFormClose = (open: boolean) => {
+    setWorkExpFormOpen(open);
+    if (!open) {
+      setEditingWorkExp(null);
+      // Trigger refresh of the list
+      setRefreshTrigger((prev) => prev + 1);
+    }
   };
 
   const currentSection = sections.find((s) => s.id === activeSection);
@@ -51,40 +70,48 @@ export function UserSettingsDialog({
             />
 
             <ScrollArea className="flex-1 p-6">
-              <SectionContent section={activeSection} />
+              <SectionContent 
+                section={activeSection} 
+                onEditWorkExp={handleEditWorkExp}
+                refreshTrigger={refreshTrigger}
+              />
             </ScrollArea>
           </div>
         </div>
 
         <WorkExperienceForm
           open={workExpFormOpen}
-          onOpenChange={setWorkExpFormOpen}
+          onOpenChange={handleFormClose}
+          workExperience={editingWorkExp}
         />
       </DialogContent>
     </Dialog>
   );
 }
 
-function SectionContent({ section }: { section: SettingsSection }) {
-  // Placeholder content - will be replaced with actual forms
+function SectionContent({ 
+  section,
+  onEditWorkExp,
+  refreshTrigger,
+}: { 
+  section: SettingsSection;
+  onEditWorkExp: (workExp: WorkExperience) => void;
+  refreshTrigger: number;
+}) {
   return (
     <div className="space-y-4">
-      {section === 'work' && <WorkExperienceContent />}
+      {section === 'work' && (
+        <WorkExperienceList 
+          onEdit={onEditWorkExp} 
+          refreshTrigger={refreshTrigger}
+        />
+      )}
       {section === 'education' && <EducationContent />}
       {section === 'projects' && <ProjectsContent />}
       {section === 'skills' && <SkillsContent />}
       {section === 'certifications' && <CertificationsContent />}
       {section === 'languages' && <LanguagesContent />}
     </div>
-  );
-}
-
-function WorkExperienceContent() {
-  return (
-    <EmptyState
-      title="No work experience added yet"
-      description="Add your work experience to help create a compelling resumé"
-    />
   );
 }
 
