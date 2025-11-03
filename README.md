@@ -1,3 +1,17 @@
+# Persona - AI-Powered Resumé Generator
+
+Persona is an intelligent resumé building application that leverages AI to help you create professional, ATS-optimized resumés. Built with Next.js and powered by advanced language models, Persona guides you through the process of crafting compelling resumes that stand out to recruiters and hiring managers.
+
+## Features
+
+- **AI-Powered Assistance**: Get intelligent suggestions for resume content and formatting
+- **ATS-Optimized**: Ensures your resume passes Applicant Tracking Systems
+- **Interactive Chat Interface**: Natural conversation flow to build your resume
+- **Resume History**: Save and manage multiple resume versions
+- **Professional Templates**: Modern, clean designs that showcase your skills
+
+---
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started

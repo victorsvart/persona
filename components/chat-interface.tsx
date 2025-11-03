@@ -11,10 +11,10 @@ import { cn } from '@/lib/utils';
 
 export function ChatInterface() {
   const [input, setInput] = React.useState('');
-  
+
   const transport = React.useMemo(
     () => new DefaultChatTransport({ api: '/api/chat' }),
-    []
+    [],
   );
 
   const { messages, sendMessage, status } = useChat({
@@ -27,7 +27,9 @@ export function ChatInterface() {
   React.useEffect(() => {
     // Scroll to bottom when new messages arrive
     if (scrollAreaRef.current) {
-      const scrollContainer = scrollAreaRef.current.querySelector('[data-radix-scroll-area-viewport]');
+      const scrollContainer = scrollAreaRef.current.querySelector(
+        '[data-radix-scroll-area-viewport]',
+      );
       if (scrollContainer) {
         scrollContainer.scrollTop = scrollContainer.scrollHeight;
       }
@@ -37,10 +39,10 @@ export function ChatInterface() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!input.trim() || isLoading) return;
-    
-    sendMessage({ 
-      role: 'user', 
-      parts: [{ type: 'text', text: input }] 
+
+    sendMessage({
+      role: 'user',
+      parts: [{ type: 'text', text: input }],
     });
     setInput('');
   };
@@ -54,9 +56,10 @@ export function ChatInterface() {
             <div className="flex h-full items-center justify-center">
               <div className="text-center">
                 <IconRobot className="mx-auto mb-4 h-12 w-12 text-muted-foreground" />
-                <h3 className="text-lg font-semibold">Start a conversation</h3>
+                <h3 className="text-lg font-semibold">Create Your Perfect Resumé</h3>
                 <p className="text-sm text-muted-foreground">
-                  Type a message below to begin chatting with the AI assistant
+                  Tell me about your experience, skills, and the role you&apos;re targeting.<br />
+                  I&apos;ll help you craft a professional, ATS-optimized resumé.
                 </p>
               </div>
             </div>
@@ -66,7 +69,7 @@ export function ChatInterface() {
                 key={message.id}
                 className={cn(
                   'flex gap-3',
-                  message.role === 'user' ? 'justify-end' : 'justify-start'
+                  message.role === 'user' ? 'justify-end' : 'justify-start',
                 )}
               >
                 {message.role === 'assistant' && (
@@ -79,7 +82,7 @@ export function ChatInterface() {
                     'max-w-[80%] rounded-lg px-4 py-2',
                     message.role === 'user'
                       ? 'bg-primary text-primary-foreground'
-                      : 'bg-muted'
+                      : 'bg-muted',
                   )}
                 >
                   <p className="whitespace-pre-wrap text-sm">
@@ -115,17 +118,21 @@ export function ChatInterface() {
       </ScrollArea>
 
       {/* Input Area */}
-      <div className="border-t bg-background/95 p-4 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <div className="border-t bg-background/95 p-4 backdrop-blur supports-backdrop-filter:bg-background/60">
         <form onSubmit={handleSubmit} className="mx-auto max-w-3xl">
           <div className="flex gap-2">
             <Input
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="Type your message..."
+              placeholder="Describe your experience, skills, or ask for help with your resumé..."
               className="flex-1"
               disabled={isLoading}
             />
-            <Button type="submit" size="icon" disabled={isLoading || !input.trim()}>
+            <Button
+              type="submit"
+              size="icon"
+              disabled={isLoading || !input.trim()}
+            >
               <IconSend className="h-4 w-4" />
               <span className="sr-only">Send message</span>
             </Button>
@@ -135,4 +142,3 @@ export function ChatInterface() {
     </div>
   );
 }
-

@@ -61,9 +61,9 @@ export function SignupForm({
     <div className={cn('flex flex-col gap-6', className)} {...props}>
       <Card>
         <CardHeader>
-          <CardTitle>Create an account</CardTitle>
+          <CardTitle>Join Persona</CardTitle>
           <CardDescription>
-            Enter your information below to create your account
+            Create your account and start building professional resumés with AI
           </CardDescription>
         </CardHeader>
         <CardContent>

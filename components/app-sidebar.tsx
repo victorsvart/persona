@@ -30,59 +30,59 @@ import { cn } from '@/lib/utils';
 const mockChatHistory = [
   {
     id: '1',
-    title: 'How to implement authentication',
+    title: 'Software Engineer Resumé',
     timestamp: '2 hours ago',
-    preview: 'Can you help me with implementing JWT authentication...',
+    preview: 'Help me create a resumé for a senior software engineer position...',
   },
   {
     id: '2',
-    title: 'Database schema design',
+    title: 'Product Manager CV',
     timestamp: 'Yesterday',
-    preview: 'I need help designing a schema for user management...',
+    preview: 'I need a compelling resumé for a product manager role...',
   },
   {
     id: '3',
-    title: 'React best practices',
+    title: 'Entry-level Data Analyst',
     timestamp: '2 days ago',
-    preview: 'What are the current best practices for React...',
+    preview: 'Creating my first professional resumé for data analyst positions...',
   },
   {
     id: '4',
-    title: 'API rate limiting',
+    title: 'UX Designer Portfolio',
     timestamp: '3 days ago',
-    preview: 'How do I implement rate limiting for my API...',
+    preview: 'Help me highlight my design skills and projects...',
   },
   {
     id: '5',
-    title: 'Testing strategies',
+    title: 'Marketing Manager Resumé',
     timestamp: '1 week ago',
-    preview: 'What testing strategy would you recommend...',
+    preview: 'Need to emphasize my digital marketing achievements...',
   },
   {
     id: '6',
-    title: 'Docker deployment',
+    title: 'DevOps Engineer CV',
     timestamp: '1 week ago',
-    preview: 'Help me set up Docker for my Next.js application...',
+    preview: 'Showcasing my cloud infrastructure expertise...',
   },
   {
     id: '7',
-    title: 'State management options',
+    title: 'Career Change Resumé',
     timestamp: '2 weeks ago',
-    preview: 'Should I use Redux or Zustand for state management...',
+    preview: 'Transitioning from teaching to tech, need help...',
   },
   {
     id: '8',
-    title: 'Performance optimization',
+    title: 'Executive Leadership CV',
     timestamp: '2 weeks ago',
-    preview: 'My app is slow, how can I optimize it...',
+    preview: 'Creating a C-level executive resumé...',
   },
 ];
 
 const data = {
   user: {
-    name: 'shadcn',
+    name: 'User',
     email: 'm@example.com',
-    avatar: '/avatars/shadcn.jpg',
+    avatar: '/avatars/user.jpg',
   },
 };
 
@@ -100,7 +100,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             >
               <a href="#">
                 <IconInnerShadowTop className="!size-5" />
-                <span className="text-base font-semibold">Chat Assistant</span>
+                <span className="text-base font-semibold">Persona</span>
               </a>
             </SidebarMenuButton>
           </SidebarMenuItem>
@@ -108,13 +108,13 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <div className="px-2 pt-2">
           <Button className="w-full" size="sm">
             <IconPlus className="mr-2 h-4 w-4" />
-            New Chat
+            New Resumé
           </Button>
         </div>
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Chat History</SidebarGroupLabel>
+          <SidebarGroupLabel>Resumé History</SidebarGroupLabel>
           <SidebarGroupContent>
             <ScrollArea className="h-[calc(100vh-280px)]">
               <div className="space-y-1 px-2">
