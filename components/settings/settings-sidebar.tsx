@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 import {
+  IconUser,
   IconBriefcase,
   IconSchool,
   IconCode,
@@ -18,6 +19,7 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { cn } from '@/lib/utils';
 
 export type SettingsSection =
+  | 'profile'
   | 'work'
   | 'education'
   | 'projects'
@@ -26,6 +28,12 @@ export type SettingsSection =
   | 'languages';
 
 export const sections = [
+  {
+    id: 'profile' as const,
+    label: 'Contact Info',
+    icon: IconUser,
+    description: 'Manage your contact information and social links',
+  },
   {
     id: 'work' as const,
     label: 'Work Experience',

@@ -24,6 +24,13 @@ model User {
   sessions        Session[]
   accounts        Account[]
   
+  // Contact & Social Links
+  phone           String?
+  linkedinUrl     String?
+  githubUrl       String?
+  portfolioUrl    String?
+  location        String?
+  
   // Resume-related relations
   workExperiences  WorkExperience[]
   educations       Education[]
@@ -32,6 +39,7 @@ model User {
   certifications   Certification[]
   languages        Language[]
   customSections   CustomSection[]
+  applications     Application[]
 
   @@unique([email])
   @@unique([username])
@@ -234,6 +242,44 @@ model CustomSection {
   updatedAt       DateTime  @updatedAt
 
   @@map("custom_section")
+  @@schema("public")
+}
+
+// AI Resume Generation models
+
+model Application {
+  id              String    @id @default(cuid())
+  userId          String
+  user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  company         String
+  role            String
+  jobDescription  String    @db.Text
+  
+  // Chat history for this application
+  messages        ChatMessage[]
+  
+  // Generated resume HTML (will be populated by AI)
+  generatedResumeHtml String? @db.Text
+  
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  @@map("application")
+  @@schema("public")
+}
+
+model ChatMessage {
+  id              String      @id @default(cuid())
+  applicationId   String
+  application     Application @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  
+  role            String      // 'user' or 'assistant'
+  content         String      @db.Text
+  
+  createdAt       DateTime    @default(now())
+
+  @@map("chat_message")
   @@schema("public")
 }
 

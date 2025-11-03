@@ -22,6 +22,7 @@ import { ProjectList } from '@/components/settings/projects/project-list';
 import { SkillList } from '@/components/settings/skills/skill-list';
 import { CertificationList } from '@/components/settings/certifications/certification-list';
 import { LanguageList } from '@/components/settings/languages/language-list';
+import { ProfileForm } from '@/components/settings/profile/profile-form';
 import { WorkExperience, Education, Project, Skill, Certification, Language } from '@prisma/client';
 
 interface UserSettingsDialogProps {
@@ -34,7 +35,7 @@ export function UserSettingsDialog({
   onOpenChange,
 }: UserSettingsDialogProps) {
   const [activeSection, setActiveSection] =
-    React.useState<SettingsSection>('work');
+    React.useState<SettingsSection>('profile');
   const [workExpFormOpen, setWorkExpFormOpen] = React.useState(false);
   const [educationFormOpen, setEducationFormOpen] = React.useState(false);
   const [projectFormOpen, setProjectFormOpen] = React.useState(false);
@@ -50,7 +51,10 @@ export function UserSettingsDialog({
   const [refreshTrigger, setRefreshTrigger] = React.useState(0);
 
   const handleAddNew = () => {
-    if (activeSection === 'work') {
+    if (activeSection === 'profile') {
+      // Profile section doesn't have "add new" functionality
+      return;
+    } else if (activeSection === 'work') {
       setEditingWorkExp(null);
       setWorkExpFormOpen(true);
     } else if (activeSection === 'education') {
@@ -170,7 +174,7 @@ export function UserSettingsDialog({
             <SettingsContentHeader
               title={currentSection?.label || ''}
               description={currentSection?.description || ''}
-              onAddNew={handleAddNew}
+              onAddNew={activeSection !== 'profile' ? handleAddNew : undefined}
             />
 
             <ScrollArea className="flex-1 p-6">
@@ -249,6 +253,7 @@ function SectionContent({
 }) {
   return (
     <div className="space-y-4">
+      {section === 'profile' && <ProfileForm />}
       {section === 'work' && (
         <WorkExperienceList 
           onEdit={onEditWorkExp} 
