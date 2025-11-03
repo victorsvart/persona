@@ -150,41 +150,51 @@ export async function POST(req: NextRequest) {
       messages: formattedMessages,
       temperature: 0.7,
       onFinish: async ({ text }) => {
+        console.log('[Chat API] onFinish called, saving messages...');
         // Save assistant response to database
         if (applicationId) {
-          await prisma.chatMessage.create({
-            data: {
-              applicationId,
-              role: 'assistant',
-              content: text,
-            },
-          });
-
-          // Extract HTML from response (check for code blocks or raw HTML)
-          let html = null;
-          
-          // Try to extract from markdown code block first
-          const codeBlockMatch = text.match(/```(?:html)?\s*\n([\s\S]*?)\n```/);
-          if (codeBlockMatch && codeBlockMatch[1]) {
-            const extractedHtml = codeBlockMatch[1].trim();
-            if (extractedHtml.startsWith('<') && extractedHtml.includes('</')) {
-              html = extractedHtml;
-            }
-          }
-          
-          // If no code block, check for raw HTML
-          if (!html && text.trim().startsWith('<') && text.includes('</')) {
-            html = text.trim();
-          }
-
-          // If HTML was found, update the application
-          if (html) {
-            await prisma.application.update({
-              where: { id: applicationId },
-              data: { generatedResumeHtml: html },
+          try {
+            await prisma.chatMessage.create({
+              data: {
+                applicationId,
+                role: 'assistant',
+                content: text,
+              },
             });
+            console.log('[Chat API] Assistant message saved');
+
+            // Extract HTML from response (check for code blocks or raw HTML)
+            let html = null;
+            
+            // Try to extract from markdown code block first
+            const codeBlockMatch = text.match(/```(?:html)?\s*\n([\s\S]*?)\n```/);
+            if (codeBlockMatch && codeBlockMatch[1]) {
+              const extractedHtml = codeBlockMatch[1].trim();
+              if (extractedHtml.startsWith('<') && extractedHtml.includes('</')) {
+                html = extractedHtml;
+              }
+            }
+            
+            // If no code block, check for raw HTML
+            if (!html && text.trim().startsWith('<') && text.includes('</')) {
+              html = text.trim();
+            }
+
+            // If HTML was found, update the application
+            if (html) {
+              await prisma.application.update({
+                where: { id: applicationId },
+                data: { generatedResumeHtml: html },
+              });
+              console.log('[Chat API] HTML resume saved to application');
+            } else {
+              console.log('[Chat API] No HTML found in response');
+            }
+          } catch (error) {
+            console.error('[Chat API] Error in onFinish:', error);
           }
         }
+        console.log('[Chat API] onFinish completed');
       },
     });
 

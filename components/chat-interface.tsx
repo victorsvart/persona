@@ -4,6 +4,7 @@ import * as React from 'react';
 import { IconSend, IconUser, IconRobot } from '@tabler/icons-react';
 import { useChat } from '@ai-sdk/react';
 import { DefaultChatTransport } from 'ai';
+import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { ScrollArea } from '@/components/ui/scroll-area';
@@ -21,6 +22,7 @@ interface ChatInterfaceProps {
 
 export function ChatInterface({ application }: ChatInterfaceProps) {
   const [input, setInput] = React.useState('');
+  const router = useRouter();
 
   const transport = React.useMemo(
     () => new DefaultChatTransport({ 
@@ -35,14 +37,17 @@ export function ChatInterface({ application }: ChatInterfaceProps) {
     id: application?.id, // Use application ID to maintain chat state
   });
 
-  // Merge stored messages with current session messages
+  // Always show current session messages, or fall back to stored messages
   const allMessages = React.useMemo(() => {
-    if (!application?.messages || application.messages.length === 0) {
+    // If we have current session messages, use them
+    if (messages.length > 0) {
+      console.log('[ChatInterface] Using session messages:', messages.length);
       return messages;
     }
-
-    // If we have no current messages, return stored messages
-    if (messages.length === 0) {
+    
+    // Otherwise, load from stored messages in application
+    if (application?.messages && application.messages.length > 0) {
+      console.log('[ChatInterface] Using stored messages:', application.messages.length);
       return application.messages.map((msg) => ({
         id: msg.id,
         role: msg.role as 'user' | 'assistant',
@@ -50,12 +55,57 @@ export function ChatInterface({ application }: ChatInterfaceProps) {
       }));
     }
 
-    // Otherwise, return current messages (they include the stored ones)
-    return messages;
+    console.log('[ChatInterface] No messages to display');
+    return [];
   }, [messages, application]);
 
   const scrollAreaRef = React.useRef<HTMLDivElement>(null);
   const isLoading = status === 'submitted' || status === 'streaming';
+  const prevStatusRef = React.useRef(status);
+
+  // Log status changes for debugging
+  React.useEffect(() => {
+    console.log('[ChatInterface] Status changed:', status, 'Messages:', messages.length);
+  }, [status, messages.length]);
+
+  // Detect when streaming completes and refresh to get persisted data
+  React.useEffect(() => {
+    const wasStreaming = prevStatusRef.current === 'streaming';
+    const isNowIdle = status !== 'streaming' && status !== 'submitted';
+    
+    console.log('[ChatInterface] Refresh check:', {
+      wasStreaming,
+      isNowIdle,
+      currentStatus: status,
+      prevStatus: prevStatusRef.current,
+      hasApp: !!application?.id,
+      messageCount: messages.length,
+    });
+    
+    if (wasStreaming && isNowIdle && application?.id && messages.length > 1) {
+      console.log('[ChatInterface] ✅ Conditions met! Streaming completed, refreshing in 1.5 seconds...');
+      // Streaming just completed, refresh the page to get updated data
+      const timer = setTimeout(() => {
+        console.log('[ChatInterface] 🔄 Refreshing now...');
+        router.refresh();
+      }, 1500); // Increased delay to ensure backend has finished saving
+      
+      return () => clearTimeout(timer);
+    }
+    
+    prevStatusRef.current = status;
+  }, [status, application?.id, router, messages.length]);
+
+  // Debug: log when application data changes
+  React.useEffect(() => {
+    if (application) {
+      console.log('[ChatInterface] Application updated:', {
+        id: application.id,
+        messagesCount: application.messages?.length || 0,
+        hasHtml: !!application.generatedResumeHtml,
+      });
+    }
+  }, [application]);
 
   React.useEffect(() => {
     // Scroll to bottom when new messages arrive
@@ -80,34 +130,10 @@ export function ChatInterface({ application }: ChatInterfaceProps) {
     setInput('');
   };
 
-  // Extract HTML from assistant messages (look for code blocks or raw HTML)
+  // Only show saved HTML from database (no real-time rendering during streaming)
   const latestHtml = React.useMemo(() => {
-    // Find the last assistant message with HTML
-    for (let i = allMessages.length - 1; i >= 0; i--) {
-      const message = allMessages[i];
-      if (message.role === 'assistant') {
-        const text = message.parts
-          .filter((part) => part.type === 'text')
-          .map((part: any) => part.text)
-          .join('');
-        
-        // Try to extract HTML from markdown code blocks first
-        const codeBlockMatch = text.match(/```(?:html)?\s*\n([\s\S]*?)\n```/);
-        if (codeBlockMatch && codeBlockMatch[1]) {
-          const html = codeBlockMatch[1].trim();
-          if (html.startsWith('<') && html.includes('</')) {
-            return html;
-          }
-        }
-        
-        // Check if it contains raw HTML (starts with < and has tags)
-        if (text.trim().startsWith('<') && text.includes('</')) {
-          return text.trim();
-        }
-      }
-    }
     return application?.generatedResumeHtml || null;
-  }, [allMessages, application]);
+  }, [application]);
 
   return (
     <div className="flex h-full">
