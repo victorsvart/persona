@@ -77,3 +77,4 @@ model Verification {
   @@map("verification")
   @@schema("auth")
 }
+
