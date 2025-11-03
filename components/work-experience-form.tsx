@@ -119,10 +119,34 @@ export function WorkExperienceForm({
     }
   };
 
+  const fillDemoData = () => {
+    form.setValue('company', 'Google Inc.');
+    form.setValue('position', 'Senior Software Engineer');
+    form.setValue('employmentType', 'Full-time');
+    form.setValue('location', 'Mountain View, CA');
+    form.setValue('locationType', 'Hybrid');
+    form.setValue('startDate', '2020-03');
+    form.setValue('endDate', '2023-12');
+    form.setValue('isCurrentRole', false);
+    form.setValue(
+      'description',
+      'Led the development of cloud-based solutions and microservices architecture. Collaborated with cross-functional teams to deliver high-quality software products.'
+    );
+    setAchievements([
+      'Increased system performance by 40% through optimization techniques',
+      'Led a team of 5 engineers to deliver a major feature ahead of schedule',
+      'Reduced deployment time by 60% by implementing CI/CD pipelines',
+      'Mentored junior developers and conducted code reviews',
+      'Implemented automated testing that improved code coverage to 95%',
+    ]);
+  };
+
   const totalPages = Math.ceil(achievements.length / achievementsPerPage);
   const startIndex = (achievementPage - 1) * achievementsPerPage;
   const endIndex = startIndex + achievementsPerPage;
   const currentAchievements = achievements.slice(startIndex, endIndex);
+
+  const isDevelopment = process.env.NODE_ENV === 'development';
 
   // Desktop version - contained within dialog
   if (!isMobile && open) {
@@ -136,13 +160,25 @@ export function WorkExperienceForm({
                 Add details about your professional work experience
               </p>
             </div>
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => onOpenChange(false)}
-            >
-              <IconX className="h-4 w-4" />
-            </Button>
+            <div className="flex items-center gap-2">
+              {isDevelopment && (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={fillDemoData}
+                  className="text-xs"
+                >
+                  Fill Demo Data
+                </Button>
+              )}
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => onOpenChange(false)}
+              >
+                <IconX className="h-4 w-4" />
+              </Button>
+            </div>
           </div>
 
           <ScrollArea className="max-h-[calc(85vh-180px)]">
@@ -168,13 +204,26 @@ export function WorkExperienceForm({
           </ScrollArea>
 
           <div className="border-t p-4">
-            <div className="flex gap-2 justify-end">
-              <Button variant="outline" onClick={() => onOpenChange(false)}>
-                Cancel
-              </Button>
-              <Button onClick={form.handleSubmit(onSubmit)}>
-                Save Work Experience
-              </Button>
+            <div className="flex gap-2 justify-between">
+              <div>
+                {isDevelopment && (
+                  <Button
+                    variant="secondary"
+                    size="sm"
+                    onClick={fillDemoData}
+                  >
+                    Fill Demo Data
+                  </Button>
+                )}
+              </div>
+              <div className="flex gap-2">
+                <Button variant="outline" onClick={() => onOpenChange(false)}>
+                  Cancel
+                </Button>
+                <Button onClick={form.handleSubmit(onSubmit)}>
+                  Save Work Experience
+                </Button>
+              </div>
             </div>
           </div>
         </div>
@@ -216,13 +265,22 @@ export function WorkExperienceForm({
         </ScrollArea>
 
         <DrawerFooter className="border-t">
-          <div className="flex gap-2 justify-end">
-            <DrawerClose asChild>
-              <Button variant="outline">Cancel</Button>
-            </DrawerClose>
-            <Button onClick={form.handleSubmit(onSubmit)}>
-              Save Work Experience
-            </Button>
+          <div className="flex gap-2 justify-between">
+            <div>
+              {isDevelopment && (
+                <Button variant="secondary" size="sm" onClick={fillDemoData}>
+                  Fill Demo Data
+                </Button>
+              )}
+            </div>
+            <div className="flex gap-2">
+              <DrawerClose asChild>
+                <Button variant="outline">Cancel</Button>
+              </DrawerClose>
+              <Button onClick={form.handleSubmit(onSubmit)}>
+                Save Work Experience
+              </Button>
+            </div>
           </div>
         </DrawerFooter>
       </DrawerContent>
