@@ -92,8 +92,8 @@ export function UserSettingsDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="w-[90vw] max-w-[1400px] h-[80vh] p-0 gap-0">
-        <div className="flex h-full">
+      <DialogContent className="w-[90vw] max-w-[1400px] h-[80vh] p-0 gap-0 overflow-hidden">
+        <div className="flex h-full relative">
           {/* Sidebar */}
           <div className="w-64 border-r bg-muted/20 flex flex-col">
             <DialogHeader className="p-6 pb-4">

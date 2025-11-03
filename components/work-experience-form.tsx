@@ -65,6 +65,16 @@ export function WorkExperienceForm({
   onOpenChange,
 }: WorkExperienceFormProps) {
   const [achievements, setAchievements] = React.useState<string[]>(['']);
+  const [isMobile, setIsMobile] = React.useState(false);
+  const [achievementPage, setAchievementPage] = React.useState(1);
+  const achievementsPerPage = 3;
+
+  React.useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const form = useForm<WorkExperienceFormValues>({
     resolver: zodResolver(workExperienceSchema),
@@ -97,7 +107,11 @@ export function WorkExperienceForm({
   };
 
   const addAchievement = () => {
-    setAchievements([...achievements, '']);
+    const newAchievements = [...achievements, ''];
+    setAchievements(newAchievements);
+    // Navigate to the page with the new achievement
+    const newPage = Math.ceil(newAchievements.length / achievementsPerPage);
+    setAchievementPage(newPage);
   };
 
   const updateAchievement = (index: number, value: string) => {
@@ -107,9 +121,79 @@ export function WorkExperienceForm({
   };
 
   const removeAchievement = (index: number) => {
-    setAchievements(achievements.filter((_, i) => i !== index));
+    const newAchievements = achievements.filter((_, i) => i !== index);
+    setAchievements(newAchievements);
+    // Adjust page if we deleted the last item on the current page
+    const maxPage = Math.ceil(newAchievements.length / achievementsPerPage) || 1;
+    if (achievementPage > maxPage) {
+      setAchievementPage(maxPage);
+    }
   };
 
+  const totalPages = Math.ceil(achievements.length / achievementsPerPage);
+  const startIndex = (achievementPage - 1) * achievementsPerPage;
+  const endIndex = startIndex + achievementsPerPage;
+  const currentAchievements = achievements.slice(startIndex, endIndex);
+
+  // Desktop version - contained within dialog
+  if (!isMobile && open) {
+    return (
+      <div className="absolute inset-0 z-50 flex items-end bg-black/50 animate-in fade-in">
+        <div className="bg-background w-full max-h-[85%] rounded-t-lg border-t shadow-lg animate-in slide-in-from-bottom duration-300">
+          <div className="border-b px-6 py-4 flex items-center justify-between">
+            <div>
+              <h3 className="font-semibold text-lg">Add Work Experience</h3>
+              <p className="text-sm text-muted-foreground">
+                Add details about your professional work experience
+              </p>
+            </div>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => onOpenChange(false)}
+            >
+              <IconX className="h-4 w-4" />
+            </Button>
+          </div>
+
+          <ScrollArea className="max-h-[calc(85vh-180px)]">
+            <div className="p-6">
+              <Form {...form}>
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                  <FormFields
+                    form={form}
+                    isCurrentRole={isCurrentRole}
+                    achievements={achievements}
+                    currentAchievements={currentAchievements}
+                    achievementPage={achievementPage}
+                    totalPages={totalPages}
+                    startIndex={startIndex}
+                    setAchievementPage={setAchievementPage}
+                    updateAchievement={updateAchievement}
+                    removeAchievement={removeAchievement}
+                    addAchievement={addAchievement}
+                  />
+                </form>
+              </Form>
+            </div>
+          </ScrollArea>
+
+          <div className="border-t p-4">
+            <div className="flex gap-2 justify-end">
+              <Button variant="outline" onClick={() => onOpenChange(false)}>
+                Cancel
+              </Button>
+              <Button onClick={form.handleSubmit(onSubmit)}>
+                Save Work Experience
+              </Button>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Mobile version - full screen drawer
   return (
     <Drawer open={open} onOpenChange={onOpenChange} direction="bottom">
       <DrawerContent className="max-h-[90vh]">
@@ -124,8 +208,69 @@ export function WorkExperienceForm({
           <div className="p-6">
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                {/* Company & Position */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <FormFields
+                  form={form}
+                  isCurrentRole={isCurrentRole}
+                  achievements={achievements}
+                  currentAchievements={currentAchievements}
+                  achievementPage={achievementPage}
+                  totalPages={totalPages}
+                  startIndex={startIndex}
+                  setAchievementPage={setAchievementPage}
+                  updateAchievement={updateAchievement}
+                  removeAchievement={removeAchievement}
+                  addAchievement={addAchievement}
+                />
+              </form>
+            </Form>
+          </div>
+        </ScrollArea>
+
+        <DrawerFooter className="border-t">
+          <div className="flex gap-2 justify-end">
+            <DrawerClose asChild>
+              <Button variant="outline">Cancel</Button>
+            </DrawerClose>
+            <Button onClick={form.handleSubmit(onSubmit)}>
+              Save Work Experience
+            </Button>
+          </div>
+        </DrawerFooter>
+      </DrawerContent>
+    </Drawer>
+  );
+}
+
+// Extracted form fields component to avoid duplication
+function FormFields({
+  form,
+  isCurrentRole,
+  achievements,
+  currentAchievements,
+  achievementPage,
+  totalPages,
+  startIndex,
+  setAchievementPage,
+  updateAchievement,
+  removeAchievement,
+  addAchievement,
+}: {
+  form: any;
+  isCurrentRole: boolean;
+  achievements: string[];
+  currentAchievements: string[];
+  achievementPage: number;
+  totalPages: number;
+  startIndex: number;
+  setAchievementPage: (page: number) => void;
+  updateAchievement: (index: number, value: string) => void;
+  removeAchievement: (index: number) => void;
+  addAchievement: () => void;
+}) {
+  return (
+    <>
+      {/* Company & Position */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <FormField
                     control={form.control}
                     name="company"
@@ -308,8 +453,47 @@ export function WorkExperienceForm({
 
                 {/* Achievements */}
                 <div className="space-y-3">
-                  <div className="flex items-center justify-between">
-                    <FormLabel>Key Achievements</FormLabel>
+                  <div className="flex items-center justify-between gap-4">
+                    <div className="flex items-center gap-3">
+                      <FormLabel>
+                        Key Achievements
+                        {achievements.length > 0 && (
+                          <span className="ml-2 text-xs text-muted-foreground">
+                            ({achievements.length} total)
+                          </span>
+                        )}
+                      </FormLabel>
+                      
+                      {/* Compact Pagination */}
+                      {totalPages > 1 && (
+                        <div className="flex items-center gap-1">
+                          <Button
+                            type="button"
+                            variant="ghost"
+                            size="icon"
+                            className="h-7 w-7"
+                            onClick={() => setAchievementPage(achievementPage - 1)}
+                            disabled={achievementPage === 1}
+                          >
+                            <span className="text-xs">←</span>
+                          </Button>
+                          <span className="text-xs text-muted-foreground px-1">
+                            {achievementPage}/{totalPages}
+                          </span>
+                          <Button
+                            type="button"
+                            variant="ghost"
+                            size="icon"
+                            className="h-7 w-7"
+                            onClick={() => setAchievementPage(achievementPage + 1)}
+                            disabled={achievementPage === totalPages}
+                          >
+                            <span className="text-xs">→</span>
+                          </Button>
+                        </div>
+                      )}
+                    </div>
+                    
                     <Button
                       type="button"
                       variant="outline"
@@ -321,44 +505,36 @@ export function WorkExperienceForm({
                     </Button>
                   </div>
                   <div className="space-y-2">
-                    {achievements.map((achievement, index) => (
-                      <div key={index} className="flex gap-2">
-                        <Input
-                          placeholder="e.g., Increased sales by 35% through strategic initiatives"
-                          value={achievement}
-                          onChange={(e) =>
-                            updateAchievement(index, e.target.value)
-                          }
-                        />
-                        <Button
-                          type="button"
-                          variant="ghost"
-                          size="icon"
-                          onClick={() => removeAchievement(index)}
-                        >
-                          <IconX className="h-4 w-4" />
-                        </Button>
-                      </div>
-                    ))}
+                    {currentAchievements.map((achievement, index) => {
+                      const actualIndex = startIndex + index;
+                      return (
+                        <div key={actualIndex} className="flex gap-2">
+                          <div className="flex-1 flex gap-2">
+                            <div className="flex items-center justify-center w-6 h-10 text-xs text-muted-foreground">
+                              {actualIndex + 1}
+                            </div>
+                            <Input
+                              placeholder="e.g., Increased sales by 35% through strategic initiatives"
+                              value={achievement}
+                              onChange={(e) =>
+                                updateAchievement(actualIndex, e.target.value)
+                              }
+                            />
+                          </div>
+                          <Button
+                            type="button"
+                            variant="ghost"
+                            size="icon"
+                            onClick={() => removeAchievement(actualIndex)}
+                          >
+                            <IconX className="h-4 w-4" />
+                          </Button>
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
-              </form>
-            </Form>
-          </div>
-        </ScrollArea>
-
-        <DrawerFooter className="border-t">
-          <div className="flex gap-2 justify-end">
-            <DrawerClose asChild>
-              <Button variant="outline">Cancel</Button>
-            </DrawerClose>
-            <Button onClick={form.handleSubmit(onSubmit)}>
-              Save Work Experience
-            </Button>
-          </div>
-        </DrawerFooter>
-      </DrawerContent>
-    </Drawer>
-  );
-}
+              </>
+            );
+          }
 
