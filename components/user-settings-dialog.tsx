@@ -5,6 +5,7 @@ import { Dialog, DialogContent } from '@/components/ui/dialog';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { WorkExperienceForm } from '@/components/work-experience-form';
 import { EducationForm } from '@/components/education-form';
+import { ProjectForm } from '@/components/project-form';
 import {
   SettingsSidebar,
   SettingsSection,
@@ -14,7 +15,8 @@ import { SettingsContentHeader } from '@/components/settings/settings-content-he
 import { EmptyState } from '@/components/settings/empty-state';
 import { WorkExperienceList } from '@/components/settings/work-experience/work-experience-list';
 import { EducationList } from '@/components/settings/education/education-list';
-import { WorkExperience, Education } from '@prisma/client';
+import { ProjectList } from '@/components/settings/projects/project-list';
+import { WorkExperience, Education, Project } from '@prisma/client';
 
 interface UserSettingsDialogProps {
   open: boolean;
@@ -29,8 +31,10 @@ export function UserSettingsDialog({
     React.useState<SettingsSection>('work');
   const [workExpFormOpen, setWorkExpFormOpen] = React.useState(false);
   const [educationFormOpen, setEducationFormOpen] = React.useState(false);
+  const [projectFormOpen, setProjectFormOpen] = React.useState(false);
   const [editingWorkExp, setEditingWorkExp] = React.useState<WorkExperience | null>(null);
   const [editingEducation, setEditingEducation] = React.useState<Education | null>(null);
+  const [editingProject, setEditingProject] = React.useState<Project | null>(null);
   const [refreshTrigger, setRefreshTrigger] = React.useState(0);
 
   const handleAddNew = () => {
@@ -40,6 +44,9 @@ export function UserSettingsDialog({
     } else if (activeSection === 'education') {
       setEditingEducation(null);
       setEducationFormOpen(true);
+    } else if (activeSection === 'projects') {
+      setEditingProject(null);
+      setProjectFormOpen(true);
     }
     // TODO: Add handlers for other sections
   };
@@ -52,6 +59,11 @@ export function UserSettingsDialog({
   const handleEditEducation = (education: Education) => {
     setEditingEducation(education);
     setEducationFormOpen(true);
+  };
+
+  const handleEditProject = (project: Project) => {
+    setEditingProject(project);
+    setProjectFormOpen(true);
   };
 
   const handleWorkExpFormClose = (open: boolean) => {
@@ -67,6 +79,15 @@ export function UserSettingsDialog({
     setEducationFormOpen(open);
     if (!open) {
       setEditingEducation(null);
+      // Trigger refresh of the list
+      setRefreshTrigger((prev) => prev + 1);
+    }
+  };
+
+  const handleProjectFormClose = (open: boolean) => {
+    setProjectFormOpen(open);
+    if (!open) {
+      setEditingProject(null);
       // Trigger refresh of the list
       setRefreshTrigger((prev) => prev + 1);
     }
@@ -95,6 +116,7 @@ export function UserSettingsDialog({
                 section={activeSection} 
                 onEditWorkExp={handleEditWorkExp}
                 onEditEducation={handleEditEducation}
+                onEditProject={handleEditProject}
                 refreshTrigger={refreshTrigger}
               />
             </ScrollArea>
@@ -112,6 +134,12 @@ export function UserSettingsDialog({
           onOpenChange={handleEducationFormClose}
           education={editingEducation}
         />
+
+        <ProjectForm
+          open={projectFormOpen}
+          onOpenChange={handleProjectFormClose}
+          project={editingProject}
+        />
       </DialogContent>
     </Dialog>
   );
@@ -121,11 +149,13 @@ function SectionContent({
   section,
   onEditWorkExp,
   onEditEducation,
+  onEditProject,
   refreshTrigger,
 }: { 
   section: SettingsSection;
   onEditWorkExp: (workExp: WorkExperience) => void;
   onEditEducation: (education: Education) => void;
+  onEditProject: (project: Project) => void;
   refreshTrigger: number;
 }) {
   return (
@@ -142,20 +172,16 @@ function SectionContent({
           refreshTrigger={refreshTrigger}
         />
       )}
-      {section === 'projects' && <ProjectsContent />}
+      {section === 'projects' && (
+        <ProjectList
+          onEdit={onEditProject}
+          refreshTrigger={refreshTrigger}
+        />
+      )}
       {section === 'skills' && <SkillsContent />}
       {section === 'certifications' && <CertificationsContent />}
       {section === 'languages' && <LanguagesContent />}
     </div>
-  );
-}
-
-function ProjectsContent() {
-  return (
-    <EmptyState
-      title="No projects added yet"
-      description="Showcase your personal or professional projects"
-    />
   );
 }
 
