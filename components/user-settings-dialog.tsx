@@ -4,6 +4,7 @@ import * as React from 'react';
 import { Dialog, DialogContent } from '@/components/ui/dialog';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { WorkExperienceForm } from '@/components/work-experience-form';
+import { EducationForm } from '@/components/education-form';
 import {
   SettingsSidebar,
   SettingsSection,
@@ -12,7 +13,8 @@ import {
 import { SettingsContentHeader } from '@/components/settings/settings-content-header';
 import { EmptyState } from '@/components/settings/empty-state';
 import { WorkExperienceList } from '@/components/settings/work-experience/work-experience-list';
-import { WorkExperience } from '@prisma/client';
+import { EducationList } from '@/components/settings/education/education-list';
+import { WorkExperience, Education } from '@prisma/client';
 
 interface UserSettingsDialogProps {
   open: boolean;
@@ -26,13 +28,18 @@ export function UserSettingsDialog({
   const [activeSection, setActiveSection] =
     React.useState<SettingsSection>('work');
   const [workExpFormOpen, setWorkExpFormOpen] = React.useState(false);
+  const [educationFormOpen, setEducationFormOpen] = React.useState(false);
   const [editingWorkExp, setEditingWorkExp] = React.useState<WorkExperience | null>(null);
+  const [editingEducation, setEditingEducation] = React.useState<Education | null>(null);
   const [refreshTrigger, setRefreshTrigger] = React.useState(0);
 
   const handleAddNew = () => {
     if (activeSection === 'work') {
       setEditingWorkExp(null);
       setWorkExpFormOpen(true);
+    } else if (activeSection === 'education') {
+      setEditingEducation(null);
+      setEducationFormOpen(true);
     }
     // TODO: Add handlers for other sections
   };
@@ -42,10 +49,24 @@ export function UserSettingsDialog({
     setWorkExpFormOpen(true);
   };
 
-  const handleFormClose = (open: boolean) => {
+  const handleEditEducation = (education: Education) => {
+    setEditingEducation(education);
+    setEducationFormOpen(true);
+  };
+
+  const handleWorkExpFormClose = (open: boolean) => {
     setWorkExpFormOpen(open);
     if (!open) {
       setEditingWorkExp(null);
+      // Trigger refresh of the list
+      setRefreshTrigger((prev) => prev + 1);
+    }
+  };
+
+  const handleEducationFormClose = (open: boolean) => {
+    setEducationFormOpen(open);
+    if (!open) {
+      setEditingEducation(null);
       // Trigger refresh of the list
       setRefreshTrigger((prev) => prev + 1);
     }
@@ -73,6 +94,7 @@ export function UserSettingsDialog({
               <SectionContent 
                 section={activeSection} 
                 onEditWorkExp={handleEditWorkExp}
+                onEditEducation={handleEditEducation}
                 refreshTrigger={refreshTrigger}
               />
             </ScrollArea>
@@ -81,8 +103,14 @@ export function UserSettingsDialog({
 
         <WorkExperienceForm
           open={workExpFormOpen}
-          onOpenChange={handleFormClose}
+          onOpenChange={handleWorkExpFormClose}
           workExperience={editingWorkExp}
+        />
+
+        <EducationForm
+          open={educationFormOpen}
+          onOpenChange={handleEducationFormClose}
+          education={editingEducation}
         />
       </DialogContent>
     </Dialog>
@@ -92,10 +120,12 @@ export function UserSettingsDialog({
 function SectionContent({ 
   section,
   onEditWorkExp,
+  onEditEducation,
   refreshTrigger,
 }: { 
   section: SettingsSection;
   onEditWorkExp: (workExp: WorkExperience) => void;
+  onEditEducation: (education: Education) => void;
   refreshTrigger: number;
 }) {
   return (
@@ -106,21 +136,17 @@ function SectionContent({
           refreshTrigger={refreshTrigger}
         />
       )}
-      {section === 'education' && <EducationContent />}
+      {section === 'education' && (
+        <EducationList
+          onEdit={onEditEducation}
+          refreshTrigger={refreshTrigger}
+        />
+      )}
       {section === 'projects' && <ProjectsContent />}
       {section === 'skills' && <SkillsContent />}
       {section === 'certifications' && <CertificationsContent />}
       {section === 'languages' && <LanguagesContent />}
     </div>
-  );
-}
-
-function EducationContent() {
-  return (
-    <EmptyState
-      title="No education added yet"
-      description="Add your educational background to showcase your qualifications"
-    />
   );
 }
 
