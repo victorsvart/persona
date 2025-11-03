@@ -334,7 +334,8 @@ persona/
 │   ├── actions/
 │   │   ├── work-experience.ts             # Work experience CRUD actions
 │   │   ├── education.ts                   # Education CRUD actions
-│   │   └── projects.ts                    # Projects CRUD actions
+│   │   ├── projects.ts                    # Projects CRUD actions
+│   │   └── skills.ts                      # Skills CRUD actions
 │   └── api/
 │       └── chat/
 │           └── route.ts                    # OpenAI integration
@@ -347,6 +348,7 @@ persona/
 │   ├── work-experience-form.tsx            # Work experience form (main)
 │   ├── education-form.tsx                  # Education form (main)
 │   ├── project-form.tsx                    # Project form (main)
+│   ├── skill-form.tsx                      # Skill form (main)
 │   │
 │   ├── settings/
 │   │   ├── settings-sidebar.tsx            # Settings navigation sidebar
@@ -371,14 +373,20 @@ persona/
 │   │   │   ├── education-card.tsx
 │   │   │   └── education-list.tsx
 │   │   │
-│   │   └── projects/
-│   │       ├── name-description-fields.tsx
-│   │       ├── date-fields.tsx
-│   │       ├── url-fields.tsx
-│   │       ├── technologies-section.tsx
-│   │       ├── highlights-section.tsx
-│   │       ├── project-card.tsx
-│   │       └── project-list.tsx
+│   │   ├── projects/
+│   │   │   ├── name-description-fields.tsx
+│   │   │   ├── date-fields.tsx
+│   │   │   ├── url-fields.tsx
+│   │   │   ├── technologies-section.tsx
+│   │   │   ├── highlights-section.tsx
+│   │   │   ├── project-card.tsx
+│   │   │   └── project-list.tsx
+│   │   │
+│   │   └── skills/
+│   │       ├── name-category-fields.tsx
+│   │       ├── proficiency-experience-fields.tsx
+│   │       ├── skill-card.tsx
+│   │       └── skill-list.tsx
 │   │
 │   └── ui/                                 # Shadcn UI components
 │       ├── dialog.tsx                      # Modified for custom widths
@@ -394,6 +402,7 @@ persona/
 │           ├── work-experience.form.ts     # Work experience Zod schema
 │           ├── education.form.ts           # Education Zod schema
 │           ├── project.form.ts             # Project Zod schema
+│           ├── skill.form.ts               # Skill Zod schema
 │           ├── login.form.ts               # Existing
 │           └── register.form.ts            # Existing
 │
@@ -795,13 +804,128 @@ interface EducationCardProps {
 
 ---
 
-## Future Enhancements
+### Phase 8: Skills Implementation (Completed)
 
-### Phase 8: Skills Section (Planned)
-- Category-based organization (Technical, Soft Skills, Languages, etc.)
-- Proficiency levels
-- Visual representation (progress bars or ratings)
-- Tag-based layout
+#### 8.1 Backend - Server Actions
+**File:** `app/actions/skills.ts`
+
+**Functions Implemented:**
+- `createSkill(data)` - Create new skill entry
+- `getSkills()` - Fetch all user's skills (ordered by category, then name)
+- `updateSkill(id, data)` - Update existing entry
+- `deleteSkill(id)` - Delete entry
+
+**Features:**
+- Same security patterns as previous sections
+- Authentication and ownership verification
+- Automatic sorting by category for better organization
+- Cache revalidation
+
+#### 8.2 Form Schema
+**File:** `lib/types/forms/skill.form.ts`
+
+**Schema Fields:**
+- name (required)
+- category (required) - Predefined categories
+- proficiency (optional enum: Beginner, Intermediate, Advanced, Expert)
+- yearsOfExperience (optional number, 0-50)
+
+#### 8.3 Main Form Component
+**File:** `components/skill-form.tsx`
+
+**Features:**
+- Simpler form compared to previous sections
+- Same responsive design pattern
+- Create and Edit modes
+- Select dropdown for category
+- Radio buttons for proficiency level (2x2 grid on mobile, 4 columns on desktop)
+- Number input for years of experience
+- Development-only demo data button
+- Toast notifications
+
+#### 8.4 Form Field Sub-Components
+**Directory:** `components/settings/skills/`
+
+**Files Created:**
+1. `name-category-fields.tsx`
+   - Skill Name input
+   - Category dropdown with predefined options:
+     - Technical
+     - Programming Languages
+     - Frameworks & Libraries
+     - Tools & Platforms
+     - Soft Skills
+     - Languages
+     - Design
+     - Data & Analytics
+     - DevOps & Cloud
+     - Other
+
+2. `proficiency-experience-fields.tsx`
+   - Proficiency Level radio buttons (Beginner to Expert)
+   - 2x2 grid on mobile, 4 columns on desktop
+   - Years of Experience number input
+
+#### 8.5 Display Components
+**Directory:** `components/settings/skills/`
+
+**Files Created:**
+1. `skill-card.tsx`
+   - Compact card layout
+   - Skill name with icon
+   - Category badge
+   - Years of experience display
+   - Color-coded proficiency badge:
+     - Beginner: Gray
+     - Intermediate: Blue
+     - Advanced: Green
+     - Expert: Purple
+   - Clickable to open edit form
+
+2. `skill-list.tsx`
+   - Fetches data from server actions
+   - **Category grouping** with headers
+   - Shows skill count per category
+   - Grid layout (1 column mobile, 2-3 columns desktop)
+   - Loading skeletons
+   - Empty state
+   - Auto-refresh support
+
+#### 8.6 Integration
+**File:** `components/user-settings-dialog.tsx`
+
+**Updates:**
+- Added SkillForm import and integration
+- Added skill state management
+- Updated handleAddNew for skills section
+- Added handleEditSkill handler
+- Added handleSkillFormClose handler
+- Updated SectionContent to render SkillList
+- Skills section now fully functional in settings dialog
+
+---
+
+## Testing the Skills Section
+
+### Skills Flow
+1. In settings dialog, click "Skills" in sidebar
+2. Click "Add New" → Drawer slides up
+3. Fill skill name (e.g., "React")
+4. Select category from dropdown
+5. Optionally select proficiency level using radio buttons (displayed in grid)
+6. Optionally enter years of experience
+7. Click "Save Skill"
+8. Card appears grouped under its category showing:
+   - Skill name
+   - Category badge
+   - Years of experience
+   - Color-coded proficiency level
+9. Skills are automatically organized by category
+10. Click card to edit and update
+
+---
+
+## Future Enhancements
 
 ### Phase 9: Certifications Section (Planned)
 - Certificate name, issuing organization, dates
@@ -951,20 +1075,23 @@ if (!entry || entry.userId !== session.user.id) {
 
 This implementation provides a solid foundation for the Persona resume builder. The modular architecture makes it easy to extend with new sections, and the consistent patterns ensure maintainability as the codebase grows.
 
-With Work Experience, Education, and Projects sections now complete, users can build comprehensive professional profiles. Each section follows the same architectural patterns, making the codebase consistent and easy to maintain.
+With Work Experience, Education, Projects, and Skills sections now complete, users can build comprehensive professional profiles covering the most essential resume components. Each section follows the same architectural patterns, making the codebase consistent and easy to maintain.
+
+The Skills section introduces some unique features like category-based grouping and color-coded proficiency levels, demonstrating the flexibility of the architecture while maintaining consistency.
 
 **Next Steps:**
 1. Test thoroughly with real user data
 2. Gather feedback on UX
-3. Implement remaining sections (Skills, Certifications, Languages)
+3. Implement remaining sections (Certifications, Languages)
 4. Build AI-powered resume generation using stored profile data
 5. Add PDF export functionality
 6. Implement resume templates
+7. Add delete functionality with confirmation dialogs
 
 ---
 
 **Last Updated:** November 3, 2025  
-**Phase Completed:** Phase 7 - Projects Section (Full CRUD)  
-**Completed Sections:** Work Experience, Education, Projects  
-**Next Phase:** Skills Section
+**Phase Completed:** Phase 8 - Skills Section (Full CRUD)  
+**Completed Sections:** Work Experience, Education, Projects, Skills  
+**Next Phase:** Certifications Section
 

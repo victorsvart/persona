@@ -6,6 +6,7 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { WorkExperienceForm } from '@/components/work-experience-form';
 import { EducationForm } from '@/components/education-form';
 import { ProjectForm } from '@/components/project-form';
+import { SkillForm } from '@/components/skill-form';
 import {
   SettingsSidebar,
   SettingsSection,
@@ -16,7 +17,8 @@ import { EmptyState } from '@/components/settings/empty-state';
 import { WorkExperienceList } from '@/components/settings/work-experience/work-experience-list';
 import { EducationList } from '@/components/settings/education/education-list';
 import { ProjectList } from '@/components/settings/projects/project-list';
-import { WorkExperience, Education, Project } from '@prisma/client';
+import { SkillList } from '@/components/settings/skills/skill-list';
+import { WorkExperience, Education, Project, Skill } from '@prisma/client';
 
 interface UserSettingsDialogProps {
   open: boolean;
@@ -32,9 +34,11 @@ export function UserSettingsDialog({
   const [workExpFormOpen, setWorkExpFormOpen] = React.useState(false);
   const [educationFormOpen, setEducationFormOpen] = React.useState(false);
   const [projectFormOpen, setProjectFormOpen] = React.useState(false);
+  const [skillFormOpen, setSkillFormOpen] = React.useState(false);
   const [editingWorkExp, setEditingWorkExp] = React.useState<WorkExperience | null>(null);
   const [editingEducation, setEditingEducation] = React.useState<Education | null>(null);
   const [editingProject, setEditingProject] = React.useState<Project | null>(null);
+  const [editingSkill, setEditingSkill] = React.useState<Skill | null>(null);
   const [refreshTrigger, setRefreshTrigger] = React.useState(0);
 
   const handleAddNew = () => {
@@ -47,6 +51,9 @@ export function UserSettingsDialog({
     } else if (activeSection === 'projects') {
       setEditingProject(null);
       setProjectFormOpen(true);
+    } else if (activeSection === 'skills') {
+      setEditingSkill(null);
+      setSkillFormOpen(true);
     }
     // TODO: Add handlers for other sections
   };
@@ -64,6 +71,11 @@ export function UserSettingsDialog({
   const handleEditProject = (project: Project) => {
     setEditingProject(project);
     setProjectFormOpen(true);
+  };
+
+  const handleEditSkill = (skill: Skill) => {
+    setEditingSkill(skill);
+    setSkillFormOpen(true);
   };
 
   const handleWorkExpFormClose = (open: boolean) => {
@@ -93,6 +105,15 @@ export function UserSettingsDialog({
     }
   };
 
+  const handleSkillFormClose = (open: boolean) => {
+    setSkillFormOpen(open);
+    if (!open) {
+      setEditingSkill(null);
+      // Trigger refresh of the list
+      setRefreshTrigger((prev) => prev + 1);
+    }
+  };
+
   const currentSection = sections.find((s) => s.id === activeSection);
 
   return (
@@ -117,6 +138,7 @@ export function UserSettingsDialog({
                 onEditWorkExp={handleEditWorkExp}
                 onEditEducation={handleEditEducation}
                 onEditProject={handleEditProject}
+                onEditSkill={handleEditSkill}
                 refreshTrigger={refreshTrigger}
               />
             </ScrollArea>
@@ -140,6 +162,12 @@ export function UserSettingsDialog({
           onOpenChange={handleProjectFormClose}
           project={editingProject}
         />
+
+        <SkillForm
+          open={skillFormOpen}
+          onOpenChange={handleSkillFormClose}
+          skill={editingSkill}
+        />
       </DialogContent>
     </Dialog>
   );
@@ -150,12 +178,14 @@ function SectionContent({
   onEditWorkExp,
   onEditEducation,
   onEditProject,
+  onEditSkill,
   refreshTrigger,
 }: { 
   section: SettingsSection;
   onEditWorkExp: (workExp: WorkExperience) => void;
   onEditEducation: (education: Education) => void;
   onEditProject: (project: Project) => void;
+  onEditSkill: (skill: Skill) => void;
   refreshTrigger: number;
 }) {
   return (
@@ -178,19 +208,15 @@ function SectionContent({
           refreshTrigger={refreshTrigger}
         />
       )}
-      {section === 'skills' && <SkillsContent />}
+      {section === 'skills' && (
+        <SkillList
+          onEdit={onEditSkill}
+          refreshTrigger={refreshTrigger}
+        />
+      )}
       {section === 'certifications' && <CertificationsContent />}
       {section === 'languages' && <LanguagesContent />}
     </div>
-  );
-}
-
-function SkillsContent() {
-  return (
-    <EmptyState
-      title="No skills added yet"
-      description="Add your technical and soft skills to highlight your expertise"
-    />
   );
 }
 
