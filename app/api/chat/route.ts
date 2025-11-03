@@ -54,8 +54,20 @@ export async function POST(req: NextRequest) {
         );
       }
 
-      // Fetch all user profile data
-      const [workExperiences, educations, projects, skills, certifications, languages] = await Promise.all([
+      // Fetch user and all profile data
+      const [user, workExperiences, educations, projects, skills, certifications, languages] = await Promise.all([
+        prisma.user.findUnique({
+          where: { id: session.user.id },
+          select: {
+            name: true,
+            email: true,
+            phone: true,
+            linkedinUrl: true,
+            githubUrl: true,
+            portfolioUrl: true,
+            location: true,
+          },
+        }),
         prisma.workExperience.findMany({
           where: { userId: session.user.id },
           orderBy: [{ sortOrder: 'asc' }, { startDate: 'desc' }],
@@ -82,9 +94,17 @@ export async function POST(req: NextRequest) {
         }),
       ]);
 
+      if (!user) {
+        return new Response(
+          JSON.stringify({ error: 'User not found' }),
+          { status: 404, headers: { 'Content-Type': 'application/json' } }
+        );
+      }
+
       // Generate comprehensive system prompt
       systemPrompt = generateResumeSystemPrompt(
         {
+          user,
           workExperiences,
           educations,
           projects,

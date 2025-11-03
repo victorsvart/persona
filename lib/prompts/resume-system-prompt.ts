@@ -1,4 +1,5 @@
 import type { 
+  User,
   WorkExperience, 
   Education, 
   Project, 
@@ -8,6 +9,7 @@ import type {
 } from '@prisma/client';
 
 interface UserProfileData {
+  user: Pick<User, 'name' | 'email' | 'phone' | 'linkedinUrl' | 'githubUrl' | 'portfolioUrl' | 'location'>;
   workExperiences: WorkExperience[];
   educations: Education[];
   projects: Project[];
@@ -33,6 +35,15 @@ export function generateResumeSystemPrompt(
 **Target Role:** ${application.role}
 **Job Description:**
 ${application.jobDescription}
+
+## USER CONTACT INFORMATION
+**Name:** ${profile.user.name}
+**Email:** ${profile.user.email}
+${profile.user.phone ? `**Phone:** ${profile.user.phone}` : ''}
+${profile.user.location ? `**Location:** ${profile.user.location}` : ''}
+${profile.user.linkedinUrl ? `**LinkedIn:** ${profile.user.linkedinUrl}` : ''}
+${profile.user.githubUrl ? `**GitHub:** ${profile.user.githubUrl}` : ''}
+${profile.user.portfolioUrl ? `**Portfolio:** ${profile.user.portfolioUrl}` : ''}
 
 ## USER PROFILE DATA
 
@@ -104,8 +115,9 @@ When discussing or explaining:
 
 \`\`\`html
 <header>
-  <h1>Full Name</h1>
-  <p>Email | Phone | Location | LinkedIn | Portfolio</p>
+  <h1>${profile.user.name}</h1>
+  <p>${profile.user.email}${profile.user.phone ? ` | ${profile.user.phone}` : ''}${profile.user.location ? ` | ${profile.user.location}` : ''}</p>
+  ${profile.user.linkedinUrl || profile.user.githubUrl || profile.user.portfolioUrl ? `<p>${[profile.user.linkedinUrl, profile.user.githubUrl, profile.user.portfolioUrl].filter(Boolean).join(' | ')}</p>` : ''}
 </header>
 
 <section>
@@ -127,6 +139,8 @@ When discussing or explaining:
 
 <!-- Additional sections as needed -->
 \`\`\`
+
+**IMPORTANT:** Always use the user's actual contact information (name, email, phone, etc.) from the USER CONTACT INFORMATION section above in the resume header. Do not use placeholders.
 
 Begin by introducing yourself and asking if the user would like you to generate the initial resume draft or if they have specific requirements first.`;
 }

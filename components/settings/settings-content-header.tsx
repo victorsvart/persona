@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 interface SettingsContentHeaderProps {
   title: string;
   description: string;
-  onAddNew: () => void;
+  onAddNew?: () => void;
 }
 
 export function SettingsContentHeader({
@@ -20,10 +20,12 @@ export function SettingsContentHeader({
         <h3 className="font-semibold text-lg">{title}</h3>
         <p className="text-sm text-muted-foreground">{description}</p>
       </div>
-      <Button size="sm" onClick={onAddNew}>
-        <IconPlus className="mr-2 h-4 w-4" />
-        Add New
-      </Button>
+      {onAddNew && (
+        <Button size="sm" onClick={onAddNew}>
+          <IconPlus className="mr-2 h-4 w-4" />
+          Add New
+        </Button>
+      )}
     </div>
   );
 }

@@ -133,41 +133,61 @@ export function ChatInterface({ application }: ChatInterfaceProps) {
                 </div>
               </div>
             ) : (
-              allMessages.map((message) => (
-                <div
-                  key={message.id}
-                  className={cn(
-                    'flex gap-3',
-                    message.role === 'user' ? 'justify-end' : 'justify-start',
-                  )}
-                >
-                  {message.role === 'assistant' && (
-                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary">
-                      <IconRobot className="h-5 w-5 text-primary-foreground" />
-                    </div>
-                  )}
+              allMessages.map((message) => {
+                const text = message.parts
+                  .filter((part) => part.type === 'text')
+                  .map((part: any) => part.text)
+                  .join('');
+                
+                // Check if this message contains HTML (for assistant messages only)
+                const containsHtml = message.role === 'assistant' && (
+                  text.includes('```html') || 
+                  text.includes('```\n<') ||
+                  (text.trim().startsWith('<') && text.includes('</'))
+                );
+                
+                return (
                   <div
+                    key={message.id}
                     className={cn(
-                      'max-w-[80%] rounded-lg px-4 py-2',
-                      message.role === 'user'
-                        ? 'bg-primary text-primary-foreground'
-                        : 'bg-muted',
+                      'flex gap-3',
+                      message.role === 'user' ? 'justify-end' : 'justify-start',
                     )}
                   >
-                    <p className="whitespace-pre-wrap text-sm">
-                      {message.parts
-                        .filter((part) => part.type === 'text')
-                        .map((part: any) => part.text)
-                        .join('')}
-                    </p>
-                  </div>
-                  {message.role === 'user' && (
-                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-muted">
-                      <IconUser className="h-5 w-5" />
+                    {message.role === 'assistant' && (
+                      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary">
+                        <IconRobot className="h-5 w-5 text-primary-foreground" />
+                      </div>
+                    )}
+                    <div
+                      className={cn(
+                        'max-w-[80%] rounded-lg px-4 py-2',
+                        message.role === 'user'
+                          ? 'bg-primary text-primary-foreground'
+                          : 'bg-muted',
+                      )}
+                    >
+                      {containsHtml ? (
+                        <div className="flex items-center gap-2">
+                          <svg className="h-5 w-5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                          </svg>
+                          <p className="text-sm font-medium">
+                            ✨ Resume generated! Check the preview on the right →
+                          </p>
+                        </div>
+                      ) : (
+                        <p className="whitespace-pre-wrap text-sm">{text}</p>
+                      )}
                     </div>
-                  )}
-                </div>
-              ))
+                    {message.role === 'user' && (
+                      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-muted">
+                        <IconUser className="h-5 w-5" />
+                      </div>
+                    )}
+                  </div>
+                );
+              })
             )}
             {isLoading && (
               <div className="flex gap-3">

@@ -24,6 +24,13 @@ model User {
   sessions        Session[]
   accounts        Account[]
   
+  // Contact & Social Links
+  phone           String?
+  linkedinUrl     String?
+  githubUrl       String?
+  portfolioUrl    String?
+  location        String?
+  
   // Resume-related relations
   workExperiences  WorkExperience[]
   educations       Education[]
