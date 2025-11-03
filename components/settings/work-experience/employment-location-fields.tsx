@@ -8,13 +8,8 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { Label } from '@/components/ui/label';
 
 interface EmploymentLocationFieldsProps {
   form: any;
@@ -23,57 +18,77 @@ interface EmploymentLocationFieldsProps {
 export function EmploymentLocationFields({
   form,
 }: EmploymentLocationFieldsProps) {
+  const employmentTypes = [
+    'Full-time',
+    'Part-time',
+    'Contract',
+    'Freelance',
+    'Internship',
+  ];
+
+  const locationTypes = ['On-site', 'Remote', 'Hybrid'];
+
   return (
     <>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <FormField
-          control={form.control}
-          name="employmentType"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Employment Type</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
-                <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select type" />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  <SelectItem value="Full-time">Full-time</SelectItem>
-                  <SelectItem value="Part-time">Part-time</SelectItem>
-                  <SelectItem value="Contract">Contract</SelectItem>
-                  <SelectItem value="Freelance">Freelance</SelectItem>
-                  <SelectItem value="Internship">Internship</SelectItem>
-                </SelectContent>
-              </Select>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+      <FormField
+        control={form.control}
+        name="employmentType"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>Employment Type</FormLabel>
+            <FormControl>
+              <RadioGroup
+                onValueChange={field.onChange}
+                value={field.value}
+                className="flex flex-wrap gap-3"
+              >
+                {employmentTypes.map((type) => (
+                  <div key={type} className="flex items-center space-x-2">
+                    <RadioGroupItem value={type} id={`employment-${type}`} />
+                    <Label
+                      htmlFor={`employment-${type}`}
+                      className="font-normal cursor-pointer"
+                    >
+                      {type}
+                    </Label>
+                  </div>
+                ))}
+              </RadioGroup>
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
 
-        <FormField
-          control={form.control}
-          name="locationType"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Location Type</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
-                <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select location type" />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  <SelectItem value="On-site">On-site</SelectItem>
-                  <SelectItem value="Remote">Remote</SelectItem>
-                  <SelectItem value="Hybrid">Hybrid</SelectItem>
-                </SelectContent>
-              </Select>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-      </div>
+      <FormField
+        control={form.control}
+        name="locationType"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>Location Type</FormLabel>
+            <FormControl>
+              <RadioGroup
+                onValueChange={field.onChange}
+                value={field.value}
+                className="flex flex-wrap gap-3"
+              >
+                {locationTypes.map((type) => (
+                  <div key={type} className="flex items-center space-x-2">
+                    <RadioGroupItem value={type} id={`location-${type}`} />
+                    <Label
+                      htmlFor={`location-${type}`}
+                      className="font-normal cursor-pointer"
+                    >
+                      {type}
+                    </Label>
+                  </div>
+                ))}
+              </RadioGroup>
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
 
       <FormField
         control={form.control}
