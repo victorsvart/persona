@@ -152,8 +152,8 @@ export function WorkExperienceForm({
   if (!isMobile && open) {
     return (
       <div className="absolute inset-0 z-50 flex items-end bg-black/50 animate-in fade-in">
-        <div className="bg-background w-full max-h-[85%] rounded-t-lg border-t shadow-lg animate-in slide-in-from-bottom duration-300">
-          <div className="border-b px-6 py-4 flex items-center justify-between">
+        <div className="bg-background w-full max-h-[85vh] flex flex-col rounded-t-lg border-t shadow-lg animate-in slide-in-from-bottom duration-300">
+          <div className="border-b px-6 py-4 flex items-center justify-between shrink-0">
             <div>
               <h3 className="font-semibold text-lg">Add Work Experience</h3>
               <p className="text-sm text-muted-foreground">
@@ -181,7 +181,7 @@ export function WorkExperienceForm({
             </div>
           </div>
 
-          <ScrollArea className="max-h-[calc(85vh-180px)]">
+          <ScrollArea className="flex-1 overflow-y-auto">
             <div className="p-6">
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
@@ -203,7 +203,7 @@ export function WorkExperienceForm({
             </div>
           </ScrollArea>
 
-          <div className="border-t p-4">
+          <div className="border-t p-4 shrink-0 bg-background">
             <div className="flex gap-2 justify-between">
               <div>
                 {isDevelopment && (
@@ -234,15 +234,15 @@ export function WorkExperienceForm({
   // Mobile version - full screen drawer
   return (
     <Drawer open={open} onOpenChange={onOpenChange} direction="bottom">
-      <DrawerContent className="max-h-[90vh]">
-        <DrawerHeader className="border-b">
+      <DrawerContent className="max-h-[90vh] flex flex-col">
+        <DrawerHeader className="border-b shrink-0">
           <DrawerTitle>Add Work Experience</DrawerTitle>
           <DrawerDescription>
             Add details about your professional work experience
           </DrawerDescription>
         </DrawerHeader>
 
-        <ScrollArea className="max-h-[calc(90vh-180px)]">
+        <ScrollArea className="flex-1 overflow-y-auto">
           <div className="p-6">
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
@@ -264,7 +264,7 @@ export function WorkExperienceForm({
           </div>
         </ScrollArea>
 
-        <DrawerFooter className="border-t">
+        <DrawerFooter className="border-t shrink-0 bg-background">
           <div className="flex gap-2 justify-between">
             <div>
               {isDevelopment && (
